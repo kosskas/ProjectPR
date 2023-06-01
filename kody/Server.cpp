@@ -1,4 +1,5 @@
 #include "Server.h"
+using namespace std;
 #define compareString(a, b) strcmp(a, b) == 0
 
 
@@ -22,13 +23,16 @@ void Server::start() {
     //    WSACleanup();
     //    exit(1);
     //}
-
     while (true) {
         // Accept a client socket
         SOCKET* ClientSocket = new SOCKET;
         *ClientSocket = accept(ListenSocket, NULL, NULL);
         if (*ClientSocket == INVALID_SOCKET) {
             printf("accept failed with error: %d\n", WSAGetLastError());
+            closesocket(ListenSocket);
+            WSACleanup();
+            exit(1);
+            this->~Server();
         }
         online++;
 
@@ -57,7 +61,7 @@ DWORD WINAPI ClientListener(LPVOID param) {
     int iResult;
     int iSendResult = send(ClientSocket, "CONNECTED", strlen("CONNECTED"), 0);
     if (iSendResult == SOCKET_ERROR) {
-        printf("%d send failed with error: %d\n", __LINE__,WSAGetLastError());
+        printf("send failed with error: %d\n", WSAGetLastError());
         closesocket(ClientSocket);
         return 0;
     }
@@ -72,19 +76,19 @@ DWORD WINAPI ClientListener(LPVOID param) {
            /* if (compareString(recvbuf, "END")) {
                 break;
             }*/
-            int iSendResult = send(ClientSocket, "MURXYN", 7, 0);
-            if (iSendResult == SOCKET_ERROR) {
-                printf("send failed with error: %d\n", WSAGetLastError());
-                closesocket(ClientSocket);
-                return 0;
-            }
+            //int iSendResult = send(ClientSocket, "MURXYN", 7, 0);
+            //if (iSendResult == SOCKET_ERROR) {
+            //    printf("send failed with error: %d\n", WSAGetLastError());
+            //    closesocket(ClientSocket);
+            //    return 0;
+            //}
 
         }
         else if (iResult == 0) {
             printf("Connection closing...\n");
         }
         else {
-            printf("%d recv failed with error: %d\n", __LINE__,WSAGetLastError());
+            printf("recv failed with error: %d\n", WSAGetLastError());
             closesocket(ClientSocket);
             return 0;
         }
@@ -106,22 +110,20 @@ DWORD WINAPI ClientSender(LPVOID param) {
     printf("ClientSender");
     Server server = *(Server*)param;
     while (true) {
-        printf("mock\n");
-        Sleep(1000);
-        //for (int i = 0; i < server.online; i++) {
-        //    SOCKET* ClientSocket = (server.ClientSockets[i]);
-        //    if (ClientSocket != NULL) {
-        //        char recvbuf[DEFAULT_BUFLEN] = { 0 };
-        //        int recvbuflen = DEFAULT_BUFLEN;
-        //        const char* msg = "MURZYN";
-        //        int iSendResult = send(*ClientSocket, msg, strlen(msg), 0);
-        //        if (iSendResult == SOCKET_ERROR) {
-        //            printf("%d send failed with error: %d\n",__LINE__, WSAGetLastError());
-        //            //closesocket(*ClientSocket);
-        //            return 0;
-        //        }
-        //    }
-        //}
+        for (int i = 0; i < server.online; i++) {
+            SOCKET* ClientSocket = (server.ClientSockets[i]);
+            if (ClientSocket != NULL) {
+                char recvbuf[DEFAULT_BUFLEN] = { 0 };
+                int recvbuflen = DEFAULT_BUFLEN;
+                const char* msg = "MURZYN";
+                int iSendResult = send(*ClientSocket, msg, strlen(msg), 0);
+                if (iSendResult == SOCKET_ERROR) {
+                    printf("send failed with error: %d\n", WSAGetLastError());
+                    //closesocket(*ClientSocket);
+                    return 0;
+                }
+            }
+        }
     }
 }
 

@@ -18,15 +18,19 @@ int Client::sendMessage(const char* sendbuf, int len) {
     // Send an initial buffer
     int iResult = send(ConnectSocket, sendbuf, (int)strlen(sendbuf), 0);
     if (iResult == SOCKET_ERROR) {
-        printf("%d send failed with error: %d\n",__LINE__, WSAGetLastError());
+        printf("send failed with error: %d\n", WSAGetLastError());
         closesocket(ConnectSocket);
         WSACleanup();
         return 1;
     }
-    printf("Wyslano %ldB\n", iResult);
+
+    printf("Bytes Sent: %ld\n", iResult);
+
+    
 }
 
 DWORD WINAPI MsgReceiverListener(LPVOID param) {
+    Sleep(1000);
     Client client = *(Client*)param;
     int iResult;
     do {
@@ -40,7 +44,7 @@ DWORD WINAPI MsgReceiverListener(LPVOID param) {
             return 0;
         }
         else {
-            printf("%d recv failed with error: %d\n",__LINE__, WSAGetLastError());
+            printf("recv failed with error: %d\n", WSAGetLastError());
             return 1;
         }
     } while (true);

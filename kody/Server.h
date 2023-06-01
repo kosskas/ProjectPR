@@ -37,28 +37,29 @@ private:
     friend DWORD WINAPI ClientSender(LPVOID param);
 public:
     /**
-     * @brief Konstruktor inicjalizujacy dzialanie calego serwera, wywoluje funkcje inicjalizujace WinSock
+     * @brief Konstruktor inicjalizuj¹cy dzia³anie ca³ego serwera, wywo³uje funkcjê inicjalizuj¹ce WinSock
     */
     Server();
     /**
-    * @brief Czysci poprawnie klase
+    * @brief Czyœci poprawnie klasê
     */
     ~Server();
     /**
-     * @brief Uruchamia watki serwera
+     * @brief Uruchamia w¹tki serwera
     */
     void start();
+
 };
 
 /**
- * @brief Sluchacz zdarzen pochodzacych od pojedynczego klienta, dzialajacy jako osobny watek
+ * @brief S³uchacz zdarzeñ pochodz¹cych od pojedynczego klienta, dzia³aj¹cy jako osobny w¹tek
  * @param param - SOCKET klienta
- * @return 0 jesli watek zakonczyl sie dobrze, 1 jesli zle
+ * @return 0 jeœli w¹tek zakoñczy³ siê dobrze, 1 jeœli Ÿle
 */
 DWORD WINAPI ClientListener(LPVOID param);
 /**
- * @brief Watek wysylajacy informacje do klientow
+ * @brief W¹tek wysy³aj¹cy informacje do klientów
  * @param param - Klasa
- * @return 0 jesli watek zakonczyl sie dobrze, 1 jesli zle
+ * @return 0 jeœli w¹tek zakoñczy³ siê dobrze, 1 jeœli Ÿle
 */
 DWORD WINAPI ClientSender(LPVOID param);
