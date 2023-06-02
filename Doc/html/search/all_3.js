@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['_7eclient_0',['~Client',['../class_client.html#a840e519ca781888cbd54181572ebe3a7',1,'Client']]],
-  ['_7eserver_1',['~Server',['../class_server.html#a4b3aa2579cb1c8cd1d069582c14d0fa6',1,'Server']]]
+  ['sendmessage_0',['sendMessage',['../class_client.html#a13cde1728b68928c9917493d92faac6e',1,'Client']]],
+  ['server_1',['Server',['../class_server.html',1,'Server'],['../class_server.html#ad5ec9462b520e59f7ea831e157ee5e59',1,'Server::Server()']]],
+  ['start_2',['start',['../class_server.html#a7eac07d2582fa01c2671362efa955b31',1,'Server']]]
 ];

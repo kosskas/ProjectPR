@@ -4,5 +4,5 @@ int __cdecl main(void){
     Server serwer;
     serwer.start();
 
-    return 0;
+    ExitProcess(0);
 }

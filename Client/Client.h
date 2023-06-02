@@ -25,7 +25,7 @@ private:
     HANDLE MsgReceiver;
     LPDWORD MsgSenderID;
     LPDWORD MsgReceiverID;
-    int initWinsock();
+    int initWinsock(const char* ipadress);
     friend DWORD WINAPI MsgReceiverListener(LPVOID param);
 public:
     /**
@@ -39,7 +39,6 @@ public:
      * @return 0 jesli poprawnie przeslano wiadomosc, 1 jesli zle
     */
     int sendMessage(const char* sendbuf, int len);
-    void temp();
     /**
     * @brief Czysci poprawnie klase
     */
@@ -47,7 +46,7 @@ public:
 };
 /**
  * @brief Watek nasluchujacy wiadomosci z serwera
- * @param param 0
- * @return -
+ * @param param Klasa Client
+ * @return0 jesli watek zakonczyl sie dobrze, 1 jesli zle
 */
 DWORD WINAPI MsgReceiverListener(LPVOID param);

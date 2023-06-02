@@ -8,58 +8,68 @@
 #include <ws2tcpip.h>
 #include <stdlib.h>
 #include <stdio.h>
+#include <list>
 // Need to link with Ws2_32.lib
 #pragma comment (lib, "Ws2_32.lib")
 //#pragma comment (lib, "Mswsock.lib")
+using namespace std;
+
 
 #define DEFAULT_BUFLEN 512
 #define DEFAULT_PORT "27015"
 #define CLIENT_MAX_NUM 4
 class Server {
 private:
+    //WinSock
     WSADATA wsaData;
-    int iResult;
     SOCKET ListenSocket = INVALID_SOCKET;
-    SOCKET *ClientSockets[CLIENT_MAX_NUM] = { NULL };
     addrinfo* result = NULL;
     addrinfo hints;
-    int iSendResult;
-    char recvbuf[DEFAULT_BUFLEN];
-    int recvbuflen = DEFAULT_BUFLEN;
-    HANDLE Clients[CLIENT_MAX_NUM] = { 0 };
+    list<SOCKET*> ClientSockets;
+    //WÄ…tki
     HANDLE SenderTh;
+    HANDLE PingerTh;
     LPDWORD senderThID;
-    LPDWORD ClientsThId[CLIENT_MAX_NUM];
-    int online = 0;
+    LPDWORD pingerThID;
+    //LPDWORD ClientsThId[CLIENT_MAX_NUM];
 
     int initWinsock();
+
+    //Funckje watkow
     friend DWORD WINAPI ClientListener(LPVOID param);
-    friend DWORD WINAPI ClientSender(LPVOID param);
+    friend DWORD WINAPI ClientMessenger(LPVOID param);
+    friend DWORD WINAPI Pinger(LPVOID param);
 public:
     /**
-     * @brief Konstruktor inicjalizuj¹cy dzia³anie ca³ego serwera, wywo³uje funkcjê inicjalizuj¹ce WinSock
+     * @brief Konstruktor inicjalizujacy dzialanie calego serwera, wywoluje funkcje inicjalizujace WinSock
     */
     Server();
     /**
-    * @brief Czyœci poprawnie klasê
+    * @brief Czysci poprawnie klase
     */
     ~Server();
     /**
-     * @brief Uruchamia w¹tki serwera
+     * @brief Uruchamia watki serwera
     */
     void start();
-
 };
 
 /**
- * @brief S³uchacz zdarzeñ pochodz¹cych od pojedynczego klienta, dzia³aj¹cy jako osobny w¹tek
+ * @brief Sluchacz zdarzen pochodzacych od pojedynczego klienta, dzialajacy jako osobny watek
  * @param param - SOCKET klienta
- * @return 0 jeœli w¹tek zakoñczy³ siê dobrze, 1 jeœli Ÿle
+ * @return 0 jesli watek zakonczyl sie dobrze, 1 jesli zle
 */
 DWORD WINAPI ClientListener(LPVOID param);
 /**
- * @brief W¹tek wysy³aj¹cy informacje do klientów
+ * @brief Watek wysyÅ‚ajÄ…cy informacje do klientow
  * @param param - Klasa
- * @return 0 jeœli w¹tek zakoñczy³ siê dobrze, 1 jeœli Ÿle
+ * @return 0 jesli watek zakonczyl sie dobrze
 */
-DWORD WINAPI ClientSender(LPVOID param);
+DWORD WINAPI ClientMessenger(LPVOID param);
+
+/**
+ * @brief Watek sprawdzajacy co okreslony czas czy uzytkownik istnieje, jesli nie to go wypiernicza z gry
+ * @param param - Tajemniczy paramentr, ktorego nie bede tu omawiac
+ * @return 0 jesli watek zakonczyl sie dobrze
+*/
+DWORD WINAPI Pinger(LPVOID param);

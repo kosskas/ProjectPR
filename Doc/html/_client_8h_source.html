@@ -85,40 +85,36 @@ $(function() {
 <div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#include &lt;stdlib.h&gt;</span></div>
 <div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#include &lt;stdio.h&gt;</span></div>
 <div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span> </div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span> </div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="comment">// Need to link with Ws2_32.lib, Mswsock.lib, and Advapi32.lib</span></div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="preprocessor">#pragma comment (lib, &quot;Ws2_32.lib&quot;</span>)</div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="preprocessor">#pragma comment (lib, &quot;Mswsock.lib&quot;</span>)</div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="preprocessor">#pragma comment (lib, &quot;AdvApi32.lib&quot;</span>)</div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span> </div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span> </div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="preprocessor">#define DEFAULT_BUFLEN 512</span></div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="preprocessor">#define DEFAULT_PORT &quot;27015&quot;</span></div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno"><a class="line" href="class_client.html">   19</a></span><span class="keyword">class </span><a class="code hl_class" href="class_client.html">Client</a> {</div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="keyword">private</span>:</div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>    WSADATA wsaData;</div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>    SOCKET ConnectSocket = INVALID_SOCKET;</div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>    <span class="keyword">struct </span>addrinfo* result = NULL,*ptr = NULL, hints;</div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>    <span class="keywordtype">char</span> recvbuf[DEFAULT_BUFLEN];</div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>    <span class="keywordtype">int</span> iResult;</div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>    <span class="keywordtype">int</span> recvbuflen = DEFAULT_BUFLEN;</div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>    HANDLE MsgSender;</div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>    HANDLE MsgReceiver;</div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>    LPDWORD MsgSenderID;</div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>    LPDWORD MsgReceiverID;</div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>    <span class="keywordtype">int</span> initWinsock();</div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>    <span class="keyword">friend</span> DWORD WINAPI <a class="code hl_friend" href="class_client.html#a006d2ee7929f745fb3004cd90f373802">MsgReceiverListener</a>(LPVOID param);</div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span><span class="keyword">public</span>:</div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>    <a class="code hl_class" href="class_client.html">Client</a>(<span class="keyword">const</span> <span class="keywordtype">char</span>* ipadress);</div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>    <span class="keywordtype">int</span> <a class="code hl_function" href="class_client.html#a13cde1728b68928c9917493d92faac6e">sendMessage</a>(<span class="keyword">const</span> <span class="keywordtype">char</span>* sendbuf, <span class="keywordtype">int</span> len);</div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>    <span class="keywordtype">void</span> temp();</div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>    <a class="code hl_function" href="class_client.html#a840e519ca781888cbd54181572ebe3a7">~Client</a>();</div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>};</div>
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>DWORD WINAPI MsgReceiverListener(LPVOID param);</div>
-<div class="ttc" id="aclass_client_html"><div class="ttname"><a href="class_client.html">Client</a></div><div class="ttdef"><b>Definition</b> Client.h:19</div></div>
-<div class="ttc" id="aclass_client_html_a006d2ee7929f745fb3004cd90f373802"><div class="ttname"><a href="class_client.html#a006d2ee7929f745fb3004cd90f373802">Client::MsgReceiverListener</a></div><div class="ttdeci">friend DWORD WINAPI MsgReceiverListener(LPVOID param)</div><div class="ttdoc">W¹tek nas³uchuj¹cy wiadomoœci z serwera.</div><div class="ttdef"><b>Definition</b> Client.cpp:32</div></div>
-<div class="ttc" id="aclass_client_html_a13cde1728b68928c9917493d92faac6e"><div class="ttname"><a href="class_client.html#a13cde1728b68928c9917493d92faac6e">Client::sendMessage</a></div><div class="ttdeci">int sendMessage(const char *sendbuf, int len)</div><div class="ttdoc">Przesy³a ci¹g bajtów o podanej d³ugoœci do serwera.</div><div class="ttdef"><b>Definition</b> Client.cpp:17</div></div>
-<div class="ttc" id="aclass_client_html_a840e519ca781888cbd54181572ebe3a7"><div class="ttname"><a href="class_client.html#a840e519ca781888cbd54181572ebe3a7">Client::~Client</a></div><div class="ttdeci">~Client()</div><div class="ttdoc">Czyœci poprawnie klasê.</div><div class="ttdef"><b>Definition</b> Client.cpp:70</div></div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor">#pragma comment (lib, &quot;Ws2_32.lib&quot;</span>)</div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="preprocessor">#pragma comment (lib, &quot;Mswsock.lib&quot;</span>)</div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="preprocessor">#pragma comment (lib, &quot;AdvApi32.lib&quot;</span>)</div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span> </div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="preprocessor">#define DEFAULT_BUFLEN 512</span></div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="preprocessor">#define DEFAULT_PORT &quot;27015&quot;</span></div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno"><a class="line" href="class_client.html">   16</a></span><span class="keyword">class </span><a class="code hl_class" href="class_client.html">Client</a> {</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>    WSADATA wsaData;</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>    SOCKET ConnectSocket = INVALID_SOCKET;</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>    <span class="keyword">struct </span>addrinfo* result = NULL,*ptr = NULL, hints;</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>    <span class="keywordtype">char</span> recvbuf[DEFAULT_BUFLEN];</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>    <span class="keywordtype">int</span> iResult;</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>    <span class="keywordtype">int</span> recvbuflen = DEFAULT_BUFLEN;</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>    HANDLE MsgSender;</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>    HANDLE MsgReceiver;</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>    LPDWORD MsgSenderID;</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>    LPDWORD MsgReceiverID;</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>    <span class="keywordtype">int</span> initWinsock(<span class="keyword">const</span> <span class="keywordtype">char</span>* ipadress);</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>    <span class="keyword">friend</span> DWORD WINAPI <a class="code hl_friend" href="class_client.html#a006d2ee7929f745fb3004cd90f373802">MsgReceiverListener</a>(LPVOID param);</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>    <a class="code hl_class" href="class_client.html">Client</a>(<span class="keyword">const</span> <span class="keywordtype">char</span>* ipadress);</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>    <span class="keywordtype">int</span> <a class="code hl_function" href="class_client.html#a13cde1728b68928c9917493d92faac6e">sendMessage</a>(<span class="keyword">const</span> <span class="keywordtype">char</span>* sendbuf, <span class="keywordtype">int</span> len);</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>    <a class="code hl_function" href="class_client.html#a840e519ca781888cbd54181572ebe3a7">~Client</a>();</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>};</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>DWORD WINAPI MsgReceiverListener(LPVOID param);</div>
+<div class="ttc" id="aclass_client_html"><div class="ttname"><a href="class_client.html">Client</a></div><div class="ttdef"><b>Definition</b> Client.h:16</div></div>
+<div class="ttc" id="aclass_client_html_a006d2ee7929f745fb3004cd90f373802"><div class="ttname"><a href="class_client.html#a006d2ee7929f745fb3004cd90f373802">Client::MsgReceiverListener</a></div><div class="ttdeci">friend DWORD WINAPI MsgReceiverListener(LPVOID param)</div><div class="ttdoc">Watek nasluchujacy wiadomosci z serwera.</div><div class="ttdef"><b>Definition</b> Client.cpp:30</div></div>
+<div class="ttc" id="aclass_client_html_a13cde1728b68928c9917493d92faac6e"><div class="ttname"><a href="class_client.html#a13cde1728b68928c9917493d92faac6e">Client::sendMessage</a></div><div class="ttdeci">int sendMessage(const char *sendbuf, int len)</div><div class="ttdoc">Przesyla ciag bajtow o podanej dlugosci do serwera.</div><div class="ttdef"><b>Definition</b> Client.cpp:17</div></div>
+<div class="ttc" id="aclass_client_html_a840e519ca781888cbd54181572ebe3a7"><div class="ttname"><a href="class_client.html#a840e519ca781888cbd54181572ebe3a7">Client::~Client</a></div><div class="ttdeci">~Client()</div><div class="ttdoc">Czysci poprawnie klase.</div><div class="ttdef"><b>Definition</b> Client.cpp:51</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

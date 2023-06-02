@@ -1,71 +1,73 @@
 #include "Server.h"
-using namespace std;
-#define compareString(a, b) strcmp(a, b) == 0
 
+#define compareString(a, b) strcmp(a, b) == 0
 
 Server::Server() {
     if (initWinsock() != 0) {
-        exit(EXIT_FAILURE);
+        ExitProcess(1);
     }
 }
 
 Server::~Server() {
     // cleanup
-    for(int i = 0; i < CLIENT_MAX_NUM; i++)
-        closesocket(*ClientSockets[i]);
+    CloseHandle(SenderTh);
+    CloseHandle(PingerTh);
+
+    closesocket(ListenSocket);
+    for (SOCKET* ClientSocket : ClientSockets) {
+        closesocket(*ClientSocket);
+    }
     WSACleanup();
 }
 
 void Server::start() {
-    //SenderTh = CreateThread(NULL, 0, &ClientListener, (void*)this, 0, senderThID);
-    //if (SenderTh == NULL) {
-    //    printf("Failed to create client thread.\n");
-    //    WSACleanup();
-    //    exit(1);
-    //}
+    SenderTh = CreateThread(NULL, 0, &ClientMessenger, (void*)this, 0, senderThID);
+    if (SenderTh == NULL) {
+        printf("Failed to create thread.\n");
+        WSACleanup();
+        ExitProcess(1);
+    }
+    PingerTh = CreateThread(NULL, 0, &Pinger, (void*)this, 0, pingerThID);
+    if (PingerTh == NULL) {
+        printf("Failed to create thread.\n");
+        WSACleanup();
+        ExitProcess(1);
+    }
+    ///osobna funkcja wątku??? wyłączana po starcie gry??
     while (true) {
         // Accept a client socket
         SOCKET* ClientSocket = new SOCKET;
         *ClientSocket = accept(ListenSocket, NULL, NULL);
         if (*ClientSocket == INVALID_SOCKET) {
             printf("accept failed with error: %d\n", WSAGetLastError());
-            closesocket(ListenSocket);
-            WSACleanup();
-            exit(1);
-            this->~Server();
         }
-        online++;
-
         DWORD threadId;
         HANDLE clientThread = CreateThread(NULL, 0, &ClientListener, (void*)ClientSocket, 0, &threadId);
         if (clientThread == NULL) {
-            printf("Failed to create client thread.\n");
+            printf("Failed to create thread.\n");
             closesocket(*ClientSocket);
             delete ClientSocket;
+            ClientSocket = NULL;
         }
-        else {
-            Clients[online] = clientThread;
-            ClientSockets[online] = ClientSocket;
-        }
-        
+        else
+            ClientSockets.push_back(ClientSocket);
     }
-    
-    // No longer need server socket
-    closesocket(ListenSocket);
 }
 
-DWORD WINAPI ClientListener(LPVOID param) {
+DWORD __stdcall ClientListener(LPVOID param) {
     SOCKET ClientSocket = *(SOCKET*)param;
     char recvbuf[DEFAULT_BUFLEN] = {0};
     int recvbuflen = DEFAULT_BUFLEN;
     int iResult;
     int iSendResult = send(ClientSocket, "CONNECTED", strlen("CONNECTED"), 0);
     if (iSendResult == SOCKET_ERROR) {
-        printf("send failed with error: %d\n", WSAGetLastError());
+        printf("%d send failed with error: %d\n", __LINE__,WSAGetLastError());
         closesocket(ClientSocket);
         return 0;
     }
-             
+    
+    
+
     // Receive until the peer shuts down the connection
     do {
 
@@ -73,23 +75,14 @@ DWORD WINAPI ClientListener(LPVOID param) {
         if (iResult > 0) {
             printf("Bytes received: %d\n", iResult);
             printf("Recevied: %s", recvbuf);
-           /* if (compareString(recvbuf, "END")) {
-                break;
-            }*/
-            //int iSendResult = send(ClientSocket, "MURXYN", 7, 0);
-            //if (iSendResult == SOCKET_ERROR) {
-            //    printf("send failed with error: %d\n", WSAGetLastError());
-            //    closesocket(ClientSocket);
-            //    return 0;
-            //}
-
         }
         else if (iResult == 0) {
             printf("Connection closing...\n");
         }
         else {
-            printf("recv failed with error: %d\n", WSAGetLastError());
+            printf("%d recv failed with error: %d\n", __LINE__,WSAGetLastError());
             closesocket(ClientSocket);
+            param = NULL;
             return 0;
         }
 
@@ -100,36 +93,50 @@ DWORD WINAPI ClientListener(LPVOID param) {
     if (iResult == SOCKET_ERROR) {
         printf("shutdown failed with error: %d\n", WSAGetLastError());
         closesocket(ClientSocket);
+        param = NULL;
         return 1;
     }
     delete param;
+    param = NULL;
     return 0;
 }
 
-DWORD WINAPI ClientSender(LPVOID param) {
+DWORD __stdcall ClientMessenger(LPVOID param) {
     printf("ClientSender");
-    Server server = *(Server*)param;
+    Server *server = (Server*)param;
     while (true) {
-        for (int i = 0; i < server.online; i++) {
-            SOCKET* ClientSocket = (server.ClientSockets[i]);
-            if (ClientSocket != NULL) {
-                char recvbuf[DEFAULT_BUFLEN] = { 0 };
-                int recvbuflen = DEFAULT_BUFLEN;
-                const char* msg = "MURZYN";
-                int iSendResult = send(*ClientSocket, msg, strlen(msg), 0);
-                if (iSendResult == SOCKET_ERROR) {
-                    printf("send failed with error: %d\n", WSAGetLastError());
-                    //closesocket(*ClientSocket);
-                    return 0;
+        printf("\tbump %d\n", server->ClientSockets.size());
+        Sleep(1000);
+        for (SOCKET* ClientSocket : server->ClientSockets) {
+                if (ClientSocket != NULL) {
+                    char recvbuf[DEFAULT_BUFLEN] = { 0 };
+                    int recvbuflen = DEFAULT_BUFLEN;
+                    const char* msg = "PING"; ///TU BĘDZIE WYSYŁANA MAPA
+                    int iSendResult = send(*ClientSocket, msg, strlen(msg), 0);
+                    if (iSendResult == SOCKET_ERROR) {
+                        printf("%d send failed with error: %d\n",__LINE__, WSAGetLastError());
+                    }
                 }
-            }
         }
     }
+    return 0;
+}
+
+DWORD __stdcall Pinger(LPVOID param) {
+    Server* server = (Server*)param;
+    while (true) {
+        Sleep(1000);
+        server->ClientSockets.remove_if([](SOCKET* s) {
+            return send(*s, NULL, 0, 0) == SOCKET_ERROR;
+            });
+        printf("Pinger\n");
+    }
+    return 0;
 }
 
 int Server::initWinsock() {
     // Initialize Winsock
-    iResult = WSAStartup(MAKEWORD(2, 2), &wsaData);
+    int iResult = WSAStartup(MAKEWORD(2, 2), &wsaData);
     if (iResult != 0) {
         printf("WSAStartup failed with error: %d\n", iResult);
         return 1;
