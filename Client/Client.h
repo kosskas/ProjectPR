@@ -21,7 +21,7 @@ private:
     */
     WSADATA wsaData;
     /**
-     * @brief Socket ³¹cz¹cy z serwerem
+     * @brief Socket Å‚Ä…czÄ…cy z serwerem
     */
     SOCKET ConnectSocket = INVALID_SOCKET;
     /**
@@ -29,24 +29,24 @@ private:
     */
     addrinfo* result = NULL,*ptr = NULL, hints;
     /**
-     * @brief Bufor bajtów odebranych
+     * @brief Bufor bajtÃ³w odebranych
     */
     char recvbuf[DEFAULT_BUFLEN];
     /**
-     * @brief D³ugoœæ bufora danych
+     * @brief DÅ‚ugoÅ›Ä‡ bufora danych
     */
     int recvbuflen = DEFAULT_BUFLEN;
     /**
-     * @brief Uchwyt na w¹tek MsgReceiverListener
+     * @brief Uchwyt na wÄ…tek MsgReceiverListener
     */
     HANDLE MsgReceiver;
     /**
-     * @brief WskaŸnik na ID w¹tku MsgReceiverListener
+     * @brief WskaÅºnik na ID wÄ…tku MsgReceiverListener
     */
     LPDWORD MsgReceiverID;
     /**
-     * @brief Funkcja inicjalizuj¹ca komponêty potrzebne do komunikacji
-     * @return 0 jeœli konfiguracja przebieg³a pomyœlnie, 1 jesli nie
+     * @brief Funkcja inicjalizujÄ…ca komponÄ™ty potrzebne do komunikacji
+     * @return 0 jeÅ›li konfiguracja przebiegÅ‚a pomyÅ›lnie, 1 jesli nie
     */
     int initWinsock(const char* ipadress);
     friend DWORD __stdcall MsgReceiverListener(LPVOID param);
