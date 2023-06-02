@@ -21,7 +21,7 @@ Server::~Server() {
 }
 
 void Server::start() {
-    SenderTh = CreateThread(NULL, 0, &ClientMessenger, (void*)this, 0, senderThID);
+    SenderTh = CreateThread(NULL, 0, &Broadcast, (void*)this, 0, senderThID);
     if (SenderTh == NULL) {
         printf("Failed to create thread.\n");
         WSACleanup();
@@ -33,11 +33,24 @@ void Server::start() {
         WSACleanup();
         ExitProcess(1);
     }
-    ///osobna funkcja wątku??? wyłączana po starcie gry??
+    JoinerTh = CreateThread(NULL, 0, &NewClientJoiner, (void*)this, 0, joinerThID);
+    if (JoinerTh == NULL) {
+        printf("Failed to create thread.\n");
+        WSACleanup();
+        ExitProcess(1);
+    }
+    while (true) {
+        //aktywne oczekiwanie;
+    }
+    
+}
+
+DWORD __stdcall NewClientJoiner(LPVOID param) {
+    Server* server = (Server*)param;
     while (true) {
         // Accept a client socket
         SOCKET* ClientSocket = new SOCKET;
-        *ClientSocket = accept(ListenSocket, NULL, NULL);
+        *ClientSocket = accept(server->ListenSocket, NULL, NULL);
         if (*ClientSocket == INVALID_SOCKET) {
             printf("accept failed with error: %d\n", WSAGetLastError());
         }
@@ -50,8 +63,9 @@ void Server::start() {
             ClientSocket = NULL;
         }
         else
-            ClientSockets.push_back(ClientSocket);
+            server->ClientSockets.push_back(ClientSocket);
     }
+    return 0;
 }
 
 DWORD __stdcall ClientListener(LPVOID param) {
@@ -101,7 +115,7 @@ DWORD __stdcall ClientListener(LPVOID param) {
     return 0;
 }
 
-DWORD __stdcall ClientMessenger(LPVOID param) {
+DWORD __stdcall Broadcast(LPVOID param) {
     printf("ClientSender");
     Server *server = (Server*)param;
     while (true) {
@@ -114,7 +128,7 @@ DWORD __stdcall ClientMessenger(LPVOID param) {
                     const char* msg = "PING"; ///TU BĘDZIE WYSYŁANA MAPA
                     int iSendResult = send(*ClientSocket, msg, strlen(msg), 0);
                     if (iSendResult == SOCKET_ERROR) {
-                        printf("%d send failed with error: %d\n",__LINE__, WSAGetLastError());
+                        printf("%d CM send failed with error: %d\n",__LINE__, WSAGetLastError());
                     }
                 }
         }
@@ -125,7 +139,7 @@ DWORD __stdcall ClientMessenger(LPVOID param) {
 DWORD __stdcall Pinger(LPVOID param) {
     Server* server = (Server*)param;
     while (true) {
-        Sleep(1000);
+        Sleep(1334);
         server->ClientSockets.remove_if([](SOCKET* s) {
             return send(*s, NULL, 0, 0) == SOCKET_ERROR;
             });

@@ -20,56 +20,99 @@ using namespace std;
 #define CLIENT_MAX_NUM 4
 class Server {
 private:
-    //WinSock
-    WSADATA wsaData;
+    /**
+     * @brief Struktura potrzebna od inicjalizacji WinSock
+    */
+    WSADATA wsaData; 
+    /**
+     * @brief Socket nasłuchujący nowych połączeń
+    */
     SOCKET ListenSocket = INVALID_SOCKET;
+    /**
+     * @brief Informacje o adresie
+    */
     addrinfo* result = NULL;
+    /**
+     * @brief Informacje o adresie
+    */
     addrinfo hints;
+    /**
+     * @brief Lista aktualnie połączonych użytkowników
+    */
     list<SOCKET*> ClientSockets;
     //Wątki
+    /**
+     * @brief Uchwyt na wątek Broadcast
+    */
     HANDLE SenderTh;
+    /**
+     * @brief Uchwyt na wątek Pinger
+    */
     HANDLE PingerTh;
+    /**
+     * @brief Uchwyt na wątek Joiner
+    */
+    HANDLE JoinerTh;
+    /**
+     * @brief Wskaźnik na ID wątku Broadcast
+    */
     LPDWORD senderThID;
+    /**
+     * @brief Wskaźnik na ID wątku Joiner
+    */
+    LPDWORD joinerThID;
+    /**
+     * @brief Wskaźnik na ID wątku Pinger
+    */
     LPDWORD pingerThID;
-    //LPDWORD ClientsThId[CLIENT_MAX_NUM];
-
+    /**
+     * @brief Funkcja inicjalizująca komponęty potrzebne do komunikacji
+     * @return 0 jeśli konfiguracja przebiegła pomyślnie, 1 jesli nie
+    */
     int initWinsock();
 
     //Funckje watkow
-    friend DWORD WINAPI ClientListener(LPVOID param);
-    friend DWORD WINAPI ClientMessenger(LPVOID param);
-    friend DWORD WINAPI Pinger(LPVOID param);
+    friend DWORD __stdcall NewClientJoiner(LPVOID param);
+    friend DWORD __stdcall ClientListener(LPVOID param);
+    friend DWORD __stdcall Broadcast(LPVOID param);
+    friend DWORD __stdcall Pinger(LPVOID param);
 public:
     /**
-     * @brief Konstruktor inicjalizujacy dzialanie calego serwera, wywoluje funkcje inicjalizujace WinSock
+     * @brief Konstruktor inicjalizujący działanie calego serwera, wywołuje funkcje inicjalizujące WinSock
     */
     Server();
     /**
-    * @brief Czysci poprawnie klase
+    * @brief Czyści poprawnie klasę
     */
     ~Server();
     /**
-     * @brief Uruchamia watki serwera
+     * @brief Uruchamia wątki serwera
     */
     void start();
 };
 
 /**
- * @brief Sluchacz zdarzen pochodzacych od pojedynczego klienta, dzialajacy jako osobny watek
+ * @brief Sluchacz zdarzeń pochodzących od pojedynczego klienta, działajacy jako osobny wątek
  * @param param - SOCKET klienta
- * @return 0 jesli watek zakonczyl sie dobrze, 1 jesli zle
+ * @return 0 jeśli wątek zakończył się dobrze, 1 jeśli źle
 */
-DWORD WINAPI ClientListener(LPVOID param);
+DWORD __stdcall ClientListener(LPVOID param);
 /**
- * @brief Watek wysyłający informacje do klientow
+ * @brief Watek rozsyłający informacje do klientów
  * @param param - Klasa
- * @return 0 jesli watek zakonczyl sie dobrze
+ * @return 0 jeśli wątek zakończył się dobrze
 */
-DWORD WINAPI ClientMessenger(LPVOID param);
+DWORD __stdcall Broadcast(LPVOID param);
 
 /**
- * @brief Watek sprawdzajacy co okreslony czas czy uzytkownik istnieje, jesli nie to go wypiernicza z gry
- * @param param - Tajemniczy paramentr, ktorego nie bede tu omawiac
- * @return 0 jesli watek zakonczyl sie dobrze
+ * @brief Watek sprawdzający co określony czas czy użytkownik istnieje, jeśli nie to go wypiernicza z gry
+ * @param param - Tajemniczy paramentr, którego nie będe tu omawiać
+ * @return 0 jeśli wątek zakończył się dobrze
 */
-DWORD WINAPI Pinger(LPVOID param);
+DWORD __stdcall Pinger(LPVOID param);
+/**
+ * @brief Wątek oczekujący na dołączenie nowych klientów, wyłącza się gdy do serwera podłączy się odpowiednia ilość graczy
+ * @param param - Tajemniczy paramentr, którego nie będe tu omawiać
+ * @return 0 jeśli wątek zakończył się dobrze
+*/
+DWORD __stdcall NewClientJoiner(LPVOID param);

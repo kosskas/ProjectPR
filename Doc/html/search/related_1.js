@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['msgreceiverlistener_0',['MsgReceiverListener',['../class_client.html#a006d2ee7929f745fb3004cd90f373802',1,'Client']]]
+  ['clientlistener_0',['ClientListener',['../class_server.html#aafd080de36f4d2a59e860e2a92601646',1,'Server']]]
 ];

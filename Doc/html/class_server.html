@@ -71,39 +71,152 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pri-methods">Private Member Functions</a> &#124;
+<a href="#pri-attribs">Private Attributes</a> &#124;
 <a href="#friends">Friends</a> &#124;
 <a href="class_server-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">Server Class Reference</div></div>
 </div><!--header-->
 <div class="contents">
+
+<p><code>#include &lt;<a class="el" href="_server_8h_source.html">Server.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:ad5ec9462b520e59f7ea831e157ee5e59"><td class="memItemLeft" align="right" valign="top"><a id="ad5ec9462b520e59f7ea831e157ee5e59" name="ad5ec9462b520e59f7ea831e157ee5e59"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>Server</b> ()</td></tr>
-<tr class="memdesc:ad5ec9462b520e59f7ea831e157ee5e59"><td class="mdescLeft">&#160;</td><td class="mdescRight">Konstruktor inicjalizujacy dzialanie calego serwera, wywoluje funkcje inicjalizujace WinSock. <br /></td></tr>
+<tr class="memitem:ad5ec9462b520e59f7ea831e157ee5e59"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_server.html#ad5ec9462b520e59f7ea831e157ee5e59">Server</a> ()</td></tr>
+<tr class="memdesc:ad5ec9462b520e59f7ea831e157ee5e59"><td class="mdescLeft">&#160;</td><td class="mdescRight">Konstruktor inicjalizujący działanie calego serwera, wywołuje funkcje inicjalizujące WinSock.  <br /></td></tr>
 <tr class="separator:ad5ec9462b520e59f7ea831e157ee5e59"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4b3aa2579cb1c8cd1d069582c14d0fa6"><td class="memItemLeft" align="right" valign="top"><a id="a4b3aa2579cb1c8cd1d069582c14d0fa6" name="a4b3aa2579cb1c8cd1d069582c14d0fa6"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>~Server</b> ()</td></tr>
-<tr class="memdesc:a4b3aa2579cb1c8cd1d069582c14d0fa6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Czysci poprawnie klase. <br /></td></tr>
+<tr class="memitem:a4b3aa2579cb1c8cd1d069582c14d0fa6"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_server.html#a4b3aa2579cb1c8cd1d069582c14d0fa6">~Server</a> ()</td></tr>
+<tr class="memdesc:a4b3aa2579cb1c8cd1d069582c14d0fa6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Czyści poprawnie klasę  <br /></td></tr>
 <tr class="separator:a4b3aa2579cb1c8cd1d069582c14d0fa6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7eac07d2582fa01c2671362efa955b31"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_server.html#a7eac07d2582fa01c2671362efa955b31">start</a> ()</td></tr>
-<tr class="memdesc:a7eac07d2582fa01c2671362efa955b31"><td class="mdescLeft">&#160;</td><td class="mdescRight">Uruchamia watki serwera.  <br /></td></tr>
+<tr class="memdesc:a7eac07d2582fa01c2671362efa955b31"><td class="mdescLeft">&#160;</td><td class="mdescRight">Uruchamia wątki serwera.  <br /></td></tr>
 <tr class="separator:a7eac07d2582fa01c2671362efa955b31"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-methods" name="pri-methods"></a>
+Private Member Functions</h2></td></tr>
+<tr class="memitem:adf28aee3a70e3d32c1932f95983e8a0b"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_server.html#adf28aee3a70e3d32c1932f95983e8a0b">initWinsock</a> ()</td></tr>
+<tr class="memdesc:adf28aee3a70e3d32c1932f95983e8a0b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Funkcja inicjalizująca komponęty potrzebne do komunikacji.  <br /></td></tr>
+<tr class="separator:adf28aee3a70e3d32c1932f95983e8a0b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-attribs" name="pri-attribs"></a>
+Private Attributes</h2></td></tr>
+<tr class="memitem:a97a849c8a8f0e9c5d27c3c8ebccbc2b9"><td class="memItemLeft" align="right" valign="top">WSADATA&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_server.html#a97a849c8a8f0e9c5d27c3c8ebccbc2b9">wsaData</a></td></tr>
+<tr class="memdesc:a97a849c8a8f0e9c5d27c3c8ebccbc2b9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Struktura potrzebna od inicjalizacji WinSock.  <br /></td></tr>
+<tr class="separator:a97a849c8a8f0e9c5d27c3c8ebccbc2b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a26d86f942796f93546d2e8437f2a1d4e"><td class="memItemLeft" align="right" valign="top">SOCKET&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_server.html#a26d86f942796f93546d2e8437f2a1d4e">ListenSocket</a> = INVALID_SOCKET</td></tr>
+<tr class="memdesc:a26d86f942796f93546d2e8437f2a1d4e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Socket nasłuchujący nowych połączeń  <br /></td></tr>
+<tr class="separator:a26d86f942796f93546d2e8437f2a1d4e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8bec1cf16dfcc464e376cef20e6aa2dc"><td class="memItemLeft" align="right" valign="top">addrinfo *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_server.html#a8bec1cf16dfcc464e376cef20e6aa2dc">result</a> = NULL</td></tr>
+<tr class="memdesc:a8bec1cf16dfcc464e376cef20e6aa2dc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Informacje o adresie.  <br /></td></tr>
+<tr class="separator:a8bec1cf16dfcc464e376cef20e6aa2dc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a76e0bfddb56aa270d65f50d7b27502ee"><td class="memItemLeft" align="right" valign="top">addrinfo&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_server.html#a76e0bfddb56aa270d65f50d7b27502ee">hints</a></td></tr>
+<tr class="separator:a76e0bfddb56aa270d65f50d7b27502ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2e2d611dfed63893a6dfc9527376e2c2"><td class="memItemLeft" align="right" valign="top">list&lt; SOCKET * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_server.html#a2e2d611dfed63893a6dfc9527376e2c2">ClientSockets</a></td></tr>
+<tr class="memdesc:a2e2d611dfed63893a6dfc9527376e2c2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Lista aktualnie połączonych użytkowników.  <br /></td></tr>
+<tr class="separator:a2e2d611dfed63893a6dfc9527376e2c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad090f3d9278dc04bffdd1357d775e117"><td class="memItemLeft" align="right" valign="top">HANDLE&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_server.html#ad090f3d9278dc04bffdd1357d775e117">SenderTh</a></td></tr>
+<tr class="memdesc:ad090f3d9278dc04bffdd1357d775e117"><td class="mdescLeft">&#160;</td><td class="mdescRight">Uchwyt na wątek Broadcast.  <br /></td></tr>
+<tr class="separator:ad090f3d9278dc04bffdd1357d775e117"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a055a308d0578cf0695a1cc56a34b8e6f"><td class="memItemLeft" align="right" valign="top">HANDLE&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_server.html#a055a308d0578cf0695a1cc56a34b8e6f">PingerTh</a></td></tr>
+<tr class="memdesc:a055a308d0578cf0695a1cc56a34b8e6f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Uchwyt na wątek Pinger.  <br /></td></tr>
+<tr class="separator:a055a308d0578cf0695a1cc56a34b8e6f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3a720f94eef7c30cb9cd292ce4396927"><td class="memItemLeft" align="right" valign="top">HANDLE&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_server.html#a3a720f94eef7c30cb9cd292ce4396927">JoinerTh</a></td></tr>
+<tr class="memdesc:a3a720f94eef7c30cb9cd292ce4396927"><td class="mdescLeft">&#160;</td><td class="mdescRight">Uchwyt na wątek Joiner.  <br /></td></tr>
+<tr class="separator:a3a720f94eef7c30cb9cd292ce4396927"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3c4c45884e3f564493e50d388e9b56c9"><td class="memItemLeft" align="right" valign="top">LPDWORD&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_server.html#a3c4c45884e3f564493e50d388e9b56c9">senderThID</a></td></tr>
+<tr class="memdesc:a3c4c45884e3f564493e50d388e9b56c9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Wskaźnik na ID wątku Broadcast.  <br /></td></tr>
+<tr class="separator:a3c4c45884e3f564493e50d388e9b56c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a931a7f4c62c8b507bc18e3e37ea34f98"><td class="memItemLeft" align="right" valign="top">LPDWORD&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_server.html#a931a7f4c62c8b507bc18e3e37ea34f98">joinerThID</a></td></tr>
+<tr class="memdesc:a931a7f4c62c8b507bc18e3e37ea34f98"><td class="mdescLeft">&#160;</td><td class="mdescRight">Wskaźnik na ID wątku Joiner.  <br /></td></tr>
+<tr class="separator:a931a7f4c62c8b507bc18e3e37ea34f98"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a822c5945b4afae178311085afd4436b3"><td class="memItemLeft" align="right" valign="top">LPDWORD&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_server.html#a822c5945b4afae178311085afd4436b3">pingerThID</a></td></tr>
+<tr class="memdesc:a822c5945b4afae178311085afd4436b3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Wskaźnik na ID wątku Pinger.  <br /></td></tr>
+<tr class="separator:a822c5945b4afae178311085afd4436b3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="friends" name="friends"></a>
 Friends</h2></td></tr>
-<tr class="memitem:a8b3a8a899cb7d825f844f42e7045c071"><td class="memItemLeft" align="right" valign="top">DWORD WINAPI&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_server.html#a8b3a8a899cb7d825f844f42e7045c071">ClientListener</a> (LPVOID param)</td></tr>
-<tr class="memdesc:a8b3a8a899cb7d825f844f42e7045c071"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sluchacz zdarzen pochodzacych od pojedynczego klienta, dzialajacy jako osobny watek.  <br /></td></tr>
-<tr class="separator:a8b3a8a899cb7d825f844f42e7045c071"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac03ef1b9af57891c23d94f63876c13b6"><td class="memItemLeft" align="right" valign="top">DWORD WINAPI&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_server.html#ac03ef1b9af57891c23d94f63876c13b6">ClientMessenger</a> (LPVOID param)</td></tr>
-<tr class="memdesc:ac03ef1b9af57891c23d94f63876c13b6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Watek wysyłający informacje do klientow.  <br /></td></tr>
-<tr class="separator:ac03ef1b9af57891c23d94f63876c13b6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5c45e4ba7b3a1434030fc69029782f16"><td class="memItemLeft" align="right" valign="top">DWORD WINAPI&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_server.html#a5c45e4ba7b3a1434030fc69029782f16">Pinger</a> (LPVOID param)</td></tr>
-<tr class="memdesc:a5c45e4ba7b3a1434030fc69029782f16"><td class="mdescLeft">&#160;</td><td class="mdescRight">Watek sprawdzajacy co okreslony czas czy uzytkownik istnieje, jesli nie to go wypiernicza z gry.  <br /></td></tr>
-<tr class="separator:a5c45e4ba7b3a1434030fc69029782f16"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a481c150f3525608ec9504d38cc0344c9"><td class="memItemLeft" align="right" valign="top">DWORD __stdcall&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_server.html#a481c150f3525608ec9504d38cc0344c9">NewClientJoiner</a> (LPVOID param)</td></tr>
+<tr class="memdesc:a481c150f3525608ec9504d38cc0344c9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Wątek oczekujący na dołączenie nowych klientów, wyłącza się gdy do serwera podłączy się odpowiednia ilość graczy.  <br /></td></tr>
+<tr class="separator:a481c150f3525608ec9504d38cc0344c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aafd080de36f4d2a59e860e2a92601646"><td class="memItemLeft" align="right" valign="top">DWORD __stdcall&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_server.html#aafd080de36f4d2a59e860e2a92601646">ClientListener</a> (LPVOID param)</td></tr>
+<tr class="memdesc:aafd080de36f4d2a59e860e2a92601646"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sluchacz zdarzeń pochodzących od pojedynczego klienta, działajacy jako osobny wątek.  <br /></td></tr>
+<tr class="separator:aafd080de36f4d2a59e860e2a92601646"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab7fc8298cd8500a0116ff3eabeb844b7"><td class="memItemLeft" align="right" valign="top">DWORD __stdcall&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_server.html#ab7fc8298cd8500a0116ff3eabeb844b7">Broadcast</a> (LPVOID param)</td></tr>
+<tr class="memdesc:ab7fc8298cd8500a0116ff3eabeb844b7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Watek rozsyłający informacje do klientów.  <br /></td></tr>
+<tr class="separator:ab7fc8298cd8500a0116ff3eabeb844b7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aee9f322b1680f18aab8fd0f4499dfd9d"><td class="memItemLeft" align="right" valign="top">DWORD __stdcall&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_server.html#aee9f322b1680f18aab8fd0f4499dfd9d">Pinger</a> (LPVOID param)</td></tr>
+<tr class="memdesc:aee9f322b1680f18aab8fd0f4499dfd9d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Watek sprawdzający co określony czas czy użytkownik istnieje, jeśli nie to go wypiernicza z gry.  <br /></td></tr>
+<tr class="separator:aee9f322b1680f18aab8fd0f4499dfd9d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="ad5ec9462b520e59f7ea831e157ee5e59" name="ad5ec9462b520e59f7ea831e157ee5e59"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad5ec9462b520e59f7ea831e157ee5e59">&#9670;&#160;</a></span>Server()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Server::Server </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Konstruktor inicjalizujący działanie calego serwera, wywołuje funkcje inicjalizujące WinSock. </p>
+
+</div>
+</div>
+<a id="a4b3aa2579cb1c8cd1d069582c14d0fa6" name="a4b3aa2579cb1c8cd1d069582c14d0fa6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4b3aa2579cb1c8cd1d069582c14d0fa6">&#9670;&#160;</a></span>~Server()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Server::~Server </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Czyści poprawnie klasę </p>
+
+</div>
+</div>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a id="adf28aee3a70e3d32c1932f95983e8a0b" name="adf28aee3a70e3d32c1932f95983e8a0b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adf28aee3a70e3d32c1932f95983e8a0b">&#9670;&#160;</a></span>initWinsock()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int Server::initWinsock </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Funkcja inicjalizująca komponęty potrzebne do komunikacji. </p>
+<dl class="section return"><dt>Returns</dt><dd>0 jeśli konfiguracja przebiegła pomyślnie, 1 jesli nie </dd></dl>
+
+</div>
+</div>
 <a id="a7eac07d2582fa01c2671362efa955b31" name="a7eac07d2582fa01c2671362efa955b31"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a7eac07d2582fa01c2671362efa955b31">&#9670;&#160;</a></span>start()</h2>
 
@@ -119,14 +232,13 @@ Friends</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Uruchamia watki serwera. </p>
-<p>osobna funkcja wątku??? wyłączana po starcie gry??</p>
+<p>Uruchamia wątki serwera. </p>
 
 </div>
 </div>
 <h2 class="groupheader">Friends And Related Symbol Documentation</h2>
-<a id="a8b3a8a899cb7d825f844f42e7045c071" name="a8b3a8a899cb7d825f844f42e7045c071"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8b3a8a899cb7d825f844f42e7045c071">&#9670;&#160;</a></span>ClientListener</h2>
+<a id="ab7fc8298cd8500a0116ff3eabeb844b7" name="ab7fc8298cd8500a0116ff3eabeb844b7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab7fc8298cd8500a0116ff3eabeb844b7">&#9670;&#160;</a></span>Broadcast</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -135,7 +247,7 @@ Friends</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">DWORD WINAPI ClientListener </td>
+          <td class="memname">DWORD __stdcall Broadcast </td>
           <td>(</td>
           <td class="paramtype">LPVOID&#160;</td>
           <td class="paramname"><em>param</em></td><td>)</td>
@@ -149,55 +261,20 @@ Friends</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Sluchacz zdarzen pochodzacych od pojedynczego klienta, dzialajacy jako osobny watek. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">param</td><td>- SOCKET klienta </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>0 jesli watek zakonczyl sie dobrze, 1 jesli zle </dd></dl>
-
-</div>
-</div>
-<a id="ac03ef1b9af57891c23d94f63876c13b6" name="ac03ef1b9af57891c23d94f63876c13b6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac03ef1b9af57891c23d94f63876c13b6">&#9670;&#160;</a></span>ClientMessenger</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">DWORD WINAPI ClientMessenger </td>
-          <td>(</td>
-          <td class="paramtype">LPVOID&#160;</td>
-          <td class="paramname"><em>param</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">friend</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Watek wysyłający informacje do klientow. </p>
+<p>Watek rozsyłający informacje do klientów. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">param</td><td>- Klasa </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>0 jesli watek zakonczyl sie dobrze </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>0 jeśli wątek zakończył się dobrze </dd></dl>
 <p>TU BĘDZIE WYSYŁANA MAPA</p>
 
 </div>
 </div>
-<a id="a5c45e4ba7b3a1434030fc69029782f16" name="a5c45e4ba7b3a1434030fc69029782f16"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5c45e4ba7b3a1434030fc69029782f16">&#9670;&#160;</a></span>Pinger</h2>
+<a id="aafd080de36f4d2a59e860e2a92601646" name="aafd080de36f4d2a59e860e2a92601646"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aafd080de36f4d2a59e860e2a92601646">&#9670;&#160;</a></span>ClientListener</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -206,7 +283,7 @@ Friends</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">DWORD WINAPI Pinger </td>
+          <td class="memname">DWORD __stdcall ClientListener </td>
           <td>(</td>
           <td class="paramtype">LPVOID&#160;</td>
           <td class="paramname"><em>param</em></td><td>)</td>
@@ -220,20 +297,353 @@ Friends</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Watek sprawdzajacy co okreslony czas czy uzytkownik istnieje, jesli nie to go wypiernicza z gry. </p>
+<p>Sluchacz zdarzeń pochodzących od pojedynczego klienta, działajacy jako osobny wątek. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">param</td><td>- Tajemniczy paramentr, ktorego nie bede tu omawiac </td></tr>
+    <tr><td class="paramname">param</td><td>- SOCKET klienta </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>0 jesli watek zakonczyl sie dobrze </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>0 jeśli wątek zakończył się dobrze, 1 jeśli źle </dd></dl>
+
+</div>
+</div>
+<a id="a481c150f3525608ec9504d38cc0344c9" name="a481c150f3525608ec9504d38cc0344c9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a481c150f3525608ec9504d38cc0344c9">&#9670;&#160;</a></span>NewClientJoiner</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">DWORD __stdcall NewClientJoiner </td>
+          <td>(</td>
+          <td class="paramtype">LPVOID&#160;</td>
+          <td class="paramname"><em>param</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">friend</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Wątek oczekujący na dołączenie nowych klientów, wyłącza się gdy do serwera podłączy się odpowiednia ilość graczy. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">param</td><td>- Tajemniczy paramentr, którego nie będe tu omawiać </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>0 jeśli wątek zakończył się dobrze </dd></dl>
+
+</div>
+</div>
+<a id="aee9f322b1680f18aab8fd0f4499dfd9d" name="aee9f322b1680f18aab8fd0f4499dfd9d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aee9f322b1680f18aab8fd0f4499dfd9d">&#9670;&#160;</a></span>Pinger</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">DWORD __stdcall Pinger </td>
+          <td>(</td>
+          <td class="paramtype">LPVOID&#160;</td>
+          <td class="paramname"><em>param</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">friend</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Watek sprawdzający co określony czas czy użytkownik istnieje, jeśli nie to go wypiernicza z gry. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">param</td><td>- Tajemniczy paramentr, którego nie będe tu omawiać </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>0 jeśli wątek zakończył się dobrze </dd></dl>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="a2e2d611dfed63893a6dfc9527376e2c2" name="a2e2d611dfed63893a6dfc9527376e2c2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2e2d611dfed63893a6dfc9527376e2c2">&#9670;&#160;</a></span>ClientSockets</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">list&lt;SOCKET*&gt; Server::ClientSockets</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Lista aktualnie połączonych użytkowników. </p>
+
+</div>
+</div>
+<a id="a76e0bfddb56aa270d65f50d7b27502ee" name="a76e0bfddb56aa270d65f50d7b27502ee"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a76e0bfddb56aa270d65f50d7b27502ee">&#9670;&#160;</a></span>hints</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">addrinfo Server::hints</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a3a720f94eef7c30cb9cd292ce4396927" name="a3a720f94eef7c30cb9cd292ce4396927"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3a720f94eef7c30cb9cd292ce4396927">&#9670;&#160;</a></span>JoinerTh</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">HANDLE Server::JoinerTh</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Uchwyt na wątek Joiner. </p>
+
+</div>
+</div>
+<a id="a931a7f4c62c8b507bc18e3e37ea34f98" name="a931a7f4c62c8b507bc18e3e37ea34f98"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a931a7f4c62c8b507bc18e3e37ea34f98">&#9670;&#160;</a></span>joinerThID</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">LPDWORD Server::joinerThID</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Wskaźnik na ID wątku Joiner. </p>
+
+</div>
+</div>
+<a id="a26d86f942796f93546d2e8437f2a1d4e" name="a26d86f942796f93546d2e8437f2a1d4e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a26d86f942796f93546d2e8437f2a1d4e">&#9670;&#160;</a></span>ListenSocket</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">SOCKET Server::ListenSocket = INVALID_SOCKET</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Socket nasłuchujący nowych połączeń </p>
+
+</div>
+</div>
+<a id="a055a308d0578cf0695a1cc56a34b8e6f" name="a055a308d0578cf0695a1cc56a34b8e6f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a055a308d0578cf0695a1cc56a34b8e6f">&#9670;&#160;</a></span>PingerTh</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">HANDLE Server::PingerTh</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Uchwyt na wątek Pinger. </p>
+
+</div>
+</div>
+<a id="a822c5945b4afae178311085afd4436b3" name="a822c5945b4afae178311085afd4436b3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a822c5945b4afae178311085afd4436b3">&#9670;&#160;</a></span>pingerThID</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">LPDWORD Server::pingerThID</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Wskaźnik na ID wątku Pinger. </p>
+
+</div>
+</div>
+<a id="a8bec1cf16dfcc464e376cef20e6aa2dc" name="a8bec1cf16dfcc464e376cef20e6aa2dc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8bec1cf16dfcc464e376cef20e6aa2dc">&#9670;&#160;</a></span>result</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">addrinfo* Server::result = NULL</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Informacje o adresie. </p>
+
+</div>
+</div>
+<a id="ad090f3d9278dc04bffdd1357d775e117" name="ad090f3d9278dc04bffdd1357d775e117"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad090f3d9278dc04bffdd1357d775e117">&#9670;&#160;</a></span>SenderTh</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">HANDLE Server::SenderTh</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Uchwyt na wątek Broadcast. </p>
+
+</div>
+</div>
+<a id="a3c4c45884e3f564493e50d388e9b56c9" name="a3c4c45884e3f564493e50d388e9b56c9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3c4c45884e3f564493e50d388e9b56c9">&#9670;&#160;</a></span>senderThID</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">LPDWORD Server::senderThID</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Wskaźnik na ID wątku Broadcast. </p>
+
+</div>
+</div>
+<a id="a97a849c8a8f0e9c5d27c3c8ebccbc2b9" name="a97a849c8a8f0e9c5d27c3c8ebccbc2b9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a97a849c8a8f0e9c5d27c3c8ebccbc2b9">&#9670;&#160;</a></span>wsaData</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">WSADATA Server::wsaData</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Struktura potrzebna od inicjalizacji WinSock. </p>
 
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
 <li>D:/PG/4sem/Przetwarzanie Rozproszone/ProjectPR/kody/<a class="el" href="_server_8h_source.html">Server.h</a></li>
-<li>D:/PG/4sem/Przetwarzanie Rozproszone/ProjectPR/kody/Server.cpp</li>
+<li>D:/PG/4sem/Przetwarzanie Rozproszone/ProjectPR/kody/<a class="el" href="_server_8cpp.html">Server.cpp</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

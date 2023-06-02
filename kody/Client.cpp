@@ -27,7 +27,7 @@ int Client::sendMessage(const char* sendbuf, int len) {
     return 0;
 }
 
-DWORD WINAPI MsgReceiverListener(LPVOID param) {
+DWORD __stdcall MsgReceiverListener(LPVOID param) {
     Client client = *(Client*)param;
     int iResult;
     do {
@@ -50,7 +50,7 @@ DWORD WINAPI MsgReceiverListener(LPVOID param) {
 
 Client::~Client() {
     // cleanup
-    CloseHandle(MsgSender);
+   // CloseHandle(MsgSender);
     CloseHandle(MsgReceiver);
     int iResult = shutdown(ConnectSocket, SD_SEND);
     closesocket(ConnectSocket);
@@ -66,7 +66,7 @@ int Client::initWinsock(const char* ipadress) {
     }
 
     ZeroMemory(&hints, sizeof(hints));
-    hints.ai_family = AF_UNSPEC;
+    hints.ai_family = AF_INET;//AF_UNSPEC;
     hints.ai_socktype = SOCK_STREAM;
     hints.ai_protocol = IPPROTO_TCP;
 

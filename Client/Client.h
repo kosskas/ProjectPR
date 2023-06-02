@@ -13,20 +13,43 @@
 
 #define DEFAULT_BUFLEN 512
 #define DEFAULT_PORT "27015"
+
 class Client {
 private:
+    /**
+     * @brief Struktura potrzebna od inicjalizacji WinSock
+    */
     WSADATA wsaData;
+    /**
+     * @brief Socket ³¹cz¹cy z serwerem
+    */
     SOCKET ConnectSocket = INVALID_SOCKET;
-    struct addrinfo* result = NULL,*ptr = NULL, hints;
+    /**
+     * @brief Informacje o adresie
+    */
+    addrinfo* result = NULL,*ptr = NULL, hints;
+    /**
+     * @brief Bufor bajtów odebranych
+    */
     char recvbuf[DEFAULT_BUFLEN];
-    int iResult;
+    /**
+     * @brief D³ugoœæ bufora danych
+    */
     int recvbuflen = DEFAULT_BUFLEN;
-    HANDLE MsgSender;
+    /**
+     * @brief Uchwyt na w¹tek MsgReceiverListener
+    */
     HANDLE MsgReceiver;
-    LPDWORD MsgSenderID;
+    /**
+     * @brief WskaŸnik na ID w¹tku MsgReceiverListener
+    */
     LPDWORD MsgReceiverID;
+    /**
+     * @brief Funkcja inicjalizuj¹ca komponêty potrzebne do komunikacji
+     * @return 0 jeœli konfiguracja przebieg³a pomyœlnie, 1 jesli nie
+    */
     int initWinsock(const char* ipadress);
-    friend DWORD WINAPI MsgReceiverListener(LPVOID param);
+    friend DWORD __stdcall MsgReceiverListener(LPVOID param);
 public:
     /**
      * @brief @brief Konstruktor inicjalizujacy aplikacje kliencka
@@ -49,4 +72,4 @@ public:
  * @param param Klasa Client
  * @return0 jesli watek zakonczyl sie dobrze, 1 jesli zle
 */
-DWORD WINAPI MsgReceiverListener(LPVOID param);
+DWORD __stdcall MsgReceiverListener(LPVOID param);
