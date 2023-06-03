@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['wsadata_0',['wsaData',['../class_client.html#aeef1e4fbc771a948a6ba7d4ec8ce2af7',1,'Client::wsaData'],['../class_server.html#a97a849c8a8f0e9c5d27c3c8ebccbc2b9',1,'Server::wsaData']]]
+  ['recvbuf_0',['recvbuf',['../class_client.html#a555de6ad752b17dc7ba6460aee011d24',1,'Client']]],
+  ['recvbuflen_1',['recvbuflen',['../class_client.html#a360e773f55cedc6cb3a4e666cbccd5b5',1,'Client']]]
 ];

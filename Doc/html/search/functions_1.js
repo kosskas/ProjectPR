@@ -1,5 +1,7 @@
 var searchData=
 [
-  ['client_0',['Client',['../class_client.html#a627ff06105a62972b598ea996f7461f2',1,'Client']]],
-  ['clientlistener_1',['ClientListener',['../_server_8cpp.html#aafd080de36f4d2a59e860e2a92601646',1,'ClientListener(LPVOID param):&#160;Server.cpp'],['../_server_8h.html#aafd080de36f4d2a59e860e2a92601646',1,'ClientListener(LPVOID param):&#160;Server.cpp']]]
+  ['initconsole_0',['InitConsole',['../class_client.html#abbb96dec1139b89030e060b6f3d3b7a3',1,'Client']]],
+  ['initthreads_1',['InitThreads',['../class_client.html#a0643878fe1ed3fabda51c777755c059d',1,'Client']]],
+  ['initwinsock_2',['InitWinsock',['../class_client.html#a20726fca60b89cf22d109a75334777e1',1,'Client']]],
+  ['initwinsock_3',['initWinsock',['../class_server.html#adf28aee3a70e3d32c1932f95983e8a0b',1,'Server']]]
 ];

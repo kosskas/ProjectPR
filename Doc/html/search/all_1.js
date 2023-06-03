@@ -1,4 +1,7 @@
 var searchData=
 [
-  ['broadcast_0',['Broadcast',['../class_server.html#ab7fc8298cd8500a0116ff3eabeb844b7',1,'Server::Broadcast'],['../_server_8cpp.html#ab7fc8298cd8500a0116ff3eabeb844b7',1,'Broadcast(LPVOID param):&#160;Server.cpp'],['../_server_8h.html#ab7fc8298cd8500a0116ff3eabeb844b7',1,'Broadcast(LPVOID param):&#160;Server.cpp']]]
+  ['client_0',['Client',['../class_client.html',1,'Client'],['../class_client.html#a627ff06105a62972b598ea996f7461f2',1,'Client::Client()']]],
+  ['clientlistener_1',['ClientListener',['../class_server.html#aafd080de36f4d2a59e860e2a92601646',1,'Server']]],
+  ['clientsockets_2',['ClientSockets',['../class_server.html#a2e2d611dfed63893a6dfc9527376e2c2',1,'Server']]],
+  ['connectsocket_3',['ConnectSocket',['../class_client.html#a4f46bb329dd4d02877b6663189ebb86f',1,'Client']]]
 ];

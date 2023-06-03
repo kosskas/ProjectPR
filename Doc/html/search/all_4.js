@@ -1,4 +1,7 @@
 var searchData=
 [
-  ['hints_0',['hints',['../class_client.html#a02c013b27705cc12ed3ad060e7fe0180',1,'Client::hints'],['../class_server.html#a76e0bfddb56aa270d65f50d7b27502ee',1,'Server::hints']]]
+  ['initconsole_0',['InitConsole',['../class_client.html#abbb96dec1139b89030e060b6f3d3b7a3',1,'Client']]],
+  ['initthreads_1',['InitThreads',['../class_client.html#a0643878fe1ed3fabda51c777755c059d',1,'Client']]],
+  ['initwinsock_2',['InitWinsock',['../class_client.html#a20726fca60b89cf22d109a75334777e1',1,'Client']]],
+  ['initwinsock_3',['initWinsock',['../class_server.html#adf28aee3a70e3d32c1932f95983e8a0b',1,'Server']]]
 ];

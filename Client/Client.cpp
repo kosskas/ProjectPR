@@ -1,24 +1,37 @@
 #include "Client.h"
 
 Client::Client(const char* ipadress) {
-    if (initWinsock(ipadress) != 0) {
+    if (InitWinsock(ipadress) != 0) {
+        WSACleanup();
         ExitProcess(1);
     }
-    MsgReceiver = CreateThread(NULL, 0, &MsgReceiverListener, (void*)this, 0, MsgReceiverID);
-    if (MsgReceiver == NULL) {
-        printf("Failed to create client thread.\n");
-        WSACleanup();
+    if (InitConsole() != 0) {
+        if (fdwSaveOldMode != 0)
+            SetConsoleMode(hStdin, fdwSaveOldMode);
+        ExitProcess(1);
+    }
+    if (InitThreads() != 0) {
         ExitProcess(1);
     }
 }
 
-
+void Client::start() {
+    int licz = 10;
+    while (licz) {
+        //printf("INPUT {%c}\t", keyInput);
+        const char* temp = &keyInput;
+        sendMessage(temp, 1);
+        Sleep(1000);
+        licz--;
+    }
+    sendMessage("END", 4);
+}
 
 int Client::sendMessage(const char* sendbuf, int len) {
     // Send an initial buffer
     int iResult = send(ConnectSocket, sendbuf, (int)strlen(sendbuf), 0);
     if (iResult == SOCKET_ERROR) {
-        printf("Blad w linii: %d [send failed with error: %d]\n",__LINE__, WSAGetLastError());
+        printf("Line %d in function %s\tsend failed with error: %d\n", __LINE__, __FUNCTION__, WSAGetLastError());
         closesocket(ConnectSocket);
         WSACleanup();
         return 1;
@@ -28,37 +41,62 @@ int Client::sendMessage(const char* sendbuf, int len) {
 }
 
 DWORD __stdcall MsgReceiverListener(LPVOID param) {
-    Client client = *(Client*)param;
+    Client *client = (Client*)param;
     int iResult;
     do {
-        iResult = recv(client.ConnectSocket, client.recvbuf, client.recvbuflen, 0);
+        iResult = recv(client->ConnectSocket, client->recvbuf, client->recvbuflen, 0);
         if (iResult > 0) {
             printf("\nOtrzymano: %dB\t", iResult);
-           printf("Wynik: %s\n", client.recvbuf);
+           printf("Wynik: %s\n", client->recvbuf);
         }
         else if (iResult == 0) {
             printf("Connection closed\n");
             return 0;
         }
         else {
-            printf("Blad w linii: %d [recv failed with error: %d]\n",__LINE__, WSAGetLastError());
+            printf("Line %d in function %s\recv failed with error: %d\n", __LINE__, __FUNCTION__, WSAGetLastError());
             return 1;
         }
     } while (true);
     return 0;
 }
 
+DWORD __stdcall KeyEventListener(LPVOID param) {
+    Client *client = (Client*)param;
+    DWORD cNumRead;
+    INPUT_RECORD irInBuf[128];
+    while (true) {
+        if (!ReadConsoleInput(
+            client->hStdin,      // input buffer handle 
+            irInBuf,     // buffer to read into 
+            128,         // size of read buffer 
+            &cNumRead)) { // number of records read 
+            printf("ReadConsoleInput");
+            return 1;
+        }
+        for (int i = 0; i < cNumRead; i++) {
+            if (irInBuf[i].EventType == KEY_EVENT) {
+                client->keyInput = irInBuf[i].Event.KeyEvent.uChar.AsciiChar;
+            }
+        }
+    }
+    return 0;
+}
+
 Client::~Client() {
     // cleanup
    // CloseHandle(MsgSender);
+    SetConsoleMode(hStdin, fdwSaveOldMode);
     CloseHandle(MsgReceiver);
     int iResult = shutdown(ConnectSocket, SD_SEND);
     closesocket(ConnectSocket);
     WSACleanup();
 }
 
-int Client::initWinsock(const char* ipadress) {
+int Client::InitWinsock(const char* ipadress) {
     // Initialize Winsock
+    WSADATA wsaData;
+    addrinfo* result = NULL, * ptr = NULL, hints;
     int iResult = WSAStartup(MAKEWORD(2, 2), &wsaData);
     if (iResult != 0) {
         printf("WSAStartup failed with error: %d\n", iResult);
@@ -66,7 +104,7 @@ int Client::initWinsock(const char* ipadress) {
     }
 
     ZeroMemory(&hints, sizeof(hints));
-    hints.ai_family = AF_INET;//AF_UNSPEC;
+    hints.ai_family = AF_UNSPEC;
     hints.ai_socktype = SOCK_STREAM;
     hints.ai_protocol = IPPROTO_TCP;
 
@@ -108,5 +146,40 @@ int Client::initWinsock(const char* ipadress) {
         return 1;
     }
 
+    return 0;
+}
+
+int Client::InitConsole() {
+    hStdin = GetStdHandle(STD_INPUT_HANDLE);
+    if (hStdin == INVALID_HANDLE_VALUE) {
+        printf("GetStdHandle err");
+        return 1;
+    }
+    // Save the current input mode, to be restored on exit. 
+    if (!GetConsoleMode(hStdin, &fdwSaveOldMode)) {
+        printf("GetConsoleMode err");
+        SetConsoleMode(hStdin, fdwSaveOldMode);
+        return 1;
+    }
+    fdwMode = ENABLE_WINDOW_INPUT | ENABLE_INSERT_MODE | ENABLE_EXTENDED_FLAGS;
+    if (!SetConsoleMode(hStdin, fdwMode)){
+        printf("SetConsoleMode err");
+        SetConsoleMode(hStdin, fdwSaveOldMode);
+        return 1;
+    }
+    return 0;
+}
+
+int Client::InitThreads() {
+    MsgReceiver = CreateThread(NULL, 0, &MsgReceiverListener, (void*)this, 0, MsgReceiverID);
+    if (MsgReceiver == NULL) {
+        printf("Failed to create MsgReceiverListener thread.\n");
+        return 1;
+    }
+    keyEventListener = CreateThread(NULL, 0, &KeyEventListener, (void*)this, 0, keyEventListenerID);
+    if (keyEventListener == NULL) {
+        printf("Failed to create KeyEventListener thread.\n");
+        return 1;
+    }
     return 0;
 }

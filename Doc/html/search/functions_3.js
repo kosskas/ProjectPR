@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['main_0',['main',['../app_8cpp.html#a7626fdc5873a2d10e9ac910fa40864b2',1,'main(int argc, char **argv):&#160;app.cpp'],['../main_8cpp.html#ab4ec3b3f6617ab4dcdbbe7b0ad0f06b7',1,'main(void):&#160;main.cpp']]],
-  ['msgreceiverlistener_1',['MsgReceiverListener',['../_client_8cpp.html#ab493dc086fe674e2cc41509b237f7dea',1,'MsgReceiverListener(LPVOID param):&#160;Client.cpp'],['../_client_8h.html#ab493dc086fe674e2cc41509b237f7dea',1,'MsgReceiverListener(LPVOID param):&#160;Client.cpp']]]
+  ['_7eclient_0',['~Client',['../class_client.html#a840e519ca781888cbd54181572ebe3a7',1,'Client']]],
+  ['_7eserver_1',['~Server',['../class_server.html#a4b3aa2579cb1c8cd1d069582c14d0fa6',1,'Server']]]
 ];

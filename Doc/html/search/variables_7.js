@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['senderth_0',['SenderTh',['../class_server.html#ad090f3d9278dc04bffdd1357d775e117',1,'Server']]],
-  ['senderthid_1',['senderThID',['../class_server.html#a3c4c45884e3f564493e50d388e9b56c9',1,'Server']]]
+  ['pingerth_0',['PingerTh',['../class_server.html#a055a308d0578cf0695a1cc56a34b8e6f',1,'Server']]],
+  ['pingerthid_1',['pingerThID',['../class_server.html#a822c5945b4afae178311085afd4436b3',1,'Server']]]
 ];

@@ -78,104 +78,96 @@ $(function() {
   <div class="headertitle"><div class="title">Client Class Reference</div></div>
 </div><!--header-->
 <div class="contents">
-
-<p><code>#include &lt;<a class="el" href="_client_8h_source.html">Client.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a627ff06105a62972b598ea996f7461f2"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_client.html#a627ff06105a62972b598ea996f7461f2">Client</a> (const char *ipadress)</td></tr>
-<tr class="memdesc:a627ff06105a62972b598ea996f7461f2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Konstruktor inicjalizujacy aplikacje kliencka.  <br /></td></tr>
+<tr class="memitem:a627ff06105a62972b598ea996f7461f2"><td class="memItemLeft" align="right" valign="top"><a id="a627ff06105a62972b598ea996f7461f2" name="a627ff06105a62972b598ea996f7461f2"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>Client</b> (const char *ipadress)</td></tr>
+<tr class="memdesc:a627ff06105a62972b598ea996f7461f2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Konstruktor inicjalizujący aplikacje kliencką <br /></td></tr>
 <tr class="separator:a627ff06105a62972b598ea996f7461f2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a13cde1728b68928c9917493d92faac6e"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_client.html#a13cde1728b68928c9917493d92faac6e">sendMessage</a> (const char *sendbuf, int len)</td></tr>
-<tr class="memdesc:a13cde1728b68928c9917493d92faac6e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Przesyla ciag bajtow o podanej dlugosci do serwera.  <br /></td></tr>
-<tr class="separator:a13cde1728b68928c9917493d92faac6e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a840e519ca781888cbd54181572ebe3a7"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_client.html#a840e519ca781888cbd54181572ebe3a7">~Client</a> ()</td></tr>
-<tr class="memdesc:a840e519ca781888cbd54181572ebe3a7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Czysci poprawnie klase.  <br /></td></tr>
+<tr class="memitem:a742373e08a80d993d2651b6fff76f5b9"><td class="memItemLeft" align="right" valign="top"><a id="a742373e08a80d993d2651b6fff76f5b9" name="a742373e08a80d993d2651b6fff76f5b9"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>start</b> ()</td></tr>
+<tr class="memdesc:a742373e08a80d993d2651b6fff76f5b9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Startuje działanie aplikacji. <br /></td></tr>
+<tr class="separator:a742373e08a80d993d2651b6fff76f5b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a840e519ca781888cbd54181572ebe3a7"><td class="memItemLeft" align="right" valign="top"><a id="a840e519ca781888cbd54181572ebe3a7" name="a840e519ca781888cbd54181572ebe3a7"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>~Client</b> ()</td></tr>
+<tr class="memdesc:a840e519ca781888cbd54181572ebe3a7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Czyści poprawnie klasę <br /></td></tr>
 <tr class="separator:a840e519ca781888cbd54181572ebe3a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-methods" name="pri-methods"></a>
 Private Member Functions</h2></td></tr>
-<tr class="memitem:a1f4648cfb2fb51489aa716fbb16a6606"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_client.html#a1f4648cfb2fb51489aa716fbb16a6606">initWinsock</a> (const char *ipadress)</td></tr>
-<tr class="memdesc:a1f4648cfb2fb51489aa716fbb16a6606"><td class="mdescLeft">&#160;</td><td class="mdescRight">Funkcja inicjalizująca komponęty potrzebne do komunikacji.  <br /></td></tr>
-<tr class="separator:a1f4648cfb2fb51489aa716fbb16a6606"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a20726fca60b89cf22d109a75334777e1"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_client.html#a20726fca60b89cf22d109a75334777e1">InitWinsock</a> (const char *ipadress)</td></tr>
+<tr class="memdesc:a20726fca60b89cf22d109a75334777e1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Funkcja inicjalizująca komponęty potrzebne do komunikacji.  <br /></td></tr>
+<tr class="separator:a20726fca60b89cf22d109a75334777e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abbb96dec1139b89030e060b6f3d3b7a3"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_client.html#abbb96dec1139b89030e060b6f3d3b7a3">InitConsole</a> ()</td></tr>
+<tr class="memdesc:abbb96dec1139b89030e060b6f3d3b7a3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Incjalizacja do odczytu klawiatury.  <br /></td></tr>
+<tr class="separator:abbb96dec1139b89030e060b6f3d3b7a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0643878fe1ed3fabda51c777755c059d"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_client.html#a0643878fe1ed3fabda51c777755c059d">InitThreads</a> ()</td></tr>
+<tr class="memdesc:a0643878fe1ed3fabda51c777755c059d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Incjalizacja do wątków.  <br /></td></tr>
+<tr class="separator:a0643878fe1ed3fabda51c777755c059d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a13cde1728b68928c9917493d92faac6e"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_client.html#a13cde1728b68928c9917493d92faac6e">sendMessage</a> (const char *sendbuf, int len)</td></tr>
+<tr class="memdesc:a13cde1728b68928c9917493d92faac6e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Przesyła ciąg bajtów o podanej dlugości do serwera.  <br /></td></tr>
+<tr class="separator:a13cde1728b68928c9917493d92faac6e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-attribs" name="pri-attribs"></a>
 Private Attributes</h2></td></tr>
-<tr class="memitem:aeef1e4fbc771a948a6ba7d4ec8ce2af7"><td class="memItemLeft" align="right" valign="top">WSADATA&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_client.html#aeef1e4fbc771a948a6ba7d4ec8ce2af7">wsaData</a></td></tr>
-<tr class="memdesc:aeef1e4fbc771a948a6ba7d4ec8ce2af7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Struktura potrzebna od inicjalizacji WinSock.  <br /></td></tr>
-<tr class="separator:aeef1e4fbc771a948a6ba7d4ec8ce2af7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4f46bb329dd4d02877b6663189ebb86f"><td class="memItemLeft" align="right" valign="top">SOCKET&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_client.html#a4f46bb329dd4d02877b6663189ebb86f">ConnectSocket</a> = INVALID_SOCKET</td></tr>
-<tr class="memdesc:a4f46bb329dd4d02877b6663189ebb86f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Socket łączący z serwerem.  <br /></td></tr>
+<tr class="memitem:a4f46bb329dd4d02877b6663189ebb86f"><td class="memItemLeft" align="right" valign="top"><a id="a4f46bb329dd4d02877b6663189ebb86f" name="a4f46bb329dd4d02877b6663189ebb86f"></a>
+SOCKET&#160;</td><td class="memItemRight" valign="bottom"><b>ConnectSocket</b> = INVALID_SOCKET</td></tr>
+<tr class="memdesc:a4f46bb329dd4d02877b6663189ebb86f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Socket łączący z serwerem. <br /></td></tr>
 <tr class="separator:a4f46bb329dd4d02877b6663189ebb86f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a48a1b744b50477b1bae414e71e0299d4"><td class="memItemLeft" align="right" valign="top">addrinfo *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_client.html#a48a1b744b50477b1bae414e71e0299d4">result</a> = NULL</td></tr>
-<tr class="memdesc:a48a1b744b50477b1bae414e71e0299d4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Informacje o adresie.  <br /></td></tr>
-<tr class="separator:a48a1b744b50477b1bae414e71e0299d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aff441dc1d618a8db1632398227e137d7"><td class="memItemLeft" align="right" valign="top">addrinfo *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_client.html#aff441dc1d618a8db1632398227e137d7">ptr</a> = NULL</td></tr>
-<tr class="separator:aff441dc1d618a8db1632398227e137d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a02c013b27705cc12ed3ad060e7fe0180"><td class="memItemLeft" align="right" valign="top">addrinfo&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_client.html#a02c013b27705cc12ed3ad060e7fe0180">hints</a></td></tr>
-<tr class="separator:a02c013b27705cc12ed3ad060e7fe0180"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a555de6ad752b17dc7ba6460aee011d24"><td class="memItemLeft" align="right" valign="top">char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_client.html#a555de6ad752b17dc7ba6460aee011d24">recvbuf</a> [<a class="el" href="_client_8h.html#a5261516a174b035b084a9ae06dc85730">DEFAULT_BUFLEN</a>]</td></tr>
-<tr class="memdesc:a555de6ad752b17dc7ba6460aee011d24"><td class="mdescLeft">&#160;</td><td class="mdescRight">Bufor bajtów odebranych.  <br /></td></tr>
+<tr class="memitem:a555de6ad752b17dc7ba6460aee011d24"><td class="memItemLeft" align="right" valign="top"><a id="a555de6ad752b17dc7ba6460aee011d24" name="a555de6ad752b17dc7ba6460aee011d24"></a>
+char&#160;</td><td class="memItemRight" valign="bottom"><b>recvbuf</b> [DEFAULT_BUFLEN]</td></tr>
+<tr class="memdesc:a555de6ad752b17dc7ba6460aee011d24"><td class="mdescLeft">&#160;</td><td class="mdescRight">Bufor bajtów odebranych. <br /></td></tr>
 <tr class="separator:a555de6ad752b17dc7ba6460aee011d24"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a360e773f55cedc6cb3a4e666cbccd5b5"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_client.html#a360e773f55cedc6cb3a4e666cbccd5b5">recvbuflen</a> = <a class="el" href="_client_8h.html#a5261516a174b035b084a9ae06dc85730">DEFAULT_BUFLEN</a></td></tr>
-<tr class="memdesc:a360e773f55cedc6cb3a4e666cbccd5b5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Długość bufora danych.  <br /></td></tr>
+<tr class="memitem:a360e773f55cedc6cb3a4e666cbccd5b5"><td class="memItemLeft" align="right" valign="top"><a id="a360e773f55cedc6cb3a4e666cbccd5b5" name="a360e773f55cedc6cb3a4e666cbccd5b5"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>recvbuflen</b> = DEFAULT_BUFLEN</td></tr>
+<tr class="memdesc:a360e773f55cedc6cb3a4e666cbccd5b5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Długość bufora danych. <br /></td></tr>
 <tr class="separator:a360e773f55cedc6cb3a4e666cbccd5b5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac974c9701165f1ea34e8a58b390b159d"><td class="memItemLeft" align="right" valign="top">HANDLE&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_client.html#ac974c9701165f1ea34e8a58b390b159d">MsgReceiver</a></td></tr>
-<tr class="memdesc:ac974c9701165f1ea34e8a58b390b159d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Uchwyt na wątek MsgReceiverListener.  <br /></td></tr>
+<tr class="memitem:ac974c9701165f1ea34e8a58b390b159d"><td class="memItemLeft" align="right" valign="top"><a id="ac974c9701165f1ea34e8a58b390b159d" name="ac974c9701165f1ea34e8a58b390b159d"></a>
+HANDLE&#160;</td><td class="memItemRight" valign="bottom"><b>MsgReceiver</b></td></tr>
+<tr class="memdesc:ac974c9701165f1ea34e8a58b390b159d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Uchwyt na wątek MsgReceiverListener. <br /></td></tr>
 <tr class="separator:ac974c9701165f1ea34e8a58b390b159d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a39ed5ebd70b64004a2fef8cf892a6d46"><td class="memItemLeft" align="right" valign="top">LPDWORD&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_client.html#a39ed5ebd70b64004a2fef8cf892a6d46">MsgReceiverID</a></td></tr>
-<tr class="memdesc:a39ed5ebd70b64004a2fef8cf892a6d46"><td class="mdescLeft">&#160;</td><td class="mdescRight">Wskaźnik na ID wątku MsgReceiverListener.  <br /></td></tr>
+<tr class="memitem:a5ec33c3871356eefa9868663c216c8ba"><td class="memItemLeft" align="right" valign="top"><a id="a5ec33c3871356eefa9868663c216c8ba" name="a5ec33c3871356eefa9868663c216c8ba"></a>
+HANDLE&#160;</td><td class="memItemRight" valign="bottom"><b>keyEventListener</b></td></tr>
+<tr class="memdesc:a5ec33c3871356eefa9868663c216c8ba"><td class="mdescLeft">&#160;</td><td class="mdescRight">Uchwyt na wątek KeyEventListener. <br /></td></tr>
+<tr class="separator:a5ec33c3871356eefa9868663c216c8ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a39ed5ebd70b64004a2fef8cf892a6d46"><td class="memItemLeft" align="right" valign="top"><a id="a39ed5ebd70b64004a2fef8cf892a6d46" name="a39ed5ebd70b64004a2fef8cf892a6d46"></a>
+LPDWORD&#160;</td><td class="memItemRight" valign="bottom"><b>MsgReceiverID</b></td></tr>
+<tr class="memdesc:a39ed5ebd70b64004a2fef8cf892a6d46"><td class="mdescLeft">&#160;</td><td class="mdescRight">Wskaźnik na ID wątku MsgReceiverListener. <br /></td></tr>
 <tr class="separator:a39ed5ebd70b64004a2fef8cf892a6d46"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab8155c53e384a12c3a3a8d504c1f2453"><td class="memItemLeft" align="right" valign="top"><a id="ab8155c53e384a12c3a3a8d504c1f2453" name="ab8155c53e384a12c3a3a8d504c1f2453"></a>
+LPDWORD&#160;</td><td class="memItemRight" valign="bottom"><b>keyEventListenerID</b></td></tr>
+<tr class="memdesc:ab8155c53e384a12c3a3a8d504c1f2453"><td class="mdescLeft">&#160;</td><td class="mdescRight">Wskaźnik na ID wątku KeyEventListener. <br /></td></tr>
+<tr class="separator:ab8155c53e384a12c3a3a8d504c1f2453"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a853f40120b3eb807f79d0b65bbf4d41d"><td class="memItemLeft" align="right" valign="top"><a id="a853f40120b3eb807f79d0b65bbf4d41d" name="a853f40120b3eb807f79d0b65bbf4d41d"></a>
+HANDLE&#160;</td><td class="memItemRight" valign="bottom"><b>hStdin</b></td></tr>
+<tr class="memdesc:a853f40120b3eb807f79d0b65bbf4d41d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Uchwyt standartowe wejście. <br /></td></tr>
+<tr class="separator:a853f40120b3eb807f79d0b65bbf4d41d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a78fd87e990f6dfa82bf93d19bc504d81"><td class="memItemLeft" align="right" valign="top"><a id="a78fd87e990f6dfa82bf93d19bc504d81" name="a78fd87e990f6dfa82bf93d19bc504d81"></a>
+DWORD&#160;</td><td class="memItemRight" valign="bottom"><b>fdwSaveOldMode</b> = 0</td></tr>
+<tr class="memdesc:a78fd87e990f6dfa82bf93d19bc504d81"><td class="mdescLeft">&#160;</td><td class="mdescRight">Stare ustawienia konsoli, przywracane na końcu działania aplikacji. <br /></td></tr>
+<tr class="separator:a78fd87e990f6dfa82bf93d19bc504d81"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8bcf3f1a2f1fb548c767d30c6306c756"><td class="memItemLeft" align="right" valign="top"><a id="a8bcf3f1a2f1fb548c767d30c6306c756" name="a8bcf3f1a2f1fb548c767d30c6306c756"></a>
+DWORD&#160;</td><td class="memItemRight" valign="bottom"><b>fdwMode</b></td></tr>
+<tr class="memdesc:a8bcf3f1a2f1fb548c767d30c6306c756"><td class="mdescLeft">&#160;</td><td class="mdescRight">Nowe ustawienia konsoli na czas działania aplikacji. <br /></td></tr>
+<tr class="separator:a8bcf3f1a2f1fb548c767d30c6306c756"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9aa4314c173806769acb5b33eeaa7e02"><td class="memItemLeft" align="right" valign="top"><a id="a9aa4314c173806769acb5b33eeaa7e02" name="a9aa4314c173806769acb5b33eeaa7e02"></a>
+char&#160;</td><td class="memItemRight" valign="bottom"><b>keyInput</b> = 'a'</td></tr>
+<tr class="memdesc:a9aa4314c173806769acb5b33eeaa7e02"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sczytany aktualny input z klawiatury. <br /></td></tr>
+<tr class="separator:a9aa4314c173806769acb5b33eeaa7e02"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="friends" name="friends"></a>
 Friends</h2></td></tr>
 <tr class="memitem:ab493dc086fe674e2cc41509b237f7dea"><td class="memItemLeft" align="right" valign="top">DWORD __stdcall&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_client.html#ab493dc086fe674e2cc41509b237f7dea">MsgReceiverListener</a> (LPVOID param)</td></tr>
 <tr class="memdesc:ab493dc086fe674e2cc41509b237f7dea"><td class="mdescLeft">&#160;</td><td class="mdescRight">Watek nasluchujacy wiadomosci z serwera.  <br /></td></tr>
 <tr class="separator:ab493dc086fe674e2cc41509b237f7dea"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9692392acc351fc0b4657ca28352f37d"><td class="memItemLeft" align="right" valign="top">DWORD __stdcall&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_client.html#a9692392acc351fc0b4657ca28352f37d">KeyEventListener</a> (LPVOID param)</td></tr>
+<tr class="memdesc:a9692392acc351fc0b4657ca28352f37d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Wątek nasłuchujący zdarzeń z klawiatury.  <br /></td></tr>
+<tr class="separator:a9692392acc351fc0b4657ca28352f37d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a627ff06105a62972b598ea996f7461f2" name="a627ff06105a62972b598ea996f7461f2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a627ff06105a62972b598ea996f7461f2">&#9670;&#160;</a></span>Client()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">Client::Client </td>
-          <td>(</td>
-          <td class="paramtype">const char *&#160;</td>
-          <td class="paramname"><em>ipadress</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Konstruktor inicjalizujacy aplikacje kliencka. </p>
-
-</div>
-</div>
-<a id="a840e519ca781888cbd54181572ebe3a7" name="a840e519ca781888cbd54181572ebe3a7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a840e519ca781888cbd54181572ebe3a7">&#9670;&#160;</a></span>~Client()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">Client::~Client </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Czysci poprawnie klase. </p>
-
-</div>
-</div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a1f4648cfb2fb51489aa716fbb16a6606" name="a1f4648cfb2fb51489aa716fbb16a6606"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1f4648cfb2fb51489aa716fbb16a6606">&#9670;&#160;</a></span>initWinsock()</h2>
+<a id="abbb96dec1139b89030e060b6f3d3b7a3" name="abbb96dec1139b89030e060b6f3d3b7a3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abbb96dec1139b89030e060b6f3d3b7a3">&#9670;&#160;</a></span>InitConsole()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -184,7 +176,63 @@ Friends</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">int Client::initWinsock </td>
+          <td class="memname">int Client::InitConsole </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Incjalizacja do odczytu klawiatury. </p>
+<dl class="section return"><dt>Returns</dt><dd>0 jeśli konfiguracja przebiegła pomyślnie, 1 jesli nie </dd></dl>
+
+</div>
+</div>
+<a id="a0643878fe1ed3fabda51c777755c059d" name="a0643878fe1ed3fabda51c777755c059d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0643878fe1ed3fabda51c777755c059d">&#9670;&#160;</a></span>InitThreads()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int Client::InitThreads </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Incjalizacja do wątków. </p>
+<dl class="section return"><dt>Returns</dt><dd>0 jeśli konfiguracja przebiegła pomyślnie, 1 jesli nie </dd></dl>
+
+</div>
+</div>
+<a id="a20726fca60b89cf22d109a75334777e1" name="a20726fca60b89cf22d109a75334777e1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a20726fca60b89cf22d109a75334777e1">&#9670;&#160;</a></span>InitWinsock()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int Client::InitWinsock </td>
           <td>(</td>
           <td class="paramtype">const char *&#160;</td>
           <td class="paramname"><em>ipadress</em></td><td>)</td>
@@ -208,6 +256,9 @@ Friends</h2></td></tr>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">int Client::sendMessage </td>
@@ -227,21 +278,61 @@ Friends</h2></td></tr>
           <td></td><td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
-<p>Przesyla ciag bajtow o podanej dlugosci do serwera. </p>
+<p>Przesyła ciąg bajtów o podanej dlugości do serwera. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">sendbuf</td><td>- przesylany ciag bajtow </td></tr>
-    <tr><td class="paramname">len</td><td>- dlugosc ciagu liczona w bajtach </td></tr>
+    <tr><td class="paramname">sendbuf</td><td>- przesyłany ciąg bajtów </td></tr>
+    <tr><td class="paramname">len</td><td>- dlugość ciągu liczona w bajtach </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>0 jesli poprawnie przeslano wiadomosc, 1 jesli zle </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>0 jeśli poprawnie przesłano wiadomość, 1 jeśli źle </dd></dl>
 
 </div>
 </div>
 <h2 class="groupheader">Friends And Related Symbol Documentation</h2>
+<a id="a9692392acc351fc0b4657ca28352f37d" name="a9692392acc351fc0b4657ca28352f37d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9692392acc351fc0b4657ca28352f37d">&#9670;&#160;</a></span>KeyEventListener</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">DWORD __stdcall KeyEventListener </td>
+          <td>(</td>
+          <td class="paramtype">LPVOID&#160;</td>
+          <td class="paramname"><em>param</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">friend</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Wątek nasłuchujący zdarzeń z klawiatury. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">param</td><td>Klasa <a class="el" href="class_client.html">Client</a> </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>0 jeśli wątek zakończył się dobrze, 1 jeśli źle </dd></dl>
+
+</div>
+</div>
 <a id="ab493dc086fe674e2cc41509b237f7dea" name="ab493dc086fe674e2cc41509b237f7dea"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ab493dc086fe674e2cc41509b237f7dea">&#9670;&#160;</a></span>MsgReceiverListener</h2>
 
@@ -269,229 +360,17 @@ Friends</h2></td></tr>
 <p>Watek nasluchujacy wiadomosci z serwera. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">param</td><td>Klasa <a class="el" href="class_client.html">Client</a> @return0 jesli watek zakonczyl sie dobrze, 1 jesli zle </td></tr>
+    <tr><td class="paramname">param</td><td>Klasa <a class="el" href="class_client.html">Client</a> </td></tr>
   </table>
   </dd>
 </dl>
-
-</div>
-</div>
-<h2 class="groupheader">Member Data Documentation</h2>
-<a id="a4f46bb329dd4d02877b6663189ebb86f" name="a4f46bb329dd4d02877b6663189ebb86f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4f46bb329dd4d02877b6663189ebb86f">&#9670;&#160;</a></span>ConnectSocket</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">SOCKET Client::ConnectSocket = INVALID_SOCKET</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">private</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Socket łączący z serwerem. </p>
-
-</div>
-</div>
-<a id="a02c013b27705cc12ed3ad060e7fe0180" name="a02c013b27705cc12ed3ad060e7fe0180"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a02c013b27705cc12ed3ad060e7fe0180">&#9670;&#160;</a></span>hints</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">addrinfo Client::hints</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">private</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="ac974c9701165f1ea34e8a58b390b159d" name="ac974c9701165f1ea34e8a58b390b159d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac974c9701165f1ea34e8a58b390b159d">&#9670;&#160;</a></span>MsgReceiver</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">HANDLE Client::MsgReceiver</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">private</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Uchwyt na wątek MsgReceiverListener. </p>
-
-</div>
-</div>
-<a id="a39ed5ebd70b64004a2fef8cf892a6d46" name="a39ed5ebd70b64004a2fef8cf892a6d46"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a39ed5ebd70b64004a2fef8cf892a6d46">&#9670;&#160;</a></span>MsgReceiverID</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">LPDWORD Client::MsgReceiverID</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">private</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Wskaźnik na ID wątku MsgReceiverListener. </p>
-
-</div>
-</div>
-<a id="aff441dc1d618a8db1632398227e137d7" name="aff441dc1d618a8db1632398227e137d7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aff441dc1d618a8db1632398227e137d7">&#9670;&#160;</a></span>ptr</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">addrinfo * Client::ptr = NULL</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">private</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a555de6ad752b17dc7ba6460aee011d24" name="a555de6ad752b17dc7ba6460aee011d24"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a555de6ad752b17dc7ba6460aee011d24">&#9670;&#160;</a></span>recvbuf</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">char Client::recvbuf[<a class="el" href="_client_8h.html#a5261516a174b035b084a9ae06dc85730">DEFAULT_BUFLEN</a>]</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">private</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Bufor bajtów odebranych. </p>
-
-</div>
-</div>
-<a id="a360e773f55cedc6cb3a4e666cbccd5b5" name="a360e773f55cedc6cb3a4e666cbccd5b5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a360e773f55cedc6cb3a4e666cbccd5b5">&#9670;&#160;</a></span>recvbuflen</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">int Client::recvbuflen = <a class="el" href="_client_8h.html#a5261516a174b035b084a9ae06dc85730">DEFAULT_BUFLEN</a></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">private</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Długość bufora danych. </p>
-
-</div>
-</div>
-<a id="a48a1b744b50477b1bae414e71e0299d4" name="a48a1b744b50477b1bae414e71e0299d4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a48a1b744b50477b1bae414e71e0299d4">&#9670;&#160;</a></span>result</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">addrinfo* Client::result = NULL</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">private</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Informacje o adresie. </p>
-
-</div>
-</div>
-<a id="aeef1e4fbc771a948a6ba7d4ec8ce2af7" name="aeef1e4fbc771a948a6ba7d4ec8ce2af7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aeef1e4fbc771a948a6ba7d4ec8ce2af7">&#9670;&#160;</a></span>wsaData</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">WSADATA Client::wsaData</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">private</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Struktura potrzebna od inicjalizacji WinSock. </p>
+<dl class="section return"><dt>Returns</dt><dd>0 jeśli wątek zakończył się dobrze, 1 jeśli źle </dd></dl>
 
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li>D:/PG/4sem/Przetwarzanie Rozproszone/ProjectPR/kody/<a class="el" href="_client_8h_source.html">Client.h</a></li>
-<li>D:/PG/4sem/Przetwarzanie Rozproszone/ProjectPR/kody/<a class="el" href="_client_8cpp.html">Client.cpp</a></li>
+<li>D:/PG/4sem/Przetwarzanie Rozproszone/ProjectPR/Client/<a class="el" href="_client_8h_source.html">Client.h</a></li>
+<li>D:/PG/4sem/Przetwarzanie Rozproszone/ProjectPR/Client/Client.cpp</li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

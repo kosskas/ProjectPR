@@ -17,17 +17,9 @@
 class Client {
 private:
     /**
-     * @brief Struktura potrzebna od inicjalizacji WinSock
-    */
-    WSADATA wsaData;
-    /**
      * @brief Socket łączący z serwerem
     */
     SOCKET ConnectSocket = INVALID_SOCKET;
-    /**
-     * @brief Informacje o adresie
-    */
-    addrinfo* result = NULL,*ptr = NULL, hints;
     /**
      * @brief Bufor bajtów odebranych
     */
@@ -41,35 +33,81 @@ private:
     */
     HANDLE MsgReceiver;
     /**
+     * @brief Uchwyt na wątek KeyEventListener
+    */
+    HANDLE keyEventListener;
+    /**
      * @brief Wskaźnik na ID wątku MsgReceiverListener
     */
     LPDWORD MsgReceiverID;
     /**
+     * @brief Wskaźnik na ID wątku KeyEventListener
+    */
+    LPDWORD keyEventListenerID;
+    /**
+     * @brief Uchwyt standartowe wejście
+    */
+    HANDLE hStdin;
+    /**
+     * @brief Stare ustawienia konsoli, przywracane na końcu działania aplikacji
+    */
+    DWORD fdwSaveOldMode = 0;
+    /**
+     * @brief Nowe ustawienia konsoli na czas działania aplikacji
+    */
+    DWORD fdwMode;
+    //
+    /**
+     * @brief Sczytany aktualny input z klawiatury
+    */
+    char keyInput = 'a';
+    /**
      * @brief Funkcja inicjalizująca komponęty potrzebne do komunikacji
      * @return 0 jeśli konfiguracja przebiegła pomyślnie, 1 jesli nie
     */
-    int initWinsock(const char* ipadress);
+    int InitWinsock(const char* ipadress);
+    /**
+     * @brief Incjalizacja do odczytu klawiatury
+     * @return 0 jeśli konfiguracja przebiegła pomyślnie, 1 jesli nie
+    */
+    int InitConsole();
+    /**
+     * @brief Incjalizacja do wątków
+     * @return 0 jeśli konfiguracja przebiegła pomyślnie, 1 jesli nie
+    */
+    int InitThreads();
+    /**
+     * @brief Przesyła ciąg bajtów o podanej dlugości do serwera
+     * @param sendbuf  - przesyłany ciąg bajtów
+     * @param len - dlugość ciągu liczona w bajtach
+     * @return 0 jeśli poprawnie przesłano wiadomość, 1 jeśli źle
+    */
+    int sendMessage(const char* sendbuf, int len);
     friend DWORD __stdcall MsgReceiverListener(LPVOID param);
+    friend DWORD __stdcall KeyEventListener(LPVOID param);
 public:
     /**
-     * @brief @brief Konstruktor inicjalizujacy aplikacje kliencka
+     * @brief @brief Konstruktor inicjalizujący aplikacje kliencką
     */
     Client(const char* ipadress);
     /**
-     * @brief Przesyla ciag bajtow o podanej dlugosci do serwera
-     * @param sendbuf  - przesylany ciag bajtow
-     * @param len - dlugosc ciagu liczona w bajtach
-     * @return 0 jesli poprawnie przeslano wiadomosc, 1 jesli zle
+     * @brief Startuje działanie aplikacji
     */
-    int sendMessage(const char* sendbuf, int len);
+    void start();
     /**
-    * @brief Czysci poprawnie klase
+    * @brief Czyści poprawnie klasę
     */
     ~Client();
 };
 /**
  * @brief Watek nasluchujacy wiadomosci z serwera
  * @param param Klasa Client
- * @return0 jesli watek zakonczyl sie dobrze, 1 jesli zle
+ * @return 0 jeśli wątek zakończył się dobrze, 1 jeśli źle
 */
 DWORD __stdcall MsgReceiverListener(LPVOID param);
+/**
+ * @brief Wątek nasłuchujący zdarzeń z klawiatury
+ * @param param Klasa Client
+ * @return 0 jeśli wątek zakończył się dobrze, 1 jeśli źle
+*/
+DWORD __stdcall KeyEventListener(LPVOID param);

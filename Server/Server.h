@@ -18,24 +18,13 @@ using namespace std;
 #define DEFAULT_BUFLEN 512
 #define DEFAULT_PORT "27015"
 #define CLIENT_MAX_NUM 4
+
 class Server {
 private:
-    /**
-     * @brief Struktura potrzebna od inicjalizacji WinSock
-    */
-    WSADATA wsaData; 
     /**
      * @brief Socket nasłuchujący nowych połączeń
     */
     SOCKET ListenSocket = INVALID_SOCKET;
-    /**
-     * @brief Informacje o adresie
-    */
-    addrinfo* result = NULL;
-    /**
-     * @brief Informacje o adresie
-    */
-    addrinfo hints;
     /**
      * @brief Lista aktualnie połączonych użytkowników
     */
@@ -92,7 +81,7 @@ public:
 };
 
 /**
- * @brief Sluchacz zdarzeń pochodzących od pojedynczego klienta, działajacy jako osobny wątek
+ * @brief Sluchacz zdarzeń pochodzących od pojedynczego klienta, działający jako osobny wątek
  * @param param - SOCKET klienta
  * @return 0 jeśli wątek zakończył się dobrze, 1 jeśli źle
 */

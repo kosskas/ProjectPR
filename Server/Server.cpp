@@ -23,26 +23,25 @@ Server::~Server() {
 void Server::start() {
     SenderTh = CreateThread(NULL, 0, &Broadcast, (void*)this, 0, senderThID);
     if (SenderTh == NULL) {
-        printf("Failed to create thread.\n");
+        printf("Line %d\t in function %s\tFailed to create thread.\n",__LINE__,__FUNCTION__);
         WSACleanup();
         ExitProcess(1);
     }
     PingerTh = CreateThread(NULL, 0, &Pinger, (void*)this, 0, pingerThID);
     if (PingerTh == NULL) {
-        printf("Failed to create thread.\n");
+        printf("Line %d\t in function %s\tFailed to create thread.\n", __LINE__, __FUNCTION__);
         WSACleanup();
         ExitProcess(1);
     }
     JoinerTh = CreateThread(NULL, 0, &NewClientJoiner, (void*)this, 0, joinerThID);
     if (JoinerTh == NULL) {
-        printf("Failed to create thread.\n");
+        printf("Line %d\t in function %s\tFailed to create thread.\n", __LINE__, __FUNCTION__);
         WSACleanup();
         ExitProcess(1);
     }
     while (true) {
         //aktywne oczekiwanie;
     }
-    
 }
 
 DWORD __stdcall NewClientJoiner(LPVOID param) {
@@ -52,7 +51,7 @@ DWORD __stdcall NewClientJoiner(LPVOID param) {
         SOCKET* ClientSocket = new SOCKET;
         *ClientSocket = accept(server->ListenSocket, NULL, NULL);
         if (*ClientSocket == INVALID_SOCKET) {
-            printf("accept failed with error: %d\n", WSAGetLastError());
+            printf("Line %d in function %s\taccept failed with error: %d\n", __LINE__, __FUNCTION__, WSAGetLastError());
         }
         DWORD threadId;
         HANDLE clientThread = CreateThread(NULL, 0, &ClientListener, (void*)ClientSocket, 0, &threadId);
@@ -75,13 +74,11 @@ DWORD __stdcall ClientListener(LPVOID param) {
     int iResult;
     int iSendResult = send(ClientSocket, "CONNECTED", strlen("CONNECTED"), 0);
     if (iSendResult == SOCKET_ERROR) {
-        printf("%d send failed with error: %d\n", __LINE__,WSAGetLastError());
+        printf("Line %d in function %s\tsend failed with error: %d\n", __LINE__, __FUNCTION__, WSAGetLastError());
         closesocket(ClientSocket);
         return 0;
     }
     
-    
-
     // Receive until the peer shuts down the connection
     do {
 
@@ -94,7 +91,7 @@ DWORD __stdcall ClientListener(LPVOID param) {
             printf("Connection closing...\n");
         }
         else {
-            printf("%d recv failed with error: %d\n", __LINE__,WSAGetLastError());
+            printf("Line %d in function %s\recv failed with error: %d\n", __LINE__, __FUNCTION__, WSAGetLastError());
             closesocket(ClientSocket);
             param = NULL;
             return 0;
@@ -107,6 +104,7 @@ DWORD __stdcall ClientListener(LPVOID param) {
     if (iResult == SOCKET_ERROR) {
         printf("shutdown failed with error: %d\n", WSAGetLastError());
         closesocket(ClientSocket);
+        delete param;
         param = NULL;
         return 1;
     }
@@ -128,7 +126,7 @@ DWORD __stdcall Broadcast(LPVOID param) {
                     const char* msg = "PING"; ///TU BĘDZIE WYSYŁANA MAPA
                     int iSendResult = send(*ClientSocket, msg, strlen(msg), 0);
                     if (iSendResult == SOCKET_ERROR) {
-                        printf("%d CM send failed with error: %d\n",__LINE__, WSAGetLastError());
+                        printf("Line %d in function %s\tsend failed with error: %d\n", __LINE__, __FUNCTION__, WSAGetLastError());
                     }
                 }
         }
@@ -150,6 +148,9 @@ DWORD __stdcall Pinger(LPVOID param) {
 
 int Server::initWinsock() {
     // Initialize Winsock
+    WSADATA wsaData;
+    addrinfo* result = NULL;
+    addrinfo hints;
     int iResult = WSAStartup(MAKEWORD(2, 2), &wsaData);
     if (iResult != 0) {
         printf("WSAStartup failed with error: %d\n", iResult);
