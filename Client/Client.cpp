@@ -16,10 +16,10 @@ Client::Client(const char* ipadress) {
 }
 
 void Client::start() {
-    int licz = 10;
+    int licz = 25;
     while (licz) {
         //printf("INPUT {%c}\t", keyInput);
-        const char* temp = &keyInput;
+        const char* temp = (const char*)&keyInput;
         sendMessage(temp, 1);
         Sleep(1000);
         licz--;
@@ -54,7 +54,7 @@ DWORD __stdcall MsgReceiverListener(LPVOID param) {
             return 0;
         }
         else {
-            printf("Line %d in function %s\recv failed with error: %d\n", __LINE__, __FUNCTION__, WSAGetLastError());
+            printf("Line %d in function %s \t recv failed with error: %d\n", __LINE__, __FUNCTION__, WSAGetLastError());
             return 1;
         }
     } while (true);
@@ -77,6 +77,24 @@ DWORD __stdcall KeyEventListener(LPVOID param) {
         for (int i = 0; i < cNumRead; i++) {
             if (irInBuf[i].EventType == KEY_EVENT) {
                 client->keyInput = irInBuf[i].Event.KeyEvent.uChar.AsciiChar;
+            }
+            if (irInBuf[i].EventType == KEY_EVENT && irInBuf[i].Event.KeyEvent.bKeyDown) {
+                switch (irInBuf[i].Event.KeyEvent.wVirtualKeyCode) {
+                case VK_LEFT:
+                    client->keyInput = VK_LEFT;
+                    break;
+                case VK_RIGHT:
+                    client->keyInput = VK_RIGHT;
+                    break;
+                case VK_UP:
+                    client->keyInput = VK_UP;
+                    break;
+                case VK_DOWN:
+                    client->keyInput = VK_DOWN;
+                    break;
+                default:
+                    break;
+                }
             }
         }
     }
@@ -167,6 +185,7 @@ int Client::InitConsole() {
         SetConsoleMode(hStdin, fdwSaveOldMode);
         return 1;
     }
+    
     return 0;
 }
 

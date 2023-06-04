@@ -91,8 +91,6 @@ bool Server::closeSocket(SOCKET sock)
         return true;
     }
 }
-
-
 // public
 
 Server::Server(ServerSetup setup)
@@ -146,34 +144,73 @@ Server::~Server()
 }
 
 
-void Server::listenGamersStatus()
-{
-    // # TODO
+void Server::run() {
+    garbageCollector();
+    waitForGamers();
+    //initGame()
+    sendMap(); //powinno być bardziej uruchom wątek wysyłania
+
+
+    ///Pętla grająca
+    while (_isServerRunning /*checkGameState*/) {
+        for (Gamer* gamer : gamers) {
+            printf("0x%2X ", gamer->currentDirection);
+            //Game.ruszGraczem(gamer)
+        }
+        ///
+        printf("\n");
+        Sleep(500);
+        //Sleep(100); //jakis czas
+    }
 }
-
-
-void Server::listenGamersMoves()
-{
-    // # TODO
-}
-
 
 unsigned int Server::setGamerID()
 {
     return (unsigned int)gamers.size();
 }
 
-
 void Server::waitForGamers()
 {
-    JoinerTh = CreateThread(NULL, 0, &JoinGamer, (void*)this, 0, joinerThID);
-    if (JoinerTh == NULL) {
-        printf("Failed to create 'JoinerTh' thread. \n");
-        return;
+    SOCKET gamerSocket;
+    sockaddr_in sc;
+    int lenc = sizeof(sc);
+
+    printf("\t JoinGamer: start \n");
+
+    while (_isServerRunning && gamers.size() < _setup.maxNumberOfClients) {
+
+        gamerSocket = accept(_socket, (sockaddr*)&sc, &lenc);
+        if (gamerSocket == INVALID_SOCKET) {
+            printf("JoinGamer: Accept failed with error: %d \n", WSAGetLastError());
+        }
+
+        DWORD gamerThreadId;
+        Gamer* gamer = new Gamer;
+
+        HANDLE gamerThread = CreateThread(NULL, 0, &ClientListener, gamer, 0, &gamerThreadId);
+        if (gamerThread == NULL) {
+            printf("JoinGamer: Failed to create thread. \n");
+            shutdownSocket(gamerSocket);
+            closeSocket(gamerSocket);
+            continue;
+        }
+        gamer->sock = gamerSocket;
+        gamer->ip = sc.sin_addr;
+        gamer->port = sc.sin_port;
+        gamer->thHandle = gamerThread;
+        gamer->thId = gamerThreadId;
+        gamer->isRunning = true;
+        gamer->ID = setGamerID();
+
+
+       gamers.push_back(gamer);
+
+        char ipStr[16];
+        inet_ntop(AF_INET, &(gamer->ip), ipStr, sizeof ipStr);
+        printf("JoinGamer: Gamer(%d) %s:%d joined successfully \n", gamer->ID, ipStr, gamer->port);
     }
 
-    WaitForSingleObject(JoinerTh, INFINITE);
-    CloseHandle(JoinerTh);
+    printf("\t JoinGamer: stop \n");
 }
 
 
@@ -189,16 +226,12 @@ void Server::deleteGamer(Gamer* gamer)
     delete gamer;
 }
 
-
 void Server::endConnection()
 {
     //  # TODO
 }
 
-
-
-void Server::garbageCollector()
-{
+void Server::garbageCollector() {
     PingerTh = CreateThread(NULL, 0, &Pinger, (void*)this, 0, pingerThID);
     if (PingerTh == NULL) {
         printf("Failed to create 'PingerTh' thread.\n");
@@ -206,9 +239,7 @@ void Server::garbageCollector()
     }
 }
 
-
-void Server::sendMap() 
-{
+void Server::sendMap() {
     SenderTh = CreateThread(NULL, 0, &Broadcast, (void*)this, 0, senderThID);
     if (SenderTh == NULL) {
         printf("Failed to create 'SenderTh' thread.\n");
@@ -218,53 +249,6 @@ void Server::sendMap()
 
 
 // threads functions 
-
-DWORD __stdcall JoinGamer(LPVOID param)
-{
-    Server* server = (Server*)param;
-    SOCKET gamerSocket;
-    sockaddr_in sc;
-    int lenc = sizeof(sc);
-
-    printf("\t JoinGamer: start \n");
-
-    while (server->_isServerRunning && server->gamers.size() < server->_setup.maxNumberOfClients) {
-
-        gamerSocket = accept(server->_socket, (sockaddr*)&sc, &lenc);
-        if (gamerSocket == INVALID_SOCKET) {
-            printf("JoinGamer: Accept failed with error: %d \n", WSAGetLastError());
-        }
-
-        DWORD gamerThreadId;
-        Gamer* gamer = new Gamer;
-        HANDLE gamerThread = CreateThread(NULL, 0, &ClientListener, gamer, 0, &gamerThreadId);
-        if (gamerThread == NULL) {
-            printf("JoinGamer: Failed to create thread. \n");
-            server->shutdownSocket(gamerSocket);
-            server->closeSocket(gamerSocket);
-            continue;
-        }
-
-        gamer->sock = gamerSocket;
-        gamer->ip = sc.sin_addr;
-        gamer->port = sc.sin_port;
-        gamer->thHandle = gamerThread;
-        gamer->thId = gamerThreadId;
-        gamer->isRunning = true;
-        gamer->ID = server->setGamerID();
-
-        server->gamers.push_back(gamer);
-
-        char ipStr[16];
-        inet_ntop(AF_INET, &(gamer->ip), ipStr, sizeof ipStr);
-        printf("JoinGamer: Gamer(%d) %s:%d joined successfully \n", gamer->ID, ipStr, gamer->port);
-    }
-
-    printf("\t JoinGamer: stop \n");
-
-    return 0;
-}
-
 
 DWORD __stdcall ClientListener(LPVOID param)
 {
@@ -290,6 +274,7 @@ DWORD __stdcall ClientListener(LPVOID param)
         if (iResult > 0) {
             //printf("Bytes received: %d\n", iResult);
             printf("ClientListener: Gamer(%d) Recevied: %s \n", gamer->ID, recvbuf);
+            gamer->currentDirection = recvbuf[0];
         }
         else if (iResult == 0) {
             printf("Connection closing...\n");
@@ -316,7 +301,7 @@ DWORD __stdcall Broadcast(LPVOID param)
 
     while (server->_isServerRunning) {
         Sleep(1000);
-        const char* msg = "PING"; ///TU BĘDZIE WYSYŁANA MAPA
+        const char* msg = "PING\0"; ///TU BĘDZIE WYSYŁANA MAPA
 
         if (server->gamers.size() > 0) printf("Broadcast: Gamers in game: %d \n", server->gamers.size());
         for (Gamer* gamer : server->gamers) {

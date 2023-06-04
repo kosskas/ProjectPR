@@ -60,7 +60,7 @@ private:
     /**
      * @brief Sczytany aktualny input z klawiatury
     */
-    char keyInput = 'a';
+    unsigned char keyInput = VK_LEFT;
     /**
      * @brief Funkcja inicjalizująca komponęty potrzebne do komunikacji
      * @return 0 jeśli konfiguracja przebiegła pomyślnie, 1 jesli nie

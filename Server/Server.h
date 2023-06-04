@@ -11,13 +11,17 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <list>
-
+#include <iostream>
 
 // Need to link with Ws2_32.lib
 #pragma comment (lib, "Ws2_32.lib")
 //#pragma comment (lib, "Mswsock.lib")
 using namespace std;
 
+#define LEFT VK_LEFT
+#define RIGHT VK_RIGHT
+#define UP VK_UP
+#define DOWN VK_DOWN
 
 struct ServerSetup {
     int backlog;
@@ -26,12 +30,10 @@ struct ServerSetup {
     int port;
 };
 
-
 struct Point {
-    int positionX;
-    int positionY;
+    int posX;
+    int posY;
 };
-
 
 struct Gamer {
     HANDLE thHandle;
@@ -41,9 +43,12 @@ struct Gamer {
     USHORT port;
     bool isRunning;
 
-    int currentDirection;
+    unsigned char currentDirection;
     int score;
     int ID;
+
+    list<Point> sprite;
+
     Point head;
     Point tail;
 };
@@ -61,8 +66,6 @@ private:
      * @brief Lista aktualnie połączonych graczy
     */
     list<Gamer*> gamers;
-
-    //Wątki
 
     /**
      * @brief Uchwyt na wątek Broadcast
@@ -106,7 +109,6 @@ private:
 
 
     //Funckje watkow
-    friend DWORD __stdcall JoinGamer(LPVOID param);
     friend DWORD __stdcall ClientListener(LPVOID param);
     friend DWORD __stdcall Broadcast(LPVOID param);
     friend DWORD __stdcall Pinger(LPVOID param);
@@ -151,6 +153,8 @@ protected:
     */
     bool closeSocket(SOCKET sock);
 
+
+
 public:
 
     /**
@@ -165,24 +169,13 @@ public:
     ~Server();
 
     /**
-     * @brief [ + NasłuchujStanuGraczy() ] ???.
-    */
-    void listenGamersStatus(); // # TODO
-
-    /**
-     * @brief [ + NasłuchujRuchówGraczy() ] ???.
-    */
-    void listenGamersMoves(); // # TODO
-
-    /**
      * @brief [ + NadajID() ] Używając złożonych funkcji hashujących nadaje Graczowi unikalne id.
      * @return id
     */
     unsigned int setGamerID();
 
     /**
-     * @brief [ + DodajGracza() ] Uruchamia wątek JoinGamer, który odpowiada za dołączenie do gry odpowiedniej liczby graczy.
-             W sposób blokujący oczekuje na zakończenie się wątku.
+     * @brief Funkcja, która w trybie aktywnego oczekiwania czeka na dołączenie nowych klientów, wyłącza się gdy do serwera podłączy się odpowiednia ilość graczy
     */
     void waitForGamers();
 
@@ -207,6 +200,11 @@ public:
      * @brief !!! ta metoda ma być w klasie Gra !!! Uruchamia wątek o nazwie Broadcast
     */
     void sendMap();
+
+    /**
+     * @brief Uruchamia wątki oraz grę
+    */
+    void run();
 };
 
 
@@ -231,9 +229,3 @@ DWORD __stdcall Broadcast(LPVOID param);
 */
 DWORD __stdcall Pinger(LPVOID param);
 
-/**
- * @brief Wątek oczekujący na dołączenie nowych klientów, wyłącza się gdy do serwera podłączy się odpowiednia ilość graczy
- * @param param - Tajemniczy paramentr, którego nie będe tu omawiać
- * @return 0 jeśli wątek zakończył się dobrze
-*/
-DWORD __stdcall JoinGamer(LPVOID param);
