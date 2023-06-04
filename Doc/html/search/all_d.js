@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['_7eclient_0',['~Client',['../class_client.html#a840e519ca781888cbd54181572ebe3a7',1,'Client']]],
-  ['_7eserver_1',['~Server',['../class_server.html#a4b3aa2579cb1c8cd1d069582c14d0fa6',1,'Server']]]
+  ['recvbuf_0',['recvbuf',['../class_client.html#a555de6ad752b17dc7ba6460aee011d24',1,'Client']]],
+  ['recvbuflen_1',['recvbuflen',['../class_client.html#a360e773f55cedc6cb3a4e666cbccd5b5',1,'Client']]],
+  ['run_2',['run',['../class_server.html#abb27d30b40a94326e3fd629d3b30b7d5',1,'Server']]]
 ];

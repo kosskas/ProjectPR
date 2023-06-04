@@ -14,6 +14,9 @@
 #define DEFAULT_BUFLEN 512
 #define DEFAULT_PORT "27015"
 
+/**
+ * @brief Klasa Client zarządza grą oraz połączeniem po stronie klienta
+*/
 class Client {
 private:
     /**

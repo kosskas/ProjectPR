@@ -130,8 +130,11 @@ Server::~Server()
     WaitForSingleObject(PingerTh, INFINITE);
     CloseHandle(PingerTh);
 
-    for (Gamer* gamer : gamers) {
-        deleteGamer(gamer);
+    WaitForSingleObject(SenderTh, INFINITE);
+    CloseHandle(SenderTh);
+
+    for (Player* player : Players) {
+        deletePlayer(player);
     }
 
     shutdownSocket(_socket);
@@ -146,84 +149,92 @@ Server::~Server()
 
 void Server::run() {
     garbageCollector();
-    waitForGamers();
-    //initGame()
+    //
+    waitForPlayers();
+    //wszyscy gracze dołączyli
+
+    //game.initGame()
     sendMap(); //powinno być bardziej uruchom wątek wysyłania
 
-
     ///Pętla grająca
-    while (_isServerRunning /*checkGameState*/) {
-        for (Gamer* gamer : gamers) {
-            printf("0x%2X ", gamer->currentDirection);
-            //Game.ruszGraczem(gamer)
-        }
-        ///
-        printf("\n");
-        Sleep(500);
-        //Sleep(100); //jakis czas
+    //while (_isServerRunning /* && game.checkGameState()*/) {
+    //    for (Player* Player : Players) {
+    //        //game.ruszGraczem(*Player);
+    //    }
+    //    //game.rozstawBonusy();
+    //    Sleep(500);
+    //    //wyślijMapę()?
+    //}
+    int licz = 10;
+    while (licz--) {
+        Sleep(1000);
     }
+    //printf("0x%2X ", Player->currentDirection);
+//
 }
 
-unsigned int Server::setGamerID()
+unsigned int Server::setPlayerID()
 {
-    return (unsigned int)gamers.size();
+    return (unsigned int)Players.size();
 }
 
-void Server::waitForGamers()
+void Server::waitForPlayers()
 {
-    SOCKET gamerSocket;
+    SOCKET PlayerSocket;
     sockaddr_in sc;
     int lenc = sizeof(sc);
 
-    printf("\t JoinGamer: start \n");
+    printf("\t JoinPlayer: start \n");
 
-    while (_isServerRunning && gamers.size() < _setup.maxNumberOfClients) {
+    while (_isServerRunning && Players.size() < _setup.maxNumberOfClients) {
 
-        gamerSocket = accept(_socket, (sockaddr*)&sc, &lenc);
-        if (gamerSocket == INVALID_SOCKET) {
-            printf("JoinGamer: Accept failed with error: %d \n", WSAGetLastError());
+        PlayerSocket = accept(_socket, (sockaddr*)&sc, &lenc);
+        if (PlayerSocket == INVALID_SOCKET) {
+            printf("JoinPlayer: Accept failed with error: %d \n", WSAGetLastError());
         }
 
-        DWORD gamerThreadId;
-        Gamer* gamer = new Gamer;
+        DWORD PlayerThreadId;
+        Player* player = new Player;
 
-        HANDLE gamerThread = CreateThread(NULL, 0, &ClientListener, gamer, 0, &gamerThreadId);
-        if (gamerThread == NULL) {
-            printf("JoinGamer: Failed to create thread. \n");
-            shutdownSocket(gamerSocket);
-            closeSocket(gamerSocket);
+        HANDLE PlayerThread = CreateThread(NULL, 0, &ClientListener, player, 0, &PlayerThreadId);
+        if (PlayerThread == NULL) {
+            printf("JoinPlayer: Failed to create thread. \n");
+            shutdownSocket(PlayerSocket);
+            closeSocket(PlayerSocket);
             continue;
         }
-        gamer->sock = gamerSocket;
-        gamer->ip = sc.sin_addr;
-        gamer->port = sc.sin_port;
-        gamer->thHandle = gamerThread;
-        gamer->thId = gamerThreadId;
-        gamer->isRunning = true;
-        gamer->ID = setGamerID();
+        player->sock = PlayerSocket;
+        player->ip = sc.sin_addr;
+        player->port = sc.sin_port;
+        player->thHandle = PlayerThread;
+        player->thId = PlayerThreadId;
+        player->isRunning = true;
+        player->ID = setPlayerID();
 
 
-       gamers.push_back(gamer);
+        Players.push_back(player);
 
         char ipStr[16];
-        inet_ntop(AF_INET, &(gamer->ip), ipStr, sizeof ipStr);
-        printf("JoinGamer: Gamer(%d) %s:%d joined successfully \n", gamer->ID, ipStr, gamer->port);
+        inet_ntop(AF_INET, &(player->ip), ipStr, sizeof ipStr);
+        printf("JoinPlayer: Player(%d) %s:%d joined successfully \n", player->ID, ipStr, player->port);
     }
 
-    printf("\t JoinGamer: stop \n");
+    printf("\t JoinPlayer: stop \n");
 }
 
 
-void Server::deleteGamer(Gamer* gamer)
+void Server::deletePlayer(Player* Player)
 {
+    Player->isRunning = false;
+    WaitForSingleObject(Player->thHandle, INFINITE);
     char ipStr[16];
-    inet_ntop(AF_INET, &(gamer->ip), ipStr, sizeof ipStr);
-    printf("Deleting Gamer(%d) %s:%d \n", gamer->ID, ipStr, gamer->port);
+    inet_ntop(AF_INET, &(Player->ip), ipStr, sizeof ipStr);
+    printf("Deleting Player(%d) %s:%d \n", Player->ID, ipStr, Player->port);
 
-    shutdownSocket(gamer->sock);
-    closeSocket(gamer->sock);
-    CloseHandle(gamer->thHandle);
-    delete gamer;
+    shutdownSocket(Player->sock);
+    closeSocket(Player->sock);
+    CloseHandle(Player->thHandle);
+    delete Player;
 }
 
 void Server::endConnection()
@@ -253,16 +264,16 @@ void Server::sendMap() {
 DWORD __stdcall ClientListener(LPVOID param)
 {
     const int DEFAULT_BUFLEN = 512;
-    Gamer* gamer = (Gamer*)param;
+    Player* player = (Player*)param;
 
-    printf("ClientListener: Gamer(%d) start \n", gamer->ID);
+    printf("ClientListener: Player(%d) start \n", player->ID);
 
     int recvbuflen = DEFAULT_BUFLEN;
     int iResult;
-    int iSendResult = send(gamer->sock, "CONNECTED", strlen("CONNECTED"), 0);
+    int iSendResult = send(player->sock, "CONNECTED", strlen("CONNECTED"), 0);
     if (iSendResult == SOCKET_ERROR) {
         printf("%d send failed with error: %d\n", __LINE__, WSAGetLastError());
-        gamer->isRunning = false;
+        player->isRunning = false;
         return 0;
     }
 
@@ -270,11 +281,11 @@ DWORD __stdcall ClientListener(LPVOID param)
     do {
         char recvbuf[DEFAULT_BUFLEN] = { 0 };
 
-        iResult = recv(gamer->sock, recvbuf, recvbuflen, 0);
+        iResult = recv(player->sock, recvbuf, recvbuflen, 0);
         if (iResult > 0) {
             //printf("Bytes received: %d\n", iResult);
-            printf("ClientListener: Gamer(%d) Recevied: %s \n", gamer->ID, recvbuf);
-            gamer->currentDirection = recvbuf[0];
+            printf("ClientListener: Player(%d) Recevied: %s \n", player->ID, recvbuf);
+            player->currentDirection = recvbuf[0];
         }
         else if (iResult == 0) {
             printf("Connection closing...\n");
@@ -285,10 +296,10 @@ DWORD __stdcall ClientListener(LPVOID param)
             break;
         }
 
-    } while (iResult > 0);
+    } while (iResult > 0 && player->isRunning);
 
-    printf("ClientListener: Gamer(%d) stop \n", gamer->ID);
-    gamer->isRunning = false;
+    printf("ClientListener: Player(%d) stop \n", player->ID);
+    player->isRunning = false;
     return 0;
 }
 
@@ -303,12 +314,12 @@ DWORD __stdcall Broadcast(LPVOID param)
         Sleep(1000);
         const char* msg = "PING\0"; ///TU BĘDZIE WYSYŁANA MAPA
 
-        if (server->gamers.size() > 0) printf("Broadcast: Gamers in game: %d \n", server->gamers.size());
-        for (Gamer* gamer : server->gamers) {
-            if (gamer->sock != NULL) {
-                int iSendResult = send(gamer->sock, msg, strlen(msg), 0);
+        if (server->Players.size() > 0) printf("Broadcast: Players in game: %d \n", server->Players.size());
+        for (Player* Player : server->Players) {
+            if (Player->sock != NULL) {
+                int iSendResult = send(Player->sock, msg, strlen(msg), 0);
                 if (iSendResult == SOCKET_ERROR) {
-                    printf("%d | Broadcast: send to Gamer(%d) failed with error: %d\n", __LINE__, gamer->ID, WSAGetLastError());
+                    printf("%d | Broadcast: send to Player(%d) failed with error: %d\n", __LINE__, Player->ID, WSAGetLastError());
                 }
             }
         }
@@ -329,13 +340,13 @@ DWORD __stdcall Pinger(LPVOID param)
     while (server->_isServerRunning) {
         Sleep(1334);
 
-        server->gamers.remove_if([server](Gamer* gamer) {
-            bool isGamerInactive = (send(gamer->sock, NULL, 0, 0) == SOCKET_ERROR || gamer->isRunning == false);
-            if (isGamerInactive) {
-                printf("Pinger:  Removing inactive Gamer(%d) \n", gamer->ID);
-                server->deleteGamer(gamer);
+        server->Players.remove_if([server](Player* Player) {
+            bool isPlayerInactive = (send(Player->sock, NULL, 0, 0) == SOCKET_ERROR || Player->isRunning == false);
+            if (isPlayerInactive) {
+                printf("Pinger:  Removing inactive Player(%d) \n", Player->ID);
+                server->deletePlayer(Player);
             }
-            return isGamerInactive;
+            return isPlayerInactive;
         });
 
         //printf("Pinger\n");

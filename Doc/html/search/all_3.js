@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['hstdin_0',['hStdin',['../class_client.html#a853f40120b3eb807f79d0b65bbf4d41d',1,'Client']]]
+  ['deleteplayer_0',['deletePlayer',['../class_server.html#af4b2e3eea0649653ffbcc7750e13350b',1,'Server']]]
 ];

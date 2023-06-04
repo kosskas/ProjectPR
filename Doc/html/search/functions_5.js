@@ -1,4 +1,6 @@
 var searchData=
 [
-  ['pinger_0',['Pinger',['../_server_8cpp.html#aee9f322b1680f18aab8fd0f4499dfd9d',1,'Pinger(LPVOID param):&#160;Server.cpp'],['../_server_8h.html#aee9f322b1680f18aab8fd0f4499dfd9d',1,'Pinger(LPVOID param):&#160;Server.cpp']]]
+  ['initconsole_0',['InitConsole',['../class_client.html#abbb96dec1139b89030e060b6f3d3b7a3',1,'Client']]],
+  ['initthreads_1',['InitThreads',['../class_client.html#a0643878fe1ed3fabda51c777755c059d',1,'Client']]],
+  ['initwinsock_2',['InitWinsock',['../class_client.html#a20726fca60b89cf22d109a75334777e1',1,'Client']]]
 ];

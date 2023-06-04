@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['newclientjoiner_0',['NewClientJoiner',['../class_server.html#a481c150f3525608ec9504d38cc0344c9',1,'Server']]]
+  ['pinger_0',['Pinger',['../class_server.html#aee9f322b1680f18aab8fd0f4499dfd9d',1,'Server']]]
 ];

@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['fdwmode_0',['fdwMode',['../class_client.html#a8bcf3f1a2f1fb548c767d30c6306c756',1,'Client']]],
-  ['fdwsaveoldmode_1',['fdwSaveOldMode',['../class_client.html#a78fd87e990f6dfa82bf93d19bc504d81',1,'Client']]]
+  ['backlog_0',['backlog',['../struct_server_setup.html#a579ec5614587be42eb0a0919e7b92462',1,'ServerSetup']]],
+  ['buffersize_1',['bufferSize',['../struct_server_setup.html#a90066b4584b6eb977564708b70a43854',1,'ServerSetup']]]
 ];

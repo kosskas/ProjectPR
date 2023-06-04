@@ -15,16 +15,6 @@ int __cdecl main(void){
 
     Server server(setup);
 
-    //server.garbageCollector();
-    //server.waitForGamers();
-
-    //server.sendMap(); // !!! To wg dokumentacji ma byæ w klasie Gra !!!
-
-    //const unsigned int n = 1; // n - liczba pó³minut, przez które serwer dzia³a
-    //while (true) {
-    //    Sleep(1000 * 30 * n);
-    //    break;
-    //}
     server.run();
 
     server.~Server();

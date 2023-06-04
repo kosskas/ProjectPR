@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['client_0',['Client',['../class_client.html#a627ff06105a62972b598ea996f7461f2',1,'Client']]]
+  ['bindsocket_0',['bindSocket',['../class_server.html#afa83fded6c4f8feab588c64d70574f61',1,'Server']]]
 ];

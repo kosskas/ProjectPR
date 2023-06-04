@@ -19,7 +19,7 @@ void Client::start() {
     int licz = 25;
     while (licz) {
         //printf("INPUT {%c}\t", keyInput);
-        const char* temp = (const char*)&keyInput;
+        const char* temp = (const char*)&keyInput; //evil pointer casting
         sendMessage(temp, 1);
         Sleep(1000);
         licz--;
@@ -75,9 +75,6 @@ DWORD __stdcall KeyEventListener(LPVOID param) {
             return 1;
         }
         for (int i = 0; i < cNumRead; i++) {
-            if (irInBuf[i].EventType == KEY_EVENT) {
-                client->keyInput = irInBuf[i].Event.KeyEvent.uChar.AsciiChar;
-            }
             if (irInBuf[i].EventType == KEY_EVENT && irInBuf[i].Event.KeyEvent.bKeyDown) {
                 switch (irInBuf[i].Event.KeyEvent.wVirtualKeyCode) {
                 case VK_LEFT:

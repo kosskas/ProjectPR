@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['msgreceiver_0',['MsgReceiver',['../class_client.html#ac974c9701165f1ea34e8a58b390b159d',1,'Client']]],
-  ['msgreceiverid_1',['MsgReceiverID',['../class_client.html#a39ed5ebd70b64004a2fef8cf892a6d46',1,'Client']]]
+  ['id_0',['ID',['../struct_player.html#af3a95513ac314d13a7130ac12221420e',1,'Player']]],
+  ['ip_1',['ip',['../struct_player.html#abbd5baba0dbe5181a10d3bde93514dbe',1,'Player']]],
+  ['isrunning_2',['isRunning',['../struct_player.html#a8c5f217b4a250120a67a1bf09e498392',1,'Player']]]
 ];

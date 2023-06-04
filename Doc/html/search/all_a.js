@@ -1,6 +1,7 @@
 var searchData=
 [
-  ['pinger_0',['Pinger',['../class_server.html#aee9f322b1680f18aab8fd0f4499dfd9d',1,'Server']]],
-  ['pingerth_1',['PingerTh',['../class_server.html#a055a308d0578cf0695a1cc56a34b8e6f',1,'Server']]],
-  ['pingerthid_2',['pingerThID',['../class_server.html#a822c5945b4afae178311085afd4436b3',1,'Server']]]
+  ['keyeventlistener_0',['keyEventListener',['../class_client.html#a5ec33c3871356eefa9868663c216c8ba',1,'Client']]],
+  ['keyeventlistener_1',['KeyEventListener',['../class_client.html#a9692392acc351fc0b4657ca28352f37d',1,'Client']]],
+  ['keyeventlistenerid_2',['keyEventListenerID',['../class_client.html#ab8155c53e384a12c3a3a8d504c1f2453',1,'Client']]],
+  ['keyinput_3',['keyInput',['../class_client.html#a27a27f1877b5b484cccddaf627a24165',1,'Client']]]
 ];

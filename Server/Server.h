@@ -1,59 +1,37 @@
 #pragma once
-#undef UNICODE
+#include "General.h"
+#include "Player.h"
+#include "Game.h"
 
+/*
+BROADCAST POTENCJALNIE OUT
+*/
 
-#define WIN32_LEAN_AND_MEAN
-
-
-#include <windows.h>
-#include <winsock2.h>
-#include <ws2tcpip.h>
-#include <stdlib.h>
-#include <stdio.h>
-#include <list>
-#include <iostream>
-
-// Need to link with Ws2_32.lib
-#pragma comment (lib, "Ws2_32.lib")
-//#pragma comment (lib, "Mswsock.lib")
-using namespace std;
-
-#define LEFT VK_LEFT
-#define RIGHT VK_RIGHT
-#define UP VK_UP
-#define DOWN VK_DOWN
-
+/**
+ * @brief Pozwala na ustawić serwer według podanych parametrów
+*/
 struct ServerSetup {
+    /**
+     * @brief ???
+    */
     int backlog;
+    /**
+     * @brief Określa rozmiar bufora przesyłu danych
+    */
     size_t bufferSize;
+    /**
+     * @brief Określa maksymalną liczbę klientów
+    */
     size_t maxNumberOfClients;
+    /**
+     * @brief Określa numer portu
+    */
     int port;
 };
 
-struct Point {
-    int posX;
-    int posY;
-};
-
-struct Gamer {
-    HANDLE thHandle;
-    DWORD thId;
-    SOCKET sock;
-    IN_ADDR ip;
-    USHORT port;
-    bool isRunning;
-
-    unsigned char currentDirection;
-    int score;
-    int ID;
-
-    list<Point> sprite;
-
-    Point head;
-    Point tail;
-};
-
-
+/**
+ * @brief Klasa Server zarządza połączeniami oraz grą
+*/
 class Server {
 private:
 
@@ -65,7 +43,7 @@ private:
     /**
      * @brief Lista aktualnie połączonych graczy
     */
-    list<Gamer*> gamers;
+    list<Player*> Players;
 
     /**
      * @brief Uchwyt na wątek Broadcast
@@ -107,6 +85,10 @@ private:
     */
     bool _isServerRunning;
 
+    /**
+     * @brief Instancja gry
+    */
+    Game game;
 
     //Funckje watkow
     friend DWORD __stdcall ClientListener(LPVOID param);
@@ -164,7 +146,7 @@ public:
     Server(ServerSetup setup);
 
     /**
-     * @brief Wymusza zakończenie się wątków. Usuwa obiekty klasy Gamer z listy Server::gamers. Zamyka socker serwera.
+     * @brief Wymusza zakończenie się wątków. Usuwa obiekty klasy Player z listy Server::Players. Zamyka socker serwera.
     */
     ~Server();
 
@@ -172,18 +154,18 @@ public:
      * @brief [ + NadajID() ] Używając złożonych funkcji hashujących nadaje Graczowi unikalne id.
      * @return id
     */
-    unsigned int setGamerID();
+    unsigned int setPlayerID();
 
     /**
      * @brief Funkcja, która w trybie aktywnego oczekiwania czeka na dołączenie nowych klientów, wyłącza się gdy do serwera podłączy się odpowiednia ilość graczy
     */
-    void waitForGamers();
+    void waitForPlayers();
 
     /**
      * @brief [ + UsuńGracza() ] Zamyka socket Gracza. Zamyka uchwyt do wątku Gracza. Usuwa Gracza.
-     * @param gamer - obiekt Gracza do usunięcia
+     * @param Player - obiekt Gracza do usunięcia
     */
-    void deleteGamer(Gamer* gamer);
+    void deletePlayer(Player* Player);
 
     /**
      * @brief [ + ZakończPołączenie() ] ???.
@@ -228,4 +210,3 @@ DWORD __stdcall Broadcast(LPVOID param);
  * @return 0 jeśli wątek zakończył się dobrze
 */
 DWORD __stdcall Pinger(LPVOID param);
-
