@@ -2,7 +2,7 @@
 
 
 #define BACKLOG_LENGTH SOMAXCONN   // this is to long backlog queue !!!
-#define MAX_NUMBER_OF_CLIENTS 2
+#define MAX_NUMBER_OF_CLIENTS 3
 #define BUFFER_SIZE 512
 #define PORT 27015
 

@@ -5,6 +5,10 @@
 
 /*
 BROADCAST POTENCJALNIE OUT
+
+wydaje się że mapa będzie musiała być w UTF-16 printowana u klienta
+dlaczego? ze względu na kolorki
+wysyłanie już jako UTF16 czy konwersja na miejscu??
 */
 
 /**
@@ -90,7 +94,6 @@ private:
     */
     Game game;
 
-    //Funckje watkow
     friend DWORD __stdcall ClientListener(LPVOID param);
     friend DWORD __stdcall Broadcast(LPVOID param);
     friend DWORD __stdcall Pinger(LPVOID param);
@@ -165,7 +168,7 @@ public:
      * @brief [ + UsuńGracza() ] Zamyka socket Gracza. Zamyka uchwyt do wątku Gracza. Usuwa Gracza.
      * @param Player - obiekt Gracza do usunięcia
     */
-    void deletePlayer(Player* Player);
+    void deletePlayer(Player* player);
 
     /**
      * @brief [ + ZakończPołączenie() ] ???.
@@ -176,12 +179,12 @@ public:
     /**
      * @brief Uruchamia wątek o nazwie Pinger
     */
-    void garbageCollector();
+    void initGarbageCollector();
 
     /**
      * @brief !!! ta metoda ma być w klasie Gra !!! Uruchamia wątek o nazwie Broadcast
     */
-    void sendMap();
+    void initMapBroadcast();
 
     /**
      * @brief Uruchamia wątki oraz grę
@@ -199,14 +202,14 @@ DWORD __stdcall ClientListener(LPVOID param);
 
 /**
  * @brief Watek rozsyłający informacje do klientów
- * @param param - Klasa
+ * @param param - Wskaźnik na klasę Server
  * @return 0 jeśli wątek zakończył się dobrze
 */
 DWORD __stdcall Broadcast(LPVOID param);
 
 /**
- * @brief Watek sprawdzający co określony czas czy użytkownik istnieje, jeśli nie to go wypiernicza z gry
- * @param param - Tajemniczy paramentr, którego nie będe tu omawiać
+ * @brief Watek sprawdzający co określony połączenie z użytkownikiem, jeśli nie ma to usuwa go z gry
+ * @param param - Wskaźnik na klasę Server
  * @return 0 jeśli wątek zakończył się dobrze
 */
 DWORD __stdcall Pinger(LPVOID param);

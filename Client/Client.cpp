@@ -16,7 +16,7 @@ Client::Client(const char* ipadress) {
 }
 
 void Client::start() {
-    int licz = 25;
+    int licz = 60;
     while (licz) {
         //printf("INPUT {%c}\t", keyInput);
         const char* temp = (const char*)&keyInput; //evil pointer casting
@@ -29,7 +29,7 @@ void Client::start() {
 
 int Client::sendMessage(const char* sendbuf, int len) {
     // Send an initial buffer
-    int iResult = send(ConnectSocket, sendbuf, (int)strlen(sendbuf), 0);
+    int iResult = send(ConnectSocket, sendbuf, len, 0);
     if (iResult == SOCKET_ERROR) {
         printf("Line %d in function %s\tsend failed with error: %d\n", __LINE__, __FUNCTION__, WSAGetLastError());
         closesocket(ConnectSocket);
@@ -124,7 +124,7 @@ int Client::InitWinsock(const char* ipadress) {
     hints.ai_protocol = IPPROTO_TCP;
 
     // Resolve the server address and port
-    iResult = getaddrinfo("192.168.56.1", DEFAULT_PORT, &hints, &result); //podstawić ipadress
+    iResult = getaddrinfo(ipadress, DEFAULT_PORT, &hints, &result); //podstawić ipadress
     if (iResult != 0) {
         printf("getaddrinfo failed with error: %d\n", iResult);
         WSACleanup();

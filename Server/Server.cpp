@@ -148,13 +148,13 @@ Server::~Server()
 
 
 void Server::run() {
-    garbageCollector();
+    initGarbageCollector();
     //
     waitForPlayers();
     //wszyscy gracze dołączyli
 
     //game.initGame()
-    sendMap(); //powinno być bardziej uruchom wątek wysyłania
+    initMapBroadcast(); //powinno być bardziej uruchom wątek wysyłania
 
     ///Pętla grająca
     //while (_isServerRunning /* && game.checkGameState()*/) {
@@ -165,11 +165,17 @@ void Server::run() {
     //    Sleep(500);
     //    //wyślijMapę()?
     //}
-    int licz = 10;
-    while (licz--) {
-        Sleep(1000);
+
+    //int licz = 10;
+    //IF LICZBA GRACZY == 0 END
+    while (true) {
+        for (Player* Player : Players) {
+            printf("0x%2X ", Player->currentDirection);
+        }
+        printf("\n");
+        Sleep(100);
     }
-    //printf("0x%2X ", Player->currentDirection);
+    
 //
 }
 
@@ -223,18 +229,18 @@ void Server::waitForPlayers()
 }
 
 
-void Server::deletePlayer(Player* Player)
+void Server::deletePlayer(Player* player)
 {
-    Player->isRunning = false;
-    WaitForSingleObject(Player->thHandle, INFINITE);
+    player->isRunning = false;
+    WaitForSingleObject(player->thHandle, INFINITE);
     char ipStr[16];
-    inet_ntop(AF_INET, &(Player->ip), ipStr, sizeof ipStr);
-    printf("Deleting Player(%d) %s:%d \n", Player->ID, ipStr, Player->port);
+    inet_ntop(AF_INET, &(player->ip), ipStr, sizeof ipStr);
+    printf("Deleting Player(%d) %s:%d \n", player->ID, ipStr, player->port);
 
-    shutdownSocket(Player->sock);
-    closeSocket(Player->sock);
-    CloseHandle(Player->thHandle);
-    delete Player;
+    shutdownSocket(player->sock);
+    closeSocket(player->sock);
+    CloseHandle(player->thHandle);
+    delete player;
 }
 
 void Server::endConnection()
@@ -242,7 +248,7 @@ void Server::endConnection()
     //  # TODO
 }
 
-void Server::garbageCollector() {
+void Server::initGarbageCollector() {
     PingerTh = CreateThread(NULL, 0, &Pinger, (void*)this, 0, pingerThID);
     if (PingerTh == NULL) {
         printf("Failed to create 'PingerTh' thread.\n");
@@ -250,7 +256,7 @@ void Server::garbageCollector() {
     }
 }
 
-void Server::sendMap() {
+void Server::initMapBroadcast() {
     SenderTh = CreateThread(NULL, 0, &Broadcast, (void*)this, 0, senderThID);
     if (SenderTh == NULL) {
         printf("Failed to create 'SenderTh' thread.\n");
@@ -340,11 +346,11 @@ DWORD __stdcall Pinger(LPVOID param)
     while (server->_isServerRunning) {
         Sleep(1334);
 
-        server->Players.remove_if([server](Player* Player) {
-            bool isPlayerInactive = (send(Player->sock, NULL, 0, 0) == SOCKET_ERROR || Player->isRunning == false);
+        server->Players.remove_if([server](Player* player) {
+            bool isPlayerInactive = (send(player->sock, NULL, 0, 0) == SOCKET_ERROR || player->isRunning == false);
             if (isPlayerInactive) {
-                printf("Pinger:  Removing inactive Player(%d) \n", Player->ID);
-                server->deletePlayer(Player);
+                printf("Pinger:  Removing inactive Player(%d) \n", player->ID);
+                server->deletePlayer(player);
             }
             return isPlayerInactive;
         });
