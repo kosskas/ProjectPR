@@ -1,6 +1,11 @@
 #include "Client.h"
+
+
 #include <iostream>
-int __cdecl main(int argc, char** argv) {
+
+
+int __cdecl main(int argc, char** argv)
+{
     system("cls");
     //ip będzie w argv
     Client client(argv[1]);

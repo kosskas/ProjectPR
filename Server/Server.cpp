@@ -1,9 +1,7 @@
 #include "Server.h"
 
-#define compareString(a, b) strcmp(a, b) == 0
 
-
-// protected
+// - - - - - - - - - - Server :: protected - - - - - - - - - - \\
 
 
 bool Server::startUpWinsock()
@@ -92,7 +90,10 @@ bool Server::closeSocket(SOCKET sock)
         return true;
     }
 }
-// public
+
+
+// - - - - - - - - - - Server :: public - - - - - - - - - - \\
+
 
 Server::Server(ServerSetup setup)
     : _setup(setup)
@@ -150,32 +151,11 @@ Server::~Server()
 }
 
 
-void Server::run() {
-    initGarbageCollector();
-    //
-    waitForPlayers();
-    //wszyscy gracze dołączyli
-        
-    //initMapBroadcast();
-
-    ///Pętla grająca
-    //IF LICZBA GRACZY == 0 END
-    while (_isServerRunning /* && game.checkGameState()*/ && !players.empty()) {
-        for (Player* Player : players) {
-            printf("0x%2X ", Player->currentDirection);
-            //game.ruszGraczem(*Player)
-        }
-        //game.rozstawBonusy();
-        Sleep(200); //jako param
-        sendMap();
-        //wyślijMapę()?
-    }
-}
-
 unsigned int Server::setPlayerID()
 {
     return (unsigned int)players.size();
 }
+
 
 void Server::waitForPlayers()
 {
@@ -210,7 +190,6 @@ void Server::waitForPlayers()
         player->isRunning = true;
         player->ID = setPlayerID();
 
-
         players.push_back(player);
 
         char ipStr[16];
@@ -241,7 +220,9 @@ void Server::endConnection()
     //  # TODO
 }
 
-void Server::initGarbageCollector() {
+
+void Server::initGarbageCollector()
+{
     PingerTh = CreateThread(NULL, 0, &Pinger, (void*)this, 0, pingerThID);
     if (PingerTh == NULL) {
         printf("Failed to create 'PingerTh' thread.\n");
@@ -249,7 +230,9 @@ void Server::initGarbageCollector() {
     }
 }
 
-void Server::initMapBroadcast() {
+
+void Server::initMapBroadcast()
+{
     SenderTh = CreateThread(NULL, 0, &Broadcast, (void*)this, 0, senderThID);
     if (SenderTh == NULL) {
         printf("Failed to create 'SenderTh' thread.\n");
@@ -258,7 +241,32 @@ void Server::initMapBroadcast() {
 }
 
 
-// threads functions 
+void Server::run()
+{
+    initGarbageCollector();
+    //
+    waitForPlayers();
+    //wszyscy gracze dołączyli
+
+    //initMapBroadcast();
+
+    ///Pętla grająca
+    //IF LICZBA GRACZY == 0 END
+    while (_isServerRunning /* && game.checkGameState()*/ && !players.empty()) {
+        for (Player* Player : players) {
+            printf("0x%2X ", Player->currentDirection);
+            //game.ruszGraczem(*Player)
+        }
+        //game.rozstawBonusy();
+        Sleep(200); //jako param
+        sendMap();
+        //wyślijMapę()?
+    }
+}
+
+
+// - - - - - - - - - - threads functions - - - - - - - - - - \\
+
 
 DWORD __stdcall ClientListener(LPVOID param)
 {
@@ -330,6 +338,7 @@ DWORD __stdcall Broadcast(LPVOID param)
     return 0;
 }
 
+
 void Server::sendMap()
 {
     //printf("\t Broadcast:  start \n");
@@ -346,6 +355,7 @@ void Server::sendMap()
     }
     //printf("\t Broadcast:  stop \n");
 }
+
 
 DWORD __stdcall Pinger(LPVOID param)
 {

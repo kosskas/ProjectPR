@@ -1,8 +1,3 @@
-#pragma once
-#include "General.h"
-#include "Player.h"
-#include "Game.h"
-
 /*
 BROADCAST POTENCJALNIE OUT
 
@@ -16,7 +11,7 @@ kolorki DONE
 
 * Zebranie jedzenia w tym samym momencie - najpierw sprawdzane są kolizje węży, więc problem sprowadza się do punktu 1. TODO
 
-* Nieplanowane rozłączenie gracza (odłączenie od internetu, awaria komputera itp.) 
+* Nieplanowane rozłączenie gracza (odłączenie od internetu, awaria komputera itp.)
 wykrywane jest przez serwer - wystąpi błąd połączenia lub dany klient 3 razy pod
 rząd nie odpowie na wysłanie mapy. NIEMOŻLIWE
 
@@ -38,35 +33,56 @@ ZROBIONE W POŁOWIE
 
 */
 
+
+#ifndef _SERVER_H
+#define _SERVER_H
+
+
+#include "General.h"
+#include "Player.h"
+#include "Game.h"
+
+
+#define compareString(a, b) strcmp(a, b) == 0
+
+
 /**
  * @brief Pozwala na ustawić serwer według podanych parametrów
 */
 struct ServerSetup {
+
     /**
-     * @brief ???
+     * @brief Maksymalna długość kolejki oczekujących połączeń
     */
     int backlog;
+
     /**
      * @brief Określa rozmiar bufora przesyłu danych
     */
     size_t bufferSize;
+
     /**
      * @brief Określa maksymalną liczbę klientów
     */
     size_t maxNumberOfClients;
+
     /**
      * @brief Określa numer portu
     */
     int port;
+
     /**
      * @brief Liczba wierszy
+     * 
     */
     int mapSizeY;
+
     /**
      * @brief Liczba kolumn
     */
     int mapSizeX;
 };
+
 
 /**
  * @brief Klasa Server zarządza połączeniami oraz grą
@@ -127,7 +143,7 @@ private:
     /**
      * @brief Instancja gry
     */
-    Game *game;
+    Game* game;
     /**
      * @brief Bufor przechowujący mapę gry w stanie do wysłania
     */
@@ -145,6 +161,7 @@ private:
 
     //temp, to samo co broadcast ale nie wątek
     void sendMap();
+
 protected:
 
     /**
@@ -185,8 +202,6 @@ protected:
     */
     bool closeSocket(SOCKET sock);
 
-
-
 public:
 
     /**
@@ -222,7 +237,6 @@ public:
     */
     void endConnection(); // TODO
 
-
     /**
      * @brief Uruchamia wątek o nazwie Pinger
     */
@@ -247,6 +261,7 @@ public:
 */
 DWORD __stdcall ClientListener(LPVOID param);
 
+
 /**
  * @brief Watek rozsyłający informacje do klientów
  * @param param - Wskaźnik na klasę Server
@@ -254,9 +269,13 @@ DWORD __stdcall ClientListener(LPVOID param);
 */
 DWORD __stdcall Broadcast(LPVOID param);
 
+
 /**
  * @brief Watek sprawdzający co określony połączenie z użytkownikiem, jeśli nie ma to usuwa go z gry
  * @param param - Wskaźnik na klasę Server
  * @return 0 jeśli wątek zakończył się dobrze
 */
 DWORD __stdcall Pinger(LPVOID param);
+
+
+#endif // !_SERVER_H

@@ -6,7 +6,9 @@
 #define BUFFER_SIZE 512
 #define PORT 27015
 
-int __cdecl main(void){
+
+int __cdecl main(void)
+{
     ServerSetup setup;
     setup.backlog = BACKLOG_LENGTH;
     setup.bufferSize = BUFFER_SIZE;

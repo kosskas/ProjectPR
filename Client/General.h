@@ -2,7 +2,6 @@
 #define GENERAL
 
 
-#undef UNICODE
 #define WIN32_LEAN_AND_MEAN
 
 
@@ -11,20 +10,15 @@
 #include <ws2tcpip.h>
 #include <stdlib.h>
 #include <stdio.h>
-#include <list>
 
 
-#define LEFT VK_LEFT
-#define RIGHT VK_RIGHT
-#define UP VK_UP
-#define DOWN VK_DOWN
+#define DEFAULT_BUFLEN 512
+#define DEFAULT_PORT "27015"
 
 
 #pragma comment (lib, "Ws2_32.lib")
-
-
-using std::list;
-using std::advance;
+#pragma comment (lib, "Mswsock.lib")
+#pragma comment (lib, "AdvApi32.lib")
 
 
 #endif // !GENERAL
