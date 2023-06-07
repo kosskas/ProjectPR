@@ -54,7 +54,7 @@ struct Player {
     */
     int score;
     /**
-     * @brief Unikalny identyfikator
+     * @brief Unikalny identyfikator, symbol ASCII, który będzie rysowany na mapie jako postać gracza
     */
     int ID;
 

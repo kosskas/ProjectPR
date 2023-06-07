@@ -5,6 +5,7 @@
 
 // protected
 
+
 bool Server::startUpWinsock()
 {
     WORD wsaVersion = MAKEWORD(2, 2);
@@ -114,8 +115,10 @@ Server::Server(ServerSetup setup)
         WSACleanup();
         ExitProcess(1);
     }
-
+    game = new Game(players, _setup.mapSizeY, _setup.mapSizeX);
     _isServerRunning = true;
+    mapMsgSize = _setup.mapSizeY * _setup.mapSizeX;
+    mapBuffer = new char[mapMsgSize];
 }
 
 
@@ -133,7 +136,7 @@ Server::~Server()
     WaitForSingleObject(SenderTh, INFINITE);
     CloseHandle(SenderTh);
 
-    for (Player* player : Players) {
+    for (Player* player : players) {
         deletePlayer(player);
     }
 
@@ -152,36 +155,26 @@ void Server::run() {
     //
     waitForPlayers();
     //wszyscy gracze dołączyli
-
-    //game.initGame()
-    initMapBroadcast(); //powinno być bardziej uruchom wątek wysyłania
+        
+    //initMapBroadcast();
 
     ///Pętla grająca
-    //while (_isServerRunning /* && game.checkGameState()*/) {
-    //    for (Player* Player : Players) {
-    //        //game.ruszGraczem(*Player);
-    //    }
-    //    //game.rozstawBonusy();
-    //    Sleep(500);
-    //    //wyślijMapę()?
-    //}
-
-    //int licz = 10;
     //IF LICZBA GRACZY == 0 END
-    while (true) {
-        for (Player* Player : Players) {
+    while (_isServerRunning /* && game.checkGameState()*/ && !players.empty()) {
+        for (Player* Player : players) {
             printf("0x%2X ", Player->currentDirection);
+            //game.ruszGraczem(*Player)
         }
-        printf("\n");
-        Sleep(100);
+        //game.rozstawBonusy();
+        Sleep(200); //jako param
+        sendMap();
+        //wyślijMapę()?
     }
-    
-//
 }
 
 unsigned int Server::setPlayerID()
 {
-    return (unsigned int)Players.size();
+    return (unsigned int)players.size();
 }
 
 void Server::waitForPlayers()
@@ -192,7 +185,7 @@ void Server::waitForPlayers()
 
     printf("\t JoinPlayer: start \n");
 
-    while (_isServerRunning && Players.size() < _setup.maxNumberOfClients) {
+    while (_isServerRunning && players.size() < _setup.maxNumberOfClients) {
 
         PlayerSocket = accept(_socket, (sockaddr*)&sc, &lenc);
         if (PlayerSocket == INVALID_SOCKET) {
@@ -218,7 +211,7 @@ void Server::waitForPlayers()
         player->ID = setPlayerID();
 
 
-        Players.push_back(player);
+        players.push_back(player);
 
         char ipStr[16];
         inet_ntop(AF_INET, &(player->ip), ipStr, sizeof ipStr);
@@ -290,7 +283,7 @@ DWORD __stdcall ClientListener(LPVOID param)
         iResult = recv(player->sock, recvbuf, recvbuflen, 0);
         if (iResult > 0) {
             //printf("Bytes received: %d\n", iResult);
-            printf("ClientListener: Player(%d) Recevied: %s \n", player->ID, recvbuf);
+            //printf("ClientListener: Player(%d) Recevied: %s \n", player->ID, recvbuf);
             player->currentDirection = recvbuf[0];
         }
         else if (iResult == 0) {
@@ -317,13 +310,14 @@ DWORD __stdcall Broadcast(LPVOID param)
     printf("\t Broadcast:  start \n");
 
     while (server->_isServerRunning) {
-        Sleep(1000);
-        const char* msg = "PING\0"; ///TU BĘDZIE WYSYŁANA MAPA
+        Sleep(300); //jako param
+        server->game->getMap(server->mapBuffer);
 
-        if (server->Players.size() > 0) printf("Broadcast: Players in game: %d \n", server->Players.size());
-        for (Player* Player : server->Players) {
+        if (server->players.size() > 0)
+            printf("Broadcast: Players in game: %d \n", server->players.size());
+        for (Player* Player : server->players) {
             if (Player->sock != NULL) {
-                int iSendResult = send(Player->sock, msg, strlen(msg), 0);
+                int iSendResult = send(Player->sock, server->mapBuffer, server->mapMsgSize, 0);
                 if (iSendResult == SOCKET_ERROR) {
                     printf("%d | Broadcast: send to Player(%d) failed with error: %d\n", __LINE__, Player->ID, WSAGetLastError());
                 }
@@ -336,17 +330,32 @@ DWORD __stdcall Broadcast(LPVOID param)
     return 0;
 }
 
+void Server::sendMap()
+{
+    //printf("\t Broadcast:  start \n");
+    game->getMap(mapBuffer);
+    if (players.size() > 0)
+        printf("Broadcast: Players in game: %d \n", players.size());
+    for (Player* Player : players) {
+        if (Player->sock != NULL) {
+            int iSendResult = send(Player->sock, mapBuffer, mapMsgSize, 0);
+            if (iSendResult == SOCKET_ERROR) {
+                printf("%d | Broadcast: send to Player(%d) failed with error: %d\n", __LINE__, Player->ID, WSAGetLastError());
+            }
+        }
+    }
+    //printf("\t Broadcast:  stop \n");
+}
 
 DWORD __stdcall Pinger(LPVOID param)
 {
     Server* server = (Server*)param;
 
     printf("\t Pinger:  start \n");
-
     while (server->_isServerRunning) {
-        Sleep(1334);
+        Sleep(1334); //jako param
 
-        server->Players.remove_if([server](Player* player) {
+        server->players.remove_if([server](Player* player) {
             bool isPlayerInactive = (send(player->sock, NULL, 0, 0) == SOCKET_ERROR || player->isRunning == false);
             if (isPlayerInactive) {
                 printf("Pinger:  Removing inactive Player(%d) \n", player->ID);

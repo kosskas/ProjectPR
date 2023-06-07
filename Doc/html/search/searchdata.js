@@ -2,7 +2,7 @@ var indexSectionsWithContent =
 {
   0: "_bcdefghijkmprstw~",
   1: "cgps",
-  2: "bcdegirsw~",
+  2: "bcdegimprsw~",
   3: "_bcfghijkmprst",
   4: "bckmp"
 };
@@ -18,10 +18,10 @@ var indexSectionNames =
 
 var indexSectionLabels =
 {
-  0: "Wszystko",
-  1: "Klasy",
-  2: "Funkcje",
-  3: "Zmienne",
-  4: "Przyjaciele"
+  0: "All",
+  1: "Classes",
+  2: "Functions",
+  3: "Variables",
+  4: "Friends"
 };
 

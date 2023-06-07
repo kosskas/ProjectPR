@@ -17,4 +17,5 @@
 #pragma comment (lib, "Ws2_32.lib")
 
 using std::list;
+using std::advance;
 #endif // !GENERAL

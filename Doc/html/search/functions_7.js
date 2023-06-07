@@ -1,11 +1,6 @@
 var searchData=
 [
-  ['sendmap_0',['sendMap',['../class_server.html#aec3a11294de9a29fd36401fe03e56e5f',1,'Server']]],
-  ['sendmessage_1',['sendMessage',['../class_client.html#a13cde1728b68928c9917493d92faac6e',1,'Client']]],
-  ['server_2',['Server',['../class_server.html#aeea97c30915862758ba454c9a407fc2a',1,'Server']]],
-  ['setplayerid_3',['setPlayerID',['../class_server.html#adb3b472223cbd10dfe1900b7e1622ecb',1,'Server']]],
-  ['shutdownsocket_4',['shutdownSocket',['../class_server.html#acf702c85d7af52d13ec0988030553c81',1,'Server']]],
-  ['start_5',['start',['../class_client.html#a742373e08a80d993d2651b6fff76f5b9',1,'Client']]],
-  ['startlisten_6',['startListen',['../class_server.html#a3c149701abddccdcb4d50a457ea7670b',1,'Server']]],
-  ['startupwinsock_7',['startUpWinsock',['../class_server.html#a4e2a7058c52c41563b413e4a0eee89c0',1,'Server']]]
+  ['placebonuses_0',['placeBonuses',['../class_game.html#a3773831912ac0c4f23b84b77c9243f04',1,'Game']]],
+  ['printgame_1',['printGame',['../class_client.html#aea8729be0c09336ecfe85c970ff6cd75',1,'Client']]],
+  ['printsnake_2',['printSnake',['../class_game.html#abe36167c719c3b0416dffbd8b0471bb8',1,'Game']]]
 ];

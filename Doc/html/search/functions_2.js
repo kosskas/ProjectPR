@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['deleteplayer_0',['deletePlayer',['../class_server.html#af4b2e3eea0649653ffbcc7750e13350b',1,'Server']]]
+  ['deleteplayer_0',['deletePlayer',['../class_server.html#a4f6e88c30944ed346b44b1a0c0288ed6',1,'Server']]]
 ];

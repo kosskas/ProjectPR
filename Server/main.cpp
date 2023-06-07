@@ -2,7 +2,7 @@
 
 
 #define BACKLOG_LENGTH SOMAXCONN   // this is to long backlog queue !!!
-#define MAX_NUMBER_OF_CLIENTS 3
+#define MAX_NUMBER_OF_CLIENTS 2
 #define BUFFER_SIZE 512
 #define PORT 27015
 
@@ -12,6 +12,8 @@ int __cdecl main(void){
     setup.bufferSize = BUFFER_SIZE;
     setup.maxNumberOfClients = MAX_NUMBER_OF_CLIENTS;
     setup.port = PORT;
+    setup.mapSizeY = 10;
+    setup.mapSizeX = 10;
 
     Server server(setup);
 

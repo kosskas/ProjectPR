@@ -1,4 +1,5 @@
 #include "Client.h"
+#include <iostream>
 
 Client::Client(const char* ipadress) {
     if (InitWinsock(ipadress) != 0) {
@@ -6,8 +7,10 @@ Client::Client(const char* ipadress) {
         ExitProcess(1);
     }
     if (InitConsole() != 0) {
-        if (fdwSaveOldMode != 0)
-            SetConsoleMode(hStdin, fdwSaveOldMode);
+        if (fdwSaveOldInMode != 0)
+            SetConsoleMode(hStdin, fdwSaveOldInMode);
+        if (fdwSaveOldOutMode != 0)
+            SetConsoleMode(hStdout, fdwSaveOldOutMode);
         ExitProcess(1);
     }
     if (InitThreads() != 0) {
@@ -16,12 +19,12 @@ Client::Client(const char* ipadress) {
 }
 
 void Client::start() {
-    int licz = 60;
+    int licz = 300;
     while (licz) {
         //printf("INPUT {%c}\t", keyInput);
         const char* temp = (const char*)&keyInput; //evil pointer casting
         sendMessage(temp, 1);
-        Sleep(1000);
+        Sleep(100);
         licz--;
     }
     sendMessage("END", 4);
@@ -36,8 +39,36 @@ int Client::sendMessage(const char* sendbuf, int len) {
         WSACleanup();
         return 1;
     }
-    printf("Wyslano %ldB\n", iResult);
+    //printf("Wyslano %ldB\n", iResult);
     return 0;
+}
+
+void Client::printGame() {
+    printf("Destroy \033[1;31mall\033[0m enemies. Use \x18\x19\x1a< to navigate\n");
+    char arrow = getArrow(keyInput);
+    printf("\tCurrent direction: \033[1;33m%c\033[0m\n", arrow); //odebrano wyslano???
+    for (int y = 0; y < 10; y++) {
+        for (int x = 0; x < 10; x++) {
+            printf("\033[1;34m%c\033[0m", recvbuf[y + 10 * x]);
+        }
+        printf("\n");
+    }
+    printf("\033[0;0H");
+}
+
+char Client::getArrow(char direction) {
+    switch (direction) {
+    case VK_LEFT:
+        return '<';
+    case VK_RIGHT:
+        return '\x1a';
+    case VK_UP:
+        return '\x18';
+    case VK_DOWN:
+        return '\x19';
+    default:
+        return '?';
+    }
 }
 
 DWORD __stdcall MsgReceiverListener(LPVOID param) {
@@ -46,8 +77,10 @@ DWORD __stdcall MsgReceiverListener(LPVOID param) {
     do {
         iResult = recv(client->ConnectSocket, client->recvbuf, client->recvbuflen, 0);
         if (iResult > 0) {
-            printf("\nOtrzymano: %dB\t", iResult);
-           printf("Wynik: %s\n", client->recvbuf);
+            //fflush(stdout);       ????   
+            client->printGame();
+            //printf("\nOtrzymano: %dB\t", iResult);
+            //printf("Wynik: %s\n", client->recvbuf);
         }
         else if (iResult == 0) {
             printf("Connection closed\n");
@@ -101,7 +134,7 @@ DWORD __stdcall KeyEventListener(LPVOID param) {
 Client::~Client() {
     // cleanup
    // CloseHandle(MsgSender);
-    SetConsoleMode(hStdin, fdwSaveOldMode);
+    SetConsoleMode(hStdin, fdwSaveOldInMode);
     CloseHandle(MsgReceiver);
     int iResult = shutdown(ConnectSocket, SD_SEND);
     closesocket(ConnectSocket);
@@ -165,21 +198,40 @@ int Client::InitWinsock(const char* ipadress) {
 }
 
 int Client::InitConsole() {
+    //Standardowe wejście
     hStdin = GetStdHandle(STD_INPUT_HANDLE);
     if (hStdin == INVALID_HANDLE_VALUE) {
         printf("GetStdHandle err");
         return 1;
     }
-    // Save the current input mode, to be restored on exit. 
-    if (!GetConsoleMode(hStdin, &fdwSaveOldMode)) {
+    if (!GetConsoleMode(hStdin, &fdwSaveOldInMode)) {
         printf("GetConsoleMode err");
-        SetConsoleMode(hStdin, fdwSaveOldMode);
+        SetConsoleMode(hStdin, fdwSaveOldInMode);
         return 1;
     }
-    fdwMode = ENABLE_WINDOW_INPUT | ENABLE_INSERT_MODE | ENABLE_EXTENDED_FLAGS;
-    if (!SetConsoleMode(hStdin, fdwMode)){
+    fdwInMode = fdwSaveOldInMode | ENABLE_WINDOW_INPUT | ENABLE_INSERT_MODE | ENABLE_EXTENDED_FLAGS;
+    if (!SetConsoleMode(hStdin, fdwInMode)){
         printf("SetConsoleMode err");
-        SetConsoleMode(hStdin, fdwSaveOldMode);
+        SetConsoleMode(hStdin, fdwSaveOldInMode);
+        return 1;
+    }
+    //Standardowe wyjście
+    hStdout = GetStdHandle(STD_OUTPUT_HANDLE);
+    if (hStdout == INVALID_HANDLE_VALUE) {
+        printf("GetStdHandle err");
+        return 1;
+    }
+
+    if (!GetConsoleMode(hStdout, &fdwSaveOldOutMode)) {
+        printf("GetConsoleMode err");
+        SetConsoleMode(hStdout, fdwSaveOldOutMode);
+        return 1;
+    }
+
+    fdwOutMode = fdwSaveOldOutMode | ENABLE_VIRTUAL_TERMINAL_PROCESSING;
+    if (!SetConsoleMode(hStdout, fdwOutMode)) {
+        printf("SetConsoleMode err");
+        SetConsoleMode(hStdout, fdwSaveOldOutMode);
         return 1;
     }
     

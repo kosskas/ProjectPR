@@ -26,7 +26,7 @@ private:
     /**
      * @brief Bufor bajtów odebranych
     */
-    char recvbuf[DEFAULT_BUFLEN];
+    char recvbuf[DEFAULT_BUFLEN] = { 0 };
     /**
      * @brief Długość bufora danych
     */
@@ -52,13 +52,25 @@ private:
     */
     HANDLE hStdin;
     /**
+     * @brief Uchwyt standartowe wyjście
+    */
+    HANDLE hStdout;
+    /**
      * @brief Stare ustawienia konsoli, przywracane na końcu działania aplikacji
     */
-    DWORD fdwSaveOldMode = 0;
+    DWORD fdwSaveOldInMode = 0;
     /**
      * @brief Nowe ustawienia konsoli na czas działania aplikacji
     */
-    DWORD fdwMode;
+    DWORD fdwInMode;
+    /**
+    * @brief Stare ustawienia konsoli, przywracane na końcu działania aplikacji
+    */
+    DWORD fdwSaveOldOutMode = 0;
+    /**
+     * @brief Nowe ustawienia konsoli na czas działania aplikacji
+    */
+    DWORD fdwOutMode;
     //
     /**
      * @brief Sczytany aktualny input z klawiatury
@@ -86,6 +98,17 @@ private:
      * @return 0 jeśli poprawnie przesłano wiadomość, 1 jeśli źle
     */
     int sendMessage(const char* sendbuf, int len);
+    /**
+     * @brief Wyświetla mapę, którą wysłał Server oraz status
+    */
+    void printGame();
+    /**
+     * @brief Fukcja zwracająca strzałkę w kierunku jaki posiada aktualnie Client
+     * @param direction Kierunek jaki posiada aktualnie Client
+     * @return Symbol strzałki
+    */
+    char getArrow(char direction);
+
     friend DWORD __stdcall MsgReceiverListener(LPVOID param);
     friend DWORD __stdcall KeyEventListener(LPVOID param);
 public:

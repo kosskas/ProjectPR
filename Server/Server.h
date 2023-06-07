@@ -6,9 +6,36 @@
 /*
 BROADCAST POTENCJALNIE OUT
 
-wydaje się że mapa będzie musiała być w UTF-16 printowana u klienta
-dlaczego? ze względu na kolorki
-wysyłanie już jako UTF16 czy konwersja na miejscu??
+kolorki DONE
+
+* Refaktor w Kliencie
+* Poprawne zamykanie w kliencie
+
+ Konflikty ze sprawka
+* Węże zderzają się głowami - zniszczony zostaje krótszy wąż, w przypadku równej długości losujemy wygranego. TODO
+
+* Zebranie jedzenia w tym samym momencie - najpierw sprawdzane są kolizje węży, więc problem sprowadza się do punktu 1. TODO
+
+* Nieplanowane rozłączenie gracza (odłączenie od internetu, awaria komputera itp.) 
+wykrywane jest przez serwer - wystąpi błąd połączenia lub dany klient 3 razy pod
+rząd nie odpowie na wysłanie mapy. NIEMOŻLIWE
+
+* W przypadku rozłączenia gracza, gracz przegrywa, a jego wąż znika z planszy. DONE?
+
+* Jeśli klient będzie próbował podłączyć się w trakcie gry, zostanie powiadomiony,
+że nie może się połączyć. ?TODO/DONE?
+
+
+* Przytrzymanie klawisza sterującego przez użytkownika nie spowoduje redundantnego
+wysyłania informacji do serwera o kierunku przemieszczania się. Informacja ta jest
+wysyłana tylko wtedy, gdy kierunek w ostatnio wysłanej wiadomości był różny
+od kierunku wyznaczonego przez aktualnie wciśnięty klawisz sterujący.
+ZROBIONE W POŁOWIE
+
+* Zrobić plik konfiguracyjny TODO
+
+* Sparametryzować Spleepy TODO
+
 */
 
 /**
@@ -31,6 +58,14 @@ struct ServerSetup {
      * @brief Określa numer portu
     */
     int port;
+    /**
+     * @brief Liczba wierszy
+    */
+    int mapSizeY;
+    /**
+     * @brief Liczba kolumn
+    */
+    int mapSizeX;
 };
 
 /**
@@ -47,7 +82,7 @@ private:
     /**
      * @brief Lista aktualnie połączonych graczy
     */
-    list<Player*> Players;
+    list<Player*> players;
 
     /**
      * @brief Uchwyt na wątek Broadcast
@@ -92,12 +127,24 @@ private:
     /**
      * @brief Instancja gry
     */
-    Game game;
+    Game *game;
+    /**
+     * @brief Bufor przechowujący mapę gry w stanie do wysłania
+    */
+    char* mapBuffer;
+
+    /**
+     * @brief Wielkość wysyłanej mapy
+    */
+    int mapMsgSize;
 
     friend DWORD __stdcall ClientListener(LPVOID param);
     friend DWORD __stdcall Broadcast(LPVOID param);
     friend DWORD __stdcall Pinger(LPVOID param);
 
+
+    //temp, to samo co broadcast ale nie wątek
+    void sendMap();
 protected:
 
     /**
