@@ -14,7 +14,7 @@ private:
     /**
      * @brief Socket łączący z serwerem
     */
-    SOCKET ConnectSocket = INVALID_SOCKET;
+    SOCKET _socket = INVALID_SOCKET;
 
     /**
      * @brief Bufor bajtów odebranych
@@ -29,22 +29,32 @@ private:
     /**
      * @brief Uchwyt na wątek MsgReceiverListener
     */
-    HANDLE MsgReceiver;
+    HANDLE MsgReceiverTh;
+
+    /**
+     * @brief Uchwyt na wątek MsgSender
+    */
+    HANDLE MsgSenderTh;
 
     /**
      * @brief Uchwyt na wątek KeyEventListener
     */
-    HANDLE keyEventListener;
+    HANDLE KeyEventListenerTh;
 
     /**
      * @brief Wskaźnik na ID wątku MsgReceiverListener
     */
-    LPDWORD MsgReceiverID;
+    LPDWORD MsgReceiverThID;
+
+    /**
+     * @brief Wskaźnik na ID wątku MsgSender
+    */
+    LPDWORD MsgSenderThID;
 
     /**
      * @brief Wskaźnik na ID wątku KeyEventListener
     */
-    LPDWORD keyEventListenerID;
+    LPDWORD KeyEventListenerThID;
 
     /**
      * @brief Uchwyt standartowe wejście
@@ -81,25 +91,38 @@ private:
     */
     unsigned char keyInput = VK_LEFT;
 
+    bool _isRunning;
+
+    bool _isConnected;
+
 protected:
+
+    bool startUpWinsock();
+    bool createSocket();
+    bool connectToServer(const char* ipadress);
+    bool disconnectFromServer();
+    bool shutdownSocket();
+    bool closeSocket();
 
     /**
      * @brief Funkcja inicjalizująca komponęty potrzebne do komunikacji
      * @return 0 jeśli konfiguracja przebiegła pomyślnie, 1 jesli nie
     */
-    int InitWinsock(const char* ipadress);
+    //int InitWinsock(const char* ipadress);
 
     /**
      * @brief Incjalizacja do odczytu klawiatury
      * @return 0 jeśli konfiguracja przebiegła pomyślnie, 1 jesli nie
     */
-    int InitConsole();
+    int initConsole();
 
     /**
      * @brief Incjalizacja do wątków
      * @return 0 jeśli konfiguracja przebiegła pomyślnie, 1 jesli nie
     */
-    int InitThreads();
+    bool initReceiver();
+    bool initKeyEventListener();
+    bool initSender();
 
     /**
      * @brief Przesyła ciąg bajtów o podanej dlugości do serwera
@@ -107,7 +130,7 @@ protected:
      * @param len - dlugość ciągu liczona w bajtach
      * @return 0 jeśli poprawnie przesłano wiadomość, 1 jeśli źle
     */
-    int sendMessage(const char* sendbuf, int len);
+    bool sendMessage(const char* sendbuf, int len);
 
     /**
      * @brief Wyświetla mapę, którą wysłał Server oraz status
@@ -122,6 +145,7 @@ protected:
     char getArrow(char direction);
 
     friend DWORD __stdcall MsgReceiverListener(LPVOID param);
+    friend DWORD __stdcall MsgSender(LPVOID param);
     friend DWORD __stdcall KeyEventListener(LPVOID param);
 
 public:
@@ -132,9 +156,9 @@ public:
     Client(const char* ipadress);
 
     /**
-     * @brief Startuje działanie aplikacji
+     * @brief Uruchamia wątki oraz grę
     */
-    void start();
+    void run();
 
     /**
     * @brief Czyści poprawnie klasę
@@ -149,6 +173,9 @@ public:
  * @return 0 jeśli wątek zakończył się dobrze, 1 jeśli źle
 */
 DWORD __stdcall MsgReceiverListener(LPVOID param);
+
+
+DWORD __stdcall MsgSender(LPVOID param);
 
 
 /**

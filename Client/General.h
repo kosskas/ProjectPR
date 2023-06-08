@@ -15,6 +15,11 @@
 #define DEFAULT_BUFLEN 512
 #define DEFAULT_PORT "27015"
 
+#define VK_Q 0x51 // ASCII of 'Q'
+
+
+#define compareString(a, b) strcmp(a, b) == 0
+
 
 #pragma comment (lib, "Ws2_32.lib")
 #pragma comment (lib, "Mswsock.lib")
