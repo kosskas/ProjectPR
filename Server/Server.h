@@ -115,37 +115,37 @@ private:
     /**
      * @brief Lista aktualnie połączonych graczy
     */
-    list<Player*> players;
+    list<Player*> _players;
 
     /**
      * @brief Uchwyt na wątek Broadcast
     */
-    HANDLE SenderTh;
+    HANDLE _SenderTh;
 
     /**
      * @brief Uchwyt na wątek Pinger
     */
-    HANDLE PingerTh;
+    HANDLE _PingerTh;
 
     /**
      * @brief Uchwyt na wątek Joiner
     */
-    HANDLE JoinerTh;
+    HANDLE _JoinerTh;
 
     /**
      * @brief Wskaźnik na ID wątku Broadcast
     */
-    LPDWORD senderThID;
+    LPDWORD _senderThID;
 
     /**
      * @brief Wskaźnik na ID wątku Joiner
     */
-    LPDWORD joinerThID;
+    LPDWORD _joinerThID;
 
     /**
      * @brief Wskaźnik na ID wątku Pinger
     */
-    LPDWORD pingerThID;
+    LPDWORD _pingerThID;
 
     /**
      * @brief Struktura przechowująca informacje ustawienia serwera
@@ -160,16 +160,16 @@ private:
     /**
      * @brief Instancja gry
     */
-    Game* game;
+    Game* _game;
     /**
      * @brief Bufor przechowujący mapę gry w stanie do wysłania
     */
-    char* mapBuffer;
+    char* _mapBuffer;
 
     /**
      * @brief Wielkość wysyłanej mapy
     */
-    int mapMsgSize;
+    int _mapMsgSize;
 
     friend DWORD __stdcall ClientListener(LPVOID param);
     friend DWORD __stdcall Broadcast(LPVOID param);

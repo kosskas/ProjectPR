@@ -15,27 +15,27 @@ private:
 	/**
 	 * @brief Liczba kolumn
 	*/
-	const int sizeX;
+	const int _sizeX;
 
 	/**
 	 * @brief Liczba wierszy
 	*/
-	const int sizeY;
+	const int _sizeY;
 
 	/**
 	 * @brief Wskaźnik na mapę o wymiarach Y na X, do mapy odwołuje się poprzez gameMap[y][x]
 	*/
-	char** gameMap = NULL;
+	char** _gameMap = NULL;
 
 	/**
 	 * @brief Flaga oznaczająca trwanie gry
 	*/
-	bool gameState;
+	bool _gameState;
 
 	/**
 	 * @brief Lista graczy, ta sama jak w klasie Server
 	*/
-	list<Player*> players;
+	list<Player*> _players;
 
 	/**
 	 * @brief Tworzy mape ASCII o wymiarach Y na X

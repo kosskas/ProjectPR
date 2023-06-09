@@ -19,7 +19,7 @@ char** Game::createMap(int Y, int X)
 
 void Game::clearMap(char** map)
 {
-	for (int i = 0; i < sizeY; i++) {
+	for (int i = 0; i < _sizeY; i++) {
 		delete[] map[i];
 	}
 	delete[] map;
@@ -32,20 +32,20 @@ void Game::printSnake(Player* player)
 	for (Point p : player->sprite) {
 		int y = p.posY, x = p.posX;
 		char player_symbol = (char)(player->ID);
-		gameMap[y][x] = player_symbol;
+		_gameMap[y][x] = player_symbol;
 	}
 
 	//Ogon na pusto //Problem z wydłużaniem węży???
 	Point last = player->sprite.back();
 
-	gameMap[last.posY][last.posX];
+	_gameMap[last.posY][last.posX];
 }
 
 
 Player* Game::getPlayerById(char ID) 
 {
 	int pID = (int)ID;
-	list<Player*>::iterator it = players.begin();
+	list<Player*>::iterator it = _players.begin();
 	advance(it, pID);
 	return *it;
 }
@@ -55,10 +55,10 @@ Player* Game::getPlayerById(char ID)
 
 
 Game::Game(list<Player*>& players, int y, int x)
-	: sizeX(x), sizeY(y), players(players) 
+	: _sizeX(x), _sizeY(y), _players(players) 
 {
-	gameState = true;
-	gameMap = createMap(y,x);
+	_gameState = true;
+	_gameMap = createMap(y,x);
 	///Inicjalizuj pozycje graczy oraz długości ich wężów
 
 }
@@ -66,7 +66,7 @@ Game::Game(list<Player*>& players, int y, int x)
 
 bool Game::checkGameState() 
 {
-	return gameState;
+	return _gameState;
 }
 
 
@@ -89,11 +89,11 @@ void Game::movePlayer(Player* player)
 
 void Game::getMap(char* msg) 
 {
-	printf("mapa jest %p", gameMap);
+	printf("mapa jest %p", _gameMap);
 	int i = 0;
-	for (int y = 0; y < sizeY; y++) {
-		for (int x = 0; x < sizeX; x++) {
-			msg[i++] = gameMap[y][x];
+	for (int y = 0; y < _sizeY; y++) {
+		for (int x = 0; x < _sizeX; x++) {
+			msg[i++] = _gameMap[y][x];
 		}
 	}
 }
@@ -101,5 +101,5 @@ void Game::getMap(char* msg)
 
 Game::~Game() 
 {
-	clearMap(gameMap);
+	clearMap(_gameMap);
 }
