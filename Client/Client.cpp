@@ -35,7 +35,7 @@ bool Client::createSocket()
     }
 }
 
-bool Client::connectToServer(const char* ipadress)
+bool Client::connectToServer()
 {
     addrinfo* result = NULL, * ptr = NULL, hints;
     int iResult;
@@ -46,7 +46,7 @@ bool Client::connectToServer(const char* ipadress)
     hints.ai_protocol = IPPROTO_TCP;
 
     // Resolve the server address and port
-    iResult = getaddrinfo(ipadress, DEFAULT_PORT, &hints, &result); //podstawić ipadress
+    iResult = getaddrinfo(_setup.serverIP, _setup.serverPort, &hints, &result); //podstawić ipadress
     if (iResult != 0) {
         printf("getaddrinfo failed with error: %d\n", iResult);
         return false;
@@ -116,48 +116,48 @@ bool Client::closeSocket()
 int Client::initConsole()
 {
     //Standardowe wejście
-    hStdin = GetStdHandle(STD_INPUT_HANDLE);
-    if (hStdin == INVALID_HANDLE_VALUE) {
+    _hStdin = GetStdHandle(STD_INPUT_HANDLE);
+    if (_hStdin == INVALID_HANDLE_VALUE) {
         printf("GetStdHandle err");
         return 1;
     }
 
-    if (!GetConsoleMode(hStdin, &fdwSaveOldInMode)) {
+    if (!GetConsoleMode(_hStdin, &_fdwSaveOldInMode)) {
         printf("GetConsoleMode err");
-        SetConsoleMode(hStdin, fdwSaveOldInMode);
+        SetConsoleMode(_hStdin, _fdwSaveOldInMode);
         return 1;
     }
 
-    fdwInMode = fdwSaveOldInMode | ENABLE_WINDOW_INPUT | ENABLE_INSERT_MODE | ENABLE_EXTENDED_FLAGS;
-    if (!SetConsoleMode(hStdin, fdwInMode)) {
+    _fdwInMode = _fdwSaveOldInMode | ENABLE_WINDOW_INPUT | ENABLE_INSERT_MODE | ENABLE_EXTENDED_FLAGS;
+    if (!SetConsoleMode(_hStdin, _fdwInMode)) {
         printf("SetConsoleMode err");
-        SetConsoleMode(hStdin, fdwSaveOldInMode);
+        SetConsoleMode(_hStdin, _fdwSaveOldInMode);
         return 1;
     }
 
     //Standardowe wyjście
-    hStdout = GetStdHandle(STD_OUTPUT_HANDLE);
-    if (hStdout == INVALID_HANDLE_VALUE) {
+    _hStdout = GetStdHandle(STD_OUTPUT_HANDLE);
+    if (_hStdout == INVALID_HANDLE_VALUE) {
         printf("GetStdHandle err");
         return 1;
     }
 
-    if (!GetConsoleMode(hStdout, &fdwSaveOldOutMode)) {
+    if (!GetConsoleMode(_hStdout, &_fdwSaveOldOutMode)) {
         printf("GetConsoleMode err");
-        SetConsoleMode(hStdout, fdwSaveOldOutMode);
+        SetConsoleMode(_hStdout, _fdwSaveOldOutMode);
         return 1;
     }
 
-    fdwOutMode = fdwSaveOldOutMode | ENABLE_VIRTUAL_TERMINAL_PROCESSING;
-    if (!SetConsoleMode(hStdout, fdwOutMode)) {
+    _fdwOutMode = _fdwSaveOldOutMode | ENABLE_VIRTUAL_TERMINAL_PROCESSING;
+    if (!SetConsoleMode(_hStdout, _fdwOutMode)) {
         printf("SetConsoleMode err");
-        SetConsoleMode(hStdout, fdwSaveOldOutMode);
+        SetConsoleMode(_hStdout, _fdwSaveOldOutMode);
         return 1;
     }
     CONSOLE_CURSOR_INFO cursorInfo;
-    GetConsoleCursorInfo(hStdout, &cursorInfo);
+    GetConsoleCursorInfo(_hStdout, &cursorInfo);
     cursorInfo.bVisible = FALSE;
-    SetConsoleCursorInfo(hStdout, &cursorInfo);
+    SetConsoleCursorInfo(_hStdout, &cursorInfo);
 
     return 0;
 }
@@ -165,8 +165,8 @@ int Client::initConsole()
 
 bool Client::initReceiver()
 {
-    MsgReceiverTh = CreateThread(NULL, 0, &MsgReceiverListener, (void*)this, 0, MsgReceiverThID);
-    if (MsgReceiverTh == NULL) {
+    _MsgReceiverTh = CreateThread(NULL, 0, &MsgReceiverListener, (void*)this, 0, _MsgReceiverThID);
+    if (_MsgReceiverTh == NULL) {
         printf("Failed to create MsgReceiverListener thread.\n");
         return false;
     }
@@ -176,8 +176,8 @@ bool Client::initReceiver()
 
 bool Client::initSender()
 {
-    MsgSenderTh = CreateThread(NULL, 0, &MsgSender, (void*)this, 0, MsgSenderThID);
-    if (MsgSenderTh == NULL) {
+    _MsgSenderTh = CreateThread(NULL, 0, &MsgSender, (void*)this, 0, _MsgSenderThID);
+    if (_MsgSenderTh == NULL) {
         printf("Failed to create MsgSender thread.\n");
         return false;
     }
@@ -187,8 +187,8 @@ bool Client::initSender()
 
 bool Client::initKeyEventListener()
 {
-    KeyEventListenerTh = CreateThread(NULL, 0, &KeyEventListener, (void*)this, 0, KeyEventListenerThID);
-    if (KeyEventListenerTh == NULL) {
+    _KeyEventListenerTh = CreateThread(NULL, 0, &KeyEventListener, (void*)this, 0, _KeyEventListenerThID);
+    if (_KeyEventListenerTh == NULL) {
         printf("Failed to create KeyEventListener thread.\n");
         return false;
     }
@@ -209,22 +209,20 @@ bool Client::sendMessage(const char* sendbuf, int len)
 
 void Client::printGame(const char* map)
 {
-    if (mapSizeX == 0xFFFFFFFF)
+    if (_mapSizeX == 0xFFFFFFFF)
         return;
     //    //fflush(stdout);       ???? 
-    for (int y = 0; y < mapSizeY; y++) {
-        for (int x = 0; x < mapSizeX; x++) {
-            printf("\033[1;34m%c\033[0m", map[y + mapSizeY * x]);
+    printf("\033[0;0H");
+    for (unsigned int y = 0; y < _mapSizeY; y++) {
+        for (unsigned int x = 0; x < _mapSizeX; x++) {
+            printf("\033[1;34m%c\033[0m", _recvbuf[y + _mapSizeY * x]);
         }
         printf("\n");
     }
-    char arrow = getArrow(keyInput);
+    char arrow = getArrow(_keyInput);
     printf("Destroy \033[1;31mall\033[0m enemies. Use \x18\x19\x1a< to navigate\n");
     printf("Your number %d   Current direction: \033[1;33m%c \033[0m   Your score %d",playerID, arrow, playerScore);
 
-    //printf("Odebrano %dB  Current direction: \033[1;33m%c\033[0m     \n",serverMsg ,arrow); //odebrano wyslano???
-
-    printf("\033[0;0H");
 }
 
 char Client::getArrow(char direction) 
@@ -247,7 +245,10 @@ char Client::getArrow(char direction)
 // - - - - - - - - - - Client :: public - - - - - - - - - - \\
 
 
-Client::Client(const char* ipadress) :
+Client::Client(ClientSetup setup) :
+    _setup(setup),
+    _mapSizeX(setup.mapSizeX),
+    _mapSizeY(setup.mapSizeY),
     _isRunning(true), 
     _isConnected(false)
 {
@@ -260,7 +261,7 @@ Client::Client(const char* ipadress) :
         ExitProcess(1);
     }
 
-    if (!connectToServer(ipadress)) {
+    if (!connectToServer()) {
         printf("Unable to connect to server!\n");
         WSACleanup();
         ExitProcess(1);
@@ -269,10 +270,10 @@ Client::Client(const char* ipadress) :
     _isConnected = true;
 
     if (initConsole() != 0) {
-        if (fdwSaveOldInMode != 0)
-            SetConsoleMode(hStdin, fdwSaveOldInMode);
-        if (fdwSaveOldOutMode != 0)
-            SetConsoleMode(hStdout, fdwSaveOldOutMode);
+        if (_fdwSaveOldInMode != 0)
+            SetConsoleMode(_hStdin, _fdwSaveOldInMode);
+        if (_fdwSaveOldOutMode != 0)
+            SetConsoleMode(_hStdout, _fdwSaveOldOutMode);
         ExitProcess(1);
     }
 }
@@ -302,19 +303,19 @@ Client::~Client()
 {
     _isRunning = false;
 
-    SetConsoleMode(hStdin, fdwSaveOldInMode);
-    SetConsoleMode(hStdout, fdwSaveOldOutMode);
+    SetConsoleMode(_hStdin, _fdwSaveOldInMode);
+    SetConsoleMode(_hStdout, _fdwSaveOldOutMode);
 
     // CloseHandle(MsgSender);
 
-    WaitForSingleObject(MsgSenderTh, INFINITE);
-    CloseHandle(MsgSenderTh);
+    WaitForSingleObject(_MsgSenderTh, INFINITE);
+    CloseHandle(_MsgSenderTh);
 
-    WaitForSingleObject(MsgReceiverTh, INFINITE);
-    CloseHandle(MsgReceiverTh);
+    WaitForSingleObject(_MsgReceiverTh, INFINITE);
+    CloseHandle(_MsgReceiverTh);
 
-    WaitForSingleObject(KeyEventListenerTh, INFINITE);
-    CloseHandle(KeyEventListenerTh);
+    WaitForSingleObject(_KeyEventListenerTh, INFINITE);
+    CloseHandle(_KeyEventListenerTh);
 
     if (disconnectFromServer()) {
         _isConnected = false;
@@ -327,9 +328,9 @@ void Client::decodeMessage() {
     char mode = recvbuf[0];
     switch (mode) {
     case Client::CONN:
-        mapSizeX = recvbuf[1];
-        mapSizeY = recvbuf[2];
-        playerID = recvbuf[3];
+        _mapSizeX = recvbuf[1];
+        _mapSizeY = recvbuf[2];
+        _playerID = recvbuf[3];
         break;
     case Client::DISC:
         playerScore = recvbuf[1];
@@ -389,10 +390,11 @@ DWORD __stdcall MsgSender(LPVOID param)
     
 
     do { 
-        if (lastKeyInput != client->keyInput) {
-            lastKeyInput = client->keyInput;
-            const char* currentKeyInput = (const char*)&(client->keyInput);
-            client->sendMessage(currentKeyInput, 1);       
+        if (lastKeyInput != client->_keyInput) {
+            lastKeyInput = client->_keyInput;
+            const char* currentKeyInput = (const char*)&(client->_keyInput);
+            client->sendMessage(currentKeyInput, 1);
+            
         }
 
         Sleep(100);
@@ -413,7 +415,7 @@ DWORD __stdcall KeyEventListener(LPVOID param)
 
     while (client->_isRunning) {
 
-        if (!ReadConsoleInput(client->hStdin, irInBuf, 128, &cNumRead)) { 
+        if (!ReadConsoleInput(client->_hStdin, irInBuf, 128, &cNumRead)) { 
             printf("ReadConsoleInput");
             return 1;
         }
@@ -424,16 +426,16 @@ DWORD __stdcall KeyEventListener(LPVOID param)
                 switch (irInBuf[i].Event.KeyEvent.wVirtualKeyCode)
                 {
                 case VK_LEFT:
-                    client->keyInput = VK_LEFT;
+                    client->_keyInput = VK_LEFT;
                     break;
                 case VK_RIGHT:
-                    client->keyInput = VK_RIGHT;
+                    client->_keyInput = VK_RIGHT;
                     break;
                 case VK_UP:
-                    client->keyInput = VK_UP;
+                    client->_keyInput = VK_UP;
                     break;
                 case VK_DOWN:
-                    client->keyInput = VK_DOWN;
+                    client->_keyInput = VK_DOWN;
                     break;
                 case VK_Q:
                     client->_isRunning = false;

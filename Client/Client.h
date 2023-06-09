@@ -6,10 +6,43 @@
 
 
 /**
+ * @brief Pozwala ustawić klienta według podanych parametrów
+*/
+struct ClientSetup {
+
+    /**
+     * @brief Numer ip serwera
+    */
+    const char* serverIP;
+
+    /**
+     * @brief Numer portu serwera
+    */
+    const char* serverPort;
+
+    /**
+     * @brief Określa rozmiar bufora odbioru/przesyłu danych
+    */
+    size_t bufferSize;
+
+    /**
+     * @brief Liczba wierszy
+    */
+    unsigned int mapSizeY;
+
+    /**
+     * @brief Liczba kolumn
+    */
+    unsigned int mapSizeX;
+};
+
+
+/**
  * @brief Klasa Client zarządza grą oraz połączeniem po stronie klienta
 */
 class Client {
 private:
+
     enum MSGMODE {
         CONN = 0xA,
         DISC,
@@ -18,102 +51,108 @@ private:
         SPECTATE,
         MAP
     };
+
     /**
      * @brief Socket łączący z serwerem
     */
     SOCKET _socket = INVALID_SOCKET;
 
     /**
+     * @brief Struktura przechowująca informacje ustawienia klienta
+    */
+    ClientSetup _setup;
+
+    /**
      * @brief Bufor bajtów odebranych
     */
-    char recvbuf[DEFAULT_BUFLEN] = { 0 };
+    char _recvbuf[DEFAULT_BUFLEN] = { 0 };
 
     /**
      * @brief Długość bufora danych
     */
-    int recvbuflen = DEFAULT_BUFLEN;
+    int _recvbuflen = DEFAULT_BUFLEN;
 
     /**
      * @brief Uchwyt na wątek MsgReceiverListener
     */
-    HANDLE MsgReceiverTh;
+    HANDLE _MsgReceiverTh;
 
     /**
      * @brief Uchwyt na wątek MsgSender
     */
-    HANDLE MsgSenderTh;
+    HANDLE _MsgSenderTh;
 
     /**
      * @brief Uchwyt na wątek KeyEventListener
     */
-    HANDLE KeyEventListenerTh;
+    HANDLE _KeyEventListenerTh;
 
     /**
      * @brief Wskaźnik na ID wątku MsgReceiverListener
     */
-    LPDWORD MsgReceiverThID;
+    LPDWORD _MsgReceiverThID;
 
     /**
      * @brief Wskaźnik na ID wątku MsgSender
     */
-    LPDWORD MsgSenderThID;
+    LPDWORD _MsgSenderThID;
 
     /**
      * @brief Wskaźnik na ID wątku KeyEventListener
     */
-    LPDWORD KeyEventListenerThID;
+    LPDWORD _KeyEventListenerThID;
 
     /**
      * @brief Uchwyt standartowe wejście
     */
-    HANDLE hStdin;
+    HANDLE _hStdin;
 
     /**
      * @brief Uchwyt standartowe wyjście
     */
-    HANDLE hStdout;
+    HANDLE _hStdout;
 
     /**
      * @brief Stare ustawienia konsoli, przywracane na końcu działania aplikacji
     */
-    DWORD fdwSaveOldInMode = 0;
+    DWORD _fdwSaveOldInMode = 0;
 
     /**
      * @brief Nowe ustawienia konsoli na czas działania aplikacji
     */
-    DWORD fdwInMode;
+    DWORD _fdwInMode;
 
     /**
     * @brief Stare ustawienia konsoli, przywracane na końcu działania aplikacji
     */
-    DWORD fdwSaveOldOutMode = 0;
+    DWORD _fdwSaveOldOutMode = 0;
 
     /**
      * @brief Nowe ustawienia konsoli na czas działania aplikacji
     */
-    DWORD fdwOutMode;
+    DWORD _fdwOutMode;
 
     /**
      * @brief Sczytany aktualny input z klawiatury
     */
-    unsigned char keyInput = VK_LEFT;
+    unsigned char _keyInput = VK_LEFT;
 
     bool _isRunning;
 
     bool _isConnected;
 
-    unsigned int mapSizeY;
-    unsigned int mapSizeX = 0xFFFFFFFF;
+    unsigned int _mapSizeY;
+    unsigned int _mapSizeX = 0xFFFFFFFF;
 
-    unsigned int playerID;
-    unsigned int playerScore;
+    unsigned int _playerID;
+    unsigned int _playerScore;
 
 
 protected:
 
     bool startUpWinsock();
     bool createSocket();
-    bool connectToServer(const char* ipadress);
+    bool connectToServer();
     bool disconnectFromServer();
     bool shutdownSocket();
     bool closeSocket();
@@ -170,7 +209,7 @@ public:
     /**
      * @brief @brief Konstruktor inicjalizujący aplikacje kliencką
     */
-    Client(const char* ipadress);
+    Client(ClientSetup setup);
 
     /**
      * @brief Uruchamia wątki oraz grę
