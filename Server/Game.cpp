@@ -60,6 +60,9 @@ Game::Game(list<Player*>& players, int y, int x)
 	_gameState = true;
 	_gameMap = createMap(y,x);
 	///Inicjalizuj pozycje graczy oraz długości ich wężów
+	for (Player* player : _players) {
+		_gameMap[x / (player->ID+1)][y / (player->ID+1)] = (char)player->ID;
+	}
 
 }
 
