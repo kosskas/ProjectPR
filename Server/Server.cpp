@@ -221,7 +221,16 @@ void Server::deletePlayer(Player* player)
 
 void Server::endConnection()
 {
-    //  # TODO
+    char msg[4];
+    for (Player* Player : _players) {
+        if (Player->sock != NULL) {
+            codeMessage(Player, msg, DISC);
+            int iSendResult = send(Player->sock, msg, 4, 0);
+            if (iSendResult == SOCKET_ERROR) {
+                printf("%d | Broadcast: send to Player(%d) failed with error: %d\n", __LINE__, Player->ID, WSAGetLastError());
+            }
+        }
+    }
 }
 
 
@@ -265,7 +274,7 @@ void Server::run()
         //game.rozstawBonusy();
         Sleep(200); //jako param
         sendMap();
-        //wyślijMapę()?
+
     }
 }
 
@@ -287,7 +296,6 @@ DWORD __stdcall ClientListener(LPVOID param)
 {
     const int DEFAULT_BUFLEN = 4;
     Player* player = (Player*)param;
-
     printf("ClientListener: Player(%d) start \n", player->ID);
 
     int _recvbuflen = DEFAULT_BUFLEN;
@@ -358,6 +366,7 @@ DWORD __stdcall Broadcast(LPVOID param)
 
 void Server::sendMap()
 {  
+    printf("wysylanie");
     _game->getMap(_mapBuffer+2);
     if (_players.size() > 0)
         printf("Broadcast: Players in game: %d \n", _players.size());

@@ -83,7 +83,6 @@ void Game::movePlayer(Player* player)
 	// 
 	// Nanieś węża na mapę??
 	//Aktualizuj głowę i ogon { begin(), back() }
-
 }
 
 

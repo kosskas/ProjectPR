@@ -11,11 +11,11 @@ int __cdecl main(void)
     setup.mapSizeY = 10;
     setup.mapSizeX = 10;
 
-    Server server(setup);
+    Server* server = new Server(setup);
 
-    server.run();
+    server->run();
 
-    server.~Server();
+    delete server;
 
     char c = getchar();
     c = getchar();

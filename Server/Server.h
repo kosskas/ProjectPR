@@ -30,12 +30,6 @@ ZROBIONE W POŁOWIE
 * Zrobić plik konfiguracyjny TODO
 
 * Sparametryzować Spleepy TODO
-
-
-
-32x32 to max wymiary
-max graczy 7
-16 bitów msg
 */
 
 
@@ -58,7 +52,6 @@ enum MSGMODE {
     CONN = 0xA,
     DISC,
     END,
-    PINGER,
     SPECTATE,
     MAP
 };
@@ -175,10 +168,7 @@ private:
     friend DWORD __stdcall Broadcast(LPVOID param);
     friend DWORD __stdcall Pinger(LPVOID param);
 
-
-    //temp, to samo co broadcast ale nie wątek
-    void sendMap();
-
+    //friend struct Player;
 protected:
 
     /**
@@ -219,19 +209,6 @@ protected:
     */
     bool closeSocket(SOCKET sock);
 
-public:
-
-    /**
-     * @brief Inicjalizuje WSA. Tworzy socket serwera. Uruchamia serwer pozostawiając go w stanie nasłuchiwania połączeń.
-     * @param setup - struktura zawierająca ustawienia, z którymi serwer ma zostać uruchomiony.
-    */
-    Server(ServerSetup setup);
-
-    /**
-     * @brief Wymusza zakończenie się wątków. Usuwa obiekty klasy Player z listy Server::Players. Zamyka socker serwera.
-    */
-    ~Server();
-
     /**
      * @brief [ + NadajID() ] Używając złożonych funkcji hashujących nadaje Graczowi unikalne id.
      * @return id
@@ -250,9 +227,9 @@ public:
     void deletePlayer(Player* player);
 
     /**
-     * @brief [ + ZakończPołączenie() ] ???.
+     * @brief [ + ZakończPołączenie() ] Wysyła sygnał do graczy o tym, że połączenie zostanie zamknięte
     */
-    void endConnection(); // TODO
+    void endConnection();
 
     /**
      * @brief Uruchamia wątek o nazwie Pinger
@@ -260,9 +237,21 @@ public:
     void initGarbageCollector();
 
     /**
-     * @brief !!! ta metoda ma być w klasie Gra !!! Uruchamia wątek o nazwie Broadcast
+     * @brief Uruchamia wątek o nazwie Broadcast
     */
     void initMapBroadcast();
+
+    /**
+     * @brief Rozsyłają mapę do klientów temp, to samo co broadcast ale nie wątek
+    */
+    void sendMap();
+public:
+
+    /**
+     * @brief Inicjalizuje WSA. Tworzy socket serwera. Uruchamia serwer pozostawiając go w stanie nasłuchiwania połączeń.
+     * @param setup - struktura zawierająca ustawienia, z którymi serwer ma zostać uruchomiony.
+    */
+    Server(ServerSetup setup);
 
     /**
      * @brief Uruchamia wątki oraz grę
@@ -274,11 +263,17 @@ public:
      * @return Liczba kolumn
     */
     unsigned int getXSize();
+
     /**
      * @brief Pobiera wymiar X
      * @return Liczba wierszy
     */
     unsigned int getYSize();
+
+    /**
+     * @brief Wymusza zakończenie się wątków. Usuwa obiekty klasy Player z listy Server::Players. Zamyka socker serwera.
+    */
+    ~Server();
 };
 
 
@@ -304,7 +299,6 @@ DWORD __stdcall Broadcast(LPVOID param);
  * @return 0 jeśli wątek zakończył się dobrze
 */
 DWORD __stdcall Pinger(LPVOID param);
-
 /**
  * @brief Koduje wiadomość do gracza
  * @param player Wskaźnik na Player
@@ -312,5 +306,4 @@ DWORD __stdcall Pinger(LPVOID param);
  * @param mode tryb wiadomości
 */
 void codeMessage(Player* player, char* msg, MSGMODE mode);
-
 #endif // !_SERVER_H

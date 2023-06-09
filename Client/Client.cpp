@@ -209,6 +209,7 @@ bool Client::sendMessage(const char* sendbuf, int len)
 
 void Client::printGame(const char* map)
 {
+
     if (_mapSizeX == 0xFFFFFFFF)
         return;
     //    //fflush(stdout);       ???? 
