@@ -64,7 +64,7 @@ enum MSGMODE {
 };
 
 /**
- * @brief Pozwala na ustawić serwer według podanych parametrów
+ * @brief Pozwala ustawić serwer według podanych parametrów
 */
 struct ServerSetup {
 
@@ -106,8 +106,6 @@ struct ServerSetup {
 */
 class Server {
 private:
-    
-
 
     /**
      * @brief Socket nasłuchujący nowych połączeń

@@ -6,10 +6,43 @@
 
 
 /**
+ * @brief Pozwala ustawić klienta według podanych parametrów
+*/
+struct ClientSetup {
+
+    /**
+     * @brief Numer ip serwera
+    */
+    const char* serverIP;
+
+    /**
+     * @brief Numer portu serwera
+    */
+    const char* serverPort;
+
+    /**
+     * @brief Określa rozmiar bufora odbioru/przesyłu danych
+    */
+    size_t bufferSize;
+
+    /**
+     * @brief Liczba wierszy
+    */
+    unsigned int mapSizeY;
+
+    /**
+     * @brief Liczba kolumn
+    */
+    unsigned int mapSizeX;
+};
+
+
+/**
  * @brief Klasa Client zarządza grą oraz połączeniem po stronie klienta
 */
 class Client {
 private:
+
     enum MSGMODE {
         CONN = 0xA,
         DISC,
@@ -18,10 +51,16 @@ private:
         SPECTATE,
         MAP
     };
+
     /**
      * @brief Socket łączący z serwerem
     */
     SOCKET _socket = INVALID_SOCKET;
+
+    /**
+     * @brief Struktura przechowująca informacje ustawienia klienta
+    */
+    ClientSetup _setup;
 
     /**
      * @brief Bufor bajtów odebranych
@@ -105,8 +144,8 @@ private:
 
     bool _isConnected;
 
-    unsigned int mapSizeY = 40;
-    unsigned int mapSizeX = 63;
+    unsigned int _mapSizeY;
+    unsigned int _mapSizeX;
 
     unsigned int playerID;
     unsigned int playerScore;
@@ -116,7 +155,7 @@ protected:
 
     bool startUpWinsock();
     bool createSocket();
-    bool connectToServer(const char* ipadress);
+    bool connectToServer();
     bool disconnectFromServer();
     bool shutdownSocket();
     bool closeSocket();
@@ -172,7 +211,7 @@ public:
     /**
      * @brief @brief Konstruktor inicjalizujący aplikacje kliencką
     */
-    Client(const char* ipadress);
+    Client(ClientSetup setup);
 
     /**
      * @brief Uruchamia wątki oraz grę

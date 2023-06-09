@@ -35,7 +35,7 @@ bool Client::createSocket()
     }
 }
 
-bool Client::connectToServer(const char* ipadress)
+bool Client::connectToServer()
 {
     addrinfo* result = NULL, * ptr = NULL, hints;
     int iResult;
@@ -46,7 +46,7 @@ bool Client::connectToServer(const char* ipadress)
     hints.ai_protocol = IPPROTO_TCP;
 
     // Resolve the server address and port
-    iResult = getaddrinfo(ipadress, DEFAULT_PORT, &hints, &result); //podstawić ipadress
+    iResult = getaddrinfo(_setup.serverIP, _setup.serverPort, &hints, &result); //podstawić ipadress
     if (iResult != 0) {
         printf("getaddrinfo failed with error: %d\n", iResult);
         return false;
@@ -209,9 +209,11 @@ bool Client::sendMessage(const char* sendbuf, int len)
 
 void Client::printGame()
 {
-    for (int y = 0; y < mapSizeY; y++) {
-        for (int x = 0; x < mapSizeX; x++) {
-            printf("\033[1;34m%c\033[0m", recvbuf[y + 10 * x]);
+    printf("\033[0;0H");
+
+    for (unsigned int y = 0; y < _mapSizeY; y++) {
+        for (unsigned int x = 0; x < _mapSizeX; x++) {
+            printf("\033[1;34m%c\033[0m", recvbuf[y + _mapSizeY * x]);
         }
         printf("\n");
     }
@@ -223,7 +225,7 @@ void Client::printGame()
 
 
     
-    printf("\033[0;0H");
+
 }
 
 char Client::getArrow(char direction) 
@@ -246,7 +248,10 @@ char Client::getArrow(char direction)
 // - - - - - - - - - - Client :: public - - - - - - - - - - \\
 
 
-Client::Client(const char* ipadress) :
+Client::Client(ClientSetup setup) :
+    _setup(setup),
+    _mapSizeX(setup.mapSizeX),
+    _mapSizeY(setup.mapSizeY),
     _isRunning(true), 
     _isConnected(false)
 {
@@ -259,7 +264,7 @@ Client::Client(const char* ipadress) :
         ExitProcess(1);
     }
 
-    if (!connectToServer(ipadress)) {
+    if (!connectToServer()) {
         printf("Unable to connect to server!\n");
         WSACleanup();
         ExitProcess(1);
@@ -327,8 +332,8 @@ void Client::decodeMessage(uint16_t* msg) {
     char mode = bytemsg[0] & 0x0F;
     switch (mode) {
     case Client::CONN:
-        mapSizeY = bytemsg[1];
-        mapSizeX = bytemsg[2];
+        _mapSizeY = bytemsg[1];
+        _mapSizeX = bytemsg[2];
         playerID = bytemsg[3];
         break;
     case Client::DISC:

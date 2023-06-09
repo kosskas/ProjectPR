@@ -17,6 +17,9 @@
 
 #define VK_Q 0x51 // ASCII of 'Q'
 
+#define MAP_SIZE_X 40 
+#define MAP_SIZE_Y 20
+
 
 #define compareString(a, b) strcmp(a, b) == 0
 

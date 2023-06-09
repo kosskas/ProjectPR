@@ -7,16 +7,25 @@
 int __cdecl main(int argc, char** argv)
 {
     system("cls");
-    //ip będzie w argv
-    Client client(argv[1]);
-    //wprintf(L"\033[35;106m Hello, world!\033[m");
+
+    ClientSetup setup;
+    setup.serverIP = argv[1];
+    setup.serverPort = DEFAULT_PORT;
+    setup.bufferSize = DEFAULT_BUFLEN;
+    setup.mapSizeX = MAP_SIZE_X;
+    setup.mapSizeY = MAP_SIZE_Y;
+
+    Client client(setup);
+
     client.run();
 
     client.~Client();
 
-    printf("Press Enter twice... \n");
+    printf("\n Press Enter twice... \n");
     char c = getchar();
     c = getchar();
 
     ExitProcess(0);
 }
+
+//wprintf(L"\033[35;106m Hello, world!\033[m");
