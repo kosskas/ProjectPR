@@ -192,6 +192,7 @@ void Server::waitForPlayers()
         player->thId = PlayerThreadId;
         player->isRunning = true;
         player->ID = setPlayerID();
+        player->score = 0;
 
         players.push_back(player);
 
@@ -291,15 +292,9 @@ DWORD __stdcall ClientListener(LPVOID param)
 
     int recvbuflen = DEFAULT_BUFLEN;
     int iResult;
-    int msg;
-    codeMessage(player, &msg, CONN);
-    printf("%08X\n", msg); // gives 
-    //const unsigned char* txtmsg = (const unsigned char*)&msg;
-    //const char* txtmsg2 = (const char*)&msg;
-    //printf("%02X %02X\n", txtmsg[1], txtmsg[0]);
-    //printf("%02X %02X\n", txtmsg2[1], txtmsg2[0]);
-    //int iSendResult = send(player->sock, "CONNECTED", strlen("CONNECTED"), 0);
-    int iSendResult = send(player->sock, (const char*)&msg, 4, 0);
+    char msg[4];
+    codeMessage(player, msg, CONN);
+    int iSendResult = send(player->sock, msg, 4, 0);
     if (iSendResult == SOCKET_ERROR) {
         printf("%d send failed with error: %d\n", __LINE__, WSAGetLastError());
         player->isRunning = false;
@@ -362,68 +357,43 @@ DWORD __stdcall Broadcast(LPVOID param)
 
 
 void Server::sendMap()
-{
-    //printf("\t Broadcast:  start \n");
-    game->getMap(mapBuffer);
+{  
+    game->getMap(mapBuffer+2);
     if (players.size() > 0)
         printf("Broadcast: Players in game: %d \n", players.size());
     for (Player* Player : players) {
         if (Player->sock != NULL) {
-            int iSendResult = send(Player->sock, mapBuffer, mapMsgSize, 0);
+            codeMessage(Player, mapBuffer, MAP);
+            int iSendResult = send(Player->sock, mapBuffer, mapMsgSize+3, 0);
             if (iSendResult == SOCKET_ERROR) {
                 printf("%d | Broadcast: send to Player(%d) failed with error: %d\n", __LINE__, Player->ID, WSAGetLastError());
             }
         }
     }
-    //printf("\t Broadcast:  stop \n");
 }
 
-void codeMessage(Player* player, int* msg, MSGMODE mode)
+void codeMessage(Player* player, char* msg, MSGMODE mode)
 {
-    char* bytemsg = (char*)msg;
-    bytemsg[0] = mode;
-    bytemsg[1] = player->srvptr->getXSize();
-    bytemsg[2] = player->srvptr->getYSize();
-    bytemsg[3] = player->ID;
-    //uint16_t mapX = player->srvptr->getXSize() << 4;
-    //uint16_t mapY = player->srvptr->getYSize() << 9;
-    //uint16_t pID = player->ID << 14;
-    //*msg = mode | mapY | mapX | pID;
-    /*switch (mode) {
+    switch (mode) {
     case CONN:
-        uint16_t mapX = player->srvptr->getXSize() << 4;
-        uint16_t mapY = player->srvptr->getYSize() << 9;
-        uint16_t pID = player->ID << 14;
-        *msg = mode | mapY | mapX | pID;
-        break;*/
-        /*case Server::DISC:
-            bytemsg[1] = player->score;
-            bytemsg[2] = 0xFE;
-            bytemsg[3] = 0xEF;
-            break;
-        case Server::END:
-            bytemsg[1] = 0xDE;
-            bytemsg[2] = 0xAD;
-            bytemsg[3] = 0xEF;
-            break;
-        case Server::PINGER:
-            bytemsg[1] = 0xFF;
-            bytemsg[2] = 0xFF;
-            bytemsg[3] = 0xFF;
-            break;
-        case Server::SPECTATE:
-            bytemsg[1] = 0xEE;
-            bytemsg[2] = 0xEE;
-            bytemsg[3] = 0xEE;
-            break;
-        case Server::MAP:
-            bytemsg[1] = 0xAA;
-            bytemsg[2] = 0xBB;
-            bytemsg[3] = 0xDD;
-            break;*/
-            /*default:
-                break;
-            }*/
+        msg[0] = mode;
+        msg[1] = player->srvptr->getXSize();
+        msg[2] = player->srvptr->getYSize();
+        msg[3] = player->ID;
+        break;
+    case DISC:
+        msg[0] = mode;
+        msg[1] = player->score;
+        break;
+    case END:
+    case SPECTATE:
+    case MAP:
+        msg[0] = mode;
+        msg[1] = player->score;
+        break;
+    default:
+        break;
+    }
 }
 
 

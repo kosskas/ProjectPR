@@ -33,9 +33,6 @@ private:
     */
     int recvbuflen = DEFAULT_BUFLEN;
 
-
-    int serverMsg;
-
     /**
      * @brief Uchwyt na wątek MsgReceiverListener
     */
@@ -105,8 +102,8 @@ private:
 
     bool _isConnected;
 
-    unsigned int mapSizeY = 40;
-    unsigned int mapSizeX = 63;
+    unsigned int mapSizeY;
+    unsigned int mapSizeX = 0xFFFFFFFF;
 
     unsigned int playerID;
     unsigned int playerScore;
@@ -151,8 +148,9 @@ protected:
 
     /**
      * @brief Wyświetla mapę, którą wysłał Server oraz status
+     * @param map wskaźnik na mapę
     */
-    void printGame();
+    void printGame(const char* map);
 
     /**
      * @brief Fukcja zwracająca strzałkę w kierunku jaki posiada aktualnie Client
@@ -161,7 +159,7 @@ protected:
     */
     char getArrow(char direction);
 
-    void decodeMessage(uint16_t* msg);
+    void decodeMessage();
 
     friend DWORD __stdcall MsgReceiverListener(LPVOID param);
     friend DWORD __stdcall MsgSender(LPVOID param);

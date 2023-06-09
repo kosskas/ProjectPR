@@ -89,7 +89,6 @@ void Game::movePlayer(Player* player)
 
 void Game::getMap(char* msg) 
 {
-	printf("mapa jest %p", gameMap);
 	int i = 0;
 	for (int y = 0; y < sizeY; y++) {
 		for (int x = 0; x < sizeX; x++) {

@@ -27,6 +27,9 @@ struct Point {
  * @brief Zawiera wszystktie informacje o pojedynczym graczu-kliencie
 */
 struct Player {
+    /**
+     * @brief Wskaźnik na klasę Server
+    */
     Server* srvptr;
     /**
      * @brief Uchwyt na wątek ClientListener

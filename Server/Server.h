@@ -307,6 +307,12 @@ DWORD __stdcall Broadcast(LPVOID param);
 */
 DWORD __stdcall Pinger(LPVOID param);
 
-void codeMessage(Player* player, int* msg, MSGMODE mode);
+/**
+ * @brief Koduje wiadomość do gracza
+ * @param player Wskaźnik na Player
+ * @param msg bufor na wiadomość
+ * @param mode tryb wiadomości
+*/
+void codeMessage(Player* player, char* msg, MSGMODE mode);
 
 #endif // !_SERVER_H

@@ -207,22 +207,23 @@ bool Client::sendMessage(const char* sendbuf, int len)
     return true;
 }
 
-void Client::printGame()
+void Client::printGame(const char* map)
 {
+    if (mapSizeX == 0xFFFFFFFF)
+        return;
+    //    //fflush(stdout);       ???? 
     for (int y = 0; y < mapSizeY; y++) {
         for (int x = 0; x < mapSizeX; x++) {
-            printf("\033[1;34m%c\033[0m", recvbuf[y + 10 * x]);
+            printf("\033[1;34m%c\033[0m", map[y + mapSizeY * x]);
         }
         printf("\n");
     }
     char arrow = getArrow(keyInput);
     printf("Destroy \033[1;31mall\033[0m enemies. Use \x18\x19\x1a< to navigate\n");
-    printf("Odebrano %dB  Current direction: \033[1;33m%c\033[0m\n", serverMsg, arrow);
+    printf("Your number %d   Current direction: \033[1;33m%c \033[0m   Your score %d",playerID, arrow, playerScore);
 
     //printf("Odebrano %dB  Current direction: \033[1;33m%c\033[0m     \n",serverMsg ,arrow); //odebrano wyslano???
 
-
-    
     printf("\033[0;0H");
 }
 
@@ -322,29 +323,27 @@ Client::~Client()
     WSACleanup();
 }
 
-void Client::decodeMessage(uint16_t* msg) {
-    uint8_t* bytemsg = (uint8_t*)&msg;
-    char mode = bytemsg[0] & 0x0F;
+void Client::decodeMessage() {
+    char mode = recvbuf[0];
     switch (mode) {
     case Client::CONN:
-        mapSizeY = bytemsg[1];
-        mapSizeX = bytemsg[2];
-        playerID = bytemsg[3];
+        mapSizeX = recvbuf[1];
+        mapSizeY = recvbuf[2];
+        playerID = recvbuf[3];
         break;
     case Client::DISC:
-
+        playerScore = recvbuf[1];
+        _isRunning = false;
         break;
     case Client::END:
-
-        break;
-    case Client::PINGER:
-
+        _isRunning = false;
         break;
     case Client::SPECTATE:
-
+        //TODO NA KOŃCU
         break;
     case Client::MAP:
-        //socre
+        playerScore = recvbuf[1];
+        printGame(recvbuf + 2);
         break;
     default:
         break;
@@ -363,30 +362,11 @@ DWORD __stdcall MsgReceiverListener(LPVOID param)
     int iResult;
 
     do {
-        client->serverMsg = recv(client->_socket, client->recvbuf, client->recvbuflen, 0);
-        if (client->serverMsg > 0) {
-
-
-            //int mode = 0xF;
-            //printf("%02X %02X %02X %02X ", client->recvbuf[3], client->recvbuf[2], client->recvbuf[1],client->recvbuf[0]);
-            /*printf("%d, %04X", client->serverMsg, msg);
-            if ((msg & 0xF) == 0xA) {
-                printf("CONN");
-            }*/
-            if (compareString(client->recvbuf, "END")) {
-                client->_isRunning = false;
-            }
-            else if (client->recvbuf[0] == 0x0A) {
-                printf("startS");
-            }
-            else {
-                //fflush(stdout);       ????   
-                client->printGame();
-                //printf("\nOtrzymano: %dB\t", iResult);
-                //printf("Wynik: %s\n", client->recvbuf);
-            }
+        iResult = recv(client->_socket, client->recvbuf, client->recvbuflen, 0);
+        if (iResult > 0) {
+            client->decodeMessage();
         }
-        else if (client->serverMsg == 0) {
+        else if (iResult == 0) {
             printf("Connection closed\n");
             client->_isRunning = false;
         }
@@ -412,8 +392,7 @@ DWORD __stdcall MsgSender(LPVOID param)
         if (lastKeyInput != client->keyInput) {
             lastKeyInput = client->keyInput;
             const char* currentKeyInput = (const char*)&(client->keyInput);
-            client->sendMessage(currentKeyInput, 1);
-            
+            client->sendMessage(currentKeyInput, 1);       
         }
 
         Sleep(100);
