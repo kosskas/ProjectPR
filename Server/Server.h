@@ -58,7 +58,6 @@ enum MSGMODE {
     CONN = 0xA,
     DISC,
     END,
-    PINGER,
     SPECTATE,
     MAP
 };

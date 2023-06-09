@@ -1,4 +1,5 @@
 #include "Game.h"
+#include <random>
 
 
 // - - - - - - - - - - Game :: private - - - - - - - - - - \\
@@ -61,7 +62,7 @@ Game::Game(list<Player*>& players, int y, int x)
 	_gameMap = createMap(y,x);
 	///Inicjalizuj pozycje graczy oraz długości ich wężów
 	for (Player* player : _players) {
-		_gameMap[x / (player->ID+1)][y / (player->ID+1)] = (char)player->ID;
+		_gameMap[y / (player->ID+1)][x / (player->ID+1)] = (char)player->ID;
 	}
 
 }
@@ -75,6 +76,22 @@ bool Game::checkGameState()
 
 void Game::placeBonuses(int num)
 {
+	// Inicjalizacja generatora liczb losowych
+	std::random_device rd;
+	std::mt19937 generator(rd());
+
+	// Utworzenie rozkładu równomiernego dla zakresu od 1 do 10
+	std::uniform_int_distribution<int> distribution(0, this->_sizeX-1);
+
+	// Wylosowanie liczby
+	for (int i = 0; i < num; i++)
+	{
+		int rand_x = distribution(generator);
+		int rand_y = distribution(generator);
+		_gameMap[rand_y][rand_x] = 'X';
+	}
+	
+
 	//losuj współrzędne tak długo jak na nich nic nie ma
 }
 

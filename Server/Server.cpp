@@ -262,7 +262,7 @@ void Server::run()
             printf("0x%2X ", Player->currentDirection);
             //game.ruszGraczem(*Player)
         }
-        //game.rozstawBonusy();
+        _game->placeBonuses(1);
         Sleep(200); //jako param
         sendMap();
         //wyślijMapę()?
