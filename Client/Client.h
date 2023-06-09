@@ -10,7 +10,14 @@
 */
 class Client {
 private:
-
+    enum MSGMODE {
+        CONN = 0xA,
+        DISC,
+        END,
+        PINGER,
+        SPECTATE,
+        MAP
+    };
     /**
      * @brief Socket łączący z serwerem
     */
@@ -25,6 +32,9 @@ private:
      * @brief Długość bufora danych
     */
     int recvbuflen = DEFAULT_BUFLEN;
+
+
+    int serverMsg;
 
     /**
      * @brief Uchwyt na wątek MsgReceiverListener
@@ -95,6 +105,13 @@ private:
 
     bool _isConnected;
 
+    unsigned int mapSizeY = 40;
+    unsigned int mapSizeX = 63;
+
+    unsigned int playerID;
+    unsigned int playerScore;
+
+
 protected:
 
     bool startUpWinsock();
@@ -144,6 +161,8 @@ protected:
     */
     char getArrow(char direction);
 
+    void decodeMessage(uint16_t* msg);
+
     friend DWORD __stdcall MsgReceiverListener(LPVOID param);
     friend DWORD __stdcall MsgSender(LPVOID param);
     friend DWORD __stdcall KeyEventListener(LPVOID param);
@@ -174,7 +193,11 @@ public:
 */
 DWORD __stdcall MsgReceiverListener(LPVOID param);
 
-
+/**
+ * @brief Czemu wątek??,
+ * @param param 
+ * @return 
+*/
 DWORD __stdcall MsgSender(LPVOID param);
 
 

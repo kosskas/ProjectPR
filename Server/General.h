@@ -12,7 +12,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <list>
-
+#include <stdint.h>
 
 #define LEFT VK_LEFT
 #define RIGHT VK_RIGHT

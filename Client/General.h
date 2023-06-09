@@ -1,6 +1,6 @@
 #ifndef GENERAL
 #define GENERAL
-
+#define _CRT_SECURE_NO_WARNINGS
 
 #define WIN32_LEAN_AND_MEAN
 
@@ -10,9 +10,9 @@
 #include <ws2tcpip.h>
 #include <stdlib.h>
 #include <stdio.h>
+#include <stdint.h>
 
-
-#define DEFAULT_BUFLEN 512
+#define DEFAULT_BUFLEN 4096//512
 #define DEFAULT_PORT "27015"
 
 #define VK_Q 0x51 // ASCII of 'Q'

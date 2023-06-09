@@ -31,13 +31,19 @@ ZROBIONE W POŁOWIE
 
 * Sparametryzować Spleepy TODO
 
+
+
+32x32 to max wymiary
+max graczy 7
+16 bitów msg
 */
 
 
 #ifndef _SERVER_H
 #define _SERVER_H
 
-
+struct Player;
+class Game;
 #include "General.h"
 #include "Player.h"
 #include "Game.h"
@@ -45,6 +51,17 @@ ZROBIONE W POŁOWIE
 
 #define compareString(a, b) strcmp(a, b) == 0
 
+/**
+ * @brief Tryby wiadomości jakie będzie wysyłał Server
+*/
+enum MSGMODE {
+    CONN = 0xA,
+    DISC,
+    END,
+    PINGER,
+    SPECTATE,
+    MAP
+};
 
 /**
  * @brief Pozwala na ustawić serwer według podanych parametrów
@@ -75,12 +92,12 @@ struct ServerSetup {
      * @brief Liczba wierszy
      * 
     */
-    int mapSizeY;
+    unsigned int mapSizeY;
 
     /**
      * @brief Liczba kolumn
     */
-    int mapSizeX;
+    unsigned int mapSizeX;
 };
 
 
@@ -89,6 +106,8 @@ struct ServerSetup {
 */
 class Server {
 private:
+    
+
 
     /**
      * @brief Socket nasłuchujący nowych połączeń
@@ -251,6 +270,17 @@ public:
      * @brief Uruchamia wątki oraz grę
     */
     void run();
+
+    /**
+     * @brief Pobiera wymiar X
+     * @return Liczba kolumn
+    */
+    unsigned int getXSize();
+    /**
+     * @brief Pobiera wymiar X
+     * @return Liczba wierszy
+    */
+    unsigned int getYSize();
 };
 
 
@@ -277,5 +307,6 @@ DWORD __stdcall Broadcast(LPVOID param);
 */
 DWORD __stdcall Pinger(LPVOID param);
 
+void codeMessage(Player* player, int* msg, MSGMODE mode);
 
 #endif // !_SERVER_H

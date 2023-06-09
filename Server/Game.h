@@ -25,7 +25,7 @@ private:
 	/**
 	 * @brief Wskaźnik na mapę o wymiarach Y na X, do mapy odwołuje się poprzez gameMap[y][x]
 	*/
-	char** gameMap;
+	char** gameMap = NULL;
 
 	/**
 	 * @brief Flaga oznaczająca trwanie gry

@@ -6,15 +6,13 @@
 
 char** Game::createMap(int Y, int X) 
 {
-	char** temp = new char* [Y];
-
-	for (int i = 0; i < Y; i++) {
-		temp[i] = new char[X];
-		for (int j = 0; j < sizeX; j++) {
-			temp[i][j] = '#';
+	char** temp = new char*[Y];
+	for (int y = 0; y < Y; y++) {
+		temp[y] = new char[X];
+		for (int x = 0; x < X; x++) {
+			temp[y][x] = '8';
 		}
 	}
-
 	return temp;
 }
 
@@ -57,7 +55,7 @@ Player* Game::getPlayerById(char ID)
 
 
 Game::Game(list<Player*>& players, int y, int x)
-	: sizeX(y), sizeY(x), players(players) 
+	: sizeX(x), sizeY(y), players(players) 
 {
 	gameState = true;
 	gameMap = createMap(y,x);
@@ -91,6 +89,7 @@ void Game::movePlayer(Player* player)
 
 void Game::getMap(char* msg) 
 {
+	printf("mapa jest %p", gameMap);
 	int i = 0;
 	for (int y = 0; y < sizeY; y++) {
 		for (int x = 0; x < sizeX; x++) {

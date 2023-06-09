@@ -119,7 +119,9 @@ Server::Server(ServerSetup setup)
     game = new Game(players, _setup.mapSizeY, _setup.mapSizeX);
     _isServerRunning = true;
     mapMsgSize = _setup.mapSizeY * _setup.mapSizeX;
+   
     mapBuffer = new char[mapMsgSize];
+    printf("Mapa bajtow %d ", mapMsgSize);
 }
 
 
@@ -182,6 +184,7 @@ void Server::waitForPlayers()
             closeSocket(PlayerSocket);
             continue;
         }
+        player->srvptr = this;
         player->sock = PlayerSocket;
         player->ip = sc.sin_addr;
         player->port = sc.sin_port;
@@ -252,6 +255,7 @@ void Server::run()
 
     ///Pętla grająca
     //IF LICZBA GRACZY == 0 END
+
     while (_isServerRunning /* && game.checkGameState()*/ && !players.empty()) {
         for (Player* Player : players) {
             printf("0x%2X ", Player->currentDirection);
@@ -264,20 +268,38 @@ void Server::run()
     }
 }
 
+unsigned int Server::getXSize()
+{
+    return _setup.mapSizeX;
+}
+
+unsigned int Server::getYSize()
+{
+    return _setup.mapSizeY;
+}
+
 
 // - - - - - - - - - - threads functions - - - - - - - - - - \\
 
 
 DWORD __stdcall ClientListener(LPVOID param)
 {
-    const int DEFAULT_BUFLEN = 512;
+    const int DEFAULT_BUFLEN = 4;
     Player* player = (Player*)param;
 
     printf("ClientListener: Player(%d) start \n", player->ID);
 
     int recvbuflen = DEFAULT_BUFLEN;
     int iResult;
-    int iSendResult = send(player->sock, "CONNECTED", strlen("CONNECTED"), 0);
+    int msg;
+    codeMessage(player, &msg, CONN);
+    printf("%08X\n", msg); // gives 
+    //const unsigned char* txtmsg = (const unsigned char*)&msg;
+    //const char* txtmsg2 = (const char*)&msg;
+    //printf("%02X %02X\n", txtmsg[1], txtmsg[0]);
+    //printf("%02X %02X\n", txtmsg2[1], txtmsg2[0]);
+    //int iSendResult = send(player->sock, "CONNECTED", strlen("CONNECTED"), 0);
+    int iSendResult = send(player->sock, (const char*)&msg, 4, 0);
     if (iSendResult == SOCKET_ERROR) {
         printf("%d send failed with error: %d\n", __LINE__, WSAGetLastError());
         player->isRunning = false;
@@ -354,6 +376,54 @@ void Server::sendMap()
         }
     }
     //printf("\t Broadcast:  stop \n");
+}
+
+void codeMessage(Player* player, int* msg, MSGMODE mode)
+{
+    char* bytemsg = (char*)msg;
+    bytemsg[0] = mode;
+    bytemsg[1] = player->srvptr->getXSize();
+    bytemsg[2] = player->srvptr->getYSize();
+    bytemsg[3] = player->ID;
+    //uint16_t mapX = player->srvptr->getXSize() << 4;
+    //uint16_t mapY = player->srvptr->getYSize() << 9;
+    //uint16_t pID = player->ID << 14;
+    //*msg = mode | mapY | mapX | pID;
+    /*switch (mode) {
+    case CONN:
+        uint16_t mapX = player->srvptr->getXSize() << 4;
+        uint16_t mapY = player->srvptr->getYSize() << 9;
+        uint16_t pID = player->ID << 14;
+        *msg = mode | mapY | mapX | pID;
+        break;*/
+        /*case Server::DISC:
+            bytemsg[1] = player->score;
+            bytemsg[2] = 0xFE;
+            bytemsg[3] = 0xEF;
+            break;
+        case Server::END:
+            bytemsg[1] = 0xDE;
+            bytemsg[2] = 0xAD;
+            bytemsg[3] = 0xEF;
+            break;
+        case Server::PINGER:
+            bytemsg[1] = 0xFF;
+            bytemsg[2] = 0xFF;
+            bytemsg[3] = 0xFF;
+            break;
+        case Server::SPECTATE:
+            bytemsg[1] = 0xEE;
+            bytemsg[2] = 0xEE;
+            bytemsg[3] = 0xEE;
+            break;
+        case Server::MAP:
+            bytemsg[1] = 0xAA;
+            bytemsg[2] = 0xBB;
+            bytemsg[3] = 0xDD;
+            break;*/
+            /*default:
+                break;
+            }*/
 }
 
 

@@ -3,8 +3,9 @@
 
 
 #include "General.h"
+#include "Server.h"
 
-
+class Server;
 /**
  * @brief Zawiera parę określającą położenie XY
 */
@@ -26,7 +27,7 @@ struct Point {
  * @brief Zawiera wszystktie informacje o pojedynczym graczu-kliencie
 */
 struct Player {
-
+    Server* srvptr;
     /**
      * @brief Uchwyt na wątek ClientListener
     */
