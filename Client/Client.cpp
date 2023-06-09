@@ -215,13 +215,13 @@ void Client::printGame(const char* map)
     printf("\033[0;0H");
     for (unsigned int y = 0; y < _mapSizeY; y++) {
         for (unsigned int x = 0; x < _mapSizeX; x++) {
-            printf("\033[1;34m%c\033[0m", _recvbuf[y + _mapSizeY * x]);
+            printf("\033[1;34m%c\033[0m", map[y + _mapSizeY * x]);
         }
         printf("\n");
     }
     char arrow = getArrow(_keyInput);
     printf("Destroy \033[1;31mall\033[0m enemies. Use \x18\x19\x1a< to navigate\n");
-    printf("Your number %d   Current direction: \033[1;33m%c \033[0m   Your score %d",_playerID, arrow, _playerScore);
+    printf("Your number %d   Current direction: \033[1;33m%c \033[0m   Your score %d\n",_playerID, arrow, _playerScore);
 
 }
 
@@ -294,7 +294,7 @@ void Client::run()
     while (licz && _isRunning) {
         Sleep(100);
         licz--;
-
+        //Wstawić jakiś wątek tutaj
     }
 }
 
@@ -414,17 +414,13 @@ DWORD __stdcall KeyEventListener(LPVOID param)
     INPUT_RECORD irInBuf[128];
 
     while (client->_isRunning) {
-
         if (!ReadConsoleInput(client->_hStdin, irInBuf, 128, &cNumRead)) { 
             printf("ReadConsoleInput");
             return 1;
         }
-
         for (unsigned int i = 0; i < cNumRead; i++) {
             if (irInBuf[i].EventType == KEY_EVENT && irInBuf[i].Event.KeyEvent.bKeyDown) {
-
-                switch (irInBuf[i].Event.KeyEvent.wVirtualKeyCode)
-                {
+                switch (irInBuf[i].Event.KeyEvent.wVirtualKeyCode) {
                 case VK_LEFT:
                     client->_keyInput = VK_LEFT;
                     break;

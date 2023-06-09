@@ -38,7 +38,7 @@ void Game::printSnake(Player* player)
 	//Ogon na pusto //Problem z wydłużaniem węży???
 	Point last = player->sprite.back();
 
-	_gameMap[last.posY][last.posX];
+	_gameMap[last.posY][last.posX] = ' ';
 }
 
 
@@ -85,6 +85,7 @@ void Game::movePlayer(Player* player)
 	//Aktualizuj głowę i ogon { begin(), back() }
 
 }
+
 
 
 void Game::getMap(char* msg) 

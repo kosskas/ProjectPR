@@ -47,7 +47,6 @@ private:
         CONN = 0xA,
         DISC,
         END,
-        PINGER,
         SPECTATE,
         MAP
     };
@@ -137,31 +136,67 @@ private:
     */
     unsigned char _keyInput = VK_LEFT;
 
+    /**
+     * @brief Flaga określająca czy trwa gra
+    */
     bool _isRunning;
-
+    /**
+     * @brief Flaga określająca czy Client jest podłączony do serwera
+    */
     bool _isConnected;
 
+    /**
+     * @brief Liczba wierszy
+    */
     unsigned int _mapSizeY;
+    /**
+     * @brief Liczba kolumn
+    */
     unsigned int _mapSizeX = 0xFFFFFFFF;
-
+    /**
+     * @brief Identyfikator gracza
+    */
     unsigned int _playerID;
+    /**
+     * @brief Wynik gracza
+    */
     unsigned int _playerScore;
 
 
 protected:
-
-    bool startUpWinsock();
-    bool createSocket();
-    bool connectToServer();
-    bool disconnectFromServer();
-    bool shutdownSocket();
-    bool closeSocket();
-
+    
     /**
-     * @brief Funkcja inicjalizująca komponęty potrzebne do komunikacji
-     * @return 0 jeśli konfiguracja przebiegła pomyślnie, 1 jesli nie
+     * @brief Inicjalizacja WinSock API
+     * @return true jeśli inicjalizacja zakończyła się powodzeniem, false jeśli źle
     */
-    //int InitWinsock(const char* ipadress);
+    bool startUpWinsock();
+    /**
+     * @brief Tworzy socket serwera o paramterach: IPv4, połączeniowe, TCP, ....
+     * @return true jeśli socket utworzony pomyślnie, false jeśli źle
+    */
+    bool createSocket();
+    /**
+     * @brief Łączy z serwerem
+     * @return true jeśli połączenie zakończyło się powodzeniem, false jeśli źle
+    */
+    bool connectToServer();
+    /**
+     * @brief Rozłącza z serwerem
+     * @return true jeśli rozłączenie zakończyło się powodzeniem, false jeśli źle
+    */
+    bool disconnectFromServer();
+    /**
+     * @brief Ucisza socket - nie może ani wysyłać, ani odbierać danych
+     * @param sock - SOCKET do uciszenia
+     * @return true jeśli pomyślnie uciszono socket, false jeśli nie
+    */
+    bool shutdownSocket();
+    /**
+    * @brief Zamyka socket
+     * @param sock - SOCKET do zamknięcia
+     * @return true jeśli pomyślnie zamknięto socket, false jeśli nie
+    */
+    bool closeSocket();
 
     /**
      * @brief Incjalizacja do odczytu klawiatury
@@ -170,11 +205,19 @@ protected:
     int initConsole();
 
     /**
-     * @brief Incjalizacja do wątków
+     * @brief Incjalizacja wątku do odbierania danych z serwera
      * @return 0 jeśli konfiguracja przebiegła pomyślnie, 1 jesli nie
     */
     bool initReceiver();
+    /**
+     * @brief Incjalizacja wątku do odbierania danych z klawiatury
+     * @return 0 jeśli konfiguracja przebiegła pomyślnie, 1 jesli nie
+    */
     bool initKeyEventListener();
+    /**
+     * @brief Incjalizacja wątku do wysyłania danych do serwera
+     * @return 0 jeśli konfiguracja przebiegła pomyślnie, 1 jesli nie
+    */
     bool initSender();
 
     /**
@@ -198,6 +241,9 @@ protected:
     */
     char getArrow(char direction);
 
+    /**
+     * @brief Dekoduje wiadomość od Serwera i ją przetwarza
+    */
     void decodeMessage();
 
     friend DWORD __stdcall MsgReceiverListener(LPVOID param);
