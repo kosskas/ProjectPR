@@ -290,7 +290,7 @@ DWORD __stdcall ClientListener(LPVOID param)
 
     printf("ClientListener: Player(%d) start \n", player->ID);
 
-    int recvbuflen = DEFAULT_BUFLEN;
+    int _recvbuflen = DEFAULT_BUFLEN;
     int iResult;
     char msg[4];
     codeMessage(player, msg, CONN);
@@ -303,13 +303,13 @@ DWORD __stdcall ClientListener(LPVOID param)
 
     // Receive until the peer shuts down the connection
     do {
-        char recvbuf[DEFAULT_BUFLEN] = { 0 };
+        char _recvbuf[DEFAULT_BUFLEN] = { 0 };
 
-        iResult = recv(player->sock, recvbuf, recvbuflen, 0);
+        iResult = recv(player->sock, _recvbuf, _recvbuflen, 0);
         if (iResult > 0) {
             //printf("Bytes received: %d\n", iResult);
-            //printf("ClientListener: Player(%d) Recevied: %s \n", player->ID, recvbuf);
-            player->currentDirection = recvbuf[0];
+            //printf("ClientListener: Player(%d) Recevied: %s \n", player->ID, _recvbuf);
+            player->currentDirection = _recvbuf[0];
         }
         else if (iResult == 0) {
             printf("Connection closing...\n");
@@ -358,13 +358,13 @@ DWORD __stdcall Broadcast(LPVOID param)
 
 void Server::sendMap()
 {  
-    game->getMap(_mapBuffer+2);
+    _game->getMap(_mapBuffer+2);
     if (_players.size() > 0)
         printf("Broadcast: Players in game: %d \n", _players.size());
     for (Player* Player : _players) {
         if (Player->sock != NULL) {
             codeMessage(Player, _mapBuffer, MAP);
-            int iSendResult = send(Player->sock, _mapBuffer, _mapMsgSize+3, 0);
+            int iSendResult = send(Player->sock, _mapBuffer, _mapMsgSize+2, 0);
             if (iSendResult == SOCKET_ERROR) {
                 printf("%d | Broadcast: send to Player(%d) failed with error: %d\n", __LINE__, Player->ID, WSAGetLastError());
             }

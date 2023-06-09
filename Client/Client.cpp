@@ -221,7 +221,7 @@ void Client::printGame(const char* map)
     }
     char arrow = getArrow(_keyInput);
     printf("Destroy \033[1;31mall\033[0m enemies. Use \x18\x19\x1a< to navigate\n");
-    printf("Your number %d   Current direction: \033[1;33m%c \033[0m   Your score %d",playerID, arrow, playerScore);
+    printf("Your number %d   Current direction: \033[1;33m%c \033[0m   Your score %d",_playerID, arrow, _playerScore);
 
 }
 
@@ -325,15 +325,15 @@ Client::~Client()
 }
 
 void Client::decodeMessage() {
-    char mode = recvbuf[0];
+    char mode = _recvbuf[0];
     switch (mode) {
     case Client::CONN:
-        _mapSizeX = recvbuf[1];
-        _mapSizeY = recvbuf[2];
-        _playerID = recvbuf[3];
+        _mapSizeX = _recvbuf[1];
+        _mapSizeY = _recvbuf[2];
+        _playerID = _recvbuf[3];
         break;
     case Client::DISC:
-        playerScore = recvbuf[1];
+        _playerScore = _recvbuf[1];
         _isRunning = false;
         break;
     case Client::END:
@@ -343,8 +343,8 @@ void Client::decodeMessage() {
         //TODO NA KOŃCU
         break;
     case Client::MAP:
-        playerScore = recvbuf[1];
-        printGame(recvbuf + 2);
+        _playerScore = _recvbuf[1];
+        printGame(_recvbuf + 2);
         break;
     default:
         break;
@@ -363,7 +363,7 @@ DWORD __stdcall MsgReceiverListener(LPVOID param)
     int iResult;
 
     do {
-        iResult = recv(client->_socket, client->recvbuf, client->recvbuflen, 0);
+        iResult = recv(client->_socket, client->_recvbuf, client->_recvbuflen, 0);
         if (iResult > 0) {
             client->decodeMessage();
         }
