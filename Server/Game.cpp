@@ -124,7 +124,11 @@ void Game::removeSnake(Player* player)
 
 void Game::drawSnakeHead(Player* player)
 {
-	_gameMap[player->sprite.front().posY][player->sprite.front().posX] = PLAYER_HEAD_SPRITE;
+	if (player->isRunning)
+	{
+		_gameMap[player->sprite.front().posY][player->sprite.front().posX] = PLAYER_HEAD_SPRITE;
+	}
+	
 }
 
 
@@ -187,7 +191,11 @@ void Game::movePlayer(Player* player)
 	}
 
 	// Nanieś węża na mapę
-	printSnake(player);
+	if (player->isRunning)
+	{
+		printSnake(player);
+	}
+	
 }
 
 

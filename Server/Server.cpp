@@ -217,8 +217,8 @@ void Server::deletePlayer(Player* player)
 {
     player->isRunning = false;
 
-    TerminateThread(player->thHandle, 0);
-    DWORD res = WaitForSingleObject(player->thHandle, 5000);
+    //TerminateThread(player->thHandle, 0);
+    DWORD res = WaitForSingleObject(player->thHandle, INFINITE);
     if (res == WAIT_OBJECT_0) {
         printf("player->thHandle OK");
     }
@@ -297,6 +297,7 @@ void Server::run()
     while (_isServerRunning /* && game.checkGameState()*/ && !_players.empty()) {
 
         for (Player* player : _players) {
+            _game->removeSnake(player);
             _game->movePlayer(player);
         }
 
@@ -460,7 +461,7 @@ DWORD __stdcall Pinger(LPVOID param)
             if (isInactive) {
                 printf("Pinger:  Removing inactive Player(%d) \n", (*i)->ID);
                 (*i)->isRunning = false;
-                server->deletePlayer((*i));
+                //server->deletePlayer((*i));
                 server->_game->removeSnake((*i));
                 i = server->_players.erase(i);
             }
