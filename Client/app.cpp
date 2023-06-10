@@ -17,7 +17,7 @@ int __cdecl main(int argc, char** argv)
     Client client(setup);
 
     client.run();
-
+    
     client.~Client();
 
     printf("\n Press Enter twice... \n");

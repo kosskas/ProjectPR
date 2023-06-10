@@ -31,18 +31,23 @@ void Game::printSnake(Player* player)
 {
 	for (Point p : player->sprite) {
 		int y = p.posY, x = p.posX;
-		_gameMap[y][x] = (char)(player->ID) + '0';
+		_gameMap[y][x] = getPlayerASCII(player);
 	}
-	_gameMap[player->sprite.front().posY][player->sprite.front().posX] = '#';
 }
 
 
 Player* Game::getPlayerById(char ID) 
 {
-	int pID = (int)ID;
+	int pID = (int)(ID - '0');
 	list<Player*>::iterator it = _players.begin();
 	advance(it, pID);
 	return *it;
+}
+
+
+char Game::getPlayerASCII(Player* player)
+{
+	return (char)(player->ID) + '0';
 }
 
 
@@ -101,6 +106,28 @@ void Game::placeBonuses(int num)
 }
 
 
+void Game::removeSnake(Player* player)
+{
+	if (player->isRunning == false)
+	{
+		for (Point p : player->sprite) {
+			int y = p.posY, x = p.posX;
+			if (_gameMap[y][x] == getPlayerASCII(player) ||
+				_gameMap[y][x] == PLAYER_HEAD_SPRITE)
+			{
+				_gameMap[y][x] = EMPTY_SPRITE;
+			}
+		}
+	}
+}
+
+
+void Game::drawSnakeHead(Player* player)
+{
+	_gameMap[player->sprite.front().posY][player->sprite.front().posX] = PLAYER_HEAD_SPRITE;
+}
+
+
 void Game::movePlayer(Player* player) 
 {
 	//Przesuń jego postać
@@ -132,6 +159,7 @@ void Game::movePlayer(Player* player)
 
 	// (dodaj na początek listy nowe kordy, a ogon zwiń) i Rozwiąż konfilikty
 	Point currHeadPos = player->sprite.front();
+	Point currTailPos = player->sprite.back();
 	Point nextHeadPos;
 
 	nextHeadPos.posX = currHeadPos.posX + xTranslation;
@@ -142,16 +170,23 @@ void Game::movePlayer(Player* player)
 	if (nextHeadPos.posY < 0) nextHeadPos.posY += _sizeY;
 	if (nextHeadPos.posY >= _sizeY) nextHeadPos.posY -= _sizeY;
 
-	player->sprite.push_front(nextHeadPos);
+	// reackja na zawartość następnego pola
+	char nextPos = _gameMap[nextHeadPos.posY][nextHeadPos.posX];
+	char playerASCII = getPlayerASCII(player);
 
-	if (_gameMap[nextHeadPos.posY][nextHeadPos.posX] != BONUS_SPRITE) {
-		Point currTailPos = player->sprite.back();
-		_gameMap[currTailPos.posY][currTailPos.posX] = EMPTY_SPRITE;
+	if (nextPos == EMPTY_SPRITE || nextPos == playerASCII) {
+		player->sprite.push_front(nextHeadPos);
 		player->sprite.pop_back();
+		_gameMap[currTailPos.posY][currTailPos.posX] = EMPTY_SPRITE;
 	}
-	
+	else if (nextPos == BONUS_SPRITE) {
+		player->sprite.push_front(nextHeadPos);
+	}
+	else { // on the next position enemy snake is placed
+		player->isRunning = false;
+	}
 
-	// Nanieś węża na mapę??
+	// Nanieś węża na mapę
 	printSnake(player);
 }
 

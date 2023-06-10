@@ -53,7 +53,7 @@ private:
 
 	/**
 	 * @brief Nanosi na mapę ASCII postać gracza
-	 * @param psprite Lista punktów zajmowanych przez człony węża gracza na mapie
+	 * @param ??? psprite Lista punktów zajmowanych przez człony węża gracza na mapie
 	*/
 	void printSnake(Player* player);
 
@@ -63,6 +63,8 @@ private:
 	 * @return Wskaźnik na gracza o podanym ID
 	*/
 	Player* getPlayerById(char ID);
+
+	char getPlayerASCII(Player* player);
 
 public:
 
@@ -85,6 +87,14 @@ public:
 	 * @param num Liczba bonusów
 	*/
 	void placeBonuses(int num);
+
+	/**
+	 * @brief Usuwa postać nieaktywnego gracza
+	 * @param player ???
+	*/
+	void removeSnake(Player* player);
+
+	void drawSnakeHead(Player* player);
 
 	/**
 	 * @brief Przesuwa postać gracza według jego bieżącego kierunku

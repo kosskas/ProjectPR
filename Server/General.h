@@ -30,7 +30,7 @@
 
 #define EMPTY_SPRITE ' '
 #define BONUS_SPRITE 'X'
-#define PLAYER_1_SPRITE '1' // ??
+#define PLAYER_HEAD_SPRITE '#'
 
 #define MIN_TIME_BETWEEN_BONUS_MS 1000
 #define MAX_TIME_BETWEEN_BONUS_MS 5000

@@ -6,10 +6,10 @@ int __cdecl main(void)
     ServerSetup setup;
     setup.backlog = BACKLOG_LENGTH;
     setup.bufferSize = BUFFER_SIZE;
-    setup.maxNumberOfClients = 3;
+    setup.maxNumberOfClients = MAX_NUMBER_OF_CLIENTS;
     setup.port = PORT;
-    setup.mapSizeY = 30;
-    setup.mapSizeX = 30;
+    setup.mapSizeY = MAP_SIZE_Y;
+    setup.mapSizeX = MAP_SIZE_X;
 
     Server server(setup);
 

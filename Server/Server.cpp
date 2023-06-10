@@ -216,6 +216,7 @@ void Server::waitForPlayers()
 void Server::deletePlayer(Player* player)
 {
     player->isRunning = false;
+
     WaitForSingleObject(player->thHandle, INFINITE);
     char ipStr[16];
     inet_ntop(AF_INET, &(player->ip), ipStr, sizeof ipStr);
@@ -224,8 +225,8 @@ void Server::deletePlayer(Player* player)
     shutdownSocket(player->sock);
     closeSocket(player->sock);
     CloseHandle(player->thHandle);
-    delete player;
-    player = nullptr;
+    //delete player;
+    //player = nullptr;
     
 }
 
@@ -287,16 +288,17 @@ void Server::run()
     while (_isServerRunning /* && game.checkGameState()*/ && !_players.empty()) {
 
         for (Player* player : _players) {
-            //printf("0x%2X ", player->currentDirection);
-            //game.ruszGraczem(*Player)
             _game->movePlayer(player);
         }
-        
+
+        for (Player* player : _players) {
+            _game->drawSnakeHead(player);
+        }
+ 
         if (i % 16 == 0) _game->placeBonuses(1);
         
-        Sleep(250); //jako param
+        Sleep(200); //jako param
         sendMap();
-
         i++;
     }
     //endConnection();
@@ -394,8 +396,9 @@ void Server::sendMap()
     if (_players.empty())
         return;
     _game->getMap(_mapBuffer+2);
-    if (_players.size() > 0)
-        printf("Broadcast: Players in game: %d \n", _players.size());
+    if (_players.size() > 0) {
+        //printf("Broadcast: Players in game: %d \n", _players.size());
+    }        
     for (Player* Player : _players) {
         if (Player->sock != NULL) {
             codeMessage(Player, _mapBuffer, MAP);
@@ -440,15 +443,24 @@ DWORD __stdcall Pinger(LPVOID param)
     while (server->_isServerRunning) {
   
         //printf("\t Online %d\n", server->_players.size());
-        server->_players.remove_if([server](Player* player) {
-            bool isPlayerInactive = (send(player->sock, NULL, 0, 0) == SOCKET_ERROR || player->isRunning == false);
-            if (isPlayerInactive) {
-                printf("Pinger:  Removing inactive Player(%d) \n", player->ID);
-                server->deletePlayer(player);
+        auto i = server->_players.begin();
+        while (i != server->_players.end())
+        {
+            bool isInactive = ((*i)->isRunning == false || send((*i)->sock, NULL, 0, 0) == SOCKET_ERROR );
+
+            if (isInactive) {
+                printf("Pinger:  Removing inactive Player(%d) \n", (*i)->ID);
+                (*i)->isRunning = false;
+                server->deletePlayer((*i));
+                server->_game->removeSnake((*i));
+                i = server->_players.erase(i);
             }
-            return isPlayerInactive;
-        });
-        Sleep(1334); //jako param
+            else {
+                ++i;
+            }
+        }
+
+        Sleep(500); //jako param
     }
 
     printf("\t Pinger:  stop \n");
