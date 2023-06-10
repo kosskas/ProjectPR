@@ -13,6 +13,7 @@
 #include <stdio.h>
 #include <list>
 #include <stdint.h>
+#include <random>
 
 #define LEFT VK_LEFT
 #define RIGHT VK_RIGHT
@@ -24,8 +25,15 @@
 #define BUFFER_SIZE 4096//512
 #define PORT 27015
 
-#define MAP_SIZE_X 40 
+#define MAP_SIZE_X 20 
 #define MAP_SIZE_Y 20
+
+#define EMPTY_SPRITE '_'
+#define BONUS_SPRITE 'X'
+#define PLAYER_1_SPRITE '1' // ??
+
+#define MIN_TIME_BETWEEN_BONUS_MS 1000
+#define MAX_TIME_BETWEEN_BONUS_MS 5000
 
 
 #pragma comment (lib, "Ws2_32.lib")

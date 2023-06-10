@@ -1,5 +1,4 @@
 #include "Game.h"
-#include <random>
 
 
 // - - - - - - - - - - Game :: private - - - - - - - - - - \\
@@ -11,7 +10,7 @@ char** Game::createMap(int Y, int X)
 	for (int y = 0; y < Y; y++) {
 		temp[y] = new char[X];
 		for (int x = 0; x < X; x++) {
-			temp[y][x] = '8';
+			temp[y][x] = EMPTY_SPRITE;
 		}
 	}
 	return temp;
@@ -32,14 +31,8 @@ void Game::printSnake(Player* player)
 {
 	for (Point p : player->sprite) {
 		int y = p.posY, x = p.posX;
-		char player_symbol = (char)(player->ID);
-		_gameMap[y][x] = player_symbol;
+		_gameMap[y][x] = (char)(player->ID) + '0';
 	}
-
-	//Ogon na pusto //Problem z wydłużaniem węży???
-	Point last = player->sprite.back();
-
-	_gameMap[last.posY][last.posX] = ' ';
 }
 
 
@@ -60,9 +53,10 @@ Game::Game(list<Player*>& players, int y, int x)
 {
 	_gameState = true;
 	_gameMap = createMap(y,x);
+
 	///Inicjalizuj pozycje graczy oraz długości ich wężów
 	for (Player* player : _players) {
-		_gameMap[y / (player->ID+1)][x / (player->ID+1)] = (char)player->ID;
+		player->sprite.push_front({5, 5});
 	}
 
 }
@@ -80,29 +74,84 @@ void Game::placeBonuses(int num)
 	std::random_device rd;
 	std::mt19937 generator(rd());
 
-	// Utworzenie rozkładu równomiernego dla zakresu od 1 do 10
-	std::uniform_int_distribution<int> distribution(0, this->_sizeX-1);
+	// Utworzenie rozkładu równomiernego dla zakresu od (0,0) do (_sizeX,_sizeY)
+	std::uniform_int_distribution<int> distributionX(0, this->_sizeX-1);
+	std::uniform_int_distribution<int> distributionY(0, this->_sizeY-1);
 
 	// Wylosowanie liczby
+	int maxTries = 5;
+	int rand_x;
+	int rand_y;
+
 	for (int i = 0; i < num; i++)
 	{
-		int rand_x = distribution(generator);
-		int rand_y = distribution(generator);
-		_gameMap[rand_y][rand_x] = 'X';
-	}
-	
+		//losuj współrzędne tak długo jak nie znajdziesz pustych, maxTries razy
+		int ithTry = 0;
+		do {
+			ithTry++;
+			rand_x = distributionX(generator);
+			rand_y = distributionY(generator);
+		} while (_gameMap[rand_y][rand_x] != EMPTY_SPRITE && ithTry <= maxTries);
 
-	//losuj współrzędne tak długo jak na nich nic nie ma
+		if (ithTry >= maxTries) continue;
+		
+		_gameMap[rand_y][rand_x] = BONUS_SPRITE;
+	}
 }
 
 
 void Game::movePlayer(Player* player) 
 {
-	//pobierz obecny kierunek wskazywany przez gracza
-	//Przesuń jego postać (dodaj na początek listy nowe kordy, a ogon zwiń) i Rozwiąż konfilikty
-	// 
+	//Przesuń jego postać
+	int xTranslation = 0;
+	int yTranslation = 0;
+	int step = 1;
+
+	switch (player->currentDirection) {
+	case UP:
+		xTranslation = -1 * step;
+		yTranslation = 0;
+		break;
+	case DOWN:
+		xTranslation = +1 * step;
+		yTranslation = 0;
+		break;
+	case LEFT:
+		xTranslation = 0;
+		yTranslation = -1 * step;
+		break;
+	case RIGHT:
+		xTranslation = 0;
+		yTranslation = +1 * step;
+		break;
+	default:
+		//printf("\n Critical 'player->currentDirection' error ! \n");
+		break;
+	}
+
+	// (dodaj na początek listy nowe kordy, a ogon zwiń) i Rozwiąż konfilikty
+	Point currHeadPos = player->sprite.front();
+	Point nextHeadPos;
+
+	nextHeadPos.posX = currHeadPos.posX + xTranslation;
+	if (nextHeadPos.posX < 0) nextHeadPos.posX += _sizeX;
+	if (nextHeadPos.posX >= _sizeX) nextHeadPos.posX -= _sizeX;
+
+	nextHeadPos.posY = currHeadPos.posY + yTranslation;
+	if (nextHeadPos.posY < 0) nextHeadPos.posY += _sizeY;
+	if (nextHeadPos.posY >= _sizeY) nextHeadPos.posY -= _sizeY;
+
+	player->sprite.push_front(nextHeadPos);
+
+	if (_gameMap[nextHeadPos.posY][nextHeadPos.posX] != BONUS_SPRITE) {
+		Point currTailPos = player->sprite.back();
+		_gameMap[currTailPos.posY][currTailPos.posX] = EMPTY_SPRITE;
+		player->sprite.pop_back();
+	}
+	
+
 	// Nanieś węża na mapę??
-	//Aktualizuj głowę i ogon { begin(), back() }
+	printSnake(player);
 }
 
 

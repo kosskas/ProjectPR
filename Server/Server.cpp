@@ -116,7 +116,7 @@ Server::Server(ServerSetup setup)
         WSACleanup();
         ExitProcess(1);
     }
-    _game = new Game(_players, _setup.mapSizeY, _setup.mapSizeX);
+
     _isServerRunning = true;
     _mapMsgSize = _setup.mapSizeY * _setup.mapSizeX;
    
@@ -261,20 +261,32 @@ void Server::run()
     waitForPlayers();
     //wszyscy gracze dołączyli
 
+    _game = new Game(_players, _setup.mapSizeY, _setup.mapSizeX);
+
     //initMapBroadcast();
 
     ///Pętla grająca
     //IF LICZBA GRACZY == 0 END
 
+    // Inicjalizacja generatora liczb losowych dla bonusów
+    //std::random_device rd;
+    //std::mt19937 generator(rd());
+    //std::uniform_int_distribution<int> bonusRandTime(MIN_TIME_BETWEEN_BONUS_MS, MAX_TIME_BETWEEN_BONUS_MS);
+    unsigned int i = 0;
     while (_isServerRunning /* && game.checkGameState()*/ && !_players.empty()) {
-        for (Player* Player : _players) {
-            printf("0x%2X ", Player->currentDirection);
+
+        for (Player* player : _players) {
+            //printf("0x%2X ", player->currentDirection);
             //game.ruszGraczem(*Player)
+            _game->movePlayer(player);
         }
-        _game->placeBonuses(1);
-        Sleep(200); //jako param
+        
+        if (i % 16 == 0) _game->placeBonuses(1);
+        
+        Sleep(250); //jako param
         sendMap();
 
+        i++;
     }
 }
 

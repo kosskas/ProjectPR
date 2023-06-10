@@ -38,9 +38,11 @@ ZROBIONE W POŁOWIE
 
 struct Player;
 class Game;
+
 #include "General.h"
 #include "Player.h"
 #include "Game.h"
+
 
 
 #define compareString(a, b) strcmp(a, b) == 0
