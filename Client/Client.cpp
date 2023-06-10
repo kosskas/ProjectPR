@@ -350,10 +350,10 @@ void Client::decodeMessage() {
     case Client::END:
         _isRunning = false;
         break;
+    case Client::MAP:
     case Client::SPECTATE:
         //TODO NA KOŃCU
-        break;
-    case Client::MAP:
+        //już nie wysyła, tylko odbiera
         _playerScore = _recvbuf[1];
         printGame(_recvbuf + 2);
         break;

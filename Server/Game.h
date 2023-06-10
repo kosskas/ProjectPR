@@ -64,6 +64,11 @@ private:
 	*/
 	Player* getPlayerById(char ID);
 
+	/**
+	 * @brief Pobiera kod ASCII gracza
+	 * @param player Wskaźnik na konkretnego gracza
+	 * @return Symbol ASCII
+	*/
 	char getPlayerASCII(Player* player);
 
 public:
@@ -90,10 +95,14 @@ public:
 
 	/**
 	 * @brief Usuwa postać nieaktywnego gracza
-	 * @param player ???
+	 * @param player Wskaźnik na konkretnego gracza
 	*/
 	void removeSnake(Player* player);
 
+	/**
+	 * @brief Wysuje głowę postaci gracza na mapie
+	 * @param player Wskaźnik na konkretnego gracza
+	*/
 	void drawSnakeHead(Player* player);
 
 	/**

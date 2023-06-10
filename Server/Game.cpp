@@ -184,6 +184,7 @@ void Game::movePlayer(Player* player)
 		_gameMap[currTailPos.posY][currTailPos.posX] = EMPTY_SPRITE;
 	}
 	else if (nextPos == BONUS_SPRITE) {
+		//score++
 		player->sprite.push_front(nextHeadPos);
 	}
 	else { // on the next position enemy snake is placed

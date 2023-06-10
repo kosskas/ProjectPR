@@ -311,7 +311,7 @@ void Server::run()
         sendMap();
         i++;
     }
-    //endConnection();
+    endConnection();
 }
 
 unsigned int Server::getXSize()
@@ -453,7 +453,7 @@ DWORD __stdcall Pinger(LPVOID param)
     while (server->_isServerRunning) {
   
         //printf("\t Online %d\n", server->_players.size());
-        auto i = server->_players.begin();
+        std::list<Player*>::iterator i = server->_players.begin();
         while (i != server->_players.end())
         {
             bool isInactive = ((*i)->isRunning == false || send((*i)->sock, NULL, 0, 0) == SOCKET_ERROR );

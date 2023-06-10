@@ -21,7 +21,7 @@
 #define DOWN VK_DOWN
 
 #define BACKLOG_LENGTH SOMAXCONN   // this is to long backlog queue !!!
-#define MAX_NUMBER_OF_CLIENTS 2
+#define MAX_NUMBER_OF_CLIENTS 1
 #define BUFFER_SIZE 4096//512
 #define PORT 27015
 

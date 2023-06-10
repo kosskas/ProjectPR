@@ -60,7 +60,10 @@ struct Player {
      * @brief Flaga określająca czy dany klient istnieje
     */
     bool isRunning;
-
+    /**
+     * @brief Flaga określająca czy dany klient gra
+    */
+    bool isPlaying;
     /**
      * @brief Określa obecnie obrany kierunek 
     */
@@ -69,7 +72,7 @@ struct Player {
     /**
      * @brief Zdobyty wynik podczas gry
     */
-    int score;
+    int score; ///uint16??
 
     /**
      * @brief Unikalny identyfikator, symbol ASCII, który będzie rysowany na mapie jako postać gracza
