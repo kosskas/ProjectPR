@@ -6,16 +6,16 @@ int __cdecl main(void)
     ServerSetup setup;
     setup.backlog = BACKLOG_LENGTH;
     setup.bufferSize = BUFFER_SIZE;
-    setup.maxNumberOfClients = 1;
+    setup.maxNumberOfClients = 3;
     setup.port = PORT;
-    setup.mapSizeY = MAP_SIZE_Y;
-    setup.mapSizeX = MAP_SIZE_X;
+    setup.mapSizeY = 30;
+    setup.mapSizeX = 30;
 
-    Server* server = new Server(setup);
+    Server server(setup);
 
-    server->run();
+    server.run();
 
-    delete server;
+    server.~Server();
 
     char c = getchar();
     c = getchar();

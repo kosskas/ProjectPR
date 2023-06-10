@@ -1,35 +1,17 @@
 /*
-BROADCAST POTENCJALNIE OUT
-
-kolorki DONE
-
-* Refaktor w Kliencie
-* Poprawne zamykanie w kliencie
-
- Konflikty ze sprawka
-* Węże zderzają się głowami - zniszczony zostaje krótszy wąż, w przypadku równej długości losujemy wygranego. TODO
-
-* Zebranie jedzenia w tym samym momencie - najpierw sprawdzane są kolizje węży, więc problem sprowadza się do punktu 1. TODO
-
-* Nieplanowane rozłączenie gracza (odłączenie od internetu, awaria komputera itp.)
-wykrywane jest przez serwer - wystąpi błąd połączenia lub dany klient 3 razy pod
-rząd nie odpowie na wysłanie mapy. NIEMOŻLIWE
-
+* TODO
+* poprawić kolorowanie konsoli
+* X I Y na odwrót!!!!!
+* Zakończenie poprawne wątków (PINGER!!!!)
 * W przypadku rozłączenia gracza, gracz przegrywa, a jego wąż znika z planszy. DONE?
-
+* Węże zderzają się głowami - zniszczony zostaje krótszy wąż, w przypadku równej długości losujemy wygranego.
+* Zebranie jedzenia w tym samym momencie - najpierw sprawdzane są kolizje węży, więc problem sprowadza się do punktu 1.
+ Konflikty ze sprawka
 * Jeśli klient będzie próbował podłączyć się w trakcie gry, zostanie powiadomiony,
-że nie może się połączyć. ?TODO/DONE?
+że nie może się połączyć. 
+* Zrobić plik konfiguracyjny 
+* Sparametryzować Spleepy 
 
-
-* Przytrzymanie klawisza sterującego przez użytkownika nie spowoduje redundantnego
-wysyłania informacji do serwera o kierunku przemieszczania się. Informacja ta jest
-wysyłana tylko wtedy, gdy kierunek w ostatnio wysłanej wiadomości był różny
-od kierunku wyznaczonego przez aktualnie wciśnięty klawisz sterujący.
-ZROBIONE W POŁOWIE
-
-* Zrobić plik konfiguracyjny TODO
-
-* Sparametryzować Spleepy TODO
 */
 
 
@@ -150,8 +132,7 @@ private:
     /**
      * @brief flaga informująca wątki o konieczności zakończenia się
     */
-    bool _isServerRunning;
-
+    volatile bool _isServerRunning;
     /**
      * @brief Instancja gry
     */

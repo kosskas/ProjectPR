@@ -14,11 +14,11 @@ int __cdecl main(int argc, char** argv)
     setup.mapSizeX = MAP_SIZE_X;
     setup.mapSizeY = MAP_SIZE_Y;
 
-    Client *client = new Client(setup);
+    Client client(setup);
 
-    client->run();
+    client.run();
 
-    delete client;
+    client.~Client();
 
     printf("\n Press Enter twice... \n");
     char c = getchar();

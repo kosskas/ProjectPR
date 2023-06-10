@@ -33,6 +33,7 @@ void Game::printSnake(Player* player)
 		int y = p.posY, x = p.posX;
 		_gameMap[y][x] = (char)(player->ID) + '0';
 	}
+	_gameMap[player->sprite.front().posY][player->sprite.front().posX] = '#';
 }
 
 

@@ -245,6 +245,12 @@ protected:
      * @brief Dekoduje wiadomość od Serwera i ją przetwarza
     */
     void decodeMessage();
+    /**
+     * @brief Ustawia kolor w zależności od ID gracza
+     * @param buf bufor gdzie będzie umieszczony kod koloru
+     * @param id Pole z graczem 
+    */
+    void getColorById(char* buf, char id);
 
     friend DWORD __stdcall MsgReceiverListener(LPVOID param);
     friend DWORD __stdcall MsgSender(LPVOID param);

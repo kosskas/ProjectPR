@@ -28,7 +28,7 @@
 #define MAP_SIZE_X 20 
 #define MAP_SIZE_Y 20
 
-#define EMPTY_SPRITE '_'
+#define EMPTY_SPRITE ' '
 #define BONUS_SPRITE 'X'
 #define PLAYER_1_SPRITE '1' // ??
 

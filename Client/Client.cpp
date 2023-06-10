@@ -209,21 +209,25 @@ bool Client::sendMessage(const char* sendbuf, int len)
 
 void Client::printGame(const char* map)
 {
-
+    char bufor[8];
     if (_mapSizeX == 0xFFFFFFFF)
         return;
     //    //fflush(stdout);       ???? 
     printf("\033[0;0H");
     for (unsigned int y = 0; y < _mapSizeY; y++) {
         for (unsigned int x = 0; x < _mapSizeX; x++) {
-            printf("\033[1;34m%c\033[0m", map[y + _mapSizeY * x]);
+            char tile = map[y + _mapSizeY * x];
+            getColorById(bufor, tile);
+            printf("%s%c", bufor, tile);
         }
         printf("\n");
     }
+    printf("\033[0m");
     char arrow = getArrow(_keyInput);
+    getColorById(bufor, (char)_playerID+'0');
     printf("Destroy \033[1;31mall\033[0m enemies. Use \x18\x19\x1a< to navigate\n");
-    printf("Your number %d   Current direction: \033[1;33m%c \033[0m   Your score %d\n",_playerID, arrow, _playerScore);
-
+    printf("Your number %s%d%s   Current direction: \033[1;33m%c \033[0m   Your score %d\n",bufor,_playerID,RESET, arrow, _playerScore);
+    printf("\033[0m");
 }
 
 char Client::getArrow(char direction) 
@@ -285,16 +289,22 @@ void Client::run()
     if (!initReceiver())
         return;
 
-    if (!initSender())
-        return;
+    //if (!initSender())
+      //  return;
 
     if (!initKeyEventListener())
         return;
-
+    unsigned char lastKeyInput = 0;
     int licz = 300;
-    while (licz && _isRunning) {
+    while (_isRunning) {
+        if (lastKeyInput != _keyInput) {
+            lastKeyInput = _keyInput;
+            const char* currentKeyInput = (const char*)&(_keyInput);
+            sendMessage(currentKeyInput, 1);
+        }
         Sleep(100);
-        licz--;
+        //Sleep(100);
+        //licz--;
         //Wstawić jakiś wątek tutaj
     }
 }
@@ -444,4 +454,32 @@ DWORD __stdcall KeyEventListener(LPVOID param)
         }
     }
     return 0;
+}
+void Client::getColorById(char* buf, char id) {
+    switch (id) {
+    case '#':
+        strcpy(buf, BG_WHITE);
+        break;
+    case '0':
+        strcpy(buf, BG_GREEN);
+        break;
+    case '1':
+        strcpy(buf, BG_CYAN);
+        break;
+    case '2':
+        strcpy(buf, BG_BLUE);
+        break;
+    case '3':
+        strcpy(buf, BG_RED);
+        break;
+    case '4':
+        strcpy(buf, BG_YELLOW);
+        break;
+    case 'X':
+        strcpy(buf, BG_LIGHT_RED);
+        break;
+    default:
+        strcpy(buf, BG_LIGHT_GRAY);
+        break;
+    }
 }

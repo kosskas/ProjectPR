@@ -129,26 +129,34 @@ Server::~Server()
 {
     printf("\n Closing server... \n");
 
-    _isServerRunning = false;
+    
 
     //CloseHandle(SenderTh);
 
-    WaitForSingleObject(_PingerTh, INFINITE);
+
+    _isServerRunning = false;
+    //for (Player* player : _players) {
+    //    deletePlayer(player);
+    //}
+
+    delete _game;
+
+    TerminateThread(_PingerTh, 0);
+    DWORD res =  WaitForSingleObject(_PingerTh, 5000);
+    if (res == WAIT_OBJECT_0) {
+        printf("OK");
+    }
+    else {
+        printf("NOT OK");
+    }
     CloseHandle(_PingerTh);
 
-    WaitForSingleObject(_SenderTh, INFINITE);
-    CloseHandle(_SenderTh);
-
-    for (Player* player : _players) {
-        deletePlayer(player);
-    }
 
     shutdownSocket(_socket);
 
     closeSocket(_socket);
 
     WSACleanup();
-
     printf("Server closed \n");
 }
 
@@ -217,6 +225,8 @@ void Server::deletePlayer(Player* player)
     closeSocket(player->sock);
     CloseHandle(player->thHandle);
     delete player;
+    player = nullptr;
+    
 }
 
 void Server::endConnection()
@@ -273,6 +283,7 @@ void Server::run()
     //std::mt19937 generator(rd());
     //std::uniform_int_distribution<int> bonusRandTime(MIN_TIME_BETWEEN_BONUS_MS, MAX_TIME_BETWEEN_BONUS_MS);
     unsigned int i = 0;
+
     while (_isServerRunning /* && game.checkGameState()*/ && !_players.empty()) {
 
         for (Player* player : _players) {
@@ -288,6 +299,7 @@ void Server::run()
 
         i++;
     }
+    //endConnection();
 }
 
 unsigned int Server::getXSize()
@@ -378,7 +390,9 @@ DWORD __stdcall Broadcast(LPVOID param)
 
 void Server::sendMap()
 {  
-    printf("wysylanie");
+    //printf("wysylanie");
+    if (_players.empty())
+        return;
     _game->getMap(_mapBuffer+2);
     if (_players.size() > 0)
         printf("Broadcast: Players in game: %d \n", _players.size());
@@ -424,8 +438,8 @@ DWORD __stdcall Pinger(LPVOID param)
 
     printf("\t Pinger:  start \n");
     while (server->_isServerRunning) {
-        Sleep(1334); //jako param
-
+  
+        //printf("\t Online %d\n", server->_players.size());
         server->_players.remove_if([server](Player* player) {
             bool isPlayerInactive = (send(player->sock, NULL, 0, 0) == SOCKET_ERROR || player->isRunning == false);
             if (isPlayerInactive) {
@@ -434,8 +448,7 @@ DWORD __stdcall Pinger(LPVOID param)
             }
             return isPlayerInactive;
         });
-
-        //printf("Pinger\n");
+        Sleep(1334); //jako param
     }
 
     printf("\t Pinger:  stop \n");
