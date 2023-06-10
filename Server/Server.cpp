@@ -217,14 +217,23 @@ void Server::deletePlayer(Player* player)
 {
     player->isRunning = false;
 
-    WaitForSingleObject(player->thHandle, INFINITE);
+    TerminateThread(player->thHandle, 0);
+    DWORD res = WaitForSingleObject(player->thHandle, 5000);
+    if (res == WAIT_OBJECT_0) {
+        printf("player->thHandle OK");
+    }
+    else {
+        printf("player->thHandle NOT OK");
+    }
+    //WaitForSingleObject(player->thHandle, INFINITE);
+    CloseHandle(player->thHandle);
+    
     char ipStr[16];
     inet_ntop(AF_INET, &(player->ip), ipStr, sizeof ipStr);
     printf("Deleting Player(%d) %s:%d \n", player->ID, ipStr, player->port);
 
     shutdownSocket(player->sock);
     closeSocket(player->sock);
-    CloseHandle(player->thHandle);
     //delete player;
     //player = nullptr;
     
