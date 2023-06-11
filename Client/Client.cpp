@@ -174,17 +174,6 @@ bool Client::initReceiver()
 }
 
 
-bool Client::initSender()
-{
-    _MsgSenderTh = CreateThread(NULL, 0, &MsgSender, (void*)this, 0, _MsgSenderThID);
-    if (_MsgSenderTh == NULL) {
-        printf("Failed to create MsgSender thread.\n");
-        return false;
-    }
-    return true;
-}
-
-
 bool Client::initKeyEventListener()
 {
     _KeyEventListenerTh = CreateThread(NULL, 0, &KeyEventListener, (void*)this, 0, _KeyEventListenerThID);
@@ -282,6 +271,7 @@ Client::Client(ClientSetup setup) :
             SetConsoleMode(_hStdout, _fdwSaveOldOutMode);
         ExitProcess(1);
     }
+    system("cls");
 }
 
 
@@ -314,9 +304,6 @@ Client::~Client()
 
     // CloseHandle(MsgSender);
 
-    WaitForSingleObject(_MsgSenderTh, INFINITE);
-    CloseHandle(_MsgSenderTh);
-
     WaitForSingleObject(_MsgReceiverTh, INFINITE);
     CloseHandle(_MsgReceiverTh);
 
@@ -340,17 +327,16 @@ void Client::decodeMessage() {
         _playerID = _recvbuf[3];
         break;
     case Client::DISC:
-        _playerScore = _recvbuf[1];
+        //_playerScore = _recvbuf[1];
         _isRunning = false;
-        break;
-    case Client::END:
-        _isRunning = false;
+        //odbierz id wygrywa i sprawdz czy to ty
+        //printf("You won.\n");
         break;
     case Client::SPECTATE:
         printf("You lost. Now watch\n");
     case Client::MAP:
-        _playerScore = _recvbuf[1];
-        printGame(_recvbuf + 2);
+        _playerScore = (unsigned short)_recvbuf[1] | (unsigned short)(_recvbuf[2])<<8;
+        printGame(_recvbuf + 3);
         break;
     default:
         break;
@@ -386,32 +372,6 @@ DWORD __stdcall MsgReceiverListener(LPVOID param)
 
     return 0;
 }
-
-
-DWORD __stdcall MsgSender(LPVOID param)
-{
-    Client* client = (Client*)param;
-
-    unsigned char lastKeyInput = 0;
-    
-
-    do { 
-        if (lastKeyInput != client->_keyInput) {
-            lastKeyInput = client->_keyInput;
-            const char* currentKeyInput = (const char*)&(client->_keyInput);
-            client->sendMessage(currentKeyInput, 1);
-            
-        }
-
-        Sleep(100);
-
-    } while (client->_isRunning);
-
-    client->sendMessage("END", 4);
-
-    return 0;
-}
-
 
 DWORD __stdcall KeyEventListener(LPVOID param)
 {
@@ -459,7 +419,7 @@ void Client::getColorById(char* buf, char id) {
         strcpy(buf, BG_GREEN);
         break;
     case '1':
-        strcpy(buf, BG_CYAN);
+        strcpy(buf, BG_YELLOW);
         break;
     case '2':
         strcpy(buf, BG_BLUE);
@@ -468,7 +428,7 @@ void Client::getColorById(char* buf, char id) {
         strcpy(buf, BG_RED);
         break;
     case '4':
-        strcpy(buf, BG_YELLOW);
+        strcpy(buf, BG_CYAN);
         break;
     case 'X':
         strcpy(buf, BG_LIGHT_RED);

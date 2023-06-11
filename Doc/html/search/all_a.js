@@ -1,7 +1,5 @@
 var searchData=
 [
-  ['keyeventlistener_0',['keyEventListener',['../class_client.html#a5ec33c3871356eefa9868663c216c8ba',1,'Client']]],
-  ['keyeventlistener_1',['KeyEventListener',['../class_client.html#a9692392acc351fc0b4657ca28352f37d',1,'Client']]],
-  ['keyeventlistenerid_2',['keyEventListenerID',['../class_client.html#ab8155c53e384a12c3a3a8d504c1f2453',1,'Client']]],
-  ['keyinput_3',['keyInput',['../class_client.html#a27a27f1877b5b484cccddaf627a24165',1,'Client']]]
+  ['removesnake_0',['removeSnake',['../class_game.html#ab98403da69bfb6b372aa917fbae4526c',1,'Game']]],
+  ['run_1',['run',['../class_client.html#ae0bc335d720265d4d6e8a72cf7a2a9aa',1,'Client::run()'],['../class_server.html#abb27d30b40a94326e3fd629d3b30b7d5',1,'Server::run()']]]
 ];

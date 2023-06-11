@@ -1,6 +1,9 @@
 var searchData=
 [
-  ['id_0',['ID',['../struct_player.html#af3a95513ac314d13a7130ac12221420e',1,'Player']]],
-  ['ip_1',['ip',['../struct_player.html#abbd5baba0dbe5181a10d3bde93514dbe',1,'Player']]],
-  ['isrunning_2',['isRunning',['../struct_player.html#a8c5f217b4a250120a67a1bf09e498392',1,'Player']]]
+  ['score_0',['score',['../struct_player.html#af90f47d3d6306361df521135f6f1016d',1,'Player']]],
+  ['serverip_1',['serverIP',['../struct_client_setup.html#ad3b7a90606877b6dc300e83aa5624f32',1,'ClientSetup']]],
+  ['serverport_2',['serverPort',['../struct_client_setup.html#afc2864ad852fb5939279fbc96c3f55be',1,'ClientSetup']]],
+  ['sock_3',['sock',['../struct_player.html#a62172d5cb15a75727b62083973f1db4b',1,'Player']]],
+  ['sprite_4',['sprite',['../struct_player.html#af724ade2e35ec2d538082a24223dfd8e',1,'Player']]],
+  ['srvptr_5',['srvptr',['../struct_player.html#a4dba0d59f7812fbe98f7a1ce648d3b85',1,'Player']]]
 ];

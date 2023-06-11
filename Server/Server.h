@@ -1,15 +1,19 @@
 /*
-* TODO
-* poprawić kolorowanie konsoli
-* X I Y na odwrót!!!!!
+///TODO
+* X i Y jest gdzieś na odwrót!!!!!
 * Zakończenie poprawne wątków (PINGER!!!!)
-* W przypadku rozłączenia gracza, gracz przegrywa, a jego wąż znika z planszy. DONE?
 * Jeśli klient będzie próbował podłączyć się w trakcie gry, zostanie powiadomiony,
 że nie może się połączyć. 
 * Zrobić plik konfiguracyjny i Sparametryzować Spleepy 
-
+* poprawić komunikaty
+* poprawić wysyłanie scora na 2 bajtach
 */
-
+/*
+///Zaobserwonane błędy
+* Wyłączanie pingera -> crash serwera: Nierozwiązane/(Rozwiązane metodą bomby atomowej)
+* Czołowe zderzenie węży -> crash serwera: Rozwiązane
+* Dziwny memory wyjątek - pojawia się rzadko po skończeniu działania dektruktora serwera -> crash: Nierozwiązane
+*/
 
 #ifndef _SERVER_H
 #define _SERVER_H
@@ -31,9 +35,9 @@ class Game;
 enum MSGMODE {
     CONN = 0xA,
     DISC,
-    END,
     SPECTATE,
-    MAP
+    MAP,
+    BUSY
 };
 
 /**
@@ -91,11 +95,6 @@ private:
     list<Player*> _players;
 
     /**
-     * @brief Uchwyt na wątek Broadcast
-    */
-    HANDLE _SenderTh;
-
-    /**
      * @brief Uchwyt na wątek Pinger
     */
     HANDLE _PingerTh;
@@ -104,11 +103,6 @@ private:
      * @brief Uchwyt na wątek Joiner
     */
     HANDLE _JoinerTh;
-
-    /**
-     * @brief Wskaźnik na ID wątku Broadcast
-    */
-    LPDWORD _senderThID;
 
     /**
      * @brief Wskaźnik na ID wątku Joiner
@@ -144,10 +138,8 @@ private:
     int _mapMsgSize;
 
     friend DWORD __stdcall ClientListener(LPVOID param);
-    friend DWORD __stdcall Broadcast(LPVOID param);
     friend DWORD __stdcall Pinger(LPVOID param);
 
-    //friend struct Player;
 protected:
 
     /**
@@ -216,14 +208,9 @@ protected:
     void initGarbageCollector();
 
     /**
-     * @brief Uruchamia wątek o nazwie Broadcast
-    */
-    void initMapBroadcast();
-
-    /**
      * @brief Rozsyłają mapę do klientów temp, to samo co broadcast ale nie wątek
     */
-    void sendMap();
+    void sendMessage();
 public:
 
     /**
@@ -262,15 +249,6 @@ public:
  * @return 0 jeśli wątek zakończył się dobrze, 1 jeśli źle
 */
 DWORD __stdcall ClientListener(LPVOID param);
-
-
-/**
- * @brief Watek rozsyłający informacje do klientów
- * @param param - Wskaźnik na klasę Server
- * @return 0 jeśli wątek zakończył się dobrze
-*/
-DWORD __stdcall Broadcast(LPVOID param);
-
 
 /**
  * @brief Watek sprawdzający co określony połączenie z użytkownikiem, jeśli nie ma to usuwa go z gry

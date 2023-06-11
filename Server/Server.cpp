@@ -1,6 +1,5 @@
 #include "Server.h"
 
-
 // - - - - - - - - - - Server :: protected - - - - - - - - - - \\
 
 
@@ -128,17 +127,7 @@ Server::Server(ServerSetup setup)
 Server::~Server()
 {
     printf("\n Closing server... \n");
-
-    
-
-    //CloseHandle(SenderTh);
-
-
     _isServerRunning = false;
-    //for (Player* player : _players) {
-    //    deletePlayer(player);
-    //}
-
     delete _game;
 
     TerminateThread(_PingerTh, 0);
@@ -217,9 +206,10 @@ void Server::waitForPlayers()
 void Server::deletePlayer(Player* player)
 {
     player->isRunning = false;
+    player->isPlaying = false;
 
     //TerminateThread(player->thHandle, 0);
-    DWORD res = WaitForSingleObject(player->thHandle, 2000);
+    DWORD res = WaitForSingleObject(player->thHandle, INFINITE);
     if (res == WAIT_OBJECT_0) {
         printf("player->thHandle OK");
     }
@@ -265,16 +255,6 @@ void Server::initGarbageCollector()
 }
 
 
-void Server::initMapBroadcast()
-{
-    _SenderTh = CreateThread(NULL, 0, &Broadcast, (void*)this, 0, _senderThID);
-    if (_SenderTh == NULL) {
-        printf("Failed to create 'SenderTh' thread.\n");
-        return;
-    }    
-}
-
-
 void Server::run()
 {
     initGarbageCollector();
@@ -306,7 +286,7 @@ void Server::run()
         if (i % 16 == 0) _game->placeBonuses(1);
         
         Sleep(200); //jako param
-        sendMap();
+        sendMessage();
         i++;
     }
     //endConnection();
@@ -369,41 +349,12 @@ DWORD __stdcall ClientListener(LPVOID param)
     return 0;
 }
 
-
-DWORD __stdcall Broadcast(LPVOID param)
-{
-    Server* server = (Server*)param;
-
-    printf("\t Broadcast:  start \n");
-
-    while (server->_isServerRunning) {
-        Sleep(300); //jako param
-        server->_game->getMap(server->_mapBuffer);
-
-        if (server->_players.size() > 0)
-            printf("Broadcast: Players in game: %d \n", server->_players.size());
-        for (Player* Player : server->_players) {
-            if (Player->sock != NULL) {
-                int iSendResult = send(Player->sock, server->_mapBuffer, server->_mapMsgSize, 0);
-                if (iSendResult == SOCKET_ERROR) {
-                    printf("%d | Broadcast: send to Player(%d) failed with error: %d\n", __LINE__, Player->ID, WSAGetLastError());
-                }
-            }
-        }
-    }
-
-    printf("\t Broadcast:  stop \n");
-
-    return 0;
-}
-
-
-void Server::sendMap()
+void Server::sendMessage()
 {  
     //printf("wysylanie");
     if (_players.empty())
         return;
-    _game->getMap(_mapBuffer+2);
+    _game->getMap(_mapBuffer+3);
     if (_players.size() > 0) {
         //printf("Broadcast: Players in game: %d \n", _players.size());
     }        
@@ -413,7 +364,7 @@ void Server::sendMap()
                 codeMessage(Player, _mapBuffer, MAP);
             else
                 codeMessage(Player, _mapBuffer, SPECTATE);
-            int iSendResult = send(Player->sock, _mapBuffer, _mapMsgSize+2, 0);
+            int iSendResult = send(Player->sock, _mapBuffer, _mapMsgSize+3, 0);
             if (iSendResult == SOCKET_ERROR) {
                 printf("%d | Broadcast: send to Player(%d) failed with error: %d\n", __LINE__, Player->ID, WSAGetLastError());
             }
@@ -432,14 +383,14 @@ void codeMessage(Player* player, char* msg, MSGMODE mode)
         msg[3] = player->ID;
         break;
     case DISC:
-        msg[0] = mode;
-        msg[1] = player->score;
-        break;
-    case END:
+        msg[0] = mode;      
+        //wyślij wszystkim id gracza który wygrał
+        break;      
     case SPECTATE:
     case MAP:
         msg[0] = mode;
-        msg[1] = player->score;
+        msg[1] = player->score & 0xFF;
+        msg[2] = (player->score>>8) & 0xFF;
         break;
     default:
         break;

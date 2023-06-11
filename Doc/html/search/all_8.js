@@ -1,11 +1,8 @@
 var searchData=
 [
-  ['id_0',['ID',['../struct_player.html#af3a95513ac314d13a7130ac12221420e',1,'Player']]],
-  ['initconsole_1',['InitConsole',['../class_client.html#abbb96dec1139b89030e060b6f3d3b7a3',1,'Client']]],
-  ['initgarbagecollector_2',['initGarbageCollector',['../class_server.html#a746126d40f2f7045a53f0a6e1fa421cb',1,'Server']]],
-  ['initmapbroadcast_3',['initMapBroadcast',['../class_server.html#ad5cd3d89c5f9c2db302e8c8051738847',1,'Server']]],
-  ['initthreads_4',['InitThreads',['../class_client.html#a0643878fe1ed3fabda51c777755c059d',1,'Client']]],
-  ['initwinsock_5',['InitWinsock',['../class_client.html#a20726fca60b89cf22d109a75334777e1',1,'Client']]],
-  ['ip_6',['ip',['../struct_player.html#abbd5baba0dbe5181a10d3bde93514dbe',1,'Player']]],
-  ['isrunning_7',['isRunning',['../struct_player.html#a8c5f217b4a250120a67a1bf09e498392',1,'Player']]]
+  ['mapsizex_0',['mapSizeX',['../struct_client_setup.html#a09b7d2e64236c4d6bfa5ea42329000b0',1,'ClientSetup::mapSizeX'],['../struct_server_setup.html#aa215b18c7bd449f8fba224ca0786cab4',1,'ServerSetup::mapSizeX']]],
+  ['mapsizey_1',['mapSizeY',['../struct_client_setup.html#a15d61f026c5f53c01eb0278700b5f7af',1,'ClientSetup::mapSizeY'],['../struct_server_setup.html#ad671e087bcd9a913d10a3bc58cdcfeb1',1,'ServerSetup::mapSizeY']]],
+  ['maxnumberofclients_2',['maxNumberOfClients',['../struct_server_setup.html#a82e42cd2cf5006233bddf7b8d9c83faa',1,'ServerSetup']]],
+  ['moveplayer_3',['movePlayer',['../class_game.html#a44fbdb787e3efe7506dc13805fc58d49',1,'Game']]],
+  ['msgreceiverlistener_4',['MsgReceiverListener',['../class_client.html#ab493dc086fe674e2cc41509b237f7dea',1,'Client']]]
 ];

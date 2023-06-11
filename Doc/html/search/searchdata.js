@@ -1,10 +1,11 @@
 var indexSectionsWithContent =
 {
-  0: "_bcdefghijkmprstw~",
+  0: "_bcdegikmprstw~",
   1: "cgps",
   2: "bcdegimprsw~",
-  3: "_bcfghijkmprst",
-  4: "bckmp"
+  3: "_bcimpst",
+  4: "ckmp",
+  5: "p"
 };
 
 var indexSectionNames =
@@ -13,15 +14,17 @@ var indexSectionNames =
   1: "classes",
   2: "functions",
   3: "variables",
-  4: "related"
+  4: "related",
+  5: "pages"
 };
 
 var indexSectionLabels =
 {
-  0: "All",
-  1: "Classes",
-  2: "Functions",
-  3: "Variables",
-  4: "Friends"
+  0: "Wszystko",
+  1: "Klasy",
+  2: "Funkcje",
+  3: "Zmienne",
+  4: "Przyjaciele",
+  5: "Strony"
 };
 

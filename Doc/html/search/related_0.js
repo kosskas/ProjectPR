@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['broadcast_0',['Broadcast',['../class_server.html#ab7fc8298cd8500a0116ff3eabeb844b7',1,'Server']]]
+  ['clientlistener_0',['ClientListener',['../class_server.html#aafd080de36f4d2a59e860e2a92601646',1,'Server']]]
 ];

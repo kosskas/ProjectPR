@@ -46,9 +46,9 @@ private:
     enum MSGMODE {
         CONN = 0xA,
         DISC,
-        END,
         SPECTATE,
-        MAP
+        MAP,
+        BUSY
     };
 
     /**
@@ -77,11 +77,6 @@ private:
     HANDLE _MsgReceiverTh;
 
     /**
-     * @brief Uchwyt na wątek MsgSender
-    */
-    HANDLE _MsgSenderTh;
-
-    /**
      * @brief Uchwyt na wątek KeyEventListener
     */
     HANDLE _KeyEventListenerTh;
@@ -90,11 +85,6 @@ private:
      * @brief Wskaźnik na ID wątku MsgReceiverListener
     */
     LPDWORD _MsgReceiverThID;
-
-    /**
-     * @brief Wskaźnik na ID wątku MsgSender
-    */
-    LPDWORD _MsgSenderThID;
 
     /**
      * @brief Wskaźnik na ID wątku KeyEventListener
@@ -160,7 +150,7 @@ private:
     /**
      * @brief Wynik gracza
     */
-    unsigned int _playerScore;
+    unsigned short _playerScore;
 
 
 protected:
@@ -214,11 +204,6 @@ protected:
      * @return 0 jeśli konfiguracja przebiegła pomyślnie, 1 jesli nie
     */
     bool initKeyEventListener();
-    /**
-     * @brief Incjalizacja wątku do wysyłania danych do serwera
-     * @return 0 jeśli konfiguracja przebiegła pomyślnie, 1 jesli nie
-    */
-    bool initSender();
 
     /**
      * @brief Przesyła ciąg bajtów o podanej dlugości do serwera
@@ -235,7 +220,7 @@ protected:
     void printGame(const char* map);
 
     /**
-     * @brief Fukcja zwracająca strzałkę w kierunku jaki posiada aktualnie Client
+     * @brief Funkcja zwracająca strzałkę w kierunku jaki posiada aktualnie Client
      * @param direction Kierunek jaki posiada aktualnie Client
      * @return Symbol strzałki
     */
@@ -252,8 +237,7 @@ protected:
     */
     void getColorById(char* buf, char id);
 
-    friend DWORD __stdcall MsgReceiverListener(LPVOID param);
-    friend DWORD __stdcall MsgSender(LPVOID param);
+    friend DWORD __stdcall MsgReceiverListener(LPVOID param);;
     friend DWORD __stdcall KeyEventListener(LPVOID param);
 
 public:
@@ -281,14 +265,6 @@ public:
  * @return 0 jeśli wątek zakończył się dobrze, 1 jeśli źle
 */
 DWORD __stdcall MsgReceiverListener(LPVOID param);
-
-/**
- * @brief Czemu wątek??,
- * @param param 
- * @return 
-*/
-DWORD __stdcall MsgSender(LPVOID param);
-
 
 /**
  * @brief Wątek nasłuchujący zdarzeń z klawiatury

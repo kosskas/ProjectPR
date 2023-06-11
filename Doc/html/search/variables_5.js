@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['head_0',['head',['../struct_player.html#a9c828d0540b5881422f124c6e9d223b5',1,'Player']]],
-  ['hstdin_1',['hStdin',['../class_client.html#a853f40120b3eb807f79d0b65bbf4d41d',1,'Client']]],
-  ['hstdout_2',['hStdout',['../class_client.html#a32e7f9d4730ad4914798491fed0ce690',1,'Client']]]
+  ['port_0',['port',['../struct_player.html#a686dcdcac08cbc3d8a7f60a286b7f86b',1,'Player::port'],['../struct_server_setup.html#afb4b482b8a6baba0cf982dc55006e840',1,'ServerSetup::port']]],
+  ['posx_1',['posX',['../struct_point.html#ac7529e00a074254133686a43bc4c16b5',1,'Point']]],
+  ['posy_2',['posY',['../struct_point.html#a1298e339748753f5e17af5caed69d1b4',1,'Point']]]
 ];

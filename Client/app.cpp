@@ -6,7 +6,7 @@
 
 int __cdecl main(int argc, char** argv)
 {
-    system("cls");
+    //system("cls");
     ClientSetup setup;
     setup.serverIP = argv[1];
     setup.serverPort = DEFAULT_PORT;
@@ -14,11 +14,11 @@ int __cdecl main(int argc, char** argv)
     setup.mapSizeX = MAP_SIZE_X;
     setup.mapSizeY = MAP_SIZE_Y;
 
-    Client client(setup);
+    Client *client = new Client(setup);
 
-    client.run();
+    client->run();
     
-    client.~Client();
+    delete client;
 
     printf("\n Press Enter twice... \n");
     char c = getchar();

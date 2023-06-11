@@ -58,13 +58,6 @@ private:
 	void printSnake(Player* player);
 
 	/**
-	 * @brief Pobiera wskaźnik na gracza o podanym ID w liście graczy
-	 * @param ID Identyfikator ASCII
-	 * @return Wskaźnik na gracza o podanym ID
-	*/
-	Player* getPlayerById(char ID);
-
-	/**
 	 * @brief Pobiera kod ASCII gracza
 	 * @param player Wskaźnik na konkretnego gracza
 	 * @return Symbol ASCII

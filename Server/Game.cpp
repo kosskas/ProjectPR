@@ -36,15 +36,6 @@ void Game::printSnake(Player* player)
 }
 
 
-Player* Game::getPlayerById(char ID) 
-{
-	int pID = (int)(ID - '0');
-	list<Player*>::iterator it = _players.begin();
-	advance(it, pID);
-	return *it;
-}
-
-
 char Game::getPlayerASCII(Player* player)
 {
 	return (char)(player->ID) + '0';
@@ -59,10 +50,10 @@ Game::Game(list<Player*>& players, int y, int x)
 {
 	_gameState = true;
 	_gameMap = createMap(y,x);
-
+	int sty = 5, stx = 5;
 	///Inicjalizuj pozycje graczy oraz długości ich wężów
 	for (Player* player : _players) {
-		player->sprite.push_front({5, 5});
+		player->sprite.push_front({ sty++, stx ++});
 	}
 
 }
@@ -185,11 +176,11 @@ void Game::movePlayer(Player* player)
 		_gameMap[currTailPos.posY][currTailPos.posX] = EMPTY_SPRITE;
 	}
 	else if (nextPos == BONUS_SPRITE) {
-		player->score++;
+		player->score+=100;
 		player->sprite.push_front(nextHeadPos);
 	}
 	else {
-		getPlayerById(nextPos)->score =+ 5;
+		//getPlayerById(nextPos)->score =+ 10; KRYT ERR
 		// on the next position enemy snake is placed
 		player->isPlaying = false;
 		removeSnake(player);

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['clientlistener_0',['ClientListener',['../class_server.html#aafd080de36f4d2a59e860e2a92601646',1,'Server']]]
+  ['keyeventlistener_0',['KeyEventListener',['../class_client.html#a9692392acc351fc0b4657ca28352f37d',1,'Client']]]
 ];

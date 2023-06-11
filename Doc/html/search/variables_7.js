@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['joinerth_0',['JoinerTh',['../class_server.html#a3a720f94eef7c30cb9cd292ce4396927',1,'Server']]],
-  ['joinerthid_1',['joinerThID',['../class_server.html#a931a7f4c62c8b507bc18e3e37ea34f98',1,'Server']]]
+  ['thhandle_0',['thHandle',['../struct_player.html#a07d65d9f58e4b7048421883bde012308',1,'Player']]],
+  ['thid_1',['thId',['../struct_player.html#a9d00905df4de193dbdb5feaa573eed45',1,'Player']]]
 ];

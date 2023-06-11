@@ -72,7 +72,7 @@ struct Player {
     /**
      * @brief Zdobyty wynik podczas gry
     */
-    int score; ///uint16??
+    short score;
 
     /**
      * @brief Unikalny identyfikator, symbol ASCII, który będzie rysowany na mapie jako postać gracza
@@ -83,16 +83,6 @@ struct Player {
      * @brief Określa położenie wszystkich członów postaci gracza na mapie
     */
     list<Point> sprite;
-
-    /**
-     * @brief Określa położenie głowy postaci gracza
-    */
-    Point head;
-
-    /**
-     * @brief Określa położenie ostatniego członu postaci gracza
-    */
-    Point tail;
 };
 
 

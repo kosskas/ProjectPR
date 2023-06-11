@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['msgreceiverlistener_0',['MsgReceiverListener',['../class_client.html#ab493dc086fe674e2cc41509b237f7dea',1,'Client']]]
+  ['pinger_0',['Pinger',['../class_server.html#aee9f322b1680f18aab8fd0f4499dfd9d',1,'Server']]]
 ];

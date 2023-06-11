@@ -1,12 +1,16 @@
 var searchData=
 [
-  ['mapbuffer_0',['mapBuffer',['../class_server.html#aa38dc6bdadf40f9492df3fc11895c0b8',1,'Server']]],
-  ['mapmsgsize_1',['mapMsgSize',['../class_server.html#a954e5e5683c658abcb43a344d09dbad1',1,'Server']]],
-  ['mapsizex_2',['mapSizeX',['../struct_server_setup.html#ad5b8a35ddeecbb0d902fca1d90118c2b',1,'ServerSetup']]],
-  ['mapsizey_3',['mapSizeY',['../struct_server_setup.html#a0962fc5a03538e1867df0c33c59ed099',1,'ServerSetup']]],
-  ['maxnumberofclients_4',['maxNumberOfClients',['../struct_server_setup.html#a82e42cd2cf5006233bddf7b8d9c83faa',1,'ServerSetup']]],
-  ['moveplayer_5',['movePlayer',['../class_game.html#a44fbdb787e3efe7506dc13805fc58d49',1,'Game']]],
-  ['msgreceiver_6',['MsgReceiver',['../class_client.html#ac974c9701165f1ea34e8a58b390b159d',1,'Client']]],
-  ['msgreceiverid_7',['MsgReceiverID',['../class_client.html#a39ed5ebd70b64004a2fef8cf892a6d46',1,'Client']]],
-  ['msgreceiverlistener_8',['MsgReceiverListener',['../class_client.html#ab493dc086fe674e2cc41509b237f7dea',1,'Client']]]
+  ['score_0',['score',['../struct_player.html#af90f47d3d6306361df521135f6f1016d',1,'Player']]],
+  ['sendmessage_1',['sendMessage',['../class_client.html#aad121e3efbdb671b908ae30a5b6406f5',1,'Client::sendMessage()'],['../class_server.html#a2a18a69fd156e54291dcc66a5084b8dc',1,'Server::sendMessage()']]],
+  ['server_2',['Server',['../class_server.html',1,'Server'],['../class_server.html#aeea97c30915862758ba454c9a407fc2a',1,'Server::Server()']]],
+  ['serverip_3',['serverIP',['../struct_client_setup.html#ad3b7a90606877b6dc300e83aa5624f32',1,'ClientSetup']]],
+  ['serverport_4',['serverPort',['../struct_client_setup.html#afc2864ad852fb5939279fbc96c3f55be',1,'ClientSetup']]],
+  ['serversetup_5',['ServerSetup',['../struct_server_setup.html',1,'']]],
+  ['setplayerid_6',['setPlayerID',['../class_server.html#adb3b472223cbd10dfe1900b7e1622ecb',1,'Server']]],
+  ['shutdownsocket_7',['shutdownSocket',['../class_client.html#a38d4b954621867ba3f10bcf22b79ed4d',1,'Client::shutdownSocket()'],['../class_server.html#acf702c85d7af52d13ec0988030553c81',1,'Server::shutdownSocket()']]],
+  ['sock_8',['sock',['../struct_player.html#a62172d5cb15a75727b62083973f1db4b',1,'Player']]],
+  ['sprite_9',['sprite',['../struct_player.html#af724ade2e35ec2d538082a24223dfd8e',1,'Player']]],
+  ['srvptr_10',['srvptr',['../struct_player.html#a4dba0d59f7812fbe98f7a1ce648d3b85',1,'Player']]],
+  ['startlisten_11',['startListen',['../class_server.html#a3c149701abddccdcb4d50a457ea7670b',1,'Server']]],
+  ['startupwinsock_12',['startUpWinsock',['../class_client.html#a98eb099fd5a7afc8ad68d0f33b6a2a3c',1,'Client::startUpWinsock()'],['../class_server.html#a4e2a7058c52c41563b413e4a0eee89c0',1,'Server::startUpWinsock()']]]
 ];
