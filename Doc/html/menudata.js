@@ -66,6 +66,8 @@ var menudata={children:[
 {text:"p",url:"functions_vars.html#index_p"},
 {text:"s",url:"functions_vars.html#index_s"},
 {text:"t",url:"functions_vars.html#index_t"}]},
+{text:"Wyliczenia",url:"functions_enum.html"},
+{text:"Wartości wyliczeń",url:"functions_eval.html"},
 {text:"Funkcje powiązane",url:"functions_rela.html"}]}]},
 {text:"Pliki",url:"files.html",children:[
 {text:"Lista plików",url:"files.html"}]}]}

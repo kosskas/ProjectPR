@@ -40,7 +40,4 @@
 
 
 using std::list;
-using std::advance;
-
-
 #endif // !GENERAL

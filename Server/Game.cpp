@@ -1,7 +1,7 @@
 #include "Game.h"
 
 
-// - - - - - - - - - - Game :: private - - - - - - - - - - \\
+// - - - - - - - - - - Game :: protected - - - - - - - - - - \\
 
 
 char** Game::createMap(int Y, int X) 

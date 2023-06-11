@@ -33,15 +33,6 @@ struct ClientSetup {
 */
 class Client {
 private:
-
-    enum MSGMODE {
-        CONN = 0xA,
-        DISC,
-        SPECTATE,
-        MAP,
-        BUSY
-    };
-
     /**
      * @brief Socket łączący z serwerem
     */
@@ -234,7 +225,29 @@ protected:
 public:
 
     /**
+     * @brief Tryby wiadomości jakie będzie odbierał Client od Server
+    */
+    enum MSGMODE {
+        /**
+         * @brief Połączono z Server, odbierz informacje o grze
+        */
+        CONN = 0xA,
+        /**
+         * @brief Koniec gry, połączenie zostanie zamknięte
+        */
+        DISC,
+        /**
+         * @brief Poza grą. Odbierz aktualną mapę
+        */
+        SPECTATE,
+        /**
+         * @brief W grze. Odbierz aktualną mapę
+        */
+        MAP
+    };
+    /**
      * @brief @brief Konstruktor inicjalizujący aplikacje kliencką
+     * 
     */
     Client(ClientSetup setup);
 
@@ -245,6 +258,7 @@ public:
 
     /**
     * @brief Czyści poprawnie klasę
+    * 
     */
     ~Client();
 };

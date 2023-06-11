@@ -37,6 +37,7 @@ private:
 	*/
 	list<Player*> _players;
 
+protected:
 	/**
 	 * @brief Tworzy mape ASCII o wymiarach Y na X
 	 * @param Y wiesze
@@ -53,7 +54,7 @@ private:
 
 	/**
 	 * @brief Nanosi na mapę ASCII postać gracza
-	 * @param ??? psprite Lista punktów zajmowanych przez człony węża gracza na mapie
+	 * @param Lista punktów zajmowanych przez człony węża gracza na mapie
 	*/
 	void printSnake(Player* player);
 
@@ -111,7 +112,8 @@ public:
 	void getMap(char* msg);
 
 	/**
-	* Czyści poprawnie klasę Game
+	 * @brief Czyści poprawnie klasę Game
+	 * 
 	*/
 	~Game();
 };

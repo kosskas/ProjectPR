@@ -318,7 +318,7 @@ DWORD __stdcall ClientListener(LPVOID param)
     int _recvbuflen = DEFAULT_BUFLEN;
     int iResult;
     char msg[4];
-    codeMessage(player, msg, CONN);
+    codeMessage(player, msg, Server::CONN);
     int iSendResult = send(player->sock, msg, 4, 0);
     if (iSendResult == SOCKET_ERROR) {
         printf("%d send failed with error: %d\n", __LINE__, WSAGetLastError());
@@ -376,22 +376,22 @@ void Server::sendMessage()
     }
 }
 
-void codeMessage(Player* player, char* msg, MSGMODE mode)
+void codeMessage(Player* player, char* msg, Server::MSGMODE mode)
 {
     
     switch (mode) {
-    case CONN:
+    case Server::CONN:
         msg[0] = mode;
         msg[1] = player->srvptr->getXSize();
         msg[2] = player->srvptr->getYSize();
         msg[3] = player->ID;
         break;
-    case DISC:
+    case Server::DISC:
         msg[0] = mode;      
         //wyślij wszystkim id gracza który wygrał
         break;      
-    case SPECTATE:
-    case MAP:
+    case Server::SPECTATE:
+    case Server::MAP:
     {
         short score = player->score;
         msg[0] = mode;
@@ -400,16 +400,13 @@ void codeMessage(Player* player, char* msg, MSGMODE mode)
             push ebx
             mov ebx, msg
             mov ax, score
-            mov[ebx + 1], al
-            mov[ebx + 2], ah
+            mov [ebx + 1], al
+            mov [ebx + 2], ah
             pop ebx
             pop eax
         };
         break;
     }
-    case BUSY:
-        msg[0] = mode;
-        break;
     default:
         break;
     }

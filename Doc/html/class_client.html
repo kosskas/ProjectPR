@@ -71,9 +71,9 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
+<a href="#pub-types">Typy publiczne</a> &#124;
 <a href="#pub-methods">Metody publiczne</a> &#124;
 <a href="#pro-methods">Metody chronione</a> &#124;
-<a href="#pri-types">Typy prywatne</a> &#124;
 <a href="#pri-attribs">Atrybuty prywatne</a> &#124;
 <a href="#friends">Przyjaciele</a> &#124;
 <a href="class_client-members.html">Lista wszystkich składowych</a>  </div>
@@ -86,19 +86,27 @@ $(function() {
 
 <p><code>#include &lt;<a class="el" href="_client_8h_source.html">Client.h</a>&gt;</code></p>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-types" name="pub-types"></a>
+Typy publiczne</h2></td></tr>
+<tr class="memitem:a2f2a6f9955ce1f5be8a603e5b2b677ec"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_client.html#a2f2a6f9955ce1f5be8a603e5b2b677ec">MSGMODE</a> { <a class="el" href="class_client.html#a2f2a6f9955ce1f5be8a603e5b2b677eca4fbb83aacf5992cb5381504e64a2be30">CONN</a> = 0xA
+, <a class="el" href="class_client.html#a2f2a6f9955ce1f5be8a603e5b2b677eca120b7d7800104e118b3faa941fba7c4c">DISC</a>
+, <a class="el" href="class_client.html#a2f2a6f9955ce1f5be8a603e5b2b677ecaaabe49e5661b93950b8df7f5953412e0">SPECTATE</a>
+, <a class="el" href="class_client.html#a2f2a6f9955ce1f5be8a603e5b2b677eca01f08f20ce995eb72975969005c185e8">MAP</a>
+ }</td></tr>
+<tr class="memdesc:a2f2a6f9955ce1f5be8a603e5b2b677ec"><td class="mdescLeft">&#160;</td><td class="mdescRight">Tryby wiadomości jakie będzie odbierał <a class="el" href="class_client.html" title="Klasa Client zarządza grą oraz połączeniem po stronie klienta.">Client</a> od <a class="el" href="class_server.html" title="Klasa Server zarządza połączeniami oraz grą">Server</a>.  <a href="class_client.html#a2f2a6f9955ce1f5be8a603e5b2b677ec">Więcej...</a><br /></td></tr>
+<tr class="separator:a2f2a6f9955ce1f5be8a603e5b2b677ec"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Metody publiczne</h2></td></tr>
-<tr class="memitem:a431111485358b8c99812dfb3e7f81031"><td class="memItemLeft" align="right" valign="top"><a id="a431111485358b8c99812dfb3e7f81031" name="a431111485358b8c99812dfb3e7f81031"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>Client</b> (<a class="el" href="struct_client_setup.html">ClientSetup</a> setup)</td></tr>
-<tr class="memdesc:a431111485358b8c99812dfb3e7f81031"><td class="mdescLeft">&#160;</td><td class="mdescRight">Konstruktor inicjalizujący aplikacje kliencką <br /></td></tr>
+<tr class="memitem:a431111485358b8c99812dfb3e7f81031"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_client.html#a431111485358b8c99812dfb3e7f81031">Client</a> (<a class="el" href="struct_client_setup.html">ClientSetup</a> setup)</td></tr>
+<tr class="memdesc:a431111485358b8c99812dfb3e7f81031"><td class="mdescLeft">&#160;</td><td class="mdescRight">Konstruktor inicjalizujący aplikacje kliencką  <br /></td></tr>
 <tr class="separator:a431111485358b8c99812dfb3e7f81031"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae0bc335d720265d4d6e8a72cf7a2a9aa"><td class="memItemLeft" align="right" valign="top"><a id="ae0bc335d720265d4d6e8a72cf7a2a9aa" name="ae0bc335d720265d4d6e8a72cf7a2a9aa"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>run</b> ()</td></tr>
 <tr class="memdesc:ae0bc335d720265d4d6e8a72cf7a2a9aa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Uruchamia wątki oraz grę <br /></td></tr>
 <tr class="separator:ae0bc335d720265d4d6e8a72cf7a2a9aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a840e519ca781888cbd54181572ebe3a7"><td class="memItemLeft" align="right" valign="top"><a id="a840e519ca781888cbd54181572ebe3a7" name="a840e519ca781888cbd54181572ebe3a7"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>~Client</b> ()</td></tr>
-<tr class="memdesc:a840e519ca781888cbd54181572ebe3a7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Czyści poprawnie klasę <br /></td></tr>
+<tr class="memitem:a840e519ca781888cbd54181572ebe3a7"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_client.html#a840e519ca781888cbd54181572ebe3a7">~Client</a> ()</td></tr>
+<tr class="memdesc:a840e519ca781888cbd54181572ebe3a7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Czyści poprawnie klasę  <br /></td></tr>
 <tr class="separator:a840e519ca781888cbd54181572ebe3a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
@@ -146,19 +154,6 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>decodeMessage</b> ()<
 <tr class="memitem:a0fa08ee0c6a7e921be4d6c6f1f60848c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_client.html#a0fa08ee0c6a7e921be4d6c6f1f60848c">getColorById</a> (char *buf, char id)</td></tr>
 <tr class="memdesc:a0fa08ee0c6a7e921be4d6c6f1f60848c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Ustawia kolor w zależności od ID gracza.  <br /></td></tr>
 <tr class="separator:a0fa08ee0c6a7e921be4d6c6f1f60848c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-types" name="pri-types"></a>
-Typy prywatne</h2></td></tr>
-<tr class="memitem:a2f2a6f9955ce1f5be8a603e5b2b677ec"><td class="memItemLeft" align="right" valign="top"><a id="a2f2a6f9955ce1f5be8a603e5b2b677ec" name="a2f2a6f9955ce1f5be8a603e5b2b677ec"></a>enum &#160;</td><td class="memItemRight" valign="bottom"><b>MSGMODE</b> { <br />
-&#160;&#160;<b>CONN</b> = 0xA
-, <b>DISC</b>
-, <b>SPECTATE</b>
-, <b>MAP</b>
-, <br />
-&#160;&#160;<b>BUSY</b>
-<br />
- }</td></tr>
-<tr class="separator:a2f2a6f9955ce1f5be8a603e5b2b677ec"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-attribs" name="pri-attribs"></a>
 Atrybuty prywatne</h2></td></tr>
@@ -258,7 +253,74 @@ Przyjaciele</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Opis szczegółowy</h2>
 <div class="textblock"><p>Klasa <a class="el" href="class_client.html" title="Klasa Client zarządza grą oraz połączeniem po stronie klienta.">Client</a> zarządza grą oraz połączeniem po stronie klienta. </p>
-</div><h2 class="groupheader">Dokumentacja funkcji składowych</h2>
+</div><h2 class="groupheader">Dokumentacja składowych wyliczanych</h2>
+<a id="a2f2a6f9955ce1f5be8a603e5b2b677ec" name="a2f2a6f9955ce1f5be8a603e5b2b677ec"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2f2a6f9955ce1f5be8a603e5b2b677ec">&#9670;&#160;</a></span>MSGMODE</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="class_client.html#a2f2a6f9955ce1f5be8a603e5b2b677ec">Client::MSGMODE</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Tryby wiadomości jakie będzie odbierał <a class="el" href="class_client.html" title="Klasa Client zarządza grą oraz połączeniem po stronie klienta.">Client</a> od <a class="el" href="class_server.html" title="Klasa Server zarządza połączeniami oraz grą">Server</a>. </p>
+<table class="fieldtable">
+<tr><th colspan="2">Wartości wyliczeń</th></tr><tr><td class="fieldname"><a id="a2f2a6f9955ce1f5be8a603e5b2b677eca4fbb83aacf5992cb5381504e64a2be30" name="a2f2a6f9955ce1f5be8a603e5b2b677eca4fbb83aacf5992cb5381504e64a2be30"></a>CONN&#160;</td><td class="fielddoc"><p>Połączono z <a class="el" href="class_server.html" title="Klasa Server zarządza połączeniami oraz grą">Server</a>, odbierz informacje o grze. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a2f2a6f9955ce1f5be8a603e5b2b677eca120b7d7800104e118b3faa941fba7c4c" name="a2f2a6f9955ce1f5be8a603e5b2b677eca120b7d7800104e118b3faa941fba7c4c"></a>DISC&#160;</td><td class="fielddoc"><p>Koniec gry, połączenie zostanie zamknięte. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a2f2a6f9955ce1f5be8a603e5b2b677ecaaabe49e5661b93950b8df7f5953412e0" name="a2f2a6f9955ce1f5be8a603e5b2b677ecaaabe49e5661b93950b8df7f5953412e0"></a>SPECTATE&#160;</td><td class="fielddoc"><p>Poza grą. Odbierz aktualną mapę </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a2f2a6f9955ce1f5be8a603e5b2b677eca01f08f20ce995eb72975969005c185e8" name="a2f2a6f9955ce1f5be8a603e5b2b677eca01f08f20ce995eb72975969005c185e8"></a>MAP&#160;</td><td class="fielddoc"><p>W grze. Odbierz aktualną mapę </p>
+</td></tr>
+</table>
+
+</div>
+</div>
+<h2 class="groupheader">Dokumentacja konstruktora i destruktora</h2>
+<a id="a431111485358b8c99812dfb3e7f81031" name="a431111485358b8c99812dfb3e7f81031"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a431111485358b8c99812dfb3e7f81031">&#9670;&#160;</a></span>Client()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Client::Client </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_client_setup.html">ClientSetup</a>&#160;</td>
+          <td class="paramname"><em>setup</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Konstruktor inicjalizujący aplikacje kliencką </p>
+
+</div>
+</div>
+<a id="a840e519ca781888cbd54181572ebe3a7" name="a840e519ca781888cbd54181572ebe3a7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a840e519ca781888cbd54181572ebe3a7">&#9670;&#160;</a></span>~Client()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Client::~Client </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Czyści poprawnie klasę </p>
+
+</div>
+</div>
+<h2 class="groupheader">Dokumentacja funkcji składowych</h2>
 <a id="a4f50cc56d6bb3024223b56372a1399de" name="a4f50cc56d6bb3024223b56372a1399de"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a4f50cc56d6bb3024223b56372a1399de">&#9670;&#160;</a></span>closeSocket()</h2>
 

@@ -1,8 +1,6 @@
 /*
 ///TODO
 * Zakończenie poprawne wątków (PINGER!!!!)
-* Jeśli klient będzie próbował podłączyć się w trakcie gry, zostanie powiadomiony,
-że nie może się połączyć. ???TODO???
 * Zrobić plik konfiguracyjny i Sparametryzować Spleepy 
 * poprawić komunikaty
 * warunek gry
@@ -24,20 +22,6 @@ class Game;
 #include "Player.h"
 #include "Game.h"
 
-
-
-#define compareString(a, b) strcmp(a, b) == 0
-
-/**
- * @brief Tryby wiadomości jakie będzie wysyłał Server
-*/
-enum MSGMODE {
-    CONN = 0xA,
-    DISC,
-    SPECTATE,
-    MAP,
-    BUSY
-};
 
 /**
  * @brief Pozwala ustawić serwer według podanych parametrów
@@ -66,7 +50,6 @@ struct ServerSetup {
 
     /**
      * @brief Liczba wierszy
-     * 
     */
     unsigned int mapSizeY;
 
@@ -110,7 +93,7 @@ private:
     ServerSetup _setup;
 
     /**
-     * @brief flaga informująca wątki o konieczności zakończenia się
+     * @brief Flaga informująca wątki o konieczności zakończenia się
     */
     volatile bool _isServerRunning;
     /**
@@ -171,7 +154,7 @@ protected:
     bool closeSocket(SOCKET sock);
 
     /**
-     * @brief [ + NadajID() ] Używając złożonych funkcji hashujących nadaje Graczowi unikalne id.
+     * @brief Używając złożonych funkcji hashujących nadaje Graczowi unikalne id.
      * @return id
     */
     unsigned int setPlayerID();
@@ -182,13 +165,13 @@ protected:
     void waitForPlayers();
 
     /**
-     * @brief [ + UsuńGracza() ] Zamyka socket Gracza. Zamyka uchwyt do wątku Gracza. Usuwa Gracza.
+     * @brief Zamyka socket Gracza. Zamyka uchwyt do wątku Gracza. Usuwa Gracza.
      * @param Player - obiekt Gracza do usunięcia
     */
     void deletePlayer(Player* player);
 
     /**
-     * @brief [ + ZakończPołączenie() ] Wysyła sygnał do graczy o tym, że połączenie zostanie zamknięte
+     * @brief Wysyła sygnał do graczy o tym, że połączenie zostanie zamknięte
     */
     void endConnection();
 
@@ -196,16 +179,33 @@ protected:
      * @brief Uruchamia wątek o nazwie Pinger
     */
     void initGarbageCollector();
-    /**
-     * @brief Uruchamia wątek o nazwie Joiner
-    */
-    void initJoiner();
 
     /**
      * @brief Rozsyłają mapę do klientów temp, to samo co broadcast ale nie wątek
     */
     void sendMessage();
 public:
+    /**
+     * @brief Tryby wiadomości jakie będzie wysyłał Server do Client
+    */
+    enum MSGMODE {
+        /**
+         * @brief Połączono z Server, odbierz informacje o grze
+        */
+        CONN = 0xA,
+        /**
+         * @brief Koniec gry, połączenie zostanie zamknięte
+        */
+        DISC,
+        /**
+         * @brief Poza grą. Odbierz aktualną mapę
+        */
+        SPECTATE,
+        /**
+         * @brief W grze. Odbierz aktualną mapę
+        */
+        MAP
+    };
 
     /**
      * @brief Inicjalizuje WSA. Tworzy socket serwera. Uruchamia serwer pozostawiając go w stanie nasłuchiwania połączeń.
@@ -232,6 +232,7 @@ public:
 
     /**
      * @brief Wymusza zakończenie się wątków. Usuwa obiekty klasy Player z listy Server::Players. Zamyka socker serwera.
+     * 
     */
     ~Server();
 };
@@ -255,5 +256,5 @@ DWORD __stdcall Pinger(LPVOID param);
  * @param msg bufor na wiadomość
  * @param mode tryb wiadomości
 */
-void codeMessage(Player* player, char* msg, MSGMODE mode);
+void codeMessage(Player* player, char* msg, Server::MSGMODE mode);
 #endif // !_SERVER_H

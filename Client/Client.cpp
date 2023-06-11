@@ -347,10 +347,6 @@ void Client::decodeMessage() {
         _playerScore = score;
         printGame(_recvbuf + 3);
         break;
-    case Client::BUSY:
-        printf("Busy");
-        _isRunning = false;
-        break;
     default:
         break;
     }

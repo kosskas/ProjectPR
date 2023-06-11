@@ -4,8 +4,10 @@ var indexSectionsWithContent =
   1: "cgps",
   2: "bcdegimprsw~",
   3: "_bcimpst",
-  4: "ckmp",
-  5: "p"
+  4: "m",
+  5: "cdms",
+  6: "ckmp",
+  7: "p"
 };
 
 var indexSectionNames =
@@ -14,8 +16,10 @@ var indexSectionNames =
   1: "classes",
   2: "functions",
   3: "variables",
-  4: "related",
-  5: "pages"
+  4: "enums",
+  5: "enumvalues",
+  6: "related",
+  7: "pages"
 };
 
 var indexSectionLabels =
@@ -24,7 +28,9 @@ var indexSectionLabels =
   1: "Klasy",
   2: "Funkcje",
   3: "Zmienne",
-  4: "Przyjaciele",
-  5: "Strony"
+  4: "Wyliczenia",
+  5: "Wartości wyliczeń",
+  6: "Przyjaciele",
+  7: "Strony"
 };
 

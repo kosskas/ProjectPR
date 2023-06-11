@@ -71,6 +71,7 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
+<a href="#pub-types">Typy publiczne</a> &#124;
 <a href="#pub-methods">Metody publiczne</a> &#124;
 <a href="#pro-methods">Metody chronione</a> &#124;
 <a href="#pri-attribs">Atrybuty prywatne</a> &#124;
@@ -85,6 +86,16 @@ $(function() {
 
 <p><code>#include &lt;<a class="el" href="_server_8h_source.html">Server.h</a>&gt;</code></p>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-types" name="pub-types"></a>
+Typy publiczne</h2></td></tr>
+<tr class="memitem:a388c76328b9064e5505c82e2a94ac9e4"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_server.html#a388c76328b9064e5505c82e2a94ac9e4">MSGMODE</a> { <a class="el" href="class_server.html#a388c76328b9064e5505c82e2a94ac9e4a2b936362378a7552855c6b62eb3ac67b">CONN</a> = 0xA
+, <a class="el" href="class_server.html#a388c76328b9064e5505c82e2a94ac9e4a67c20e1ebf0b901cc9f09d03f8fa6aab">DISC</a>
+, <a class="el" href="class_server.html#a388c76328b9064e5505c82e2a94ac9e4aeba43caa5745c227cda6983d780cc776">SPECTATE</a>
+, <a class="el" href="class_server.html#a388c76328b9064e5505c82e2a94ac9e4a1b02c12214b9f166a4bd5c57ab83887d">MAP</a>
+ }</td></tr>
+<tr class="memdesc:a388c76328b9064e5505c82e2a94ac9e4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Tryby wiadomości jakie będzie wysyłał <a class="el" href="class_server.html" title="Klasa Server zarządza połączeniami oraz grą">Server</a> do <a class="el" href="class_client.html" title="Klasa Client zarządza grą oraz połączeniem po stronie klienta.">Client</a>.  <a href="class_server.html#a388c76328b9064e5505c82e2a94ac9e4">Więcej...</a><br /></td></tr>
+<tr class="separator:a388c76328b9064e5505c82e2a94ac9e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Metody publiczne</h2></td></tr>
 <tr class="memitem:aeea97c30915862758ba454c9a407fc2a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_server.html#aeea97c30915862758ba454c9a407fc2a">Server</a> (<a class="el" href="struct_server_setup.html">ServerSetup</a> setup)</td></tr>
@@ -99,9 +110,8 @@ Metody publiczne</h2></td></tr>
 <tr class="memitem:a909d24042901f87a1b395bf5df9a5967"><td class="memItemLeft" align="right" valign="top">unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_server.html#a909d24042901f87a1b395bf5df9a5967">getYSize</a> ()</td></tr>
 <tr class="memdesc:a909d24042901f87a1b395bf5df9a5967"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pobiera wymiar X.  <br /></td></tr>
 <tr class="separator:a909d24042901f87a1b395bf5df9a5967"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4b3aa2579cb1c8cd1d069582c14d0fa6"><td class="memItemLeft" align="right" valign="top"><a id="a4b3aa2579cb1c8cd1d069582c14d0fa6" name="a4b3aa2579cb1c8cd1d069582c14d0fa6"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>~Server</b> ()</td></tr>
-<tr class="memdesc:a4b3aa2579cb1c8cd1d069582c14d0fa6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Wymusza zakończenie się wątków. Usuwa obiekty klasy <a class="el" href="struct_player.html" title="Zawiera wszystktie informacje o pojedynczym graczu-kliencie.">Player</a> z listy Server::Players. Zamyka socker serwera. <br /></td></tr>
+<tr class="memitem:a4b3aa2579cb1c8cd1d069582c14d0fa6"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_server.html#a4b3aa2579cb1c8cd1d069582c14d0fa6">~Server</a> ()</td></tr>
+<tr class="memdesc:a4b3aa2579cb1c8cd1d069582c14d0fa6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Wymusza zakończenie się wątków. Usuwa obiekty klasy <a class="el" href="struct_player.html" title="Zawiera wszystktie informacje o pojedynczym graczu-kliencie.">Player</a> z listy Server::Players. Zamyka socker serwera.  <br /></td></tr>
 <tr class="separator:a4b3aa2579cb1c8cd1d069582c14d0fa6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
@@ -125,18 +135,18 @@ Metody chronione</h2></td></tr>
 <tr class="memdesc:a9a13f26c9f302283f9e4e1a2b4686597"><td class="mdescLeft">&#160;</td><td class="mdescRight">Zamyka socket.  <br /></td></tr>
 <tr class="separator:a9a13f26c9f302283f9e4e1a2b4686597"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adb3b472223cbd10dfe1900b7e1622ecb"><td class="memItemLeft" align="right" valign="top">unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_server.html#adb3b472223cbd10dfe1900b7e1622ecb">setPlayerID</a> ()</td></tr>
-<tr class="memdesc:adb3b472223cbd10dfe1900b7e1622ecb"><td class="mdescLeft">&#160;</td><td class="mdescRight">[ + NadajID() ] Używając złożonych funkcji hashujących nadaje Graczowi unikalne id.  <br /></td></tr>
+<tr class="memdesc:adb3b472223cbd10dfe1900b7e1622ecb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Używając złożonych funkcji hashujących nadaje Graczowi unikalne id.  <br /></td></tr>
 <tr class="separator:adb3b472223cbd10dfe1900b7e1622ecb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a51e70a4e47fd22661b0cda716d617de7"><td class="memItemLeft" align="right" valign="top"><a id="a51e70a4e47fd22661b0cda716d617de7" name="a51e70a4e47fd22661b0cda716d617de7"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>waitForPlayers</b> ()</td></tr>
 <tr class="memdesc:a51e70a4e47fd22661b0cda716d617de7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Funkcja, która w trybie aktywnego oczekiwania czeka na dołączenie nowych klientów, wyłącza się gdy do serwera podłączy się odpowiednia ilość graczy. <br /></td></tr>
 <tr class="separator:a51e70a4e47fd22661b0cda716d617de7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4f6e88c30944ed346b44b1a0c0288ed6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_server.html#a4f6e88c30944ed346b44b1a0c0288ed6">deletePlayer</a> (<a class="el" href="struct_player.html">Player</a> *player)</td></tr>
-<tr class="memdesc:a4f6e88c30944ed346b44b1a0c0288ed6"><td class="mdescLeft">&#160;</td><td class="mdescRight">[ + UsuńGracza() ] Zamyka socket Gracza. Zamyka uchwyt do wątku Gracza. Usuwa Gracza.  <br /></td></tr>
+<tr class="memdesc:a4f6e88c30944ed346b44b1a0c0288ed6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Zamyka socket Gracza. Zamyka uchwyt do wątku Gracza. Usuwa Gracza.  <br /></td></tr>
 <tr class="separator:a4f6e88c30944ed346b44b1a0c0288ed6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a38a20a03c46d8b312058dc99e60c4945"><td class="memItemLeft" align="right" valign="top"><a id="a38a20a03c46d8b312058dc99e60c4945" name="a38a20a03c46d8b312058dc99e60c4945"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>endConnection</b> ()</td></tr>
-<tr class="memdesc:a38a20a03c46d8b312058dc99e60c4945"><td class="mdescLeft">&#160;</td><td class="mdescRight">[ + ZakończPołączenie() ] Wysyła sygnał do graczy o tym, że połączenie zostanie zamknięte <br /></td></tr>
+<tr class="memdesc:a38a20a03c46d8b312058dc99e60c4945"><td class="mdescLeft">&#160;</td><td class="mdescRight">Wysyła sygnał do graczy o tym, że połączenie zostanie zamknięte. <br /></td></tr>
 <tr class="separator:a38a20a03c46d8b312058dc99e60c4945"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a746126d40f2f7045a53f0a6e1fa421cb"><td class="memItemLeft" align="right" valign="top"><a id="a746126d40f2f7045a53f0a6e1fa421cb" name="a746126d40f2f7045a53f0a6e1fa421cb"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>initGarbageCollector</b> ()</td></tr>
@@ -161,14 +171,6 @@ list&lt; <a class="el" href="struct_player.html">Player</a> * &gt;&#160;</td><td
 HANDLE&#160;</td><td class="memItemRight" valign="bottom"><b>_PingerTh</b></td></tr>
 <tr class="memdesc:a878694c21cef8fc29303a800e9505e73"><td class="mdescLeft">&#160;</td><td class="mdescRight">Uchwyt na wątek Pinger. <br /></td></tr>
 <tr class="separator:a878694c21cef8fc29303a800e9505e73"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af4b691feaa7f803140b57b24d6ffce86"><td class="memItemLeft" align="right" valign="top"><a id="af4b691feaa7f803140b57b24d6ffce86" name="af4b691feaa7f803140b57b24d6ffce86"></a>
-HANDLE&#160;</td><td class="memItemRight" valign="bottom"><b>_JoinerTh</b></td></tr>
-<tr class="memdesc:af4b691feaa7f803140b57b24d6ffce86"><td class="mdescLeft">&#160;</td><td class="mdescRight">Uchwyt na wątek Joiner. <br /></td></tr>
-<tr class="separator:af4b691feaa7f803140b57b24d6ffce86"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a400f2fe8482569c5abf705ddbe9e9fd6"><td class="memItemLeft" align="right" valign="top"><a id="a400f2fe8482569c5abf705ddbe9e9fd6" name="a400f2fe8482569c5abf705ddbe9e9fd6"></a>
-LPDWORD&#160;</td><td class="memItemRight" valign="bottom"><b>_joinerThID</b></td></tr>
-<tr class="memdesc:a400f2fe8482569c5abf705ddbe9e9fd6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Wskaźnik na ID wątku Joiner. <br /></td></tr>
-<tr class="separator:a400f2fe8482569c5abf705ddbe9e9fd6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5b5ce0bea197f553ab8199672b739baf"><td class="memItemLeft" align="right" valign="top"><a id="a5b5ce0bea197f553ab8199672b739baf" name="a5b5ce0bea197f553ab8199672b739baf"></a>
 LPDWORD&#160;</td><td class="memItemRight" valign="bottom"><b>_pingerThID</b></td></tr>
 <tr class="memdesc:a5b5ce0bea197f553ab8199672b739baf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Wskaźnik na ID wątku Pinger. <br /></td></tr>
@@ -179,7 +181,7 @@ LPDWORD&#160;</td><td class="memItemRight" valign="bottom"><b>_pingerThID</b></t
 <tr class="separator:a3f82e7982999642245de98be7c7acae0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a14851da3aa652e8307113791af98594e"><td class="memItemLeft" align="right" valign="top"><a id="a14851da3aa652e8307113791af98594e" name="a14851da3aa652e8307113791af98594e"></a>
 volatile bool&#160;</td><td class="memItemRight" valign="bottom"><b>_isServerRunning</b></td></tr>
-<tr class="memdesc:a14851da3aa652e8307113791af98594e"><td class="mdescLeft">&#160;</td><td class="mdescRight">flaga informująca wątki o konieczności zakończenia się <br /></td></tr>
+<tr class="memdesc:a14851da3aa652e8307113791af98594e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Flaga informująca wątki o konieczności zakończenia się <br /></td></tr>
 <tr class="separator:a14851da3aa652e8307113791af98594e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa79395b37a223b8932865977d448b0bd"><td class="memItemLeft" align="right" valign="top"><a id="aa79395b37a223b8932865977d448b0bd" name="aa79395b37a223b8932865977d448b0bd"></a>
 <a class="el" href="class_game.html">Game</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>_game</b></td></tr>
@@ -205,7 +207,34 @@ Przyjaciele</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Opis szczegółowy</h2>
 <div class="textblock"><p>Klasa <a class="el" href="class_server.html" title="Klasa Server zarządza połączeniami oraz grą">Server</a> zarządza połączeniami oraz grą </p>
-</div><h2 class="groupheader">Dokumentacja konstruktora i destruktora</h2>
+</div><h2 class="groupheader">Dokumentacja składowych wyliczanych</h2>
+<a id="a388c76328b9064e5505c82e2a94ac9e4" name="a388c76328b9064e5505c82e2a94ac9e4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a388c76328b9064e5505c82e2a94ac9e4">&#9670;&#160;</a></span>MSGMODE</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="class_server.html#a388c76328b9064e5505c82e2a94ac9e4">Server::MSGMODE</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Tryby wiadomości jakie będzie wysyłał <a class="el" href="class_server.html" title="Klasa Server zarządza połączeniami oraz grą">Server</a> do <a class="el" href="class_client.html" title="Klasa Client zarządza grą oraz połączeniem po stronie klienta.">Client</a>. </p>
+<table class="fieldtable">
+<tr><th colspan="2">Wartości wyliczeń</th></tr><tr><td class="fieldname"><a id="a388c76328b9064e5505c82e2a94ac9e4a2b936362378a7552855c6b62eb3ac67b" name="a388c76328b9064e5505c82e2a94ac9e4a2b936362378a7552855c6b62eb3ac67b"></a>CONN&#160;</td><td class="fielddoc"><p>Połączono z <a class="el" href="class_server.html" title="Klasa Server zarządza połączeniami oraz grą">Server</a>, odbierz informacje o grze. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a388c76328b9064e5505c82e2a94ac9e4a67c20e1ebf0b901cc9f09d03f8fa6aab" name="a388c76328b9064e5505c82e2a94ac9e4a67c20e1ebf0b901cc9f09d03f8fa6aab"></a>DISC&#160;</td><td class="fielddoc"><p>Koniec gry, połączenie zostanie zamknięte. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a388c76328b9064e5505c82e2a94ac9e4aeba43caa5745c227cda6983d780cc776" name="a388c76328b9064e5505c82e2a94ac9e4aeba43caa5745c227cda6983d780cc776"></a>SPECTATE&#160;</td><td class="fielddoc"><p>Poza grą. Odbierz aktualną mapę </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a388c76328b9064e5505c82e2a94ac9e4a1b02c12214b9f166a4bd5c57ab83887d" name="a388c76328b9064e5505c82e2a94ac9e4a1b02c12214b9f166a4bd5c57ab83887d"></a>MAP&#160;</td><td class="fielddoc"><p>W grze. Odbierz aktualną mapę </p>
+</td></tr>
+</table>
+
+</div>
+</div>
+<h2 class="groupheader">Dokumentacja konstruktora i destruktora</h2>
 <a id="aeea97c30915862758ba454c9a407fc2a" name="aeea97c30915862758ba454c9a407fc2a"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aeea97c30915862758ba454c9a407fc2a">&#9670;&#160;</a></span>Server()</h2>
 
@@ -229,6 +258,25 @@ Przyjaciele</h2></td></tr>
   </table>
   </dd>
 </dl>
+
+</div>
+</div>
+<a id="a4b3aa2579cb1c8cd1d069582c14d0fa6" name="a4b3aa2579cb1c8cd1d069582c14d0fa6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4b3aa2579cb1c8cd1d069582c14d0fa6">&#9670;&#160;</a></span>~Server()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Server::~Server </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Wymusza zakończenie się wątków. Usuwa obiekty klasy <a class="el" href="struct_player.html" title="Zawiera wszystktie informacje o pojedynczym graczu-kliencie.">Player</a> z listy Server::Players. Zamyka socker serwera. </p>
 
 </div>
 </div>
@@ -348,7 +396,7 @@ Przyjaciele</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>[ + UsuńGracza() ] Zamyka socket Gracza. Zamyka uchwyt do wątku Gracza. Usuwa Gracza. </p>
+<p>Zamyka socket Gracza. Zamyka uchwyt do wątku Gracza. Usuwa Gracza. </p>
 <dl class="params"><dt>Parametry</dt><dd>
   <table class="params">
     <tr><td class="paramname"><a class="el" href="struct_player.html" title="Zawiera wszystktie informacje o pojedynczym graczu-kliencie.">Player</a></td><td>- obiekt Gracza do usunięcia </td></tr>
@@ -441,7 +489,7 @@ Przyjaciele</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>[ + NadajID() ] Używając złożonych funkcji hashujących nadaje Graczowi unikalne id. </p>
+<p>Używając złożonych funkcji hashujących nadaje Graczowi unikalne id. </p>
 <dl class="section return"><dt>Zwraca</dt><dd>id </dd></dl>
 
 </div>
@@ -565,7 +613,7 @@ Przyjaciele</h2></td></tr>
 <p>Sluchacz zdarzeń pochodzących od pojedynczego klienta, działajacy jako osobny wątek. </p>
 <dl class="params"><dt>Parametry</dt><dd>
   <table class="params">
-    <tr><td class="paramname">param</td><td>- SOCKET klienta </td></tr>
+    <tr><td class="paramname">param</td><td>- Wskaźnik na <a class="el" href="struct_player.html" title="Zawiera wszystktie informacje o pojedynczym graczu-kliencie.">Player</a> </td></tr>
   </table>
   </dd>
 </dl>
