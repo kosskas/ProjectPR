@@ -2,9 +2,7 @@
 
 **Wstęp**
 
-Celem projektu jest zaimplementowanie prostej wieloosobowej gry konsolowej typu Slither.io. Do implementacji zostanie użyty język C++. Działanie gry będzie oparte
-
-- architekturę client-server oraz protokół komunikacyjny TCP. Do obsługi połączeń zostaną wykorzystane interfejsy dostępne w bibliotece WinAPIWinsock2.
+Celem projektu jest zaimplementowanie prostej wieloosobowej gry konsolowej typu Slither.io. Do implementacji zostanie użyty język C++. Działanie gry będzie oparte o architekturę client-server oraz protokół komunikacyjny TCP. Do obsługi połączeń zostaną wykorzystane interfejsy dostępne w bibliotece WinAPIWinsock2.
 
 **Rozgrywka**
 
