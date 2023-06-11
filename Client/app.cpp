@@ -11,8 +11,6 @@ int __cdecl main(int argc, char** argv)
     setup.serverIP = argv[1];
     setup.serverPort = DEFAULT_PORT;
     setup.bufferSize = DEFAULT_BUFLEN;
-    setup.mapSizeX = MAP_SIZE_X;
-    setup.mapSizeY = MAP_SIZE_Y;
 
     Client *client = new Client(setup);
 

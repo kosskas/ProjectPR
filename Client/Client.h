@@ -25,15 +25,6 @@ struct ClientSetup {
     */
     size_t bufferSize;
 
-    /**
-     * @brief Liczba wierszy
-    */
-    unsigned int mapSizeY;
-
-    /**
-     * @brief Liczba kolumn
-    */
-    unsigned int mapSizeX;
 };
 
 

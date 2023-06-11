@@ -51,10 +51,8 @@ bool Client::connectToServer()
         printf("getaddrinfo failed with error: %d\n", iResult);
         return false;
     }
-
     // Attempt to connect to an address until one succeeds
     for (ptr = result; ptr != NULL; ptr = ptr->ai_next) {
-
         // Connect to server.
         iResult = connect(_socket, ptr->ai_addr, (int)ptr->ai_addrlen);
         if (iResult == SOCKET_ERROR) {
@@ -244,8 +242,6 @@ char Client::getArrow(char direction)
 
 Client::Client(ClientSetup setup) :
     _setup(setup),
-    _mapSizeX(setup.mapSizeX),
-    _mapSizeY(setup.mapSizeY),
     _isRunning(true), 
     _isConnected(false)
 {
@@ -274,7 +270,7 @@ Client::Client(ClientSetup setup) :
             SetConsoleMode(_hStdout, _fdwSaveOldOutMode);
         ExitProcess(1);
     }
-    system("cls");
+    //system("cls");
 }
 
 
@@ -304,8 +300,6 @@ Client::~Client()
 
     SetConsoleMode(_hStdin, _fdwSaveOldInMode);
     SetConsoleMode(_hStdout, _fdwSaveOldOutMode);
-
-    // CloseHandle(MsgSender);
 
     WaitForSingleObject(_MsgReceiverTh, INFINITE);
     CloseHandle(_MsgReceiverTh);
@@ -367,30 +361,53 @@ void Client::decodeMessage() {
 
 // - - - - - - - - - - threads functions - - - - - - - - - - \\
 
-
-DWORD __stdcall MsgReceiverListener(LPVOID param) 
+DWORD __stdcall MsgReceiverListener(LPVOID param)
 {
     Client* client = (Client*)param;
     int iResult;
 
     do {
-        iResult = recv(client->_socket, client->_recvbuf, client->_recvbuflen, 0);
-        if (iResult > 0) {
-            client->decodeMessage();
-        }
-        else if (iResult == 0) {
-            printf("Connection closed\n");
+        fd_set readSet;
+        FD_ZERO(&readSet);
+        FD_SET(client->_socket, &readSet);
+
+        struct timeval timeout;
+        timeout.tv_sec = 2;  // 2 sekundy
+        timeout.tv_usec = 0;
+
+        // Wywołanie select
+        int result = select(0, &readSet, nullptr, nullptr, &timeout);
+        if (result == SOCKET_ERROR) {
+            printf("Line %d in function %s \t select failed with error: %d\n", __LINE__, __FUNCTION__, WSAGetLastError());
             client->_isRunning = false;
+            break;
         }
-        else {
-            printf("Line %d in function %s \t recv failed with error: %d\n", __LINE__, __FUNCTION__, WSAGetLastError());
+
+        if (result > 0) {
+            iResult = recv(client->_socket, client->_recvbuf, client->_recvbuflen, 0);
+            if (iResult > 0) {
+                client->decodeMessage();
+            }
+            else if (iResult == 0) {
+                printf("Connection closed\n");
+                client->_isRunning = false;
+            }
+            else {
+                printf("Line %d in function %s \t recv failed with error: %d\n", __LINE__, __FUNCTION__, WSAGetLastError());
+                client->_isRunning = false;
+            }
+        }
+        else if (result == 0) {
+            printf("%sServer busy%s\n", RED, RESET);
             client->_isRunning = false;
+            break;
         }
 
     } while (client->_isRunning);
 
     return 0;
 }
+
 
 DWORD __stdcall KeyEventListener(LPVOID param)
 {

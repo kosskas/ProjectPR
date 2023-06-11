@@ -1,11 +1,11 @@
 /*
 ///TODO
-* X i Y jest gdzieś na odwrót!!!!!
 * Zakończenie poprawne wątków (PINGER!!!!)
 * Jeśli klient będzie próbował podłączyć się w trakcie gry, zostanie powiadomiony,
-że nie może się połączyć. 
+że nie może się połączyć. ???TODO???
 * Zrobić plik konfiguracyjny i Sparametryzować Spleepy 
 * poprawić komunikaty
+* warunek gry
 */
 /*
 ///Zaobserwonane błędy
@@ -98,15 +98,6 @@ private:
     */
     HANDLE _PingerTh;
 
-    /**
-     * @brief Uchwyt na wątek Joiner
-    */
-    HANDLE _JoinerTh;
-
-    /**
-     * @brief Wskaźnik na ID wątku Joiner
-    */
-    LPDWORD _joinerThID;
 
     /**
      * @brief Wskaźnik na ID wątku Pinger
@@ -122,7 +113,6 @@ private:
      * @brief flaga informująca wątki o konieczności zakończenia się
     */
     volatile bool _isServerRunning;
-    volatile bool _canStartGame;
     /**
      * @brief Instancja gry
     */
@@ -139,7 +129,6 @@ private:
 
     friend DWORD __stdcall ClientListener(LPVOID param);
     friend DWORD __stdcall Pinger(LPVOID param);
-    friend DWORD __stdcall Joiner(LPVOID param);
 
 protected:
 
@@ -246,12 +235,7 @@ public:
     */
     ~Server();
 };
-/**
- * @brief Sluchacz nowych klientów. Jeśli klient będzie próbował podłączyć się w trakcie gry, zostanie powiadomiony, że nie może się połączyć. 
- * @param param - Wskaźnik na klasę Server
- * @return 0 jeśli wątek zakończył się dobrze
-*/
-DWORD __stdcall Joiner(LPVOID param);
+
 /**
  * @brief Sluchacz zdarzeń pochodzących od pojedynczego klienta, działajacy jako osobny wątek
  * @param param - Wskaźnik na Player
