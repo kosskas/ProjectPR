@@ -15,11 +15,11 @@ Serwer rozpoczyna rozgrywkę, gdy połączy się 3 graczy. Każdy gracz otrzymuj
 **Przewidywane problemy i propozycje ich rozwiązania**
 
 1. Węże zderzają się głowami - zniszczony zostaje krótszy wąż, w przypadku równej długości losujemy wygranego.
-2. Zebranie jedzenia w tym samym momencie - najpierw sprawdzane są kolizje węży, więc problem sprowadza się do punktu 1.
-1. Nieplanowane rozłączenie gracza (odłączenie od internetu, awaria komputera itp.) wykrywane jest przez serwer - wystąpi błąd połączenia lub dany klient 3 razy pod rząd nie odpowie na wysłanie mapy.
-3. W przypadku rozłączenia gracza, gracz przegrywa, a jego wąż znika z planszy.
-4. Jeśli klient będzie próbował podłączyć się w trakcie gry, zostanie powiadomiony, że nie może się połączyć.
-5. Przytrzymanie klawisza sterującego przez użytkownika nie spowoduje redundantnego wysyłania informacji do serwera o kierunku przemieszczania się. Informacja ta jest wysyłana tylko wtedy, gdy kierunek w ostatnio wysłanej wiadomości był różny od kierunku wyznaczonego przez aktualnie wciśnięty klawisz sterujący.
+2. Zebranie jedzenia w tym samym momencie - najpierw sprawdzane są kolizje węży, więc problem sprowadza się do punktu piewszego.
+3. Nieplanowane rozłączenie gracza (odłączenie od internetu, awaria komputera itp.) wykrywane jest przez serwer - wystąpi błąd połączenia lub dany klient 3 razy pod rząd nie odpowie na wysłanie mapy.
+4. W przypadku rozłączenia gracza, gracz przegrywa, a jego wąż znika z planszy.
+5. Jeśli klient będzie próbował podłączyć się w trakcie gry, zostanie powiadomiony, że nie może się połączyć.
+6. Przytrzymanie klawisza sterującego przez użytkownika nie spowoduje redundantnego wysyłania informacji do serwera o kierunku przemieszczania się. Informacja ta jest wysyłana tylko wtedy, gdy kierunek w ostatnio wysłanej wiadomości był różny od kierunku wyznaczonego przez aktualnie wciśnięty klawisz sterujący.
 
 **Diagram klas**
 

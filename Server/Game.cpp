@@ -180,7 +180,6 @@ void Game::movePlayer(Player* player)
 		player->sprite.push_front(nextHeadPos);
 	}
 	else {
-		//getPlayerById(nextPos)->score =+ 10; KRYT ERR
 		// on the next position enemy snake is placed
 		player->isPlaying = false;
 		removeSnake(player);

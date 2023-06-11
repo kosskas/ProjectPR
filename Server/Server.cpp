@@ -147,6 +147,7 @@ Server::~Server()
 
     WSACleanup();
     printf("Server closed \n");
+
 }
 
 
@@ -375,6 +376,7 @@ void Server::sendMessage()
 
 void codeMessage(Player* player, char* msg, MSGMODE mode)
 {
+    short score = player->score;
     switch (mode) {
     case CONN:
         msg[0] = mode;
@@ -389,8 +391,16 @@ void codeMessage(Player* player, char* msg, MSGMODE mode)
     case SPECTATE:
     case MAP:
         msg[0] = mode;
-        msg[1] = player->score & 0xFF;
-        msg[2] = (player->score>>8) & 0xFF;
+        __asm {
+            push eax
+            push ebx
+            mov ebx, msg
+            mov ax, score
+            mov [ebx+1], al
+            mov [ebx+2], ah
+            pop ebx
+            pop eax
+        };
         break;
     default:
         break;

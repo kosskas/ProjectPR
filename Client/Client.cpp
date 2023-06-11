@@ -198,6 +198,8 @@ bool Client::sendMessage(const char* sendbuf, int len)
 
 void Client::printGame(const char* map)
 {
+    if (!_isRunning)
+        return;
     char bufor[8];
     if (_mapSizeX == 0xFFFFFFFF)
         return;
@@ -319,6 +321,8 @@ Client::~Client()
 
 void Client::decodeMessage() {
     char mode = _recvbuf[0];
+    char* msg = _recvbuf;
+    short score = 0;
     switch (mode) {
     case Client::CONN:
         printf("%sCONNECTED%s\n", BRIGHT_GREEN, RESET);
@@ -335,7 +339,17 @@ void Client::decodeMessage() {
     case Client::SPECTATE:
         printf("You lost. Now watch\n");
     case Client::MAP:
-        _playerScore = (unsigned short)_recvbuf[1] | (unsigned short)(_recvbuf[2])<<8;
+        __asm {
+            push eax
+            push ebx
+            mov ebx, msg
+            mov al, [ebx+1]
+            mov ah, [ebx+2]
+            mov score, ax
+            pop ebx
+            pop eax
+        }
+        _playerScore = score;
         printGame(_recvbuf + 3);
         break;
     default:
