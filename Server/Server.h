@@ -122,6 +122,7 @@ private:
      * @brief flaga informująca wątki o konieczności zakończenia się
     */
     volatile bool _isServerRunning;
+    volatile bool _canStartGame;
     /**
      * @brief Instancja gry
     */
@@ -138,6 +139,7 @@ private:
 
     friend DWORD __stdcall ClientListener(LPVOID param);
     friend DWORD __stdcall Pinger(LPVOID param);
+    friend DWORD __stdcall Joiner(LPVOID param);
 
 protected:
 
@@ -205,6 +207,10 @@ protected:
      * @brief Uruchamia wątek o nazwie Pinger
     */
     void initGarbageCollector();
+    /**
+     * @brief Uruchamia wątek o nazwie Joiner
+    */
+    void initJoiner();
 
     /**
      * @brief Rozsyłają mapę do klientów temp, to samo co broadcast ale nie wątek
@@ -240,11 +246,15 @@ public:
     */
     ~Server();
 };
-
-
+/**
+ * @brief Sluchacz nowych klientów. Jeśli klient będzie próbował podłączyć się w trakcie gry, zostanie powiadomiony, że nie może się połączyć. 
+ * @param param - Wskaźnik na klasę Server
+ * @return 0 jeśli wątek zakończył się dobrze
+*/
+DWORD __stdcall Joiner(LPVOID param);
 /**
  * @brief Sluchacz zdarzeń pochodzących od pojedynczego klienta, działajacy jako osobny wątek
- * @param param - SOCKET klienta
+ * @param param - Wskaźnik na Player
  * @return 0 jeśli wątek zakończył się dobrze, 1 jeśli źle
 */
 DWORD __stdcall ClientListener(LPVOID param);

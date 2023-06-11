@@ -117,6 +117,7 @@ Server::Server(ServerSetup setup)
     }
 
     _isServerRunning = true;
+    _canStartGame = false;
     _mapMsgSize = _setup.mapSizeY * _setup.mapSizeX;
    
     _mapBuffer = new char[_mapMsgSize];
@@ -255,12 +256,24 @@ void Server::initGarbageCollector()
     }
 }
 
+void Server::initJoiner()
+{
+    _JoinerTh = CreateThread(NULL, 0, &Joiner, (void*)this, 0, _joinerThID);
+    if (_JoinerTh == NULL) {
+        printf("Failed to create 'JoinerTh' thread.\n");
+        return;
+    }
+}
+
 
 void Server::run()
 {
     initGarbageCollector();
+    //initJoiner();
     waitForPlayers();
     //wszyscy gracze dołączyli
+    //while (!_canStartGame);
+
 
     _game = new Game(_players, _setup.mapSizeY, _setup.mapSizeX);
 
@@ -306,6 +319,61 @@ unsigned int Server::getYSize()
 
 // - - - - - - - - - - threads functions - - - - - - - - - - \\
 
+
+DWORD __stdcall Joiner(LPVOID param) {
+    Server* server = (Server*)param;
+    SOCKET PlayerSocket;
+    sockaddr_in sc;
+    int lenc = sizeof(sc);
+    char msg[4];
+    printf("\t JoinPlayer: start \n");
+
+    while (server->_isServerRunning /* && _players.size() < _setup.maxNumberOfClients*/) {
+
+        PlayerSocket = accept(server->_socket, (sockaddr*)&sc, &lenc);
+        if (PlayerSocket == INVALID_SOCKET) {
+            printf("JoinPlayer: Accept failed with error: %d \n", WSAGetLastError());
+        }
+
+        if (server->_players.size() >= server->_setup.maxNumberOfClients) { //wyślij że busy
+
+            codeMessage(NULL, msg, BUSY);
+            int iSendResult = send(PlayerSocket, msg, 4, 0);
+            closesocket(PlayerSocket);
+            continue;
+        }
+        DWORD PlayerThreadId;
+        Player* player = new Player;
+
+        HANDLE PlayerThread = CreateThread(NULL, 0, &ClientListener, player, 0, &PlayerThreadId);
+        if (PlayerThread == NULL) {
+            printf("JoinPlayer: Failed to create thread. \n");
+            server->shutdownSocket(PlayerSocket);
+            server->closeSocket(PlayerSocket);
+            continue;
+        }
+        player->srvptr = server;
+        player->sock = PlayerSocket;
+        player->ip = sc.sin_addr;
+        player->port = sc.sin_port;
+        player->thHandle = PlayerThread;
+        player->thId = PlayerThreadId;
+        player->isRunning = true;
+        player->isPlaying = true;
+        player->ID = server->setPlayerID();
+        player->score = 0;
+
+        server->_players.push_back(player);
+
+        char ipStr[16];
+        inet_ntop(AF_INET, &(player->ip), ipStr, sizeof ipStr);
+        printf("JoinPlayer: Player(%d) %s:%d joined successfully \n", player->ID, ipStr, player->port);
+        if (server->_players.size() == server->_setup.maxNumberOfClients)
+            server->_canStartGame = true;
+    }
+
+    printf("\t JoinPlayer: stop \n");
+}
 
 DWORD __stdcall ClientListener(LPVOID param)
 {
@@ -376,7 +444,7 @@ void Server::sendMessage()
 
 void codeMessage(Player* player, char* msg, MSGMODE mode)
 {
-    short score = player->score;
+    
     switch (mode) {
     case CONN:
         msg[0] = mode;
@@ -390,17 +458,23 @@ void codeMessage(Player* player, char* msg, MSGMODE mode)
         break;      
     case SPECTATE:
     case MAP:
+    {
+        short score = player->score;
         msg[0] = mode;
         __asm {
             push eax
             push ebx
             mov ebx, msg
             mov ax, score
-            mov [ebx+1], al
-            mov [ebx+2], ah
+            mov[ebx + 1], al
+            mov[ebx + 2], ah
             pop ebx
             pop eax
         };
+        break;
+    }
+    case BUSY:
+        msg[0] = mode;
         break;
     default:
         break;

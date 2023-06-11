@@ -17,9 +17,6 @@
 
 #define VK_Q 0x51 // ASCII of 'Q'
 
-#define MAP_SIZE_X 40 
-#define MAP_SIZE_Y 20
-
 #define BLACK      "\033[0;30m"
 #define DARK_GRAY  "\033[1;30m"
 #define RED        "\033[0;31m"
