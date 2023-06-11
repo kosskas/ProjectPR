@@ -416,6 +416,9 @@ DWORD __stdcall KeyEventListener(LPVOID param)
     INPUT_RECORD irInBuf[128];
 
     while (client->_isRunning) {
+        if (WaitForSingleObject(client->_hStdin, 1000) != WAIT_OBJECT_0) {
+            continue;
+        }
         if (!ReadConsoleInput(client->_hStdin, irInBuf, 128, &cNumRead)) { 
             printf("ReadConsoleInput");
             return 1;
