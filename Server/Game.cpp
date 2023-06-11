@@ -132,20 +132,20 @@ void Game::movePlayer(Player* player)
 
 	switch (player->currentDirection) {
 	case UP:
+		xTranslation = 0;
+		yTranslation = -1 * step;;
+		break;
+	case DOWN:
+		xTranslation = 0;
+		yTranslation = +1 * step;
+		break;
+	case LEFT:
 		xTranslation = -1 * step;
 		yTranslation = 0;
 		break;
-	case DOWN:
+	case RIGHT:
 		xTranslation = +1 * step;
 		yTranslation = 0;
-		break;
-	case LEFT:
-		xTranslation = 0;
-		yTranslation = -1 * step;
-		break;
-	case RIGHT:
-		xTranslation = 0;
-		yTranslation = +1 * step;
 		break;
 	default:
 		//printf("\n Critical 'player->currentDirection' error ! \n");
