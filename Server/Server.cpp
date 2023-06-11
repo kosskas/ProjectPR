@@ -236,7 +236,7 @@ void Server::endConnection()
     char msg[4];
     for (Player* Player : _players) {
         if (Player->sock != NULL) {
-            codeMessage(Player, msg, DISC);
+            codeMessage(Player, msg, DISC); //WON
             int iSendResult = send(Player->sock, msg, 4, 0);
             if (iSendResult == SOCKET_ERROR) {
                 printf("%d | Broadcast: send to Player(%d) failed with error: %d\n", __LINE__, Player->ID, WSAGetLastError());

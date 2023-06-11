@@ -8,8 +8,8 @@ int __cdecl main(void)
     setup.bufferSize = BUFFER_SIZE;
     setup.maxNumberOfClients = 1;
     setup.port = PORT;
-    setup.mapSizeY = MAP_SIZE_Y;
-    setup.mapSizeX = MAP_SIZE_X;
+    setup.mapSizeY = 20;
+    setup.mapSizeX = 60;
 
     Server *server = new Server(setup);
 

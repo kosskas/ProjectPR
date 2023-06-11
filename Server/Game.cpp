@@ -55,7 +55,6 @@ Game::Game(list<Player*>& players, int y, int x)
 	for (Player* player : _players) {
 		player->sprite.push_front({ sty++, stx ++});
 	}
-
 }
 
 
@@ -176,7 +175,7 @@ void Game::movePlayer(Player* player)
 		_gameMap[currTailPos.posY][currTailPos.posX] = EMPTY_SPRITE;
 	}
 	else if (nextPos == BONUS_SPRITE) {
-		player->score+=100;
+		player->score+=10;
 		player->sprite.push_front(nextHeadPos);
 	}
 	else {

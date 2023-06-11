@@ -6,7 +6,6 @@
 że nie może się połączyć. 
 * Zrobić plik konfiguracyjny i Sparametryzować Spleepy 
 * poprawić komunikaty
-* poprawić wysyłanie scora na 2 bajtach
 */
 /*
 ///Zaobserwonane błędy
