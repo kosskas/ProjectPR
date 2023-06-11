@@ -207,7 +207,8 @@ void Client::printGame(const char* map)
     printf("\033[0;0H");
     for (unsigned int y = 0; y < _mapSizeY; y++) {
         for (unsigned int x = 0; x < _mapSizeX; x++) {
-            char tile = map[y + _mapSizeY * x];
+            //char tile = map[y + _mapSizeY * x];
+            char tile = map[y*_mapSizeX + x];
             getColorById(bufor, tile);
             printf("%s%c", bufor, tile);
         }

@@ -25,7 +25,7 @@
 #define BUFFER_SIZE 4096//512
 #define PORT 27015
 
-#define MAP_SIZE_X 20 
+#define MAP_SIZE_X 100 
 #define MAP_SIZE_Y 20
 
 #define EMPTY_SPRITE ' '
