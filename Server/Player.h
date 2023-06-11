@@ -59,11 +59,11 @@ struct Player {
     /**
      * @brief Flaga określająca czy dany klient istnieje
     */
-    bool isRunning;
+    volatile bool isRunning;
     /**
      * @brief Flaga określająca czy dany klient gra
     */
-    bool isPlaying;
+    volatile bool isPlaying;
     /**
      * @brief Określa obecnie obrany kierunek 
     */

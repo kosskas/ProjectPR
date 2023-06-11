@@ -257,6 +257,7 @@ Client::Client(ClientSetup setup) :
     _isRunning(true), 
     _isConnected(false)
 {
+    printf("Trying to connect to %s... \n", setup.serverIP);
     if (!startUpWinsock()) {
         ExitProcess(1);
     }
@@ -267,7 +268,7 @@ Client::Client(ClientSetup setup) :
     }
 
     if (!connectToServer()) {
-        printf("Unable to connect to server!\n");
+        printf("%sUnable to connect to server!%s\n",BRIGHT_RED, RESET);
         WSACleanup();
         ExitProcess(1);
     }
@@ -289,9 +290,6 @@ void Client::run()
     if (!initReceiver())
         return;
 
-    //if (!initSender())
-      //  return;
-
     if (!initKeyEventListener())
         return;
     unsigned char lastKeyInput = 0;
@@ -302,10 +300,7 @@ void Client::run()
             const char* currentKeyInput = (const char*)&(_keyInput);
             sendMessage(currentKeyInput, 1);
         }
-        Sleep(100);
-        //Sleep(100);
-        //licz--;
-        //Wstawić jakiś wątek tutaj
+        Sleep(100); //jako parametr
     }
 }
 
@@ -339,6 +334,7 @@ void Client::decodeMessage() {
     char mode = _recvbuf[0];
     switch (mode) {
     case Client::CONN:
+        printf("%sCONNECTED%s\n", BRIGHT_GREEN, RESET);
         _mapSizeX = _recvbuf[1];
         _mapSizeY = _recvbuf[2];
         _playerID = _recvbuf[3];
@@ -350,10 +346,9 @@ void Client::decodeMessage() {
     case Client::END:
         _isRunning = false;
         break;
-    case Client::MAP:
     case Client::SPECTATE:
-        //TODO NA KOŃCU
-        //już nie wysyła, tylko odbiera
+        printf("You lost. Now watch\n");
+    case Client::MAP:
         _playerScore = _recvbuf[1];
         printGame(_recvbuf + 2);
         break;

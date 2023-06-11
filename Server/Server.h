@@ -4,13 +4,9 @@
 * X I Y na odwrót!!!!!
 * Zakończenie poprawne wątków (PINGER!!!!)
 * W przypadku rozłączenia gracza, gracz przegrywa, a jego wąż znika z planszy. DONE?
-* Węże zderzają się głowami - zniszczony zostaje krótszy wąż, w przypadku równej długości losujemy wygranego.
-* Zebranie jedzenia w tym samym momencie - najpierw sprawdzane są kolizje węży, więc problem sprowadza się do punktu 1.
- Konflikty ze sprawka
 * Jeśli klient będzie próbował podłączyć się w trakcie gry, zostanie powiadomiony,
 że nie może się połączyć. 
-* Zrobić plik konfiguracyjny 
-* Sparametryzować Spleepy 
+* Zrobić plik konfiguracyjny i Sparametryzować Spleepy 
 
 */
 

@@ -142,7 +142,7 @@ Server::~Server()
     delete _game;
 
     TerminateThread(_PingerTh, 0);
-    DWORD res =  WaitForSingleObject(_PingerTh, 5000);
+    DWORD res =  WaitForSingleObject(_PingerTh, INFINITE);
     if (res == WAIT_OBJECT_0) {
         printf("OK");
     }
@@ -199,6 +199,7 @@ void Server::waitForPlayers()
         player->thHandle = PlayerThread;
         player->thId = PlayerThreadId;
         player->isRunning = true;
+        player->isPlaying = true;
         player->ID = setPlayerID();
         player->score = 0;
 
@@ -218,7 +219,7 @@ void Server::deletePlayer(Player* player)
     player->isRunning = false;
 
     //TerminateThread(player->thHandle, 0);
-    DWORD res = WaitForSingleObject(player->thHandle, INFINITE);
+    DWORD res = WaitForSingleObject(player->thHandle, 2000);
     if (res == WAIT_OBJECT_0) {
         printf("player->thHandle OK");
     }
@@ -234,8 +235,8 @@ void Server::deletePlayer(Player* player)
 
     shutdownSocket(player->sock);
     closeSocket(player->sock);
-    //delete player;
-    //player = nullptr;
+    delete player;
+    player = nullptr;
     
 }
 
@@ -277,13 +278,10 @@ void Server::initMapBroadcast()
 void Server::run()
 {
     initGarbageCollector();
-    //
     waitForPlayers();
     //wszyscy gracze dołączyli
 
     _game = new Game(_players, _setup.mapSizeY, _setup.mapSizeX);
-
-    //initMapBroadcast();
 
     ///Pętla grająca
     //IF LICZBA GRACZY == 0 END
@@ -294,10 +292,10 @@ void Server::run()
     //std::uniform_int_distribution<int> bonusRandTime(MIN_TIME_BETWEEN_BONUS_MS, MAX_TIME_BETWEEN_BONUS_MS);
     unsigned int i = 0;
 
-    while (_isServerRunning /* && game.checkGameState()*/ && !_players.empty()) {
+    while (_isServerRunning /* && game.checkGameState()*/ && !_players.empty()) { // && liczba grających > 1
 
         for (Player* player : _players) {
-            _game->removeSnake(player);
+            //_game->removeSnake(player);
             _game->movePlayer(player);
         }
 
@@ -311,7 +309,7 @@ void Server::run()
         sendMap();
         i++;
     }
-    endConnection();
+    //endConnection();
 }
 
 unsigned int Server::getXSize()
@@ -411,11 +409,15 @@ void Server::sendMap()
     }        
     for (Player* Player : _players) {
         if (Player->sock != NULL) {
-            codeMessage(Player, _mapBuffer, MAP);
+            if(Player->isPlaying)
+                codeMessage(Player, _mapBuffer, MAP);
+            else
+                codeMessage(Player, _mapBuffer, SPECTATE);
             int iSendResult = send(Player->sock, _mapBuffer, _mapMsgSize+2, 0);
             if (iSendResult == SOCKET_ERROR) {
                 printf("%d | Broadcast: send to Player(%d) failed with error: %d\n", __LINE__, Player->ID, WSAGetLastError());
             }
+
         }
     }
 }
@@ -453,20 +455,21 @@ DWORD __stdcall Pinger(LPVOID param)
     while (server->_isServerRunning) {
   
         //printf("\t Online %d\n", server->_players.size());
-        std::list<Player*>::iterator i = server->_players.begin();
-        while (i != server->_players.end())
+        std::list<Player*>::iterator it = server->_players.begin();
+        while (it != server->_players.end())
         {
-            bool isInactive = ((*i)->isRunning == false || send((*i)->sock, NULL, 0, 0) == SOCKET_ERROR );
+            bool isInactive = ((*it)->isRunning == false || send((*it)->sock, NULL, 0, 0) == SOCKET_ERROR );
 
             if (isInactive) {
-                printf("Pinger:  Removing inactive Player(%d) \n", (*i)->ID);
-                (*i)->isRunning = false;
-                //server->deletePlayer((*i));
-                server->_game->removeSnake((*i));
-                i = server->_players.erase(i);
+                printf("Pinger:  Removing inactive Player(%d) \n", (*it)->ID);
+                (*it)->isRunning = false;
+                server->_game->removeSnake((*it));             
+                server->deletePlayer((*it));
+                it = server->_players.erase(it);
+                
             }
             else {
-                ++i;
+                ++it;
             }
         }
 

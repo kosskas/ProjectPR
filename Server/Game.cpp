@@ -108,23 +108,22 @@ void Game::placeBonuses(int num)
 
 void Game::removeSnake(Player* player)
 {
-	if (player->isRunning == false)
-	{
-		for (Point p : player->sprite) {
-			int y = p.posY, x = p.posX;
-			if (_gameMap[y][x] == getPlayerASCII(player) ||
-				_gameMap[y][x] == PLAYER_HEAD_SPRITE)
-			{
-				_gameMap[y][x] = EMPTY_SPRITE;
-			}
+
+	for (Point p : player->sprite) {
+		int y = p.posY, x = p.posX;
+		if (_gameMap[y][x] == getPlayerASCII(player) ||
+		_gameMap[y][x] == PLAYER_HEAD_SPRITE)
+		{
+		_gameMap[y][x] = BONUS_SPRITE;
 		}
 	}
+
 }
 
 
 void Game::drawSnakeHead(Player* player)
 {
-	if (player->isRunning)
+	if (player->isPlaying)
 	{
 		_gameMap[player->sprite.front().posY][player->sprite.front().posX] = PLAYER_HEAD_SPRITE;
 	}
@@ -134,6 +133,8 @@ void Game::drawSnakeHead(Player* player)
 
 void Game::movePlayer(Player* player) 
 {
+	if (!player->isPlaying)
+		return;
 	//Przesuń jego postać
 	int xTranslation = 0;
 	int yTranslation = 0;
@@ -184,15 +185,18 @@ void Game::movePlayer(Player* player)
 		_gameMap[currTailPos.posY][currTailPos.posX] = EMPTY_SPRITE;
 	}
 	else if (nextPos == BONUS_SPRITE) {
-		//score++
+		player->score++;
 		player->sprite.push_front(nextHeadPos);
 	}
-	else { // on the next position enemy snake is placed
-		player->isRunning = false;
+	else {
+		getPlayerById(nextPos)->score =+ 5;
+		// on the next position enemy snake is placed
+		player->isPlaying = false;
+		removeSnake(player);
 	}
 
 	// Nanieś węża na mapę
-	if (player->isRunning)
+	if (player->isPlaying)
 	{
 		printSnake(player);
 	}
