@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['score_0',['score',['../struct_player.html#af90f47d3d6306361df521135f6f1016d',1,'Player']]],
+  ['score_0',['score',['../struct_player.html#a6808ae95134a0bfcb6a852fcdf43fba4',1,'Player']]],
   ['sendmessage_1',['sendMessage',['../class_client.html#aad121e3efbdb671b908ae30a5b6406f5',1,'Client::sendMessage()'],['../class_server.html#a2a18a69fd156e54291dcc66a5084b8dc',1,'Server::sendMessage()']]],
   ['server_2',['Server',['../class_server.html',1,'Server'],['../class_server.html#aeea97c30915862758ba454c9a407fc2a',1,'Server::Server()']]],
   ['serverip_3',['serverIP',['../struct_client_setup.html#ad3b7a90606877b6dc300e83aa5624f32',1,'ClientSetup']]],

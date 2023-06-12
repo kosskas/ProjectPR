@@ -239,10 +239,11 @@ void Server::endConnection()
             codeMessage(Player, msg, DISC); //WON
             int iSendResult = send(Player->sock, msg, 4, 0);
             if (iSendResult == SOCKET_ERROR) {
-                printf("%d | Broadcast: send to Player(%d) failed with error: %d\n", __LINE__, Player->ID, WSAGetLastError());
+                printf("%d | endConnection: send to Player(%d) failed with error: %d\n", __LINE__, Player->ID, WSAGetLastError());
             }
         }
     }
+    Sleep(1000);
 }
 
 
@@ -265,7 +266,7 @@ void Server::run()
     //while (!_canStartGame);
 
 
-    _game = new Game(_players, _setup.mapSizeY, _setup.mapSizeX);
+    _game = new Game(_players, _setup.mapSizeY, _setup.mapSizeX, _setup.winScore);
 
     ///Pętla grająca
     //IF LICZBA GRACZY == 0 END
@@ -276,7 +277,7 @@ void Server::run()
     //std::uniform_int_distribution<int> bonusRandTime(MIN_TIME_BETWEEN_BONUS_MS, MAX_TIME_BETWEEN_BONUS_MS);
     unsigned int i = 0;
 
-    while (_isServerRunning /* && game.checkGameState()*/ && !_players.empty()) { // && liczba grających > 1
+    while (_isServerRunning  && _game->checkGameState() && !_players.empty()) { // && liczba grających > 1
 
         for (Player* player : _players) {
             //_game->removeSnake(player);
@@ -293,7 +294,7 @@ void Server::run()
         sendMessage();
         i++;
     }
-    //endConnection();
+    endConnection();
 }
 
 unsigned int Server::getXSize()
@@ -304,6 +305,16 @@ unsigned int Server::getXSize()
 unsigned int Server::getYSize()
 {
     return _setup.mapSizeY;
+}
+
+int Server::getWinnerID()
+{
+    return _game->getWinnerID();
+}
+
+unsigned int Server::getWinCondition()
+{
+    return _setup.winScore;
 }
 
 
@@ -317,9 +328,9 @@ DWORD __stdcall ClientListener(LPVOID param)
 
     int _recvbuflen = DEFAULT_BUFLEN;
     int iResult;
-    char msg[4];
+    char msg[5];
     codeMessage(player, msg, Server::CONN);
-    int iSendResult = send(player->sock, msg, 4, 0);
+    int iSendResult = send(player->sock, msg, 5, 0);
     if (iSendResult == SOCKET_ERROR) {
         printf("%d send failed with error: %d\n", __LINE__, WSAGetLastError());
         player->isRunning = false;
@@ -381,14 +392,17 @@ void codeMessage(Player* player, char* msg, Server::MSGMODE mode)
     
     switch (mode) {
     case Server::CONN:
+    {
         msg[0] = mode;
         msg[1] = player->srvptr->getXSize();
         msg[2] = player->srvptr->getYSize();
         msg[3] = player->ID;
+        msg[4] = player->srvptr->getWinCondition();
         break;
+    }
     case Server::DISC:
         msg[0] = mode;      
-        //wyślij wszystkim id gracza który wygrał
+        msg[1] = player->srvptr->getWinnerID();        //wyślij wszystkim id gracza który wygrał
         break;      
     case Server::SPECTATE:
     case Server::MAP:

@@ -72,7 +72,7 @@ struct Player {
     /**
      * @brief Zdobyty wynik podczas gry
     */
-    short score;
+    unsigned short score;
 
     /**
      * @brief Unikalny identyfikator, symbol ASCII, który będzie rysowany na mapie jako postać gracza

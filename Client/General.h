@@ -16,6 +16,7 @@
 #define DEFAULT_PORT "27015"
 
 #define VK_Q 0x51 // ASCII of 'Q'
+#define RETURN_CURSOR "\033[0;0H"
 
 #define BLACK      "\033[0;30m"
 #define DARK_GRAY  "\033[1;30m"

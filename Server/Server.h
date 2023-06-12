@@ -17,7 +17,6 @@
 
 struct Player;
 class Game;
-
 #include "General.h"
 #include "Player.h"
 #include "Game.h"
@@ -57,6 +56,11 @@ struct ServerSetup {
      * @brief Liczba kolumn
     */
     unsigned int mapSizeX;
+
+    /**
+     * @brief Wynik wymagany do wygrania gry
+    */
+    unsigned short winScore;
 };
 
 
@@ -112,7 +116,6 @@ private:
 
     friend DWORD __stdcall ClientListener(LPVOID param);
     friend DWORD __stdcall Pinger(LPVOID param);
-
 protected:
 
     /**
@@ -192,7 +195,7 @@ public:
         /**
          * @brief Połączono z Server, odbierz informacje o grze
         */
-        CONN = 0xA,
+        CONN,
         /**
          * @brief Koniec gry, połączenie zostanie zamknięte
         */
@@ -229,6 +232,18 @@ public:
      * @return Liczba wierszy
     */
     unsigned int getYSize();
+
+    /**
+     * @brief Zwraca identyfikator gracza, który wygrał rozgrywkę
+     * @return ID gracza, który wygrał
+    */
+    int getWinnerID();
+
+    /**
+     * @brief Zwraca wymagany wynik do wygrania gry
+     * @return Wynik
+    */
+    unsigned int getWinCondition();
 
     /**
      * @brief Wymusza zakończenie się wątków. Usuwa obiekty klasy Player z listy Server::Players. Zamyka socker serwera.

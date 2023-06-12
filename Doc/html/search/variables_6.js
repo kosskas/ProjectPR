@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['score_0',['score',['../struct_player.html#af90f47d3d6306361df521135f6f1016d',1,'Player']]],
+  ['score_0',['score',['../struct_player.html#a6808ae95134a0bfcb6a852fcdf43fba4',1,'Player']]],
   ['serverip_1',['serverIP',['../struct_client_setup.html#ad3b7a90606877b6dc300e83aa5624f32',1,'ClientSetup']]],
   ['serverport_2',['serverPort',['../struct_client_setup.html#afc2864ad852fb5939279fbc96c3f55be',1,'ClientSetup']]],
   ['sock_3',['sock',['../struct_player.html#a62172d5cb15a75727b62083973f1db4b',1,'Player']]],

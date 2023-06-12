@@ -37,6 +37,15 @@ private:
 	*/
 	list<Player*> _players;
 
+	/**
+	 * @brief Wynik wymagany do wygrania gry
+	*/
+	unsigned short _winScore;
+
+	/**
+	 * @brief ID gracza, który wygrał
+	*/
+	int winnerID;
 protected:
 	/**
 	 * @brief Tworzy mape ASCII o wymiarach Y na X
@@ -72,8 +81,9 @@ public:
 	 * @param players Lista graczy, ta sama jak w klasie Server
 	 * @param y Liczba kolumn
 	 * @param x Liczba wierszy
+	 * @param wScore Wynik wymagany do wygrania gry
 	*/
-	Game(list<Player*>& players, int y, int x);
+	Game(list<Player*>& players, int y, int x, unsigned short wScore);
 
 	/**
 	 * @brief Sprawdza stan bieżącej gry
@@ -110,6 +120,12 @@ public:
 	 * @param msg Wskaźnik na docelową pamięć
 	*/
 	void getMap(char* msg);
+
+	/**
+	 * @brief Zwraca identyfikator gracza, który wygrał rozgrywkę
+	 * @return ID gracza, który wygrał
+	*/
+	int getWinnerID();
 
 	/**
 	 * @brief Czyści poprawnie klasę Game

@@ -88,7 +88,7 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-types" name="pub-types"></a>
 Typy publiczne</h2></td></tr>
-<tr class="memitem:a2f2a6f9955ce1f5be8a603e5b2b677ec"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_client.html#a2f2a6f9955ce1f5be8a603e5b2b677ec">MSGMODE</a> { <a class="el" href="class_client.html#a2f2a6f9955ce1f5be8a603e5b2b677eca4fbb83aacf5992cb5381504e64a2be30">CONN</a> = 0xA
+<tr class="memitem:a2f2a6f9955ce1f5be8a603e5b2b677ec"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_client.html#a2f2a6f9955ce1f5be8a603e5b2b677ec">MSGMODE</a> { <a class="el" href="class_client.html#a2f2a6f9955ce1f5be8a603e5b2b677eca4fbb83aacf5992cb5381504e64a2be30">CONN</a>
 , <a class="el" href="class_client.html#a2f2a6f9955ce1f5be8a603e5b2b677eca120b7d7800104e118b3faa941fba7c4c">DISC</a>
 , <a class="el" href="class_client.html#a2f2a6f9955ce1f5be8a603e5b2b677ecaaabe49e5661b93950b8df7f5953412e0">SPECTATE</a>
 , <a class="el" href="class_client.html#a2f2a6f9955ce1f5be8a603e5b2b677eca01f08f20ce995eb72975969005c185e8">MAP</a>
@@ -225,6 +225,10 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>_isRunning</b></td></
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>_isConnected</b></td></tr>
 <tr class="memdesc:a90f7ea8d056e098a7f109584b3347b93"><td class="mdescLeft">&#160;</td><td class="mdescRight">Flaga określająca czy <a class="el" href="class_client.html" title="Klasa Client zarządza grą oraz połączeniem po stronie klienta.">Client</a> jest podłączony do serwera. <br /></td></tr>
 <tr class="separator:a90f7ea8d056e098a7f109584b3347b93"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6f770552c0eb255f4b823ea0cae48d67"><td class="memItemLeft" align="right" valign="top"><a id="a6f770552c0eb255f4b823ea0cae48d67" name="a6f770552c0eb255f4b823ea0cae48d67"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>_hasReceivedConnMsg</b></td></tr>
+<tr class="memdesc:a6f770552c0eb255f4b823ea0cae48d67"><td class="mdescLeft">&#160;</td><td class="mdescRight">Flaga określająca czy <a class="el" href="class_client.html" title="Klasa Client zarządza grą oraz połączeniem po stronie klienta.">Client</a> otrzymał wiadomość początkową od <a class="el" href="class_server.html" title="Klasa Server zarządza połączeniami oraz grą">Server</a>. <br /></td></tr>
+<tr class="separator:a6f770552c0eb255f4b823ea0cae48d67"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac6e2b187d62e68642485659e9a526c42"><td class="memItemLeft" align="right" valign="top"><a id="ac6e2b187d62e68642485659e9a526c42" name="ac6e2b187d62e68642485659e9a526c42"></a>
 unsigned int&#160;</td><td class="memItemRight" valign="bottom"><b>_mapSizeY</b></td></tr>
 <tr class="memdesc:ac6e2b187d62e68642485659e9a526c42"><td class="mdescLeft">&#160;</td><td class="mdescRight">Liczba wierszy. <br /></td></tr>
@@ -241,6 +245,10 @@ unsigned int&#160;</td><td class="memItemRight" valign="bottom"><b>_playerID</b>
 unsigned short&#160;</td><td class="memItemRight" valign="bottom"><b>_playerScore</b></td></tr>
 <tr class="memdesc:a0cba8e39a3131c15d2a63ff4e8427753"><td class="mdescLeft">&#160;</td><td class="mdescRight">Wynik gracza. <br /></td></tr>
 <tr class="separator:a0cba8e39a3131c15d2a63ff4e8427753"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a365ec0b1ff43e28b252ad7e51a7cf8f5"><td class="memItemLeft" align="right" valign="top"><a id="a365ec0b1ff43e28b252ad7e51a7cf8f5" name="a365ec0b1ff43e28b252ad7e51a7cf8f5"></a>
+unsigned int&#160;</td><td class="memItemRight" valign="bottom"><b>_serverWinScore</b></td></tr>
+<tr class="memdesc:a365ec0b1ff43e28b252ad7e51a7cf8f5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Wymagany wynik do wygrania gry przesłany przez <a class="el" href="class_server.html" title="Klasa Server zarządza połączeniami oraz grą">Server</a>. <br /></td></tr>
+<tr class="separator:a365ec0b1ff43e28b252ad7e51a7cf8f5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="friends" name="friends"></a>
 Przyjaciele</h2></td></tr>

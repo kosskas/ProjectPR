@@ -86,9 +86,9 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Metody publiczne</h2></td></tr>
-<tr class="memitem:a57539f3c112340c73d85c8aa5d5b78ad"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game.html#a57539f3c112340c73d85c8aa5d5b78ad">Game</a> (list&lt; <a class="el" href="struct_player.html">Player</a> * &gt; &amp;players, int y, int x)</td></tr>
-<tr class="memdesc:a57539f3c112340c73d85c8aa5d5b78ad"><td class="mdescLeft">&#160;</td><td class="mdescRight">Inicjalizuje klasę <a class="el" href="class_game.html" title="Klasa Game zarządza logiką gry.">Game</a>.  <br /></td></tr>
-<tr class="separator:a57539f3c112340c73d85c8aa5d5b78ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5024a0c621c57b0a4d878d47ba197cd5"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game.html#a5024a0c621c57b0a4d878d47ba197cd5">Game</a> (list&lt; <a class="el" href="struct_player.html">Player</a> * &gt; &amp;players, int y, int x, unsigned short wScore)</td></tr>
+<tr class="memdesc:a5024a0c621c57b0a4d878d47ba197cd5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Inicjalizuje klasę <a class="el" href="class_game.html" title="Klasa Game zarządza logiką gry.">Game</a>.  <br /></td></tr>
+<tr class="separator:a5024a0c621c57b0a4d878d47ba197cd5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a20f831cd0ac6a796dd8037c9840722a3"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game.html#a20f831cd0ac6a796dd8037c9840722a3">checkGameState</a> ()</td></tr>
 <tr class="memdesc:a20f831cd0ac6a796dd8037c9840722a3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sprawdza stan bieżącej gry.  <br /></td></tr>
 <tr class="separator:a20f831cd0ac6a796dd8037c9840722a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -107,6 +107,9 @@ Metody publiczne</h2></td></tr>
 <tr class="memitem:a2bfe1cf03f2f0545c3d038640338382f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game.html#a2bfe1cf03f2f0545c3d038640338382f">getMap</a> (char *msg)</td></tr>
 <tr class="memdesc:a2bfe1cf03f2f0545c3d038640338382f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Przekształca mapę do postaci wymaganej przez <a class="el" href="class_server.html" title="Klasa Server zarządza połączeniami oraz grą">Server</a> do wysłania.  <br /></td></tr>
 <tr class="separator:a2bfe1cf03f2f0545c3d038640338382f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7499ba00c41608781a2f3f3f835546b7"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game.html#a7499ba00c41608781a2f3f3f835546b7">getWinnerID</a> ()</td></tr>
+<tr class="memdesc:a7499ba00c41608781a2f3f3f835546b7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Zwraca identyfikator gracza, który wygrał rozgrywkę  <br /></td></tr>
+<tr class="separator:a7499ba00c41608781a2f3f3f835546b7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae3d112ca6e0e55150d2fdbc704474530"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game.html#ae3d112ca6e0e55150d2fdbc704474530">~Game</a> ()</td></tr>
 <tr class="memdesc:ae3d112ca6e0e55150d2fdbc704474530"><td class="mdescLeft">&#160;</td><td class="mdescRight">Czyści poprawnie klasę <a class="el" href="class_game.html" title="Klasa Game zarządza logiką gry.">Game</a>.  <br /></td></tr>
 <tr class="separator:ae3d112ca6e0e55150d2fdbc704474530"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -148,12 +151,20 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>_gameState</b></td></
 list&lt; <a class="el" href="struct_player.html">Player</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>_players</b></td></tr>
 <tr class="memdesc:aea48f42447cfcf7da342ee817b049ede"><td class="mdescLeft">&#160;</td><td class="mdescRight">Lista graczy, ta sama jak w klasie <a class="el" href="class_server.html" title="Klasa Server zarządza połączeniami oraz grą">Server</a>. <br /></td></tr>
 <tr class="separator:aea48f42447cfcf7da342ee817b049ede"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae25e5c4eb0f40ba040ec5ce1c34644dd"><td class="memItemLeft" align="right" valign="top"><a id="ae25e5c4eb0f40ba040ec5ce1c34644dd" name="ae25e5c4eb0f40ba040ec5ce1c34644dd"></a>
+unsigned short&#160;</td><td class="memItemRight" valign="bottom"><b>_winScore</b></td></tr>
+<tr class="memdesc:ae25e5c4eb0f40ba040ec5ce1c34644dd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Wynik wymagany do wygrania gry. <br /></td></tr>
+<tr class="separator:ae25e5c4eb0f40ba040ec5ce1c34644dd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5ce257dcde8bacb44d3dd85062c94b00"><td class="memItemLeft" align="right" valign="top"><a id="a5ce257dcde8bacb44d3dd85062c94b00" name="a5ce257dcde8bacb44d3dd85062c94b00"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>winnerID</b></td></tr>
+<tr class="memdesc:a5ce257dcde8bacb44d3dd85062c94b00"><td class="mdescLeft">&#160;</td><td class="mdescRight">ID gracza, który wygrał <br /></td></tr>
+<tr class="separator:a5ce257dcde8bacb44d3dd85062c94b00"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Opis szczegółowy</h2>
 <div class="textblock"><p>Klasa <a class="el" href="class_game.html" title="Klasa Game zarządza logiką gry.">Game</a> zarządza logiką gry. </p>
 </div><h2 class="groupheader">Dokumentacja konstruktora i destruktora</h2>
-<a id="a57539f3c112340c73d85c8aa5d5b78ad" name="a57539f3c112340c73d85c8aa5d5b78ad"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a57539f3c112340c73d85c8aa5d5b78ad">&#9670;&#160;</a></span>Game()</h2>
+<a id="a5024a0c621c57b0a4d878d47ba197cd5" name="a5024a0c621c57b0a4d878d47ba197cd5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5024a0c621c57b0a4d878d47ba197cd5">&#9670;&#160;</a></span>Game()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -174,7 +185,13 @@ list&lt; <a class="el" href="struct_player.html">Player</a> * &gt;&#160;</td><td
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>x</em>&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned short&#160;</td>
+          <td class="paramname"><em>wScore</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -190,6 +207,7 @@ list&lt; <a class="el" href="struct_player.html">Player</a> * &gt;&#160;</td><td
     <tr><td class="paramname">players</td><td>Lista graczy, ta sama jak w klasie <a class="el" href="class_server.html" title="Klasa Server zarządza połączeniami oraz grą">Server</a> </td></tr>
     <tr><td class="paramname">y</td><td>Liczba kolumn </td></tr>
     <tr><td class="paramname">x</td><td>Liczba wierszy </td></tr>
+    <tr><td class="paramname">wScore</td><td>Wynik wymagany do wygrania gry </td></tr>
   </table>
   </dd>
 </dl>
@@ -401,6 +419,26 @@ list&lt; <a class="el" href="struct_player.html">Player</a> * &gt;&#160;</td><td
   </dd>
 </dl>
 <dl class="section return"><dt>Zwraca</dt><dd>Symbol ASCII </dd></dl>
+
+</div>
+</div>
+<a id="a7499ba00c41608781a2f3f3f835546b7" name="a7499ba00c41608781a2f3f3f835546b7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7499ba00c41608781a2f3f3f835546b7">&#9670;&#160;</a></span>getWinnerID()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int Game::getWinnerID </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Zwraca identyfikator gracza, który wygrał rozgrywkę </p>
+<dl class="section return"><dt>Zwraca</dt><dd>ID gracza, który wygrał </dd></dl>
 
 </div>
 </div>

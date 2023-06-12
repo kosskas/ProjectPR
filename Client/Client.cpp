@@ -202,7 +202,7 @@ void Client::printGame(const char* map)
     if (_mapSizeX == 0xFFFFFFFF)
         return;
     //    //fflush(stdout);       ???? 
-    printf("\033[0;0H");
+    printf(RETURN_CURSOR);
     for (unsigned int y = 0; y < _mapSizeY; y++) {
         for (unsigned int x = 0; x < _mapSizeX; x++) {
             //char tile = map[y + _mapSizeY * x];
@@ -212,12 +212,12 @@ void Client::printGame(const char* map)
         }
         printf("\n");
     }
-    printf("\033[0m");
+    printf(RESET);
     char arrow = getArrow(_keyInput);
     getColorById(bufor, (char)_playerID+'0');
-    printf("Destroy \033[1;31mall\033[0m enemies. Use \x18\x19\x1a< to navigate\n");
-    printf("Your number %s%d%s   Current direction: \033[1;33m%c \033[0m   Your score %d\n",bufor,_playerID,RESET, arrow, _playerScore);
-    printf("\033[0m");
+    printf("Destroy %sall%sm enemies or collect %s%d%s points to win. Use \x18\x19\x1a< to navigate\n", BRIGHT_RED, RESET, BRIGHT_RED, _serverWinScore,RESET);
+    printf("Your number %s%d%s   Current direction: %s%c%s   Your score %s%d%s\n",bufor,_playerID,RESET, BRIGHT_YELLOW, arrow, RESET, YELLOW, _playerScore,RESET);
+    printf(RESET);
 }
 
 char Client::getArrow(char direction) 
@@ -243,7 +243,8 @@ char Client::getArrow(char direction)
 Client::Client(ClientSetup setup) :
     _setup(setup),
     _isRunning(true), 
-    _isConnected(false)
+    _isConnected(false),
+    _hasReceivedConnMsg(false)
 {
     printf("Trying to connect to %s... \n", setup.serverIP);
     if (!startUpWinsock()) {
@@ -315,31 +316,42 @@ Client::~Client()
 }
 
 void Client::decodeMessage() {
-    char mode = _recvbuf[0];
-    char* msg = _recvbuf;
-    short score = 0;
-    switch (mode) {
+    switch (_recvbuf[0]) {
     case Client::CONN:
         printf("%sCONNECTED%s\n", BRIGHT_GREEN, RESET);
         _mapSizeX = _recvbuf[1];
         _mapSizeY = _recvbuf[2];
         _playerID = _recvbuf[3];
+        _serverWinScore = _recvbuf[4];
+        _hasReceivedConnMsg = true;
         break;
     case Client::DISC:
-        //_playerScore = _recvbuf[1];
+    {
+        unsigned int winner = _recvbuf[1];
         _isRunning = false;
         //odbierz id wygrywa i sprawdz czy to ty
-        //printf("You won.\n");
+        printf("Game has ended: ");
+        if (_playerID == winner) {
+            printf("%sYou won!\n%s", BRIGHT_GREEN, RESET);
+        }
+        else {
+            printf("%sYou lost!\n%s", BRIGHT_RED, RESET);
+        }
+        //
         break;
+    }
     case Client::SPECTATE:
         printf("You lost. Now watch\n");
     case Client::MAP:
+    {
+        char* msg = _recvbuf;
+        short score = 0;
         __asm {
             push eax
             push ebx
             mov ebx, msg
-            mov al, [ebx+1]
-            mov ah, [ebx+2]
+            mov al, [ebx + 1]
+            mov ah, [ebx + 2]
             mov score, ax
             pop ebx
             pop eax
@@ -347,6 +359,7 @@ void Client::decodeMessage() {
         _playerScore = score;
         printGame(_recvbuf + 3);
         break;
+    }
     default:
         break;
     }
@@ -393,7 +406,7 @@ DWORD __stdcall MsgReceiverListener(LPVOID param)
                 client->_isRunning = false;
             }
         }
-        else if (result == 0) {
+        else if (result == 0 && !client->_hasReceivedConnMsg) {
             printf("%sServer busy%s\n", RED, RESET);
             client->_isRunning = false;
             break;

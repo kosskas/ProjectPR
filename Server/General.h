@@ -40,4 +40,7 @@
 
 
 using std::list;
+using std::uniform_int_distribution;
+using std::random_device;
+using std::mt19937;
 #endif // !GENERAL

@@ -116,6 +116,10 @@ private:
      * @brief Flaga określająca czy Client jest podłączony do serwera
     */
     bool _isConnected;
+    /**
+     * @brief Flaga określająca czy Client otrzymał wiadomość początkową od Server
+    */
+    bool _hasReceivedConnMsg;
 
     /**
      * @brief Liczba wierszy
@@ -133,8 +137,10 @@ private:
      * @brief Wynik gracza
     */
     unsigned short _playerScore;
-
-
+    /**
+     * @brief Wymagany wynik do wygrania gry przesłany przez Server
+    */
+    unsigned int _serverWinScore;
 protected:
     
     /**
@@ -231,7 +237,7 @@ public:
         /**
          * @brief Połączono z Server, odbierz informacje o grze
         */
-        CONN = 0xA,
+        CONN,
         /**
          * @brief Koniec gry, połączenie zostanie zamknięte
         */

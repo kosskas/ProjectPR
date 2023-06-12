@@ -45,8 +45,8 @@ char Game::getPlayerASCII(Player* player)
 // - - - - - - - - - - Game :: public - - - - - - - - - - \\
 
 
-Game::Game(list<Player*>& players, int y, int x)
-	: _sizeX(x), _sizeY(y), _players(players) 
+Game::Game(list<Player*>& players, int y, int x, unsigned short wScore)
+	: _sizeX(x), _sizeY(y), _players(players), _winScore(wScore)
 {
 	_gameState = true;
 	_gameMap = createMap(y,x);
@@ -55,6 +55,7 @@ Game::Game(list<Player*>& players, int y, int x)
 	for (Player* player : _players) {
 		player->sprite.push_front({ sty++, stx ++});
 	}
+
 }
 
 
@@ -67,12 +68,12 @@ bool Game::checkGameState()
 void Game::placeBonuses(int num)
 {
 	// Inicjalizacja generatora liczb losowych
-	std::random_device rd;
-	std::mt19937 generator(rd());
+	random_device rd;
+	mt19937 generator(rd());
 
 	// Utworzenie rozkładu równomiernego dla zakresu od (0,0) do (_sizeX,_sizeY)
-	std::uniform_int_distribution<int> distributionX(0, this->_sizeX-1);
-	std::uniform_int_distribution<int> distributionY(0, this->_sizeY-1);
+	uniform_int_distribution<int> distributionX(0, this->_sizeX-1);
+	uniform_int_distribution<int> distributionY(0, this->_sizeY-1);
 
 	// Wylosowanie liczby
 	int maxTries = 5;
@@ -98,7 +99,6 @@ void Game::placeBonuses(int num)
 
 void Game::removeSnake(Player* player)
 {
-
 	for (Point p : player->sprite) {
 		int y = p.posY, x = p.posX;
 		if (_gameMap[y][x] == getPlayerASCII(player) ||
@@ -189,10 +189,15 @@ void Game::movePlayer(Player* player)
 	{
 		printSnake(player);
 	}
+
+	//sprawdz warunek końca gry
+	if (player->score >= _winScore) {
+		winnerID = player->ID;
+		_gameState = false;
+		printf("Gracz %d wygral", winnerID);
+	}
 	
 }
-
-
 
 void Game::getMap(char* msg) 
 {
@@ -204,6 +209,10 @@ void Game::getMap(char* msg)
 	}
 }
 
+int Game::getWinnerID()
+{
+	return winnerID;
+}
 
 Game::~Game() 
 {

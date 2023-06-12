@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['keyeventlistener_0',['keyEventListener',['../class_client.html#a5ec33c3871356eefa9868663c216c8ba',1,'Client']]],
-  ['keyeventlistenerid_1',['keyEventListenerID',['../class_client.html#ab8155c53e384a12c3a3a8d504c1f2453',1,'Client']]],
-  ['keyinput_2',['keyInput',['../class_client.html#a27a27f1877b5b484cccddaf627a24165',1,'Client']]]
+  ['winnerid_0',['winnerID',['../class_game.html#a5ce257dcde8bacb44d3dd85062c94b00',1,'Game']]],
+  ['winscore_1',['winScore',['../struct_server_setup.html#aa4dfc0c2f8668e15305ad28c4c62e5fd',1,'ServerSetup']]]
 ];
