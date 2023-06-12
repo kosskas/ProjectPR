@@ -49,12 +49,13 @@ Game::Game(list<Player*>& players, int y, int x, unsigned short wScore)
 	: _sizeX(x), _sizeY(y), _players(players), _winScore(wScore)
 {
 	_gameState = true;
-	_gameMap = createMap(y,x);
+	_gameMap = createMap(y, x);
+
 	int sty = 2, stx = 2;
 	///Inicjalizuj pozycje graczy oraz długości ich wężów
 	for (Player* player : _players) {
-		player->sprite.push_front({ sty+=4, stx +=2});
-		player->sprite.push_front({ sty+1, stx });
+		player->sprite.push_front({ sty += 4, stx += 2 });
+		player->sprite.push_front({ sty + 1, stx });
 	}
 
 }
@@ -62,6 +63,18 @@ Game::Game(list<Player*>& players, int y, int x, unsigned short wScore)
 
 bool Game::checkGameState() 
 {
+	int n_of_playing = 0;
+	int winner = 0;
+	for (Player* player : _players) {
+		if (player->isPlaying) {
+			winner = player->ID;
+			n_of_playing++;
+		}
+	}
+	if (n_of_playing == 1) {
+		_gameState = false;
+		winnerID = winner;
+	}
 	return _gameState;
 }
 

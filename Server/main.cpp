@@ -10,14 +10,14 @@ int __cdecl main(void)
     setup.port = PORT;
     setup.mapSizeY = 25;
     setup.mapSizeX = 100;
-    setup.winScore = 50;
+    setup.winScore = 20;
 
     Server *server = new Server(setup);
 
     server->run();
 
     delete server;
-    printf("Enter..");
+    printf("Enter 2x..");
     char c = getchar();
     c = getchar();
     ExitProcess(0);

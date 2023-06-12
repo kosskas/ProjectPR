@@ -1,6 +1,4 @@
 #include "Client.h"
-#include <iostream>
-
 
 // - - - - - - - - - - Client :: protected - - - - - - - - - - \\
 
@@ -201,11 +199,9 @@ void Client::printGame(const char* map)
     char bufor[8];
     if (_mapSizeX == 0xFFFFFFFF)
         return;
-    //    //fflush(stdout);       ???? 
     printf(RETURN_CURSOR);
     for (unsigned int y = 0; y < _mapSizeY; y++) {
         for (unsigned int x = 0; x < _mapSizeX; x++) {
-            //char tile = map[y + _mapSizeY * x];
             char tile = map[y*_mapSizeX + x];
             getColorById(bufor, tile);
             printf("%s%c", bufor, tile);
@@ -246,6 +242,14 @@ Client::Client(ClientSetup setup) :
     _isConnected(false),
     _hasReceivedConnMsg(false)
 {
+    if (initConsole() != 0) {
+        if (_fdwSaveOldInMode != 0)
+            SetConsoleMode(_hStdin, _fdwSaveOldInMode);
+        if (_fdwSaveOldOutMode != 0)
+            SetConsoleMode(_hStdout, _fdwSaveOldOutMode);
+        ExitProcess(1);
+    }
+
     printf("Trying to connect to %s... \n", setup.serverIP);
     if (!startUpWinsock()) {
         ExitProcess(1);
@@ -264,13 +268,7 @@ Client::Client(ClientSetup setup) :
 
     _isConnected = true;
 
-    if (initConsole() != 0) {
-        if (_fdwSaveOldInMode != 0)
-            SetConsoleMode(_hStdin, _fdwSaveOldInMode);
-        if (_fdwSaveOldOutMode != 0)
-            SetConsoleMode(_hStdout, _fdwSaveOldOutMode);
-        ExitProcess(1);
-    }
+   
     //system("cls");
 }
 
@@ -352,11 +350,11 @@ void Client::decodeMessage() {
     }
     case Client::DISC:
     {
-        unsigned int winner = _recvbuf[1];
+        int winnerID = _recvbuf[1];
         _isRunning = false;
         //odbierz id wygrywa i sprawdz czy to ty
         printf("Game has ended: ");
-        if (_playerID == winner) {
+        if (_playerID == winnerID) {
             printf("%sYou won!\n%s", BRIGHT_GREEN, RESET);
         }
         else {
@@ -414,10 +412,16 @@ DWORD __stdcall MsgReceiverListener(LPVOID param)
         if (result == SOCKET_ERROR) {
             printf("Line %d in function %s \t select failed with error: %d\n", __LINE__, __FUNCTION__, WSAGetLastError());
             client->_isRunning = false;
-            break;
+            return 0;
         }
 
         if (result > 0) {
+            int result = select(0, &readSet, nullptr, nullptr, &timeout);
+            if (result == SOCKET_ERROR) {
+                printf("Line %d in function %s \t select failed with error: %d\n", __LINE__, __FUNCTION__, WSAGetLastError());
+                client->_isRunning = false;
+                return 0;
+            }
             iResult = recv(client->_socket, client->_recvbuf, client->_recvbuflen, 0);
             if (iResult > 0) {
                 client->decodeMessage();
@@ -425,23 +429,19 @@ DWORD __stdcall MsgReceiverListener(LPVOID param)
             else if (iResult == 0) {
                 printf("Connection closed\n");
                 client->_isRunning = false;
+                return 0;
             }
             else {
                 //printf("Line %d in function %s \t recv failed with error: %d\n", __LINE__, __FUNCTION__, WSAGetLastError());
-                printf("Game has ended: ");
-                if (client->_playerScore == client->_serverWinScore) {
-                    printf("%sYou won%s!\n", BRIGHT_GREEN, RESET);
-                }
-                else {
-                    printf("%sYou lost%s!\n", BRIGHT_RED, RESET);
-                }
+                printf("Game has ended\n");
                 client->_isRunning = false;
+                return 0;
             }
         }
         else if (result == 0 && !client->_hasReceivedConnMsg) {
             printf("%sServer busy%s\n", RED, RESET);
             client->_isRunning = false;
-            break;
+            return 0;
         }
 
     } while (client->_isRunning);

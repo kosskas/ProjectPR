@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['win32_5flean_5fand_5fmean_0',['WIN32_LEAN_AND_MEAN',['../_client_8h.html#ac7bef5d85e3dcd73eef56ad39ffc84a9',1,'WIN32_LEAN_AND_MEAN:&#160;Client.h'],['../_server_8h.html#ac7bef5d85e3dcd73eef56ad39ffc84a9',1,'WIN32_LEAN_AND_MEAN:&#160;Server.h']]]
+  ['comparestring_0',['compareString',['../_client_2_general_8h.html#aaf44cf29948083ea8b970f9f7016ca63',1,'General.h']]],
+  ['cyan_1',['CYAN',['../_client_2_general_8h.html#ad243f93c16bc4c1d3e0a13b84421d760',1,'General.h']]]
 ];

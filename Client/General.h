@@ -59,7 +59,6 @@
 
 #define compareString(a, b) strcmp(a, b) == 0
 
-
 #pragma comment (lib, "Ws2_32.lib")
 #pragma comment (lib, "Mswsock.lib")
 #pragma comment (lib, "AdvApi32.lib")

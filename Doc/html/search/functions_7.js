@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['placebonuses_0',['placeBonuses',['../class_game.html#a3773831912ac0c4f23b84b77c9243f04',1,'Game']]],
-  ['printgame_1',['printGame',['../class_client.html#a82e71f0abe366d54439fbec3410ef377',1,'Client']]],
-  ['printsnake_2',['printSnake',['../class_game.html#abe36167c719c3b0416dffbd8b0471bb8',1,'Game']]]
+  ['main_0',['main',['../app_8cpp.html#a7626fdc5873a2d10e9ac910fa40864b2',1,'main(int argc, char **argv):&#160;app.cpp'],['../main_8cpp.html#ab4ec3b3f6617ab4dcdbbe7b0ad0f06b7',1,'main(void):&#160;main.cpp']]],
+  ['moveplayer_1',['movePlayer',['../class_game.html#a44fbdb787e3efe7506dc13805fc58d49',1,'Game']]],
+  ['msgreceiverlistener_2',['MsgReceiverListener',['../_client_8cpp.html#ab493dc086fe674e2cc41509b237f7dea',1,'MsgReceiverListener(LPVOID param):&#160;Client.cpp'],['../_client_8h.html#ab493dc086fe674e2cc41509b237f7dea',1,'MsgReceiverListener(LPVOID param):&#160;Client.cpp']]]
 ];

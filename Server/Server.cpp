@@ -115,7 +115,6 @@ Server::Server(ServerSetup setup)
         WSACleanup();
         ExitProcess(1);
     }
-
     _isServerRunning = true;
     _mapMsgSize = _setup.mapSizeY * _setup.mapSizeX;
    
@@ -139,8 +138,6 @@ Server::~Server()
         printf("NOT OK");
     }
     CloseHandle(_PingerTh);
-
-
     shutdownSocket(_socket);
 
     closeSocket(_socket);
@@ -262,7 +259,7 @@ void Server::run()
     initGarbageCollector();
     waitForPlayers();
     //wszyscy gracze dołączyli
-
+    
     _game = new Game(_players, _setup.mapSizeY, _setup.mapSizeX, _setup.winScore);
 
     unsigned int i = 0;
@@ -283,6 +280,7 @@ void Server::run()
         sendMessage();
         i++;
     }
+    _game->checkGameState();
     endConnection();
 }
 
@@ -394,14 +392,14 @@ void codeMessage(Player* player, char* msg, Server::MSGMODE mode)
             shl al, 2
             mov dl, srvmode
             or al, dl
-            mov[ebx], al
+            mov [ebx], al
             mov al, x
             mov ah, y
             mov BYTE PTR[ebx + 1], al
             mov BYTE PTR[ebx + 2], ah
             mov ax, cond
-            mov[ebx + 3], al
-            mov[ebx + 4], ah
+            mov [ebx + 3], al
+            mov [ebx + 4], ah
             pop edx
             pop ebx
             pop eax
@@ -422,8 +420,8 @@ void codeMessage(Player* player, char* msg, Server::MSGMODE mode)
             push ebx
             mov ebx, msg
             mov ax, score
-            mov[ebx + 1], al
-            mov[ebx + 2], ah
+            mov [ebx + 1], al
+            mov [ebx + 2], ah
             pop ebx
             pop eax
         };
