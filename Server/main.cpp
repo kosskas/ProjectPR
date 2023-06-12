@@ -17,7 +17,7 @@ int __cdecl main(void)
     server->run();
 
     delete server;
-
+    printf("Enter..");
     char c = getchar();
     c = getchar();
     ExitProcess(0);

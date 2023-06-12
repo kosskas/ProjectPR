@@ -316,15 +316,40 @@ Client::~Client()
 }
 
 void Client::decodeMessage() {
-    switch (_recvbuf[0]) {
+    uint8_t mode = _recvbuf[0] & 0b11;
+    switch (mode) {
     case Client::CONN:
-        printf("%sCONNECTED%s\n", BRIGHT_GREEN, RESET);
-        _mapSizeX = _recvbuf[1];
-        _mapSizeY = _recvbuf[2];
-        _playerID = _recvbuf[3];
-        _serverWinScore = _recvbuf[4];
+    {
+        uint32_t sizeX = 0, sizeY = 0, id = 0, wscore = 0;
+        char* msg = _recvbuf;
+        __asm {
+            push eax
+            push ebx
+            push edx
+            mov ebx, msg
+            mov eax, 0
+            mov al, [ebx]
+            shr al, 2
+            mov id, eax
+            mov al, [ebx + 1]
+            mov sizeX, eax
+            mov al, [ebx + 2]
+            mov sizeY, eax
+            mov al, [ebx + 3]
+            mov ah, [ebx + 4]
+            mov wscore, eax
+            pop edx
+            pop ebx
+            pop eax
+        };
+        _mapSizeX = sizeX;
+        _mapSizeY = sizeY;
+        _playerID = id;
+        _serverWinScore = wscore;
         _hasReceivedConnMsg = true;
+        printf("%sCONNECTED%s\n", BRIGHT_GREEN, RESET);
         break;
+    }
     case Client::DISC:
     {
         unsigned int winner = _recvbuf[1];
@@ -402,7 +427,14 @@ DWORD __stdcall MsgReceiverListener(LPVOID param)
                 client->_isRunning = false;
             }
             else {
-                printf("Line %d in function %s \t recv failed with error: %d\n", __LINE__, __FUNCTION__, WSAGetLastError());
+                //printf("Line %d in function %s \t recv failed with error: %d\n", __LINE__, __FUNCTION__, WSAGetLastError());
+                printf("Game has ended: ");
+                if (client->_playerScore == client->_serverWinScore) {
+                    printf("%sYou won%s!\n", BRIGHT_GREEN, RESET);
+                }
+                else {
+                    printf("%sYou lost%s!\n", BRIGHT_RED, RESET);
+                }
                 client->_isRunning = false;
             }
         }

@@ -380,12 +380,34 @@ void codeMessage(Player* player, char* msg, Server::MSGMODE mode)
 {
     switch (mode) {
     case Server::CONN:
-        msg[0] = mode;
-        msg[1] = player->srvptr->getXSize();
-        msg[2] = player->srvptr->getYSize();
-        msg[3] = player->ID;
-        msg[4] = player->srvptr->getWinCondition();
+    {
+        uint8_t x = player->srvptr->getXSize(), y = player->srvptr->getYSize();
+        uint16_t cond = player->srvptr->getWinCondition();
+        uint8_t srvmode = mode, id = player->ID;
+        __asm {
+            push eax
+            push ebx
+            push edx
+            mov ebx, msg
+            mov eax, 0
+            mov al, id
+            shl al, 2
+            mov dl, srvmode
+            or al, dl
+            mov[ebx], al
+            mov al, x
+            mov ah, y
+            mov BYTE PTR[ebx + 1], al
+            mov BYTE PTR[ebx + 2], ah
+            mov ax, cond
+            mov[ebx + 3], al
+            mov[ebx + 4], ah
+            pop edx
+            pop ebx
+            pop eax
+        };
         break;
+    }
     case Server::DISC:
         msg[0] = mode;
         msg[1] = player->srvptr->getWinnerID();        //wyślij wszystkim id gracza który wygrał
@@ -393,7 +415,7 @@ void codeMessage(Player* player, char* msg, Server::MSGMODE mode)
     case Server::SPECTATE:
     case Server::MAP:
     {
-        short score = player->score;
+        uint16_t score = player->score;
         msg[0] = mode;
         __asm {
             push eax
