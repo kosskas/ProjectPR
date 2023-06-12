@@ -215,7 +215,7 @@ void Client::printGame(const char* map)
     printf(RESET);
     char arrow = getArrow(_keyInput);
     getColorById(bufor, (char)_playerID+'0');
-    printf("Destroy %sall%sm enemies or collect %s%d%s points to win. Use \x18\x19\x1a< to navigate\n", BRIGHT_RED, RESET, BRIGHT_RED, _serverWinScore,RESET);
+    printf("Destroy %sall%s enemies or collect %s%d%s points to win. Use \x18\x19\x1a< to navigate\n", BRIGHT_RED, RESET, BRIGHT_RED, _serverWinScore,RESET);
     printf("Your number %s%d%s   Current direction: %s%c%s   Your score %s%d%s\n",bufor,_playerID,RESET, BRIGHT_YELLOW, arrow, RESET, YELLOW, _playerScore,RESET);
     printf(RESET);
 }
