@@ -50,10 +50,11 @@ Game::Game(list<Player*>& players, int y, int x, unsigned short wScore)
 {
 	_gameState = true;
 	_gameMap = createMap(y,x);
-	int sty = 5, stx = 5;
+	int sty = 2, stx = 2;
 	///Inicjalizuj pozycje graczy oraz długości ich wężów
 	for (Player* player : _players) {
-		player->sprite.push_front({ sty++, stx ++});
+		player->sprite.push_front({ sty+=4, stx +=2});
+		player->sprite.push_front({ sty+1, stx });
 	}
 
 }

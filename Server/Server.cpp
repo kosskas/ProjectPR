@@ -243,7 +243,7 @@ void Server::endConnection()
             }
         }
     }
-    Sleep(1000);
+    Sleep(2000);
 }
 
 
@@ -260,27 +260,16 @@ void Server::initGarbageCollector()
 void Server::run()
 {
     initGarbageCollector();
-    //initJoiner();
     waitForPlayers();
     //wszyscy gracze dołączyli
-    //while (!_canStartGame);
-
 
     _game = new Game(_players, _setup.mapSizeY, _setup.mapSizeX, _setup.winScore);
 
-    ///Pętla grająca
-    //IF LICZBA GRACZY == 0 END
-
-    // Inicjalizacja generatora liczb losowych dla bonusów
-    //std::random_device rd;
-    //std::mt19937 generator(rd());
-    //std::uniform_int_distribution<int> bonusRandTime(MIN_TIME_BETWEEN_BONUS_MS, MAX_TIME_BETWEEN_BONUS_MS);
     unsigned int i = 0;
 
     while (_isServerRunning  && _game->checkGameState() && !_players.empty()) { // && liczba grających > 1
 
         for (Player* player : _players) {
-            //_game->removeSnake(player);
             _game->movePlayer(player);
         }
 
@@ -288,7 +277,7 @@ void Server::run()
             _game->drawSnakeHead(player);
         }
  
-        if (i % 16 == 0) _game->placeBonuses(1);
+        if (i % 20 == 0) _game->placeBonuses(3);
         
         Sleep(200); //jako param
         sendMessage();
@@ -389,21 +378,18 @@ void Server::sendMessage()
 
 void codeMessage(Player* player, char* msg, Server::MSGMODE mode)
 {
-    
     switch (mode) {
     case Server::CONN:
-    {
         msg[0] = mode;
         msg[1] = player->srvptr->getXSize();
         msg[2] = player->srvptr->getYSize();
         msg[3] = player->ID;
         msg[4] = player->srvptr->getWinCondition();
         break;
-    }
     case Server::DISC:
-        msg[0] = mode;      
+        msg[0] = mode;
         msg[1] = player->srvptr->getWinnerID();        //wyślij wszystkim id gracza który wygrał
-        break;      
+        break;
     case Server::SPECTATE:
     case Server::MAP:
     {
@@ -414,8 +400,8 @@ void codeMessage(Player* player, char* msg, Server::MSGMODE mode)
             push ebx
             mov ebx, msg
             mov ax, score
-            mov [ebx + 1], al
-            mov [ebx + 2], ah
+            mov[ebx + 1], al
+            mov[ebx + 2], ah
             pop ebx
             pop eax
         };

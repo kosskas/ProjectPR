@@ -3,7 +3,6 @@
 * Zakończenie poprawne wątków (PINGER!!!!)
 * Zrobić plik konfiguracyjny i Sparametryzować Spleepy 
 * poprawić komunikaty
-* warunek gry
 */
 /*
 ///Zaobserwonane błędy
