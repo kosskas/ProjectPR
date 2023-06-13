@@ -354,8 +354,8 @@ void Client::decodeMessage() {
             push eax
             push ebx
             mov ebx, msg
-            mov al, [ebx + 4]//weź młodszą częśc
-            mov ah, [ebx + 5]//weź starszą część
+            mov al, [ebx + 3]//weź młodszą częśc
+            mov ah, [ebx + 4]//weź starszą część
             mov winscore, ax
             pop ebx
             pop eax
@@ -367,7 +367,7 @@ void Client::decodeMessage() {
     }
     case Client::DISC:
     {
-        int winnerID = _recvbuf[1];
+        int winnerID = _recvbuf[0]>>2;
         _isRunning = false;
         //odbierz id wygrywa i sprawdz czy to ty
         printf("Game has ended: ");

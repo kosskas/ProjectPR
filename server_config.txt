@@ -14,4 +14,4 @@ spriteBonus=X
 spriteEmpty= 
 spritePlayerHead=#
 timespanBetweenBonuses=20
-winScore=2000
+winScore=1000

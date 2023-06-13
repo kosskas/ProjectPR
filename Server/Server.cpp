@@ -461,47 +461,29 @@ void Server::sendMessage()
     }
 }
 
-void codeMessage(Player* player, char* msg, Server::MSGMODE mode)
-{
+void codeMessage(Player* player, char* msg, Server::MSGMODE mode) {
     switch (mode) {
     case Server::CONN:
     {
         msg[0] = (player->ID << 2) | mode;
         msg[1] = player->srvptr->getXSize();
         msg[2] = player->srvptr->getYSize();
-        msg[3] = player->ID;
         uint16_t winscore = player->srvptr->getWinCondition();
-        __asm {
-            push eax
-            push ebx
-            mov ebx, msg
-            mov ax, winscore //przechowaj warunek końca gry (16b)
-            mov[ebx + 4], al //zapisz młodszą część
-            mov[ebx + 5], ah //zapisz starszą część
-            pop ebx
-            pop eax
-        };
+        const char* winscore_s = (const char*)&winscore; //przeksztalc na tablice bajtów
+        msg[3] = winscore_s[0]; //zapisz młodszą część
+        msg[4] = winscore_s[1]; //zapisz starszą część
         break;
     }
     case Server::DISC:
-        msg[0] = mode;
-        msg[1] = player->srvptr->getWinnerID();//wyślij wszystkim id gracza który wygrał  
+        msg[0] = (player->srvptr->getWinnerID() << 2) | mode; //wyślij wszystkim id gracza który wygrał 
         break;
     case Server::SPECTATE:
     case Server::MAP:
     {
-        uint16_t score = player->score;
         msg[0] = mode;
-        __asm {
-            push eax
-            push ebx
-            mov ebx, msg
-            mov ax, score
-            mov [ebx + 1], al //zapisz młodszą część
-            mov [ebx + 2], ah //zapisz starszą część
-            pop ebx
-            pop eax
-        };
+        const char* score = (const char*)&player->score; //przeksztalc na tablice bajtów
+        msg[1] = score[0]; //zapisz młodszą część
+        msg[2] = score[1]; //zapisz starszą część
         break;
     }
     default:
