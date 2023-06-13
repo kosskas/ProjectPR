@@ -130,7 +130,6 @@ void Game::removeSnake(Player* player)
 		_gameMap[y][x] = BONUS_SPRITE;
 		}
 	}
-
 }
 
 

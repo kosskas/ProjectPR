@@ -34,11 +34,17 @@ private:
 		*/
 		char playerHead;
 	};
-
+	/**
+	 * @brief Liczba prób podczas losowania bonusów
+	*/
 	unsigned int _placingBonusTries;
-
-	unsigned int _playerStep;
-
+	/**
+	 * @brief Kr
+	*/
+	int _playerStep;
+	/**
+	 * @brief 
+	*/
 	unsigned int _bonusScoreInc;
 
 	/**

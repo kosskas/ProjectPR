@@ -21,7 +21,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">Projekt z “Przetwarzania rozproszonego”<span id="projectnumber">&#160;BETA</span>
+   <div id="projectname">Projekt z “Przetwarzania rozproszonego”<span id="projectnumber">&#160;ALFA</span>
    </div>
    <div id="projectbrief">Dokumentacja</div>
   </td>
@@ -94,12 +94,12 @@ $(function() {
   <tr class="odd"><td class="entry"><a class="el" href="class_client.html#aa3f81619e1eaa9f59f1a03790fde7562">_MsgReceiverThID</a></td><td class="entry"><a class="el" href="class_client.html">Client</a></td><td class="entry"><span class="mlabel">private</span></td></tr>
   <tr class="even"><td class="entry"><a class="el" href="class_client.html#a2ec7f5b5ca082da2dff51066a6493049">_playerID</a></td><td class="entry"><a class="el" href="class_client.html">Client</a></td><td class="entry"><span class="mlabel">private</span></td></tr>
   <tr class="odd"><td class="entry"><a class="el" href="class_client.html#a0cba8e39a3131c15d2a63ff4e8427753">_playerScore</a></td><td class="entry"><a class="el" href="class_client.html">Client</a></td><td class="entry"><span class="mlabel">private</span></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="class_client.html#a4d909c11185bca4b04959e7e9821656c">_recvbuf</a></td><td class="entry"><a class="el" href="class_client.html">Client</a></td><td class="entry"><span class="mlabel">private</span></td></tr>
-  <tr class="odd"><td class="entry"><a class="el" href="class_client.html#a3dd105f0d92293a84738900eee33c5cd">_recvbuflen</a></td><td class="entry"><a class="el" href="class_client.html">Client</a></td><td class="entry"><span class="mlabel">private</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="class_client.html#a2b51e95915a2f0b1659c05b683440b28">_recvbuf</a></td><td class="entry"><a class="el" href="class_client.html">Client</a></td><td class="entry"><span class="mlabel">private</span></td></tr>
+  <tr class="odd"><td class="entry"><a class="el" href="class_client.html#a184ae30e997a122d6ab5dd30a67438c6">_recvbuflen</a></td><td class="entry"><a class="el" href="class_client.html">Client</a></td><td class="entry"><span class="mlabel">private</span></td></tr>
   <tr class="even"><td class="entry"><a class="el" href="class_client.html#a365ec0b1ff43e28b252ad7e51a7cf8f5">_serverWinScore</a></td><td class="entry"><a class="el" href="class_client.html">Client</a></td><td class="entry"><span class="mlabel">private</span></td></tr>
   <tr class="odd"><td class="entry"><a class="el" href="class_client.html#a3d8b60d6a9d8a0dccbd41ea0315dd64d">_setup</a></td><td class="entry"><a class="el" href="class_client.html">Client</a></td><td class="entry"><span class="mlabel">private</span></td></tr>
   <tr class="even"><td class="entry"><a class="el" href="class_client.html#aecb572172e5d9e8e022d5d028da7ef58">_socket</a></td><td class="entry"><a class="el" href="class_client.html">Client</a></td><td class="entry"><span class="mlabel">private</span></td></tr>
-  <tr class="odd"><td class="entry"><a class="el" href="class_client.html#a431111485358b8c99812dfb3e7f81031">Client</a>(ClientSetup setup)</td><td class="entry"><a class="el" href="class_client.html">Client</a></td><td class="entry"></td></tr>
+  <tr class="odd"><td class="entry"><a class="el" href="class_client.html#abfb95bf94341af90884f7cbae5012dd0">Client</a>(ClientSetup *setup)</td><td class="entry"><a class="el" href="class_client.html">Client</a></td><td class="entry"></td></tr>
   <tr class="even"><td class="entry"><a class="el" href="class_client.html#a4f50cc56d6bb3024223b56372a1399de">closeSocket</a>()</td><td class="entry"><a class="el" href="class_client.html">Client</a></td><td class="entry"><span class="mlabel">protected</span></td></tr>
   <tr class="odd"><td class="entry"><a class="el" href="class_client.html#a2f2a6f9955ce1f5be8a603e5b2b677eca4fbb83aacf5992cb5381504e64a2be30">CONN</a> wartość wyliczenia</td><td class="entry"><a class="el" href="class_client.html">Client</a></td><td class="entry"></td></tr>
   <tr class="even"><td class="entry"><a class="el" href="class_client.html#a872dcd0db96e01a4c035f1808f0247c1">connectToServer</a>()</td><td class="entry"><a class="el" href="class_client.html">Client</a></td><td class="entry"><span class="mlabel">protected</span></td></tr>
@@ -119,10 +119,11 @@ $(function() {
   <tr class="even"><td class="entry"><a class="el" href="class_client.html#a82e71f0abe366d54439fbec3410ef377">printGame</a>(const char *map)</td><td class="entry"><a class="el" href="class_client.html">Client</a></td><td class="entry"><span class="mlabel">protected</span></td></tr>
   <tr class="odd"><td class="entry"><a class="el" href="class_client.html#ae0bc335d720265d4d6e8a72cf7a2a9aa">run</a>()</td><td class="entry"><a class="el" href="class_client.html">Client</a></td><td class="entry"></td></tr>
   <tr class="even"><td class="entry"><a class="el" href="class_client.html#aad121e3efbdb671b908ae30a5b6406f5">sendMessage</a>(const char *sendbuf, int len)</td><td class="entry"><a class="el" href="class_client.html">Client</a></td><td class="entry"><span class="mlabel">protected</span></td></tr>
-  <tr class="odd"><td class="entry"><a class="el" href="class_client.html#a38d4b954621867ba3f10bcf22b79ed4d">shutdownSocket</a>()</td><td class="entry"><a class="el" href="class_client.html">Client</a></td><td class="entry"><span class="mlabel">protected</span></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="class_client.html#a2f2a6f9955ce1f5be8a603e5b2b677ecaaabe49e5661b93950b8df7f5953412e0">SPECTATE</a> wartość wyliczenia</td><td class="entry"><a class="el" href="class_client.html">Client</a></td><td class="entry"></td></tr>
-  <tr class="odd"><td class="entry"><a class="el" href="class_client.html#a98eb099fd5a7afc8ad68d0f33b6a2a3c">startUpWinsock</a>()</td><td class="entry"><a class="el" href="class_client.html">Client</a></td><td class="entry"><span class="mlabel">protected</span></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="class_client.html#a840e519ca781888cbd54181572ebe3a7">~Client</a>()</td><td class="entry"><a class="el" href="class_client.html">Client</a></td><td class="entry"></td></tr>
+  <tr class="odd"><td class="entry"><a class="el" href="class_client.html#aaecc26cb97a38908b841690180963807">setUp</a>(ClientSetup *setup)</td><td class="entry"><a class="el" href="class_client.html">Client</a></td><td class="entry"><span class="mlabel">static</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="class_client.html#a38d4b954621867ba3f10bcf22b79ed4d">shutdownSocket</a>()</td><td class="entry"><a class="el" href="class_client.html">Client</a></td><td class="entry"><span class="mlabel">protected</span></td></tr>
+  <tr class="odd"><td class="entry"><a class="el" href="class_client.html#a2f2a6f9955ce1f5be8a603e5b2b677ecaaabe49e5661b93950b8df7f5953412e0">SPECTATE</a> wartość wyliczenia</td><td class="entry"><a class="el" href="class_client.html">Client</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="class_client.html#a98eb099fd5a7afc8ad68d0f33b6a2a3c">startUpWinsock</a>()</td><td class="entry"><a class="el" href="class_client.html">Client</a></td><td class="entry"><span class="mlabel">protected</span></td></tr>
+  <tr class="odd"><td class="entry"><a class="el" href="class_client.html#a840e519ca781888cbd54181572ebe3a7">~Client</a>()</td><td class="entry"><a class="el" href="class_client.html">Client</a></td><td class="entry"></td></tr>
 </table></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

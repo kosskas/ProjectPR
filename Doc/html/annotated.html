@@ -21,7 +21,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">Projekt z “Przetwarzania rozproszonego”<span id="projectnumber">&#160;BETA</span>
+   <div id="projectname">Projekt z “Przetwarzania rozproszonego”<span id="projectnumber">&#160;ALFA</span>
    </div>
    <div id="projectbrief">Dokumentacja</div>
   </td>
@@ -74,14 +74,15 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 <div class="textblock">Tutaj znajdują się klasy, struktury, unie i interfejsy wraz z ich krótkimi opisami:</div><div class="directory">
-<table class="directory">
+<div class="levels">[poziom szczegółów <span onclick="javascript:toggleLevel(1);">1</span><span onclick="javascript:toggleLevel(2);">2</span>]</div><table class="directory">
 <tr id="row_0_" class="even"><td class="entry"><span style="width:16px;display:inline-block;">&#160;</span><span class="icona"><span class="icon">C</span></span><a class="el" href="class_client.html" target="_self">Client</a></td><td class="desc">Klasa <a class="el" href="class_client.html" title="Klasa Client zarządza grą oraz połączeniem po stronie klienta.">Client</a> zarządza grą oraz połączeniem po stronie klienta </td></tr>
 <tr id="row_1_" class="odd"><td class="entry"><span style="width:16px;display:inline-block;">&#160;</span><span class="icona"><span class="icon">C</span></span><a class="el" href="struct_client_setup.html" target="_self">ClientSetup</a></td><td class="desc">Pozwala ustawić klienta według podanych parametrów </td></tr>
-<tr id="row_2_" class="even"><td class="entry"><span style="width:16px;display:inline-block;">&#160;</span><span class="icona"><span class="icon">C</span></span><a class="el" href="class_game.html" target="_self">Game</a></td><td class="desc">Klasa <a class="el" href="class_game.html" title="Klasa Game zarządza logiką gry.">Game</a> zarządza logiką gry </td></tr>
-<tr id="row_3_" class="odd"><td class="entry"><span style="width:16px;display:inline-block;">&#160;</span><span class="icona"><span class="icon">C</span></span><a class="el" href="struct_player.html" target="_self">Player</a></td><td class="desc">Zawiera wszystktie informacje o pojedynczym graczu-kliencie </td></tr>
-<tr id="row_4_" class="even"><td class="entry"><span style="width:16px;display:inline-block;">&#160;</span><span class="icona"><span class="icon">C</span></span><a class="el" href="struct_point.html" target="_self">Point</a></td><td class="desc">Zawiera parę określającą położenie XY </td></tr>
-<tr id="row_5_" class="odd"><td class="entry"><span style="width:16px;display:inline-block;">&#160;</span><span class="icona"><span class="icon">C</span></span><a class="el" href="class_server.html" target="_self">Server</a></td><td class="desc">Klasa <a class="el" href="class_server.html" title="Klasa Server zarządza połączeniami oraz grą">Server</a> zarządza połączeniami oraz grą </td></tr>
-<tr id="row_6_" class="even"><td class="entry"><span style="width:16px;display:inline-block;">&#160;</span><span class="icona"><span class="icon">C</span></span><a class="el" href="struct_server_setup.html" target="_self">ServerSetup</a></td><td class="desc">Pozwala ustawić serwer według podanych parametrów </td></tr>
+<tr id="row_2_" class="even"><td class="entry"><span style="width:0px;display:inline-block;">&#160;</span><span id="arr_2_" class="arrow" onclick="toggleFolder('2_')">&#9660;</span><span class="icona"><span class="icon">C</span></span><a class="el" href="class_game.html" target="_self">Game</a></td><td class="desc">Klasa <a class="el" href="class_game.html" title="Klasa Game zarządza logiką gry.">Game</a> zarządza logiką gry </td></tr>
+<tr id="row_2_0_" class="odd"><td class="entry"><span style="width:32px;display:inline-block;">&#160;</span><span class="icona"><span class="icon">C</span></span><a class="el" href="struct_game_1_1_sprites_repo.html" target="_self">SpritesRepo</a></td><td class="desc">Prywatna struktura przechowująca symbole reprezentujące elementy na mapie </td></tr>
+<tr id="row_3_" class="even"><td class="entry"><span style="width:16px;display:inline-block;">&#160;</span><span class="icona"><span class="icon">C</span></span><a class="el" href="struct_player.html" target="_self">Player</a></td><td class="desc">Zawiera wszystktie informacje o pojedynczym graczu-kliencie </td></tr>
+<tr id="row_4_" class="odd"><td class="entry"><span style="width:16px;display:inline-block;">&#160;</span><span class="icona"><span class="icon">C</span></span><a class="el" href="struct_point.html" target="_self">Point</a></td><td class="desc">Zawiera parę określającą położenie XY </td></tr>
+<tr id="row_5_" class="even"><td class="entry"><span style="width:16px;display:inline-block;">&#160;</span><span class="icona"><span class="icon">C</span></span><a class="el" href="class_server.html" target="_self">Server</a></td><td class="desc">Klasa <a class="el" href="class_server.html" title="Klasa Server zarządza połączeniami oraz grą">Server</a> zarządza połączeniami oraz grą </td></tr>
+<tr id="row_6_" class="odd"><td class="entry"><span style="width:16px;display:inline-block;">&#160;</span><span class="icona"><span class="icon">C</span></span><a class="el" href="struct_server_setup.html" target="_self">ServerSetup</a></td><td class="desc">Pozwala ustawić serwer według podanych parametrów </td></tr>
 </table>
 </div><!-- directory -->
 </div><!-- contents -->

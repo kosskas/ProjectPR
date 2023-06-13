@@ -107,7 +107,7 @@ void Server::setUp(ServerSetup* setup)
         setup->numberOfBonusesAtOnce = (unsigned int)_DEFAULT_NUMBER_OF_BONUSES_AT_ONCE;
         setup->numberOfPlayers = (size_t)_DEFAULT_NUMBER_OF_PLAYERS;
         setup->placingBonusTries = (unsigned int)_DEFAULT_PLACING_BONUS_TRIES;
-        setup->playerStep = (unsigned int)_DEFAULT_PLAYER_STEP;
+        setup->playerStep = (int)_DEFAULT_PLAYER_STEP;
         setup->port = (int)_DEFAULT_PORT;
         setup->sleepMsEndConnection = (unsigned int)_DEFAULT_SLEEP_MS_END_CONNECTION;
         setup->sleepMsPinger = (unsigned int)_DEFAULT_SLEEP_MS_PINGER;
@@ -147,7 +147,7 @@ void Server::setUp(ServerSetup* setup)
                 setup->placingBonusTries = (unsigned int)std::stoi(value);
 
             if (key == "playerStep")
-                setup->playerStep = (unsigned int)std::stoi(value);
+                setup->playerStep = (int)std::stoi(value);
 
             if (key == "port") 
                 setup->port = (int)std::stoi(value);
@@ -181,8 +181,8 @@ void Server::setUp(ServerSetup* setup)
 }
 
 
-Server::Server(ServerSetup setup)
-    : _setup(setup)
+Server::Server(ServerSetup *setup)
+    : _setup(*setup)
 {
     if (!startUpWinsock()) {
         ExitProcess(1);
@@ -217,6 +217,7 @@ Server::~Server()
     delete _game;
 
     TerminateThread(_PingerTh, 0);
+
     DWORD res =  WaitForSingleObject(_PingerTh, INFINITE);
     if (res == WAIT_OBJECT_0) {
         printf("OK");
@@ -320,7 +321,7 @@ void Server::endConnection()
     char msg[DISC_MESSAGE_BUFFER_SIZE];
     for (Player* Player : _players) {
         if (Player->sock != NULL) {
-            codeMessage(Player, msg, DISC); //WON
+            codeMessage(Player, msg, DISC);
             int iSendResult = send(Player->sock, msg, DISC_MESSAGE_BUFFER_SIZE, 0);
             if (iSendResult == SOCKET_ERROR) {
                 printf("%d | endConnection: send to Player(%d) failed with error: %d\n", __LINE__, Player->ID, WSAGetLastError());
@@ -351,7 +352,7 @@ void Server::run()
 
     unsigned int i = 0;
 
-    while (_isServerRunning  && _game->checkGameState() && !_players.empty()) { // && liczba grających > 1
+    while (_isServerRunning  && _game->checkGameState() && !_players.empty()) {
 
         for (Player* player : _players) {
             _game->movePlayer(player);
@@ -363,9 +364,10 @@ void Server::run()
  
         if (i % _setup.timespanBetweenBonuses == 0) _game->placeBonuses(_setup.numberOfBonusesAtOnce);
         
-        Sleep(_setup.sleepMsRun);
+        
         sendMessage();
         i++;
+        Sleep(_setup.sleepMsRun);
     }
     _game->checkGameState();
     endConnection();
@@ -464,28 +466,18 @@ void codeMessage(Player* player, char* msg, Server::MSGMODE mode)
     switch (mode) {
     case Server::CONN:
     {
-        uint8_t x = player->srvptr->getXSize(), y = player->srvptr->getYSize();
-        uint16_t cond = player->srvptr->getWinCondition();
-        uint8_t srvmode = mode, id = player->ID;
+        msg[0] = (player->ID << 2) | mode;
+        msg[1] = player->srvptr->getXSize();
+        msg[2] = player->srvptr->getYSize();
+        msg[3] = player->ID;
+        uint16_t winscore = player->srvptr->getWinCondition();
         __asm {
             push eax
             push ebx
-            push edx
             mov ebx, msg
-            mov eax, 0
-            mov al, id
-            shl al, 2
-            mov dl, srvmode
-            or al, dl
-            mov [ebx], al
-            mov al, x
-            mov ah, y
-            mov BYTE PTR[ebx + 1], al
-            mov BYTE PTR[ebx + 2], ah
-            mov ax, cond
-            mov [ebx + 3], al
-            mov [ebx + 4], ah
-            pop edx
+            mov ax, winscore //przechowaj warunek końca gry (16b)
+            mov[ebx + 4], al //zapisz młodszą część
+            mov[ebx + 5], ah //zapisz starszą część
             pop ebx
             pop eax
         };
@@ -493,7 +485,7 @@ void codeMessage(Player* player, char* msg, Server::MSGMODE mode)
     }
     case Server::DISC:
         msg[0] = mode;
-        msg[1] = player->srvptr->getWinnerID();        //wyślij wszystkim id gracza który wygrał
+        msg[1] = player->srvptr->getWinnerID();//wyślij wszystkim id gracza który wygrał  
         break;
     case Server::SPECTATE:
     case Server::MAP:
@@ -505,8 +497,8 @@ void codeMessage(Player* player, char* msg, Server::MSGMODE mode)
             push ebx
             mov ebx, msg
             mov ax, score
-            mov [ebx + 1], al
-            mov [ebx + 2], ah
+            mov [ebx + 1], al //zapisz młodszą część
+            mov [ebx + 2], ah //zapisz starszą część
             pop ebx
             pop eax
         };

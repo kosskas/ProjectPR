@@ -53,7 +53,7 @@
 
 //#define BUFFER_SIZE 4096
 #define CLIENT_LISTENER_RECV_BUFFER_SIZE 4
-#define CONN_MESSAGE_BUFFER_SIZE 5
+#define CONN_MESSAGE_BUFFER_SIZE 6
 #define DISC_MESSAGE_BUFFER_SIZE 4
 
 
@@ -69,4 +69,6 @@ using std::list;
 using std::uniform_int_distribution;
 using std::random_device;
 using std::mt19937;
+
+#define Terminate(a) TerminateThread(a, 0)
 #endif // !GENERAL

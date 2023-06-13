@@ -1,26 +1,12 @@
-/*
-///TODO
-* Zakończenie poprawne wątków (PINGER!!!!)
-* poprawić komunikaty
-* sekcja krytyczna
-* warunki brzegowe wartości czytanych z plików config
-*/
-/*
-///Zaobserwonane błędy
-* Wyłączanie pingera -> crash serwera: Nierozwiązane/(Rozwiązane metodą bomby atomowej)
-* Czołowe zderzenie węży -> crash serwera: Rozwiązane
-* Dziwny memory wyjątek - pojawia się rzadko po skończeniu działania dektruktora serwera -> crash: Nierozwiązane
-*/
-
 #ifndef _SERVER_H
 #define _SERVER_H
 
 struct Player;
 class Game;
+
 #include "General.h"
 #include "Player.h"
 #include "Game.h"
-
 
 /**
  * @brief Pozwala ustawić serwer według podanych parametrów
@@ -31,7 +17,9 @@ struct ServerSetup {
      * @brief Maksymalna długość kolejki oczekujących połączeń
     */
     unsigned int backlog;
-
+    /**
+     * @brief Wartość o którą będzie zwiększany wynik
+    */
     unsigned int bonusScoreInc;
 
     /**
@@ -43,35 +31,57 @@ struct ServerSetup {
      * @brief Liczba wierszy
     */
     unsigned int mapSizeY;
-
+    /**
+     * @brief Liczba bonusów generowana podczas rundy
+    */
     unsigned int numberOfBonusesAtOnce;
 
     /**
      * @brief Określa maksymalną liczbę klientów
     */
     size_t numberOfPlayers;
-
+    /**
+     * @brief Liczba prób podczas losowania bonusów
+    */
     unsigned int placingBonusTries;
 
-    unsigned int playerStep;
+    /**
+     * @brief Określa krok rysowania postaci, domyślnie 1
+    */
+    int playerStep;
 
     /**
      * @brief Określa numer portu
     */
     int port;
 
+    /**
+     * @brief Czas przerwy po zakończeniu gry
+    */
     unsigned int sleepMsEndConnection;
-
+    /**
+     * @brief Czas przerwy działania wątku czyszczącego
+    */
     unsigned int sleepMsPinger;
-
+    /**
+     * @brief Czas przerwy działania głównej pętli grającej
+    */
     unsigned int sleepMsRun;
-
+    /**
+     * @brief Znak ASCII bonusu, który będzie wyświetlany na mapie
+    */
     char spriteBonus;
-
+    /**
+     * @brief Znak ASCII pustego pola, który będzie wyświetlany na mapie
+    */
     char spriteEmpty;
-
+    /**
+     * @brief Znak ASCII głowy gracza, który będzie wyświetlany na mapie
+    */
     char spritePlayerHead;
-
+    /**
+     * @brief Określa przerwę między rundami generującymi bonusy
+    */
     unsigned int timespanBetweenBonuses;
 
     /**
@@ -226,14 +236,17 @@ public:
         */
         MAP
     };
-
+    /**
+    * @brief Konfiguruje klasę Server według zadanej konfiguracji
+    * @param setup Wskaźnik na konfiguracje
+    */
     static void setUp(ServerSetup* setup);
 
     /**
      * @brief Inicjalizuje WSA. Tworzy socket serwera. Uruchamia serwer pozostawiając go w stanie nasłuchiwania połączeń.
-     * @param setup - struktura zawierająca ustawienia, z którymi serwer ma zostać uruchomiony.
+     * @param setup - Wskaźnik na ustawienia, z którymi Server ma zostać uruchomiony.
     */
-    Server(ServerSetup setup);
+    Server(ServerSetup *setup);
 
     /**
      * @brief Uruchamia wątki oraz grę

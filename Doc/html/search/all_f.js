@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['thhandle_0',['thHandle',['../struct_player.html#a07d65d9f58e4b7048421883bde012308',1,'Player']]],
-  ['thid_1',['thId',['../struct_player.html#a9d00905df4de193dbdb5feaa573eed45',1,'Player']]]
+  ['_7eclient_0',['~Client',['../class_client.html#a840e519ca781888cbd54181572ebe3a7',1,'Client']]],
+  ['_7egame_1',['~Game',['../class_game.html#ae3d112ca6e0e55150d2fdbc704474530',1,'Game']]],
+  ['_7eserver_2',['~Server',['../class_server.html#a4b3aa2579cb1c8cd1d069582c14d0fa6',1,'Server']]]
 ];

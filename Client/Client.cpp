@@ -263,8 +263,8 @@ void Client::setUp(ClientSetup* setup)
 }
 
 
-Client::Client(ClientSetup setup) :
-    _setup(setup),
+Client::Client(ClientSetup *setup) :
+    _setup(*setup),
     _isRunning(true), 
     _isConnected(false),
     _hasReceivedConnMsg(false)
@@ -277,7 +277,7 @@ Client::Client(ClientSetup setup) :
         ExitProcess(1);
     }
 
-    printf("Trying to connect to %s... \n", setup.serverIP);
+    printf("Trying to connect to %s... \n", setup->serverIP);
     if (!startUpWinsock()) {
         ExitProcess(1);
     }
@@ -345,32 +345,22 @@ void Client::decodeMessage() {
     switch (mode) {
     case Client::CONN:
     {
-        uint32_t sizeX = 0, sizeY = 0, id = 0, wscore = 0;
         char* msg = _recvbuf;
+        short winscore = 0;
+        _mapSizeX = _recvbuf[1];
+        _mapSizeY = _recvbuf[2];
+        _playerID = _recvbuf[0]>>2;
         __asm {
             push eax
             push ebx
-            push edx
             mov ebx, msg
-            mov eax, 0
-            mov al, [ebx]
-            shr al, 2
-            mov id, eax
-            mov al, [ebx + 1]
-            mov sizeX, eax
-            mov al, [ebx + 2]
-            mov sizeY, eax
-            mov al, [ebx + 3]
-            mov ah, [ebx + 4]
-            mov wscore, eax
-            pop edx
+            mov al, [ebx + 4]//weź młodszą częśc
+            mov ah, [ebx + 5]//weź starszą część
+            mov winscore, ax
             pop ebx
             pop eax
-        };
-        _mapSizeX = sizeX;
-        _mapSizeY = sizeY;
-        _playerID = id;
-        _serverWinScore = wscore;
+        }
+        _serverWinScore = winscore;
         _hasReceivedConnMsg = true;
         printf("%sCONNECTED%s\n", BRIGHT_GREEN, RESET);
         break;
@@ -400,8 +390,8 @@ void Client::decodeMessage() {
             push eax
             push ebx
             mov ebx, msg
-            mov al, [ebx + 1]
-            mov ah, [ebx + 2]
+            mov al, [ebx + 1]//weź młodszą częśc
+            mov ah, [ebx + 2]//weź starszą część
             mov score, ax
             pop ebx
             pop eax
@@ -443,12 +433,12 @@ DWORD __stdcall MsgReceiverListener(LPVOID param)
         }
 
         if (result > 0) {
-            int result = select(0, &readSet, nullptr, nullptr, &timeout);
-            if (result == SOCKET_ERROR) {
-                printf("Line %d in function %s \t select failed with error: %d\n", __LINE__, __FUNCTION__, WSAGetLastError());
-                client->_isRunning = false;
-                return 0;
-            }
+            //int result = select(0, &readSet, nullptr, nullptr, &timeout);
+            //if (result == SOCKET_ERROR) {
+            //    printf("Line %d in function %s \t select failed with error: %d\n", __LINE__, __FUNCTION__, WSAGetLastError());
+            //    client->_isRunning = false;
+            //    return 0;
+            //}
             iResult = recv(client->_socket, client->_recvbuf, client->_recvbuflen, 0);
             if (iResult > 0) {
                 client->decodeMessage();

@@ -247,13 +247,17 @@ public:
         MAP
     };
 
+    /**
+    * @brief Konfiguruje klasę Client według zadanej konfiguracji
+    * @param setup Wskaźnik na konfiguracje
+    */
     static void setUp(ClientSetup *setup);
 
     /**
      * @brief @brief Konstruktor inicjalizujący aplikacje kliencką
-     * 
+     * @param setup Wskaźnik na konfiguracje, z którymi Client ma zostać uruchomiony.
     */
-    Client(ClientSetup setup);
+    Client(ClientSetup *setup);
 
     /**
      * @brief Uruchamia wątki oraz grę

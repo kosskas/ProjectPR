@@ -21,7 +21,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">Projekt z “Przetwarzania rozproszonego”<span id="projectnumber">&#160;BETA</span>
+   <div id="projectname">Projekt z “Przetwarzania rozproszonego”<span id="projectnumber">&#160;ALFA</span>
    </div>
    <div id="projectbrief">Dokumentacja</div>
   </td>
@@ -77,11 +77,11 @@ $(function() {
   <div class="headertitle"><div class="title">General.h</div></div>
 </div><!--header-->
 <div class="contents">
-<a href="_client_2_general_8h.html">Idź do dokumentacji tego pliku.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#ifndef GENERAL</span></div>
+<div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#ifndef GENERAL</span></div>
 <div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#define GENERAL</span></div>
-<div class="line"><a id="l00003" name="l00003"></a><span class="lineno"><a class="line" href="_client_2_general_8h.html#af08ec37a8c99d747fb60fa15bc28678b">    3</a></span><span class="preprocessor">#define _CRT_SECURE_NO_WARNINGS</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="preprocessor">#define _CRT_SECURE_NO_WARNINGS</span></div>
 <div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span> </div>
-<div class="line"><a id="l00005" name="l00005"></a><span class="lineno"><a class="line" href="_client_2_general_8h.html#ac7bef5d85e3dcd73eef56ad39ffc84a9">    5</a></span><span class="preprocessor">#define WIN32_LEAN_AND_MEAN</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#define WIN32_LEAN_AND_MEAN</span></div>
 <div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span> </div>
 <div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span> </div>
 <div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#include &lt;windows.h&gt;</span></div>
@@ -90,60 +90,73 @@ $(function() {
 <div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="preprocessor">#include &lt;stdlib.h&gt;</span></div>
 <div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="preprocessor">#include &lt;stdio.h&gt;</span></div>
 <div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="preprocessor">#include &lt;stdint.h&gt;</span></div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span> </div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno"><a class="line" href="_client_2_general_8h.html#a5261516a174b035b084a9ae06dc85730">   15</a></span><span class="preprocessor">#define DEFAULT_BUFLEN 4096</span><span class="comment">//512</span></div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno"><a class="line" href="_client_2_general_8h.html#a16b710f592bf8f7900666392adc444dc">   16</a></span><span class="preprocessor">#define DEFAULT_PORT &quot;27015&quot;</span></div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="preprocessor">#include &lt;fstream&gt;</span></div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="preprocessor">#include &lt;string&gt;</span></div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span> </div>
 <div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span> </div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno"><a class="line" href="_client_2_general_8h.html#a67cb6976cdad53b42036de3c8c32cf53">   18</a></span><span class="preprocessor">#define VK_Q 0x51 </span><span class="comment">// ASCII of &#39;Q&#39;</span></div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno"><a class="line" href="_client_2_general_8h.html#a7522835012b368d338d32708897c7478">   19</a></span><span class="preprocessor">#define RETURN_CURSOR &quot;\033[0;0H&quot;</span></div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span> </div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno"><a class="line" href="_client_2_general_8h.html#a7b3b25cba33b07c303f3060fe41887f6">   21</a></span><span class="preprocessor">#define BLACK      &quot;\033[0;30m&quot;</span></div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno"><a class="line" href="_client_2_general_8h.html#aca56870f2285abae489635f0ee4d65e3">   22</a></span><span class="preprocessor">#define DARK_GRAY  &quot;\033[1;30m&quot;</span></div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno"><a class="line" href="_client_2_general_8h.html#a8d23feea868a983c8c2b661e1e16972f">   23</a></span><span class="preprocessor">#define RED        &quot;\033[0;31m&quot;</span></div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno"><a class="line" href="_client_2_general_8h.html#a458d388b2fc60518af3517f52f9e7e2a">   24</a></span><span class="preprocessor">#define BRIGHT_RED &quot;\033[1;31m&quot;</span></div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno"><a class="line" href="_client_2_general_8h.html#acfbc006ea433ad708fdee3e82996e721">   25</a></span><span class="preprocessor">#define GREEN      &quot;\033[0;32m&quot;</span></div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno"><a class="line" href="_client_2_general_8h.html#a74c0a6124f05f261352d13d64b9f9a55">   26</a></span><span class="preprocessor">#define BRIGHT_GREEN &quot;\033[1;32m&quot;</span></div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno"><a class="line" href="_client_2_general_8h.html#abf681265909adf3d3e8116c93c0ba179">   27</a></span><span class="preprocessor">#define YELLOW     &quot;\033[0;33m&quot;</span></div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno"><a class="line" href="_client_2_general_8h.html#aa983c839c2c77525a1372ffcd0f36451">   28</a></span><span class="preprocessor">#define BRIGHT_YELLOW &quot;\033[1;33m&quot;</span></div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno"><a class="line" href="_client_2_general_8h.html#a79d10e672abb49ad63eeaa8aaef57c38">   29</a></span><span class="preprocessor">#define BLUE       &quot;\033[0;34m&quot;</span></div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno"><a class="line" href="_client_2_general_8h.html#a23028f4aec597f9d81b07ae258833d92">   30</a></span><span class="preprocessor">#define BRIGHT_BLUE &quot;\033[1;34m&quot;</span></div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno"><a class="line" href="_client_2_general_8h.html#a6f699060902f800f12aaae150f3a708e">   31</a></span><span class="preprocessor">#define MAGENTA    &quot;\033[0;35m&quot;</span></div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno"><a class="line" href="_client_2_general_8h.html#aa7ab92145ef258c9462345e9cc81c05c">   32</a></span><span class="preprocessor">#define BRIGHT_MAGENTA &quot;\033[1;35m&quot;</span></div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno"><a class="line" href="_client_2_general_8h.html#ad243f93c16bc4c1d3e0a13b84421d760">   33</a></span><span class="preprocessor">#define CYAN       &quot;\033[0;36m&quot;</span></div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno"><a class="line" href="_client_2_general_8h.html#a56f6579e22e05c95127e079ee929d09a">   34</a></span><span class="preprocessor">#define BRIGHT_CYAN &quot;\033[1;36m&quot;</span></div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno"><a class="line" href="_client_2_general_8h.html#a9663e02e20b5b578e6a31adae265cb88">   35</a></span><span class="preprocessor">#define LIGHT_GRAY &quot;\033[0;37m&quot;</span></div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno"><a class="line" href="_client_2_general_8h.html#a87b537f5fa5c109d3c05c13d6b18f382">   36</a></span><span class="preprocessor">#define WHITE      &quot;\033[1;37m&quot;</span></div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span> </div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno"><a class="line" href="_client_2_general_8h.html#ab702106cf3b3e96750b6845ded4e0299">   38</a></span><span class="preprocessor">#define RESET      &quot;\033[0m&quot;</span></div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno"><a class="line" href="_client_2_general_8h.html#a26cdbb1a00213c810caccf21cd33a631">   39</a></span><span class="preprocessor">#define BOLD       &quot;\033[1m&quot;</span></div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno"><a class="line" href="_client_2_general_8h.html#aaec1a65734e33bc49e8dc8d90e9546bc">   40</a></span><span class="preprocessor">#define UNDERLINE  &quot;\033[4m&quot;</span></div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno"><a class="line" href="_client_2_general_8h.html#ab814d2aa388b74d504673d0068cab196">   41</a></span><span class="preprocessor">#define HIGHLIGHT  &quot;\033[7m&quot;</span></div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span> </div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno"><a class="line" href="_client_2_general_8h.html#a0e5ebbe291d95cf1b8f1661252722fe0">   43</a></span><span class="preprocessor">#define BG_BLACK &quot;\033[40m&quot;</span></div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno"><a class="line" href="_client_2_general_8h.html#ac317d04c219b630f9c36b0241d9d4be7">   44</a></span><span class="preprocessor">#define BG_RED &quot;\033[41m&quot;</span></div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno"><a class="line" href="_client_2_general_8h.html#ac351fb4567ed6655a5b39769cc5dfd04">   45</a></span><span class="preprocessor">#define BG_GREEN &quot;\033[42m&quot;</span></div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno"><a class="line" href="_client_2_general_8h.html#ab31fe3e74b1137650d30ede5c9b86218">   46</a></span><span class="preprocessor">#define BG_YELLOW &quot;\033[43m&quot;</span></div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno"><a class="line" href="_client_2_general_8h.html#a9afd14c731aa8c62d9471913c1b23b9f">   47</a></span><span class="preprocessor">#define BG_BLUE &quot;\033[44m&quot;</span></div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno"><a class="line" href="_client_2_general_8h.html#ac08aa3f07e012f1b0edafa632d5300ba">   48</a></span><span class="preprocessor">#define BG_MAGENTA &quot;\033[45m&quot;</span></div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno"><a class="line" href="_client_2_general_8h.html#a21ef237e1c4d69656729da4b34c31d8b">   49</a></span><span class="preprocessor">#define BG_CYAN &quot;\033[46m&quot;</span></div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno"><a class="line" href="_client_2_general_8h.html#a5583be980ba6671896377b672a43d7fd">   50</a></span><span class="preprocessor">#define BG_LIGHT_GRAY &quot;\033[47m&quot;</span></div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno"><a class="line" href="_client_2_general_8h.html#ad85c81df8176f8ef5513df13c624641d">   51</a></span><span class="preprocessor">#define BG_DARK_GRAY &quot;\033[100m&quot;</span></div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno"><a class="line" href="_client_2_general_8h.html#aac747d7b329efa0cc3584491a50fc11c">   52</a></span><span class="preprocessor">#define BG_LIGHT_RED &quot;\033[101m&quot;</span></div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno"><a class="line" href="_client_2_general_8h.html#a90bcce00699be1e5eb80a2aacc2c66f6">   53</a></span><span class="preprocessor">#define BG_LIGHT_GREEN &quot;\033[102m&quot;</span></div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno"><a class="line" href="_client_2_general_8h.html#a272346b1ca72fb10a1f79cd9076cc579">   54</a></span><span class="preprocessor">#define BG_LIGHT_YELLOW &quot;\033[103m&quot;</span></div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno"><a class="line" href="_client_2_general_8h.html#a136bdea3b75286f08d9e6fd91adf157b">   55</a></span><span class="preprocessor">#define BG_LIGHT_BLUE &quot;\033[104m&quot;</span></div>
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno"><a class="line" href="_client_2_general_8h.html#ad1dd75ab42e3994fee55f8204e3c7453">   56</a></span><span class="preprocessor">#define BG_LIGHT_MAGENTA &quot;\033[105m&quot;</span></div>
-<div class="line"><a id="l00057" name="l00057"></a><span class="lineno"><a class="line" href="_client_2_general_8h.html#a9e6e761a2aecb98ab456c67d898e6683">   57</a></span><span class="preprocessor">#define BG_LIGHT_CYAN &quot;\033[106m&quot;</span></div>
-<div class="line"><a id="l00058" name="l00058"></a><span class="lineno"><a class="line" href="_client_2_general_8h.html#a6beded3f171517df3902c52f79f6fea2">   58</a></span><span class="preprocessor">#define BG_WHITE &quot;\033[107m&quot;</span></div>
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span> </div>
-<div class="line"><a id="l00060" name="l00060"></a><span class="lineno"><a class="line" href="_client_2_general_8h.html#aaf44cf29948083ea8b970f9f7016ca63">   60</a></span><span class="preprocessor">#define compareString(a, b) strcmp(a, b) == 0</span></div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span> </div>
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span><span class="preprocessor">#pragma comment (lib, &quot;Ws2_32.lib&quot;</span>)</div>
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span><span class="preprocessor">#pragma comment (lib, &quot;Mswsock.lib&quot;</span>)</div>
-<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span><span class="preprocessor">#pragma comment (lib, &quot;AdvApi32.lib&quot;</span>)</div>
-<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span> </div>
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span> </div>
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span><span class="preprocessor">#endif </span><span class="comment">// !GENERAL</span></div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="comment">// -----------------------------------------</span></div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="preprocessor">#define CONFIG_FILE &quot;..\\client_config.txt&quot;</span></div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="preprocessor">#define SEPARATOR &#39;=&#39;</span></div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span> </div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="preprocessor">#define _DEFAULT_IP &quot;127.0.0.1&quot;</span></div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="preprocessor">#define _DEFAULT_PORT &quot;27015&quot;</span></div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="comment">// -----------------------------------------</span></div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span> </div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span> </div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="preprocessor">#define RECV_BUFFER_SIZE 4096</span><span class="comment">//512</span></div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span> </div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span> </div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span><span class="preprocessor">#define VK_Q 0x51 </span><span class="comment">// ASCII of &#39;Q&#39;</span></div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span><span class="preprocessor">#define RETURN_CURSOR &quot;\033[0;0H&quot;</span></div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span> </div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span> </div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span><span class="preprocessor">#define BLACK      &quot;\033[0;30m&quot;</span></div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span><span class="preprocessor">#define DARK_GRAY  &quot;\033[1;30m&quot;</span></div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span><span class="preprocessor">#define RED        &quot;\033[0;31m&quot;</span></div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span><span class="preprocessor">#define BRIGHT_RED &quot;\033[1;31m&quot;</span></div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span><span class="preprocessor">#define GREEN      &quot;\033[0;32m&quot;</span></div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span><span class="preprocessor">#define BRIGHT_GREEN &quot;\033[1;32m&quot;</span></div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span><span class="preprocessor">#define YELLOW     &quot;\033[0;33m&quot;</span></div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span><span class="preprocessor">#define BRIGHT_YELLOW &quot;\033[1;33m&quot;</span></div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span><span class="preprocessor">#define BLUE       &quot;\033[0;34m&quot;</span></div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span><span class="preprocessor">#define BRIGHT_BLUE &quot;\033[1;34m&quot;</span></div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span><span class="preprocessor">#define MAGENTA    &quot;\033[0;35m&quot;</span></div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span><span class="preprocessor">#define BRIGHT_MAGENTA &quot;\033[1;35m&quot;</span></div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span><span class="preprocessor">#define CYAN       &quot;\033[0;36m&quot;</span></div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span><span class="preprocessor">#define BRIGHT_CYAN &quot;\033[1;36m&quot;</span></div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span><span class="preprocessor">#define LIGHT_GRAY &quot;\033[0;37m&quot;</span></div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span><span class="preprocessor">#define WHITE      &quot;\033[1;37m&quot;</span></div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span> </div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span><span class="preprocessor">#define RESET      &quot;\033[0m&quot;</span></div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span><span class="preprocessor">#define BOLD       &quot;\033[1m&quot;</span></div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span><span class="preprocessor">#define UNDERLINE  &quot;\033[4m&quot;</span></div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span><span class="preprocessor">#define HIGHLIGHT  &quot;\033[7m&quot;</span></div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span> </div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span><span class="preprocessor">#define BG_BLACK &quot;\033[40m&quot;</span></div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span><span class="preprocessor">#define BG_RED &quot;\033[41m&quot;</span></div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span><span class="preprocessor">#define BG_GREEN &quot;\033[42m&quot;</span></div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span><span class="preprocessor">#define BG_YELLOW &quot;\033[43m&quot;</span></div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span><span class="preprocessor">#define BG_BLUE &quot;\033[44m&quot;</span></div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span><span class="preprocessor">#define BG_MAGENTA &quot;\033[45m&quot;</span></div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span><span class="preprocessor">#define BG_CYAN &quot;\033[46m&quot;</span></div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span><span class="preprocessor">#define BG_LIGHT_GRAY &quot;\033[47m&quot;</span></div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span><span class="preprocessor">#define BG_DARK_GRAY &quot;\033[100m&quot;</span></div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span><span class="preprocessor">#define BG_LIGHT_RED &quot;\033[101m&quot;</span></div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span><span class="preprocessor">#define BG_LIGHT_GREEN &quot;\033[102m&quot;</span></div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span><span class="preprocessor">#define BG_LIGHT_YELLOW &quot;\033[103m&quot;</span></div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span><span class="preprocessor">#define BG_LIGHT_BLUE &quot;\033[104m&quot;</span></div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span><span class="preprocessor">#define BG_LIGHT_MAGENTA &quot;\033[105m&quot;</span></div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span><span class="preprocessor">#define BG_LIGHT_CYAN &quot;\033[106m&quot;</span></div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span><span class="preprocessor">#define BG_WHITE &quot;\033[107m&quot;</span></div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span> </div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span><span class="preprocessor">#define compareString(a, b) strcmp(a, b) == 0</span></div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span> </div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span><span class="preprocessor">#pragma comment (lib, &quot;Ws2_32.lib&quot;</span>)</div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span><span class="preprocessor">#pragma comment (lib, &quot;Mswsock.lib&quot;</span>)</div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span><span class="preprocessor">#pragma comment (lib, &quot;AdvApi32.lib&quot;</span>)</div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span> </div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span> </div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span><span class="preprocessor">#endif </span><span class="comment">// !GENERAL</span></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

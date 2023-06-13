@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['game_0',['Game',['../class_game.html#a5024a0c621c57b0a4d878d47ba197cd5',1,'Game']]],
+  ['game_0',['Game',['../class_game.html#a198bda42ac03b7e202c4b7e69f5b43c2',1,'Game']]],
   ['getarrow_1',['getArrow',['../class_client.html#a9f82bc802d79bde630dd31c86e2dfc84',1,'Client']]],
   ['getcolorbyid_2',['getColorById',['../class_client.html#a0fa08ee0c6a7e921be4d6c6f1f60848c',1,'Client']]],
   ['getmap_3',['getMap',['../class_game.html#a2bfe1cf03f2f0545c3d038640338382f',1,'Game']]],

@@ -1,42 +1,36 @@
 var indexSectionsWithContent =
 {
-  0: "_abcdeghiklmprstuvwy~",
+  0: "_bcdegikmnprstw~",
   1: "cgps",
-  2: "acgmprs",
-  3: "bcdegikmprsw~",
-  4: "_bcimpstw",
-  5: "m",
-  6: "cdms",
-  7: "ckmp",
-  8: "_bcdeghlmpruvwy",
-  9: "p"
+  2: "bcdegimprsw~",
+  3: "_bceimnpstw",
+  4: "m",
+  5: "cdms",
+  6: "ckmp",
+  7: "p"
 };
 
 var indexSectionNames =
 {
   0: "all",
   1: "classes",
-  2: "files",
-  3: "functions",
-  4: "variables",
-  5: "enums",
-  6: "enumvalues",
-  7: "related",
-  8: "defines",
-  9: "pages"
+  2: "functions",
+  3: "variables",
+  4: "enums",
+  5: "enumvalues",
+  6: "related",
+  7: "pages"
 };
 
 var indexSectionLabels =
 {
   0: "Wszystko",
   1: "Klasy",
-  2: "Pliki",
-  3: "Funkcje",
-  4: "Zmienne",
-  5: "Wyliczenia",
-  6: "Wartości wyliczeń",
-  7: "Przyjaciele",
-  8: "Definicje",
-  9: "Strony"
+  2: "Funkcje",
+  3: "Zmienne",
+  4: "Wyliczenia",
+  5: "Wartości wyliczeń",
+  6: "Przyjaciele",
+  7: "Strony"
 };
 
