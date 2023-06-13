@@ -439,24 +439,17 @@ DWORD __stdcall ClientListener(LPVOID param)
 
 void Server::sendMessage()
 {  
-    //printf("wysylanie");
     if (_players.empty())
         return;
-    _game->getMap(_mapBuffer+3);
-    if (_players.size() > 0) {
-        //printf("Broadcast: Players in game: %d \n", _players.size());
-    }        
+    _game->getMap(_mapBuffer+3);    
     for (Player* Player : _players) {
         if (Player->sock != NULL) {
-            if(Player->isPlaying)
-                codeMessage(Player, _mapBuffer, MAP);
-            else
-                codeMessage(Player, _mapBuffer, SPECTATE);
+            MSGMODE mode = (Player->isPlaying ? MAP : SPECTATE);
+            codeMessage(Player, _mapBuffer, mode);
             int iSendResult = send(Player->sock, _mapBuffer, _mapMsgSize+3, 0);
             if (iSendResult == SOCKET_ERROR) {
                 printf("%d | Broadcast: send to Player(%d) failed with error: %d\n", __LINE__, Player->ID, WSAGetLastError());
             }
-
         }
     }
 }
@@ -481,9 +474,9 @@ void codeMessage(Player* player, char* msg, Server::MSGMODE mode) {
     case Server::MAP:
     {
         msg[0] = mode;
-        const char* score = (const char*)&player->score; //przeksztalc na tablice bajtów
-        msg[1] = score[0]; //zapisz młodszą część
-        msg[2] = score[1]; //zapisz starszą część
+        const char* score = (const char*)&player->score;
+        msg[1] = score[0];
+        msg[2] = score[1];
         break;
     }
     default:
