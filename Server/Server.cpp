@@ -94,6 +94,93 @@ bool Server::closeSocket(SOCKET sock)
 // - - - - - - - - - - Server :: public - - - - - - - - - - \\
 
 
+void Server::setUp(ServerSetup* setup)
+{
+    std::ifstream configFile(CONFIG_FILE);
+
+    if (!configFile) {
+        printf("Config file '%s' not found ! \n", CONFIG_FILE);
+        setup->backlog = (unsigned int)_DEFAULT_BACKLOG_LENGTH;
+        setup->bonusScoreInc = (unsigned int)_DEFAULT_BONUS_SCORE_INC;
+        setup->mapSizeX = (unsigned int)_DEFAULT_MAP_SIZE_X;
+        setup->mapSizeY = (unsigned int)_DEFAULT_MAP_SIZE_Y;
+        setup->numberOfBonusesAtOnce = (unsigned int)_DEFAULT_NUMBER_OF_BONUSES_AT_ONCE;
+        setup->numberOfPlayers = (size_t)_DEFAULT_NUMBER_OF_PLAYERS;
+        setup->placingBonusTries = (unsigned int)_DEFAULT_PLACING_BONUS_TRIES;
+        setup->playerStep = (unsigned int)_DEFAULT_PLAYER_STEP;
+        setup->port = (int)_DEFAULT_PORT;
+        setup->sleepMsEndConnection = (unsigned int)_DEFAULT_SLEEP_MS_END_CONNECTION;
+        setup->sleepMsPinger = (unsigned int)_DEFAULT_SLEEP_MS_PINGER;
+        setup->sleepMsRun = (unsigned int)_DEFAULT_SLEEP_MS_RUN;
+        setup->spriteBonus = (char)_DEFAULT_BONUS_SPRITE;
+        setup->spriteEmpty = (char)_DEFAULT_EMPTY_SPRITE;
+        setup->spritePlayerHead = (char)_DEFAULT_PLAYER_HEAD_SPRITE;
+        setup->timespanBetweenBonuses = (unsigned int)_DEFAULT_TIMESPAN_BETWEEN_BONUSES;
+        setup->winScore = (unsigned short)_DEFAULT_WIN_SCORE;
+        printf("Default settings has used \n");
+    }
+    else {
+        std::string row, key, value;
+        while (std::getline(configFile, row)) {
+            key = row.substr(0, row.find_first_of(SEPARATOR));
+            value = row.substr(row.find_first_of(SEPARATOR) + 1);
+
+            if (key == "backlog") 
+                setup->backlog = (unsigned int)std::stoi(value);
+
+            if (key == "bonusScoreInc")
+                setup->bonusScoreInc = (unsigned int)std::stoi(value);
+
+            if (key == "mapSizeX") 
+                setup->mapSizeX = (unsigned int)std::stoi(value);
+
+            if (key == "mapSizeY") 
+                setup->mapSizeY = (unsigned int)std::stoi(value);
+
+            if (key == "numberOfBonusesAtOnce")
+                setup->numberOfBonusesAtOnce = (unsigned int)std::stoi(value);
+
+            if (key == "numberOfPlayers")
+                setup->numberOfPlayers = (size_t)std::stoi(value);
+
+            if (key == "placingBonusTries")
+                setup->placingBonusTries = (unsigned int)std::stoi(value);
+
+            if (key == "playerStep")
+                setup->playerStep = (unsigned int)std::stoi(value);
+
+            if (key == "port") 
+                setup->port = (int)std::stoi(value);
+
+            if (key == "timespanBetweenBonuses")
+                setup->timespanBetweenBonuses = (unsigned int)std::stoi(value);
+
+            if (key == "sleepMsEndConnection")
+                setup->sleepMsEndConnection = (unsigned int)std::stoi(value);
+
+            if (key == "sleepMsPinger")
+                setup->sleepMsPinger = (unsigned int)std::stoi(value);
+
+            if (key == "sleepMsRun")
+                setup->sleepMsRun = (unsigned int)std::stoi(value);
+
+            if (key == "spriteBonus")
+                setup->spriteBonus = (char)value[0];
+
+            if (key == "spriteEmpty")
+                setup->spriteEmpty = (char)value[0];
+
+            if (key == "spritePlayerHead")
+                setup->spritePlayerHead = (char)value[0];
+
+            if (key == "winScore") 
+                setup->winScore = (unsigned int)std::stoi(value);
+        }
+        configFile.close();
+    }
+}
+
+
 Server::Server(ServerSetup setup)
     : _setup(setup)
 {
@@ -162,7 +249,7 @@ void Server::waitForPlayers()
 
     printf("\t JoinPlayer: start \n");
 
-    while (_isServerRunning && _players.size() < _setup.maxNumberOfClients) {
+    while (_isServerRunning && _players.size() < _setup.numberOfPlayers) {
 
         PlayerSocket = accept(_socket, (sockaddr*)&sc, &lenc);
         if (PlayerSocket == INVALID_SOCKET) {
@@ -230,17 +317,17 @@ void Server::deletePlayer(Player* player)
 
 void Server::endConnection()
 {
-    char msg[4];
+    char msg[DISC_MESSAGE_BUFFER_SIZE];
     for (Player* Player : _players) {
         if (Player->sock != NULL) {
             codeMessage(Player, msg, DISC); //WON
-            int iSendResult = send(Player->sock, msg, 4, 0);
+            int iSendResult = send(Player->sock, msg, DISC_MESSAGE_BUFFER_SIZE, 0);
             if (iSendResult == SOCKET_ERROR) {
                 printf("%d | endConnection: send to Player(%d) failed with error: %d\n", __LINE__, Player->ID, WSAGetLastError());
             }
         }
     }
-    Sleep(2000);
+    Sleep(_setup.sleepMsEndConnection);
 }
 
 
@@ -260,7 +347,7 @@ void Server::run()
     waitForPlayers();
     //wszyscy gracze dołączyli
     
-    _game = new Game(_players, _setup.mapSizeY, _setup.mapSizeX, _setup.winScore);
+    _game = new Game(_players, &_setup);
 
     unsigned int i = 0;
 
@@ -274,9 +361,9 @@ void Server::run()
             _game->drawSnakeHead(player);
         }
  
-        if (i % 20 == 0) _game->placeBonuses(3);
+        if (i % _setup.timespanBetweenBonuses == 0) _game->placeBonuses(_setup.numberOfBonusesAtOnce);
         
-        Sleep(200); //jako param
+        Sleep(_setup.sleepMsRun);
         sendMessage();
         i++;
     }
@@ -309,15 +396,13 @@ unsigned int Server::getWinCondition()
 
 DWORD __stdcall ClientListener(LPVOID param)
 {
-    const int DEFAULT_BUFLEN = 4;
     Player* player = (Player*)param;
     printf("ClientListener: Player(%d) start \n", player->ID);
 
-    int _recvbuflen = DEFAULT_BUFLEN;
     int iResult;
-    char msg[5];
+    char msg[CONN_MESSAGE_BUFFER_SIZE];
     codeMessage(player, msg, Server::CONN);
-    int iSendResult = send(player->sock, msg, 5, 0);
+    int iSendResult = send(player->sock, msg, CONN_MESSAGE_BUFFER_SIZE, 0);
     if (iSendResult == SOCKET_ERROR) {
         printf("%d send failed with error: %d\n", __LINE__, WSAGetLastError());
         player->isRunning = false;
@@ -326,9 +411,9 @@ DWORD __stdcall ClientListener(LPVOID param)
 
     // Receive until the peer shuts down the connection
     do {
-        char _recvbuf[DEFAULT_BUFLEN] = { 0 };
+        char _recvbuf[CLIENT_LISTENER_RECV_BUFFER_SIZE] = { 0 };
 
-        iResult = recv(player->sock, _recvbuf, _recvbuflen, 0);
+        iResult = recv(player->sock, _recvbuf, CLIENT_LISTENER_RECV_BUFFER_SIZE, 0);
         if (iResult > 0) {
             //printf("Bytes received: %d\n", iResult);
             //printf("ClientListener: Player(%d) Recevied: %s \n", player->ID, _recvbuf);
@@ -459,7 +544,7 @@ DWORD __stdcall Pinger(LPVOID param)
             }
         }
 
-        Sleep(500); //jako param
+        Sleep(server->_setup.sleepMsPinger);
     }
 
     printf("\t Pinger:  stop \n");

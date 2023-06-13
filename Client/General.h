@@ -11,12 +11,25 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <stdint.h>
+#include <fstream>
+#include <string>
 
-#define DEFAULT_BUFLEN 4096//512
-#define DEFAULT_PORT "27015"
+
+// -----------------------------------------
+#define CONFIG_FILE "..\\client_config.txt"
+#define SEPARATOR '='
+
+#define _DEFAULT_IP "127.0.0.1"
+#define _DEFAULT_PORT "27015"
+// -----------------------------------------
+
+
+#define RECV_BUFFER_SIZE 4096//512
+
 
 #define VK_Q 0x51 // ASCII of 'Q'
 #define RETURN_CURSOR "\033[0;0H"
+
 
 #define BLACK      "\033[0;30m"
 #define DARK_GRAY  "\033[1;30m"

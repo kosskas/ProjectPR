@@ -235,6 +235,33 @@ char Client::getArrow(char direction)
 
 // - - - - - - - - - - Client :: public - - - - - - - - - - \\
 
+void Client::setUp(ClientSetup* setup)
+{
+    std::ifstream configFile(CONFIG_FILE);
+
+    if (!configFile) {
+        printf("Config file '%s' not found ! \n", CONFIG_FILE);
+        strcpy_s(setup->serverIP, _DEFAULT_IP);
+        strcpy_s(setup->serverPort, _DEFAULT_PORT);
+        printf("Default settings has used \n");
+    }
+    else {
+        std::string row, key, value;
+        while (std::getline(configFile, row)) {
+            key = row.substr(0, row.find_first_of(SEPARATOR));
+            value = row.substr(row.find_first_of(SEPARATOR) + 1);
+
+            if (key == "serverIP") {
+                strcpy_s(setup->serverIP, value.c_str());
+            }
+            if (key == "serverPort") {
+                strcpy_s(setup->serverPort, value.c_str());
+            }
+        }
+        configFile.close();
+    }
+}
+
 
 Client::Client(ClientSetup setup) :
     _setup(setup),
@@ -433,7 +460,18 @@ DWORD __stdcall MsgReceiverListener(LPVOID param)
             }
             else {
                 //printf("Line %d in function %s \t recv failed with error: %d\n", __LINE__, __FUNCTION__, WSAGetLastError());
-                printf("Game has ended\n");
+                printf("Game has ended: ");
+                // silver tape
+                if (client->_playerScore >= client->_serverWinScore) {
+                    printf("%sYou won!\n%s", BRIGHT_GREEN, RESET);
+                }
+                else if (client->_playerScore <= client->_serverWinScore) {
+                    printf("%sYou lost!\n%s", BRIGHT_RED, RESET);
+                }
+                else {
+                    printf("\n");
+                }
+                // ! silver tape
                 client->_isRunning = false;
                 return 0;
             }
@@ -490,6 +528,8 @@ DWORD __stdcall KeyEventListener(LPVOID param)
     }
     return 0;
 }
+
+
 void Client::getColorById(char* buf, char id) {
     switch (id) {
     case '#':

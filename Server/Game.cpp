@@ -45,11 +45,21 @@ char Game::getPlayerASCII(Player* player)
 // - - - - - - - - - - Game :: public - - - - - - - - - - \\
 
 
-Game::Game(list<Player*>& players, int y, int x, unsigned short wScore)
-	: _sizeX(x), _sizeY(y), _players(players), _winScore(wScore)
+Game::Game(list<Player*>& players, ServerSetup* setup) :
+	_sizeX(setup->mapSizeX),
+	_sizeY(setup->mapSizeY),
+	_players(players),
+	_placingBonusTries(setup->placingBonusTries),
+	_playerStep(setup->playerStep),
+	_bonusScoreInc(setup->bonusScoreInc),
+	_winScore(setup->winScore)
 {
+	_sprites.bonus = setup->spriteBonus;
+	_sprites.empty = setup->spriteEmpty;
+	_sprites.playerHead = setup->spritePlayerHead;
+
 	_gameState = true;
-	_gameMap = createMap(y, x);
+	_gameMap = createMap(_sizeY, _sizeX);
 
 	int sty = 2, stx = 2;
 	///Inicjalizuj pozycje graczy oraz długości ich wężów
@@ -57,7 +67,6 @@ Game::Game(list<Player*>& players, int y, int x, unsigned short wScore)
 		player->sprite.push_front({ sty += 4, stx += 2 });
 		player->sprite.push_front({ sty + 1, stx });
 	}
-
 }
 
 
@@ -90,7 +99,7 @@ void Game::placeBonuses(int num)
 	uniform_int_distribution<int> distributionY(0, this->_sizeY-1);
 
 	// Wylosowanie liczby
-	int maxTries = 5;
+	int maxTries = _placingBonusTries;
 	int rand_x;
 	int rand_y;
 
@@ -142,7 +151,7 @@ void Game::movePlayer(Player* player)
 	//Przesuń jego postać
 	int xTranslation = 0;
 	int yTranslation = 0;
-	int step = 1;
+	int step = _playerStep;
 
 	switch (player->currentDirection) {
 	case UP:
@@ -189,7 +198,7 @@ void Game::movePlayer(Player* player)
 		_gameMap[currTailPos.posY][currTailPos.posX] = EMPTY_SPRITE;
 	}
 	else if (nextPos == BONUS_SPRITE) {
-		player->score+=10;
+		player->score += _bonusScoreInc;
 		player->sprite.push_front(nextHeadPos);
 	}
 	else {

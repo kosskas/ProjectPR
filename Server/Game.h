@@ -4,6 +4,8 @@
 
 #include "General.h"
 #include "Player.h"
+struct ServerSetup;
+#include "Server.h"
 
 
 /**
@@ -11,6 +13,38 @@
 */
 class Game {
 private:
+
+	/**
+	 * @brief prywatna struktura przechowująca symbole reprezentujące elementy na mapie
+	*/
+	struct SpritesRepo {
+
+		/**
+		 * @brief symbol bonusu na mapie
+		*/
+		char bonus;
+
+		/**
+		 * @brief symbol pustego pola na mapie
+		*/
+		char empty;
+
+		/**
+		 * @brief symbol oznaczający głowę postaci gracza
+		*/
+		char playerHead;
+	};
+
+	unsigned int _placingBonusTries;
+
+	unsigned int _playerStep;
+
+	unsigned int _bonusScoreInc;
+
+	/**
+	 * @brief struktura (SpritesRepo) zawierająca symbole wszystkich elementów mapy
+	*/
+	SpritesRepo _sprites;
 
 	/**
 	 * @brief Liczba kolumn
@@ -79,11 +113,9 @@ public:
 	/**
 	 * @brief Inicjalizuje klasę Game
 	 * @param players Lista graczy, ta sama jak w klasie Server
-	 * @param y Liczba kolumn
-	 * @param x Liczba wierszy
-	 * @param wScore Wynik wymagany do wygrania gry
+	 * @param setup Wskaźnik to struktury (ServerSetup) potrzbej do ustawienia paarametrów gry
 	*/
-	Game(list<Player*>& players, int y, int x, unsigned short wScore);
+	Game(list<Player*>& players, ServerSetup* setup);
 
 	/**
 	 * @brief Sprawdza stan bieżącej gry

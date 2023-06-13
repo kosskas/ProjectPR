@@ -1,8 +1,9 @@
 /*
 ///TODO
 * Zakończenie poprawne wątków (PINGER!!!!)
-* Zrobić plik konfiguracyjny i Sparametryzować Spleepy 
 * poprawić komunikaty
+* sekcja krytyczna
+* warunki brzegowe wartości czytanych z plików config
 */
 /*
 ///Zaobserwonane błędy
@@ -29,32 +30,49 @@ struct ServerSetup {
     /**
      * @brief Maksymalna długość kolejki oczekujących połączeń
     */
-    int backlog;
+    unsigned int backlog;
+
+    unsigned int bonusScoreInc;
 
     /**
-     * @brief Określa rozmiar bufora przesyłu danych
+     * @brief Liczba kolumn
     */
-    size_t bufferSize;
-
-    /**
-     * @brief Określa maksymalną liczbę klientów
-    */
-    size_t maxNumberOfClients;
-
-    /**
-     * @brief Określa numer portu
-    */
-    int port;
+    unsigned int mapSizeX;
 
     /**
      * @brief Liczba wierszy
     */
     unsigned int mapSizeY;
 
+    unsigned int numberOfBonusesAtOnce;
+
     /**
-     * @brief Liczba kolumn
+     * @brief Określa maksymalną liczbę klientów
     */
-    unsigned int mapSizeX;
+    size_t numberOfPlayers;
+
+    unsigned int placingBonusTries;
+
+    unsigned int playerStep;
+
+    /**
+     * @brief Określa numer portu
+    */
+    int port;
+
+    unsigned int sleepMsEndConnection;
+
+    unsigned int sleepMsPinger;
+
+    unsigned int sleepMsRun;
+
+    char spriteBonus;
+
+    char spriteEmpty;
+
+    char spritePlayerHead;
+
+    unsigned int timespanBetweenBonuses;
 
     /**
      * @brief Wynik wymagany do wygrania gry
@@ -208,6 +226,8 @@ public:
         */
         MAP
     };
+
+    static void setUp(ServerSetup* setup);
 
     /**
      * @brief Inicjalizuje WSA. Tworzy socket serwera. Uruchamia serwer pozostawiając go w stanie nasłuchiwania połączeń.

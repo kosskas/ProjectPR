@@ -13,17 +13,12 @@ struct ClientSetup {
     /**
      * @brief Numer ip serwera
     */
-    const char* serverIP;
+    char serverIP[16];
 
     /**
      * @brief Numer portu serwera
     */
-    const char* serverPort;
-
-    /**
-     * @brief Określa rozmiar bufora odbioru/przesyłu danych
-    */
-    size_t bufferSize;
+    char serverPort[6];
 
 };
 
@@ -46,12 +41,12 @@ private:
     /**
      * @brief Bufor bajtów odebranych
     */
-    char _recvbuf[DEFAULT_BUFLEN] = { 0 };
+    char _recvbuf[RECV_BUFFER_SIZE] = { 0 };
 
     /**
-     * @brief Długość bufora danych
+     * @brief Określa rozmiar bufora odbioru/przesyłu danych
     */
-    int _recvbuflen = DEFAULT_BUFLEN;
+    size_t _recvbuflen = RECV_BUFFER_SIZE;
 
     /**
      * @brief Uchwyt na wątek MsgReceiverListener
@@ -251,6 +246,9 @@ public:
         */
         MAP
     };
+
+    static void setUp(ClientSetup *setup);
+
     /**
      * @brief @brief Konstruktor inicjalizujący aplikacje kliencką
      * 
