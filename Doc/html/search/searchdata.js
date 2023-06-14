@@ -7,7 +7,7 @@ var indexSectionsWithContent =
   4: "m",
   5: "cdms",
   6: "ckmp",
-  7: "p"
+  7: "s"
 };
 
 var indexSectionNames =

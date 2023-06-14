@@ -256,7 +256,6 @@ void Server::waitForPlayers()
         if (PlayerSocket == INVALID_SOCKET) {
             printf("JoinPlayer: Accept failed with error: %d \n", WSAGetLastError());
         }
-
         DWORD PlayerThreadId;
         Player* player = new Player;
 
@@ -319,6 +318,7 @@ void Server::deletePlayer(Player* player)
 void Server::endConnection()
 {
     char msg[DISC_MESSAGE_BUFFER_SIZE];
+    playerListMutex.lock();
     for (Player* Player : _players) {
         if (Player->sock != NULL) {
             codeMessage(Player, msg, DISC);
@@ -328,6 +328,7 @@ void Server::endConnection()
             }
         }
     }
+    playerListMutex.unlock();
     Sleep(_setup.sleepMsEndConnection);
 }
 
@@ -354,6 +355,7 @@ void Server::run()
 
     while (_isServerRunning  && _game->checkGameState() && !_players.empty()) {
 
+        playerListMutex.lock();
         for (Player* player : _players) {
             _game->movePlayer(player);
         }
@@ -361,11 +363,12 @@ void Server::run()
         for (Player* player : _players) {
             _game->drawSnakeHead(player);
         }
- 
+        playerListMutex.unlock();
         if (i % _setup.timespanBetweenBonuses == 0) _game->placeBonuses(_setup.numberOfBonusesAtOnce);
         
-        
+        playerListMutex.lock();
         sendMessage();
+        playerListMutex.unlock();
         i++;
         Sleep(_setup.sleepMsRun);
     }
@@ -493,6 +496,7 @@ DWORD __stdcall Pinger(LPVOID param)
     while (server->_isServerRunning) {
   
         //printf("\t Online %d\n", server->_players.size());
+        server->playerListMutex.lock();
         std::list<Player*>::iterator it = server->_players.begin();
         while (it != server->_players.end())
         {
@@ -510,6 +514,7 @@ DWORD __stdcall Pinger(LPVOID param)
                 ++it;
             }
         }
+        server->playerListMutex.unlock();
 
         Sleep(server->_setup.sleepMsPinger);
     }

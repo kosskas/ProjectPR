@@ -16,7 +16,7 @@
 #include <random>
 #include <fstream>
 #include <string>
-
+#include <mutex>
 
 #define LEFT VK_LEFT
 #define RIGHT VK_RIGHT
@@ -69,6 +69,7 @@ using std::list;
 using std::uniform_int_distribution;
 using std::random_device;
 using std::mt19937;
+using std::mutex;
 
 #define Terminate(a) TerminateThread(a, 0)
 #endif // !GENERAL

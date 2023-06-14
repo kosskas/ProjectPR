@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['projekt_20z_20“przetwarzania_20rozproszonego”_0',['Projekt z “Przetwarzania rozproszonego”',['../index.html',1,'']]]
+  ['slither_2eio_0',['Slither.io',['../index.html',1,'']]]
 ];

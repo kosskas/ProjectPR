@@ -96,7 +96,10 @@ struct ServerSetup {
 */
 class Server {
 private:
-
+    /**
+     * @brief Semafor do sekcji krytycznej
+    */
+    mutex playerListMutex;
     /**
      * @brief Socket nasłuchujący nowych połączeń
     */
