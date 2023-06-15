@@ -318,7 +318,6 @@ void Server::deletePlayer(Player* player)
 void Server::endConnection()
 {
     char msg[DISC_MESSAGE_BUFFER_SIZE];
-    playerListMutex.lock();
     for (Player* Player : _players) {
         if (Player->sock != NULL) {
             codeMessage(Player, msg, DISC);
@@ -328,8 +327,6 @@ void Server::endConnection()
             }
         }
     }
-    playerListMutex.unlock();
-    Sleep(_setup.sleepMsEndConnection);
 }
 
 
@@ -373,7 +370,10 @@ void Server::run()
         Sleep(_setup.sleepMsRun);
     }
     _game->checkGameState();
+    playerListMutex.lock();
     endConnection();
+    playerListMutex.unlock();
+    Sleep(_setup.sleepMsEndConnection);
 }
 
 unsigned int Server::getXSize()
