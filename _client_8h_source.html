@@ -1,0 +1,245 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="pl">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.7"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Slither.io: Plik źródłowy Client/Client.h</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Slither.io<span id="projectnumber">&#160;RELEASE</span>
+   </div>
+   <div id="projectbrief">Projekt z “Przetwarzania rozproszonego”</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Wygenerowano przez Doxygen 1.9.7 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','Szukaj');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Wczytywanie...</div>
+<div class="SRStatus" id="Searching">Szukanie...</div>
+<div class="SRStatus" id="NoMatches">Brak dopasowań</div>
+</div>
+</div>
+</div>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_922c588100a187620fdc1533bc178f73.html">Client</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle"><div class="title">Client.h</div></div>
+</div><!--header-->
+<div class="contents">
+<div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#ifndef _CLIENT_H</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#define _CLIENT_H</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span> </div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span> </div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &quot;General.h&quot;</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span> </div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span> </div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno"><a class="line" href="struct_client_setup.html">   11</a></span><span class="keyword">struct </span><a class="code hl_struct" href="struct_client_setup.html">ClientSetup</a> {</div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span> </div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno"><a class="line" href="struct_client_setup.html#a0ec6171de455a402de94c65db9fcaad9">   16</a></span>    <span class="keywordtype">char</span> <a class="code hl_variable" href="struct_client_setup.html#a0ec6171de455a402de94c65db9fcaad9">serverIP</a>[16];</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span> </div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno"><a class="line" href="struct_client_setup.html#a74b031f9d40580a77c4ad770daa878a8">   21</a></span>    <span class="keywordtype">char</span> <a class="code hl_variable" href="struct_client_setup.html#a74b031f9d40580a77c4ad770daa878a8">serverPort</a>[6];</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span> </div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>};</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span> </div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span> </div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno"><a class="line" href="class_client.html">   29</a></span><span class="keyword">class </span><a class="code hl_class" href="class_client.html">Client</a> {</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno"><a class="line" href="class_client.html#aecb572172e5d9e8e022d5d028da7ef58">   34</a></span>    SOCKET <a class="code hl_variable" href="class_client.html#aecb572172e5d9e8e022d5d028da7ef58">_socket</a> = INVALID_SOCKET;</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span> </div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno"><a class="line" href="class_client.html#a3d8b60d6a9d8a0dccbd41ea0315dd64d">   39</a></span>    <a class="code hl_struct" href="struct_client_setup.html">ClientSetup</a> <a class="code hl_variable" href="class_client.html#a3d8b60d6a9d8a0dccbd41ea0315dd64d">_setup</a>;</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span> </div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno"><a class="line" href="class_client.html#a2b51e95915a2f0b1659c05b683440b28">   44</a></span>    <span class="keywordtype">char</span> <a class="code hl_variable" href="class_client.html#a2b51e95915a2f0b1659c05b683440b28">_recvbuf</a>[RECV_BUFFER_SIZE] = { 0 };</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span> </div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno"><a class="line" href="class_client.html#a184ae30e997a122d6ab5dd30a67438c6">   49</a></span>    <span class="keywordtype">size_t</span> <a class="code hl_variable" href="class_client.html#a184ae30e997a122d6ab5dd30a67438c6">_recvbuflen</a> = RECV_BUFFER_SIZE;</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span> </div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno"><a class="line" href="class_client.html#a61b5a56b10b43f251d30c68d2163cd7a">   54</a></span>    HANDLE <a class="code hl_variable" href="class_client.html#a61b5a56b10b43f251d30c68d2163cd7a">_MsgReceiverTh</a>;</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span> </div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno"><a class="line" href="class_client.html#a7b17ace2b5d1e84c43d058b6bb2f36fa">   59</a></span>    HANDLE <a class="code hl_variable" href="class_client.html#a7b17ace2b5d1e84c43d058b6bb2f36fa">_KeyEventListenerTh</a>;</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span> </div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno"><a class="line" href="class_client.html#aa3f81619e1eaa9f59f1a03790fde7562">   64</a></span>    LPDWORD <a class="code hl_variable" href="class_client.html#aa3f81619e1eaa9f59f1a03790fde7562">_MsgReceiverThID</a>;</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span> </div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno"><a class="line" href="class_client.html#a079517779d1083146bdcfe125619d69d">   69</a></span>    LPDWORD <a class="code hl_variable" href="class_client.html#a079517779d1083146bdcfe125619d69d">_KeyEventListenerThID</a>;</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span> </div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno"><a class="line" href="class_client.html#a10148cdb96cf764343333114f0978a48">   74</a></span>    HANDLE <a class="code hl_variable" href="class_client.html#a10148cdb96cf764343333114f0978a48">_hStdin</a>;</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span> </div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno"><a class="line" href="class_client.html#a4c2891ff3837d2a0d169f5974a16fd8b">   79</a></span>    HANDLE <a class="code hl_variable" href="class_client.html#a4c2891ff3837d2a0d169f5974a16fd8b">_hStdout</a>;</div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span> </div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno"><a class="line" href="class_client.html#ad728e8d0c9008b6ce5e1bb8942dd0525">   84</a></span>    DWORD <a class="code hl_variable" href="class_client.html#ad728e8d0c9008b6ce5e1bb8942dd0525">_fdwSaveOldInMode</a> = 0;</div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span> </div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno"><a class="line" href="class_client.html#a7e7a3c3da07ccea6bc08b8a55a8fa30d">   89</a></span>    DWORD <a class="code hl_variable" href="class_client.html#a7e7a3c3da07ccea6bc08b8a55a8fa30d">_fdwInMode</a>;</div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span> </div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno"><a class="line" href="class_client.html#acfc6d99de443a30d0ad3462bc512787c">   94</a></span>    DWORD <a class="code hl_variable" href="class_client.html#acfc6d99de443a30d0ad3462bc512787c">_fdwSaveOldOutMode</a> = 0;</div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span> </div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno"><a class="line" href="class_client.html#a6705152a2740d80a30b02eaf7e0c3853">   99</a></span>    DWORD <a class="code hl_variable" href="class_client.html#a6705152a2740d80a30b02eaf7e0c3853">_fdwOutMode</a>;</div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span> </div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno"><a class="line" href="class_client.html#aad181cd3f7c2221658008397aa47d3f5">  104</a></span>    <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> <a class="code hl_variable" href="class_client.html#aad181cd3f7c2221658008397aa47d3f5">_keyInput</a> = VK_LEFT;</div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span> </div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno"><a class="line" href="class_client.html#aa70ae6131cb44f04fd8b1a28a1bfb02b">  109</a></span>    <span class="keywordtype">bool</span> <a class="code hl_variable" href="class_client.html#aa70ae6131cb44f04fd8b1a28a1bfb02b">_isRunning</a>;</div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno"><a class="line" href="class_client.html#a90f7ea8d056e098a7f109584b3347b93">  113</a></span>    <span class="keywordtype">bool</span> <a class="code hl_variable" href="class_client.html#a90f7ea8d056e098a7f109584b3347b93">_isConnected</a>;</div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno"><a class="line" href="class_client.html#a6f770552c0eb255f4b823ea0cae48d67">  117</a></span>    <span class="keywordtype">bool</span> <a class="code hl_variable" href="class_client.html#a6f770552c0eb255f4b823ea0cae48d67">_hasReceivedConnMsg</a>;</div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span> </div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno"><a class="line" href="class_client.html#ac6e2b187d62e68642485659e9a526c42">  122</a></span>    <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <a class="code hl_variable" href="class_client.html#ac6e2b187d62e68642485659e9a526c42">_mapSizeY</a>;</div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno"><a class="line" href="class_client.html#aa0d583f5df7d4bff841fae32caa482fa">  126</a></span>    <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <a class="code hl_variable" href="class_client.html#aa0d583f5df7d4bff841fae32caa482fa">_mapSizeX</a> = 0xFFFFFFFF;</div>
+<div class="line"><a id="l00130" name="l00130"></a><span class="lineno"><a class="line" href="class_client.html#a2ec7f5b5ca082da2dff51066a6493049">  130</a></span>    <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <a class="code hl_variable" href="class_client.html#a2ec7f5b5ca082da2dff51066a6493049">_playerID</a>;</div>
+<div class="line"><a id="l00134" name="l00134"></a><span class="lineno"><a class="line" href="class_client.html#a0cba8e39a3131c15d2a63ff4e8427753">  134</a></span>    <span class="keywordtype">unsigned</span> <span class="keywordtype">short</span> <a class="code hl_variable" href="class_client.html#a0cba8e39a3131c15d2a63ff4e8427753">_playerScore</a>;</div>
+<div class="line"><a id="l00138" name="l00138"></a><span class="lineno"><a class="line" href="class_client.html#a365ec0b1ff43e28b252ad7e51a7cf8f5">  138</a></span>    <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <a class="code hl_variable" href="class_client.html#a365ec0b1ff43e28b252ad7e51a7cf8f5">_serverWinScore</a>;</div>
+<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span><span class="keyword">protected</span>:</div>
+<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span>    </div>
+<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span>    <span class="keywordtype">bool</span> <a class="code hl_function" href="class_client.html#a98eb099fd5a7afc8ad68d0f33b6a2a3c">startUpWinsock</a>();</div>
+<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span>    <span class="keywordtype">bool</span> <a class="code hl_function" href="class_client.html#a49754384bf442f0a92e2abb73f6b51ed">createSocket</a>();</div>
+<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span>    <span class="keywordtype">bool</span> <a class="code hl_function" href="class_client.html#a872dcd0db96e01a4c035f1808f0247c1">connectToServer</a>();</div>
+<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span>    <span class="keywordtype">bool</span> <a class="code hl_function" href="class_client.html#a6aaf8ffe33c0202f33de08a1ba64571d">disconnectFromServer</a>();</div>
+<div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span>    <span class="keywordtype">bool</span> <a class="code hl_function" href="class_client.html#a38d4b954621867ba3f10bcf22b79ed4d">shutdownSocket</a>();</div>
+<div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span>    <span class="keywordtype">bool</span> <a class="code hl_function" href="class_client.html#a4f50cc56d6bb3024223b56372a1399de">closeSocket</a>();</div>
+<div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span> </div>
+<div class="line"><a id="l00178" name="l00178"></a><span class="lineno">  178</span>    <span class="keywordtype">int</span> <a class="code hl_function" href="class_client.html#a1e89f15f887ac7af851a76694b91ec0a">initConsole</a>();</div>
+<div class="line"><a id="l00179" name="l00179"></a><span class="lineno">  179</span> </div>
+<div class="line"><a id="l00184" name="l00184"></a><span class="lineno">  184</span>    <span class="keywordtype">bool</span> <a class="code hl_function" href="class_client.html#a903144755865ad44b72005c396b57731">initReceiver</a>();</div>
+<div class="line"><a id="l00189" name="l00189"></a><span class="lineno">  189</span>    <span class="keywordtype">bool</span> <a class="code hl_function" href="class_client.html#a6c47e407acf821f68987d437d6ee686a">initKeyEventListener</a>();</div>
+<div class="line"><a id="l00190" name="l00190"></a><span class="lineno">  190</span> </div>
+<div class="line"><a id="l00197" name="l00197"></a><span class="lineno">  197</span>    <span class="keywordtype">bool</span> <a class="code hl_function" href="class_client.html#aad121e3efbdb671b908ae30a5b6406f5">sendMessage</a>(<span class="keyword">const</span> <span class="keywordtype">char</span>* sendbuf, <span class="keywordtype">int</span> len);</div>
+<div class="line"><a id="l00198" name="l00198"></a><span class="lineno">  198</span> </div>
+<div class="line"><a id="l00203" name="l00203"></a><span class="lineno">  203</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="class_client.html#a82e71f0abe366d54439fbec3410ef377">printGame</a>(<span class="keyword">const</span> <span class="keywordtype">char</span>* map);</div>
+<div class="line"><a id="l00204" name="l00204"></a><span class="lineno">  204</span> </div>
+<div class="line"><a id="l00210" name="l00210"></a><span class="lineno">  210</span>    <span class="keywordtype">char</span> <a class="code hl_function" href="class_client.html#a9f82bc802d79bde630dd31c86e2dfc84">getArrow</a>(<span class="keywordtype">char</span> direction);</div>
+<div class="line"><a id="l00211" name="l00211"></a><span class="lineno">  211</span> </div>
+<div class="line"><a id="l00215" name="l00215"></a><span class="lineno">  215</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="class_client.html#a9917f9390904039b808d1d46779b6006">decodeMessage</a>();</div>
+<div class="line"><a id="l00221" name="l00221"></a><span class="lineno">  221</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="class_client.html#a0fa08ee0c6a7e921be4d6c6f1f60848c">getColorById</a>(<span class="keywordtype">char</span>* buf, <span class="keywordtype">char</span> <span class="keywordtype">id</span>);</div>
+<div class="line"><a id="l00222" name="l00222"></a><span class="lineno">  222</span> </div>
+<div class="line"><a id="l00223" name="l00223"></a><span class="lineno">  223</span>    <span class="keyword">friend</span> DWORD __stdcall <a class="code hl_friend" href="class_client.html#ab493dc086fe674e2cc41509b237f7dea">MsgReceiverListener</a>(LPVOID param);;</div>
+<div class="line"><a id="l00224" name="l00224"></a><span class="lineno">  224</span>    <span class="keyword">friend</span> DWORD __stdcall <a class="code hl_friend" href="class_client.html#a9692392acc351fc0b4657ca28352f37d">KeyEventListener</a>(LPVOID param);</div>
+<div class="line"><a id="l00225" name="l00225"></a><span class="lineno">  225</span> </div>
+<div class="line"><a id="l00226" name="l00226"></a><span class="lineno">  226</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00227" name="l00227"></a><span class="lineno">  227</span> </div>
+<div class="line"><a id="l00231" name="l00231"></a><span class="lineno"><a class="line" href="class_client.html#a2f2a6f9955ce1f5be8a603e5b2b677ec">  231</a></span>    <span class="keyword">enum</span> <a class="code hl_enumeration" href="class_client.html#a2f2a6f9955ce1f5be8a603e5b2b677ec">MSGMODE</a> {</div>
+<div class="line"><a id="l00235" name="l00235"></a><span class="lineno"><a class="line" href="class_client.html#a2f2a6f9955ce1f5be8a603e5b2b677eca4fbb83aacf5992cb5381504e64a2be30">  235</a></span>        <a class="code hl_enumvalue" href="class_client.html#a2f2a6f9955ce1f5be8a603e5b2b677eca4fbb83aacf5992cb5381504e64a2be30">CONN</a>,</div>
+<div class="line"><a id="l00239" name="l00239"></a><span class="lineno"><a class="line" href="class_client.html#a2f2a6f9955ce1f5be8a603e5b2b677eca120b7d7800104e118b3faa941fba7c4c">  239</a></span>        <a class="code hl_enumvalue" href="class_client.html#a2f2a6f9955ce1f5be8a603e5b2b677eca120b7d7800104e118b3faa941fba7c4c">DISC</a>,</div>
+<div class="line"><a id="l00243" name="l00243"></a><span class="lineno"><a class="line" href="class_client.html#a2f2a6f9955ce1f5be8a603e5b2b677ecaaabe49e5661b93950b8df7f5953412e0">  243</a></span>        <a class="code hl_enumvalue" href="class_client.html#a2f2a6f9955ce1f5be8a603e5b2b677ecaaabe49e5661b93950b8df7f5953412e0">SPECTATE</a>,</div>
+<div class="line"><a id="l00247" name="l00247"></a><span class="lineno">  247</span>        <a class="code hl_enumvalue" href="class_client.html#a2f2a6f9955ce1f5be8a603e5b2b677eca01f08f20ce995eb72975969005c185e8">MAP</a></div>
+<div class="line"><a id="l00248" name="l00248"></a><span class="lineno"><a class="line" href="class_client.html#a2f2a6f9955ce1f5be8a603e5b2b677eca01f08f20ce995eb72975969005c185e8">  248</a></span>    };</div>
+<div class="line"><a id="l00249" name="l00249"></a><span class="lineno">  249</span> </div>
+<div class="line"><a id="l00254" name="l00254"></a><span class="lineno">  254</span>    <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code hl_function" href="class_client.html#aaecc26cb97a38908b841690180963807">setUp</a>(<a class="code hl_struct" href="struct_client_setup.html">ClientSetup</a> *setup);</div>
+<div class="line"><a id="l00255" name="l00255"></a><span class="lineno">  255</span> </div>
+<div class="line"><a id="l00260" name="l00260"></a><span class="lineno">  260</span>    <a class="code hl_class" href="class_client.html">Client</a>(<a class="code hl_struct" href="struct_client_setup.html">ClientSetup</a> *setup);</div>
+<div class="line"><a id="l00261" name="l00261"></a><span class="lineno">  261</span> </div>
+<div class="line"><a id="l00265" name="l00265"></a><span class="lineno">  265</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="class_client.html#ae0bc335d720265d4d6e8a72cf7a2a9aa">run</a>();</div>
+<div class="line"><a id="l00266" name="l00266"></a><span class="lineno">  266</span> </div>
+<div class="line"><a id="l00271" name="l00271"></a><span class="lineno">  271</span>    <a class="code hl_function" href="class_client.html#a840e519ca781888cbd54181572ebe3a7">~Client</a>();</div>
+<div class="line"><a id="l00272" name="l00272"></a><span class="lineno">  272</span>};</div>
+<div class="line"><a id="l00273" name="l00273"></a><span class="lineno">  273</span> </div>
+<div class="line"><a id="l00274" name="l00274"></a><span class="lineno">  274</span> </div>
+<div class="line"><a id="l00280" name="l00280"></a><span class="lineno">  280</span>DWORD __stdcall MsgReceiverListener(LPVOID param);</div>
+<div class="line"><a id="l00281" name="l00281"></a><span class="lineno">  281</span> </div>
+<div class="line"><a id="l00287" name="l00287"></a><span class="lineno">  287</span>DWORD __stdcall KeyEventListener(LPVOID param);</div>
+<div class="line"><a id="l00288" name="l00288"></a><span class="lineno">  288</span> </div>
+<div class="line"><a id="l00289" name="l00289"></a><span class="lineno">  289</span> </div>
+<div class="line"><a id="l00290" name="l00290"></a><span class="lineno">  290</span><span class="preprocessor">#endif </span><span class="comment">// !_CLIENT_H</span></div>
+<div class="ttc" id="aclass_client_html"><div class="ttname"><a href="class_client.html">Client</a></div><div class="ttdoc">Klasa Client zarządza grą oraz połączeniem po stronie klienta.</div><div class="ttdef"><b>Definition</b> Client.h:29</div></div>
+<div class="ttc" id="aclass_client_html_a079517779d1083146bdcfe125619d69d"><div class="ttname"><a href="class_client.html#a079517779d1083146bdcfe125619d69d">Client::_KeyEventListenerThID</a></div><div class="ttdeci">LPDWORD _KeyEventListenerThID</div><div class="ttdoc">Wskaźnik na ID wątku KeyEventListener.</div><div class="ttdef"><b>Definition</b> Client.h:69</div></div>
+<div class="ttc" id="aclass_client_html_a0cba8e39a3131c15d2a63ff4e8427753"><div class="ttname"><a href="class_client.html#a0cba8e39a3131c15d2a63ff4e8427753">Client::_playerScore</a></div><div class="ttdeci">unsigned short _playerScore</div><div class="ttdoc">Wynik gracza.</div><div class="ttdef"><b>Definition</b> Client.h:134</div></div>
+<div class="ttc" id="aclass_client_html_a0fa08ee0c6a7e921be4d6c6f1f60848c"><div class="ttname"><a href="class_client.html#a0fa08ee0c6a7e921be4d6c6f1f60848c">Client::getColorById</a></div><div class="ttdeci">void getColorById(char *buf, char id)</div><div class="ttdoc">Ustawia kolor w zależności od ID gracza.</div><div class="ttdef"><b>Definition</b> Client.cpp:523</div></div>
+<div class="ttc" id="aclass_client_html_a10148cdb96cf764343333114f0978a48"><div class="ttname"><a href="class_client.html#a10148cdb96cf764343333114f0978a48">Client::_hStdin</a></div><div class="ttdeci">HANDLE _hStdin</div><div class="ttdoc">Uchwyt standartowe wejście.</div><div class="ttdef"><b>Definition</b> Client.h:74</div></div>
+<div class="ttc" id="aclass_client_html_a184ae30e997a122d6ab5dd30a67438c6"><div class="ttname"><a href="class_client.html#a184ae30e997a122d6ab5dd30a67438c6">Client::_recvbuflen</a></div><div class="ttdeci">size_t _recvbuflen</div><div class="ttdoc">Określa rozmiar bufora odbioru/przesyłu danych.</div><div class="ttdef"><b>Definition</b> Client.h:49</div></div>
+<div class="ttc" id="aclass_client_html_a1e89f15f887ac7af851a76694b91ec0a"><div class="ttname"><a href="class_client.html#a1e89f15f887ac7af851a76694b91ec0a">Client::initConsole</a></div><div class="ttdeci">int initConsole()</div><div class="ttdoc">Incjalizacja do odczytu klawiatury.</div><div class="ttdef"><b>Definition</b> Client.cpp:112</div></div>
+<div class="ttc" id="aclass_client_html_a2b51e95915a2f0b1659c05b683440b28"><div class="ttname"><a href="class_client.html#a2b51e95915a2f0b1659c05b683440b28">Client::_recvbuf</a></div><div class="ttdeci">char _recvbuf[RECV_BUFFER_SIZE]</div><div class="ttdoc">Bufor bajtów odebranych.</div><div class="ttdef"><b>Definition</b> Client.h:44</div></div>
+<div class="ttc" id="aclass_client_html_a2ec7f5b5ca082da2dff51066a6493049"><div class="ttname"><a href="class_client.html#a2ec7f5b5ca082da2dff51066a6493049">Client::_playerID</a></div><div class="ttdeci">unsigned int _playerID</div><div class="ttdoc">Identyfikator gracza.</div><div class="ttdef"><b>Definition</b> Client.h:130</div></div>
+<div class="ttc" id="aclass_client_html_a2f2a6f9955ce1f5be8a603e5b2b677ec"><div class="ttname"><a href="class_client.html#a2f2a6f9955ce1f5be8a603e5b2b677ec">Client::MSGMODE</a></div><div class="ttdeci">MSGMODE</div><div class="ttdoc">Tryby wiadomości jakie będzie odbierał Client od Server.</div><div class="ttdef"><b>Definition</b> Client.h:231</div></div>
+<div class="ttc" id="aclass_client_html_a2f2a6f9955ce1f5be8a603e5b2b677eca01f08f20ce995eb72975969005c185e8"><div class="ttname"><a href="class_client.html#a2f2a6f9955ce1f5be8a603e5b2b677eca01f08f20ce995eb72975969005c185e8">Client::MAP</a></div><div class="ttdeci">@ MAP</div><div class="ttdoc">W grze. Odbierz aktualną mapę</div><div class="ttdef"><b>Definition</b> Client.h:247</div></div>
+<div class="ttc" id="aclass_client_html_a2f2a6f9955ce1f5be8a603e5b2b677eca120b7d7800104e118b3faa941fba7c4c"><div class="ttname"><a href="class_client.html#a2f2a6f9955ce1f5be8a603e5b2b677eca120b7d7800104e118b3faa941fba7c4c">Client::DISC</a></div><div class="ttdeci">@ DISC</div><div class="ttdoc">Koniec gry, połączenie zostanie zamknięte.</div><div class="ttdef"><b>Definition</b> Client.h:239</div></div>
+<div class="ttc" id="aclass_client_html_a2f2a6f9955ce1f5be8a603e5b2b677eca4fbb83aacf5992cb5381504e64a2be30"><div class="ttname"><a href="class_client.html#a2f2a6f9955ce1f5be8a603e5b2b677eca4fbb83aacf5992cb5381504e64a2be30">Client::CONN</a></div><div class="ttdeci">@ CONN</div><div class="ttdoc">Połączono z Server, odbierz informacje o grze.</div><div class="ttdef"><b>Definition</b> Client.h:235</div></div>
+<div class="ttc" id="aclass_client_html_a2f2a6f9955ce1f5be8a603e5b2b677ecaaabe49e5661b93950b8df7f5953412e0"><div class="ttname"><a href="class_client.html#a2f2a6f9955ce1f5be8a603e5b2b677ecaaabe49e5661b93950b8df7f5953412e0">Client::SPECTATE</a></div><div class="ttdeci">@ SPECTATE</div><div class="ttdoc">Poza grą. Odbierz aktualną mapę</div><div class="ttdef"><b>Definition</b> Client.h:243</div></div>
+<div class="ttc" id="aclass_client_html_a365ec0b1ff43e28b252ad7e51a7cf8f5"><div class="ttname"><a href="class_client.html#a365ec0b1ff43e28b252ad7e51a7cf8f5">Client::_serverWinScore</a></div><div class="ttdeci">unsigned int _serverWinScore</div><div class="ttdoc">Wymagany wynik do wygrania gry przesłany przez Server.</div><div class="ttdef"><b>Definition</b> Client.h:138</div></div>
+<div class="ttc" id="aclass_client_html_a38d4b954621867ba3f10bcf22b79ed4d"><div class="ttname"><a href="class_client.html#a38d4b954621867ba3f10bcf22b79ed4d">Client::shutdownSocket</a></div><div class="ttdeci">bool shutdownSocket()</div><div class="ttdoc">Ucisza socket - nie może ani wysyłać, ani odbierać danych.</div><div class="ttdef"><b>Definition</b> Client.cpp:86</div></div>
+<div class="ttc" id="aclass_client_html_a3d8b60d6a9d8a0dccbd41ea0315dd64d"><div class="ttname"><a href="class_client.html#a3d8b60d6a9d8a0dccbd41ea0315dd64d">Client::_setup</a></div><div class="ttdeci">ClientSetup _setup</div><div class="ttdoc">Struktura przechowująca informacje ustawienia klienta.</div><div class="ttdef"><b>Definition</b> Client.h:39</div></div>
+<div class="ttc" id="aclass_client_html_a49754384bf442f0a92e2abb73f6b51ed"><div class="ttname"><a href="class_client.html#a49754384bf442f0a92e2abb73f6b51ed">Client::createSocket</a></div><div class="ttdeci">bool createSocket()</div><div class="ttdoc">Tworzy socket serwera o paramterach: IPv4, połączeniowe, TCP, ....</div><div class="ttdef"><b>Definition</b> Client.cpp:22</div></div>
+<div class="ttc" id="aclass_client_html_a4c2891ff3837d2a0d169f5974a16fd8b"><div class="ttname"><a href="class_client.html#a4c2891ff3837d2a0d169f5974a16fd8b">Client::_hStdout</a></div><div class="ttdeci">HANDLE _hStdout</div><div class="ttdoc">Uchwyt standartowe wyjście.</div><div class="ttdef"><b>Definition</b> Client.h:79</div></div>
+<div class="ttc" id="aclass_client_html_a4f50cc56d6bb3024223b56372a1399de"><div class="ttname"><a href="class_client.html#a4f50cc56d6bb3024223b56372a1399de">Client::closeSocket</a></div><div class="ttdeci">bool closeSocket()</div><div class="ttdoc">Zamyka socket.</div><div class="ttdef"><b>Definition</b> Client.cpp:99</div></div>
+<div class="ttc" id="aclass_client_html_a61b5a56b10b43f251d30c68d2163cd7a"><div class="ttname"><a href="class_client.html#a61b5a56b10b43f251d30c68d2163cd7a">Client::_MsgReceiverTh</a></div><div class="ttdeci">HANDLE _MsgReceiverTh</div><div class="ttdoc">Uchwyt na wątek MsgReceiverListener.</div><div class="ttdef"><b>Definition</b> Client.h:54</div></div>
+<div class="ttc" id="aclass_client_html_a6705152a2740d80a30b02eaf7e0c3853"><div class="ttname"><a href="class_client.html#a6705152a2740d80a30b02eaf7e0c3853">Client::_fdwOutMode</a></div><div class="ttdeci">DWORD _fdwOutMode</div><div class="ttdoc">Nowe ustawienia konsoli na czas działania aplikacji.</div><div class="ttdef"><b>Definition</b> Client.h:99</div></div>
+<div class="ttc" id="aclass_client_html_a6aaf8ffe33c0202f33de08a1ba64571d"><div class="ttname"><a href="class_client.html#a6aaf8ffe33c0202f33de08a1ba64571d">Client::disconnectFromServer</a></div><div class="ttdeci">bool disconnectFromServer()</div><div class="ttdoc">Rozłącza z serwerem.</div><div class="ttdef"><b>Definition</b> Client.cpp:72</div></div>
+<div class="ttc" id="aclass_client_html_a6c47e407acf821f68987d437d6ee686a"><div class="ttname"><a href="class_client.html#a6c47e407acf821f68987d437d6ee686a">Client::initKeyEventListener</a></div><div class="ttdeci">bool initKeyEventListener()</div><div class="ttdoc">Incjalizacja wątku do odbierania danych z klawiatury.</div><div class="ttdef"><b>Definition</b> Client.cpp:173</div></div>
+<div class="ttc" id="aclass_client_html_a6f770552c0eb255f4b823ea0cae48d67"><div class="ttname"><a href="class_client.html#a6f770552c0eb255f4b823ea0cae48d67">Client::_hasReceivedConnMsg</a></div><div class="ttdeci">bool _hasReceivedConnMsg</div><div class="ttdoc">Flaga określająca czy Client otrzymał wiadomość początkową od Server.</div><div class="ttdef"><b>Definition</b> Client.h:117</div></div>
+<div class="ttc" id="aclass_client_html_a7b17ace2b5d1e84c43d058b6bb2f36fa"><div class="ttname"><a href="class_client.html#a7b17ace2b5d1e84c43d058b6bb2f36fa">Client::_KeyEventListenerTh</a></div><div class="ttdeci">HANDLE _KeyEventListenerTh</div><div class="ttdoc">Uchwyt na wątek KeyEventListener.</div><div class="ttdef"><b>Definition</b> Client.h:59</div></div>
+<div class="ttc" id="aclass_client_html_a7e7a3c3da07ccea6bc08b8a55a8fa30d"><div class="ttname"><a href="class_client.html#a7e7a3c3da07ccea6bc08b8a55a8fa30d">Client::_fdwInMode</a></div><div class="ttdeci">DWORD _fdwInMode</div><div class="ttdoc">Nowe ustawienia konsoli na czas działania aplikacji.</div><div class="ttdef"><b>Definition</b> Client.h:89</div></div>
+<div class="ttc" id="aclass_client_html_a82e71f0abe366d54439fbec3410ef377"><div class="ttname"><a href="class_client.html#a82e71f0abe366d54439fbec3410ef377">Client::printGame</a></div><div class="ttdeci">void printGame(const char *map)</div><div class="ttdoc">Wyświetla mapę, którą wysłał Server oraz status.</div><div class="ttdef"><b>Definition</b> Client.cpp:195</div></div>
+<div class="ttc" id="aclass_client_html_a840e519ca781888cbd54181572ebe3a7"><div class="ttname"><a href="class_client.html#a840e519ca781888cbd54181572ebe3a7">Client::~Client</a></div><div class="ttdeci">~Client()</div><div class="ttdoc">Czyści poprawnie klasę</div><div class="ttdef"><b>Definition</b> Client.cpp:323</div></div>
+<div class="ttc" id="aclass_client_html_a872dcd0db96e01a4c035f1808f0247c1"><div class="ttname"><a href="class_client.html#a872dcd0db96e01a4c035f1808f0247c1">Client::connectToServer</a></div><div class="ttdeci">bool connectToServer()</div><div class="ttdoc">Łączy z serwerem.</div><div class="ttdef"><b>Definition</b> Client.cpp:36</div></div>
+<div class="ttc" id="aclass_client_html_a903144755865ad44b72005c396b57731"><div class="ttname"><a href="class_client.html#a903144755865ad44b72005c396b57731">Client::initReceiver</a></div><div class="ttdeci">bool initReceiver()</div><div class="ttdoc">Incjalizacja wątku do odbierania danych z serwera.</div><div class="ttdef"><b>Definition</b> Client.cpp:162</div></div>
+<div class="ttc" id="aclass_client_html_a90f7ea8d056e098a7f109584b3347b93"><div class="ttname"><a href="class_client.html#a90f7ea8d056e098a7f109584b3347b93">Client::_isConnected</a></div><div class="ttdeci">bool _isConnected</div><div class="ttdoc">Flaga określająca czy Client jest podłączony do serwera.</div><div class="ttdef"><b>Definition</b> Client.h:113</div></div>
+<div class="ttc" id="aclass_client_html_a9692392acc351fc0b4657ca28352f37d"><div class="ttname"><a href="class_client.html#a9692392acc351fc0b4657ca28352f37d">Client::KeyEventListener</a></div><div class="ttdeci">friend DWORD __stdcall KeyEventListener(LPVOID param)</div><div class="ttdoc">Wątek nasłuchujący zdarzeń z klawiatury.</div><div class="ttdef"><b>Definition</b> Client.cpp:481</div></div>
+<div class="ttc" id="aclass_client_html_a98eb099fd5a7afc8ad68d0f33b6a2a3c"><div class="ttname"><a href="class_client.html#a98eb099fd5a7afc8ad68d0f33b6a2a3c">Client::startUpWinsock</a></div><div class="ttdeci">bool startUpWinsock()</div><div class="ttdoc">Inicjalizacja WinSock API.</div><div class="ttdef"><b>Definition</b> Client.cpp:6</div></div>
+<div class="ttc" id="aclass_client_html_a9917f9390904039b808d1d46779b6006"><div class="ttname"><a href="class_client.html#a9917f9390904039b808d1d46779b6006">Client::decodeMessage</a></div><div class="ttdeci">void decodeMessage()</div><div class="ttdoc">Dekoduje wiadomość od Serwera i ją przetwarza.</div><div class="ttdef"><b>Definition</b> Client.cpp:343</div></div>
+<div class="ttc" id="aclass_client_html_a9f82bc802d79bde630dd31c86e2dfc84"><div class="ttname"><a href="class_client.html#a9f82bc802d79bde630dd31c86e2dfc84">Client::getArrow</a></div><div class="ttdeci">char getArrow(char direction)</div><div class="ttdoc">Funkcja zwracająca strzałkę w kierunku jaki posiada aktualnie Client.</div><div class="ttdef"><b>Definition</b> Client.cpp:219</div></div>
+<div class="ttc" id="aclass_client_html_aa0d583f5df7d4bff841fae32caa482fa"><div class="ttname"><a href="class_client.html#aa0d583f5df7d4bff841fae32caa482fa">Client::_mapSizeX</a></div><div class="ttdeci">unsigned int _mapSizeX</div><div class="ttdoc">Liczba kolumn.</div><div class="ttdef"><b>Definition</b> Client.h:126</div></div>
+<div class="ttc" id="aclass_client_html_aa3f81619e1eaa9f59f1a03790fde7562"><div class="ttname"><a href="class_client.html#aa3f81619e1eaa9f59f1a03790fde7562">Client::_MsgReceiverThID</a></div><div class="ttdeci">LPDWORD _MsgReceiverThID</div><div class="ttdoc">Wskaźnik na ID wątku MsgReceiverListener.</div><div class="ttdef"><b>Definition</b> Client.h:64</div></div>
+<div class="ttc" id="aclass_client_html_aa70ae6131cb44f04fd8b1a28a1bfb02b"><div class="ttname"><a href="class_client.html#aa70ae6131cb44f04fd8b1a28a1bfb02b">Client::_isRunning</a></div><div class="ttdeci">bool _isRunning</div><div class="ttdoc">Flaga określająca czy trwa gra.</div><div class="ttdef"><b>Definition</b> Client.h:109</div></div>
+<div class="ttc" id="aclass_client_html_aad121e3efbdb671b908ae30a5b6406f5"><div class="ttname"><a href="class_client.html#aad121e3efbdb671b908ae30a5b6406f5">Client::sendMessage</a></div><div class="ttdeci">bool sendMessage(const char *sendbuf, int len)</div><div class="ttdoc">Przesyła ciąg bajtów o podanej dlugości do serwera.</div><div class="ttdef"><b>Definition</b> Client.cpp:184</div></div>
+<div class="ttc" id="aclass_client_html_aad181cd3f7c2221658008397aa47d3f5"><div class="ttname"><a href="class_client.html#aad181cd3f7c2221658008397aa47d3f5">Client::_keyInput</a></div><div class="ttdeci">unsigned char _keyInput</div><div class="ttdoc">Sczytany aktualny input z klawiatury.</div><div class="ttdef"><b>Definition</b> Client.h:104</div></div>
+<div class="ttc" id="aclass_client_html_aaecc26cb97a38908b841690180963807"><div class="ttname"><a href="class_client.html#aaecc26cb97a38908b841690180963807">Client::setUp</a></div><div class="ttdeci">static void setUp(ClientSetup *setup)</div><div class="ttdoc">Konfiguruje klasę Client według zadanej konfiguracji.</div><div class="ttdef"><b>Definition</b> Client.cpp:238</div></div>
+<div class="ttc" id="aclass_client_html_ab493dc086fe674e2cc41509b237f7dea"><div class="ttname"><a href="class_client.html#ab493dc086fe674e2cc41509b237f7dea">Client::MsgReceiverListener</a></div><div class="ttdeci">friend DWORD __stdcall MsgReceiverListener(LPVOID param)</div><div class="ttdoc">Watek nasluchujacy wiadomosci z serwera.</div><div class="ttdef"><b>Definition</b> Client.cpp:413</div></div>
+<div class="ttc" id="aclass_client_html_ac6e2b187d62e68642485659e9a526c42"><div class="ttname"><a href="class_client.html#ac6e2b187d62e68642485659e9a526c42">Client::_mapSizeY</a></div><div class="ttdeci">unsigned int _mapSizeY</div><div class="ttdoc">Liczba wierszy.</div><div class="ttdef"><b>Definition</b> Client.h:122</div></div>
+<div class="ttc" id="aclass_client_html_acfc6d99de443a30d0ad3462bc512787c"><div class="ttname"><a href="class_client.html#acfc6d99de443a30d0ad3462bc512787c">Client::_fdwSaveOldOutMode</a></div><div class="ttdeci">DWORD _fdwSaveOldOutMode</div><div class="ttdoc">Stare ustawienia konsoli, przywracane na końcu działania aplikacji.</div><div class="ttdef"><b>Definition</b> Client.h:94</div></div>
+<div class="ttc" id="aclass_client_html_ad728e8d0c9008b6ce5e1bb8942dd0525"><div class="ttname"><a href="class_client.html#ad728e8d0c9008b6ce5e1bb8942dd0525">Client::_fdwSaveOldInMode</a></div><div class="ttdeci">DWORD _fdwSaveOldInMode</div><div class="ttdoc">Stare ustawienia konsoli, przywracane na końcu działania aplikacji.</div><div class="ttdef"><b>Definition</b> Client.h:84</div></div>
+<div class="ttc" id="aclass_client_html_ae0bc335d720265d4d6e8a72cf7a2a9aa"><div class="ttname"><a href="class_client.html#ae0bc335d720265d4d6e8a72cf7a2a9aa">Client::run</a></div><div class="ttdeci">void run()</div><div class="ttdoc">Uruchamia wątki oraz grę</div><div class="ttdef"><b>Definition</b> Client.cpp:303</div></div>
+<div class="ttc" id="aclass_client_html_aecb572172e5d9e8e022d5d028da7ef58"><div class="ttname"><a href="class_client.html#aecb572172e5d9e8e022d5d028da7ef58">Client::_socket</a></div><div class="ttdeci">SOCKET _socket</div><div class="ttdoc">Socket łączący z serwerem.</div><div class="ttdef"><b>Definition</b> Client.h:34</div></div>
+<div class="ttc" id="astruct_client_setup_html"><div class="ttname"><a href="struct_client_setup.html">ClientSetup</a></div><div class="ttdoc">Pozwala ustawić klienta według podanych parametrów.</div><div class="ttdef"><b>Definition</b> Client.h:11</div></div>
+<div class="ttc" id="astruct_client_setup_html_a0ec6171de455a402de94c65db9fcaad9"><div class="ttname"><a href="struct_client_setup.html#a0ec6171de455a402de94c65db9fcaad9">ClientSetup::serverIP</a></div><div class="ttdeci">char serverIP[16]</div><div class="ttdoc">Numer ip serwera.</div><div class="ttdef"><b>Definition</b> Client.h:16</div></div>
+<div class="ttc" id="astruct_client_setup_html_a74b031f9d40580a77c4ad770daa878a8"><div class="ttname"><a href="struct_client_setup.html#a74b031f9d40580a77c4ad770daa878a8">ClientSetup::serverPort</a></div><div class="ttdeci">char serverPort[6]</div><div class="ttdoc">Numer portu serwera.</div><div class="ttdef"><b>Definition</b> Client.h:21</div></div>
+</div><!-- fragment --></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Wygenerowano przez&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.7
+</small></address>
+</body>
+</html>

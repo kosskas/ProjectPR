@@ -1,0 +1,187 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="pl">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.7"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Slither.io: Plik źródłowy Server/Game.h</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Slither.io<span id="projectnumber">&#160;RELEASE</span>
+   </div>
+   <div id="projectbrief">Projekt z “Przetwarzania rozproszonego”</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Wygenerowano przez Doxygen 1.9.7 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','Szukaj');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Wczytywanie...</div>
+<div class="SRStatus" id="Searching">Szukanie...</div>
+<div class="SRStatus" id="NoMatches">Brak dopasowań</div>
+</div>
+</div>
+</div>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_1a445cb237d74f7a5f8d11ec3b0585cc.html">Server</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle"><div class="title">Game.h</div></div>
+</div><!--header-->
+<div class="contents">
+<div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#ifndef GAME</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#define GAME</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span> </div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span> </div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &quot;General.h&quot;</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &quot;Player.h&quot;</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="keyword">struct </span><a class="code hl_struct" href="struct_server_setup.html">ServerSetup</a>;</div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#include &quot;Server.h&quot;</span></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span> </div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span> </div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno"><a class="line" href="class_game.html">   14</a></span><span class="keyword">class </span><a class="code hl_class" href="class_game.html">Game</a> {</div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span> </div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno"><a class="line" href="struct_game_1_1_sprites_repo.html">   20</a></span>    <span class="keyword">struct </span><a class="code hl_struct" href="struct_game_1_1_sprites_repo.html">SpritesRepo</a> {</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span> </div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno"><a class="line" href="struct_game_1_1_sprites_repo.html#a58c3dc903bea43f742640e1329559ccd">   25</a></span>        <span class="keywordtype">char</span> <a class="code hl_variable" href="struct_game_1_1_sprites_repo.html#a58c3dc903bea43f742640e1329559ccd">bonus</a>;</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span> </div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno"><a class="line" href="struct_game_1_1_sprites_repo.html#a80488eff34d9ab839137534cfa0b58a5">   30</a></span>        <span class="keywordtype">char</span> <a class="code hl_variable" href="struct_game_1_1_sprites_repo.html#a80488eff34d9ab839137534cfa0b58a5">empty</a>;</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span> </div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno"><a class="line" href="struct_game_1_1_sprites_repo.html#ad354d5c19b073fb6832700cc6120346f">   35</a></span>        <span class="keywordtype">char</span> <a class="code hl_variable" href="struct_game_1_1_sprites_repo.html#ad354d5c19b073fb6832700cc6120346f">playerHead</a>;</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>    };</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno"><a class="line" href="class_game.html#a1acc0a4ded1b54a18bede6716dcda64e">   40</a></span>    <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <a class="code hl_variable" href="class_game.html#a1acc0a4ded1b54a18bede6716dcda64e">_placingBonusTries</a>;</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno"><a class="line" href="class_game.html#a69cd7d7ac5aaa4ad4da546d0c69f6859">   44</a></span>    <span class="keywordtype">int</span> <a class="code hl_variable" href="class_game.html#a69cd7d7ac5aaa4ad4da546d0c69f6859">_playerStep</a>;</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>    <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> _bonusScoreInc;</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span> </div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno"><a class="line" href="class_game.html#ac55ce0a55fce68d7d88e64df7b774277">   53</a></span>    <a class="code hl_struct" href="struct_game_1_1_sprites_repo.html">SpritesRepo</a> <a class="code hl_variable" href="class_game.html#ac55ce0a55fce68d7d88e64df7b774277">_sprites</a>;</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span> </div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno"><a class="line" href="class_game.html#ad26270885ee03f66c526d286fb33fadb">   58</a></span>    <span class="keyword">const</span> <span class="keywordtype">int</span> <a class="code hl_variable" href="class_game.html#ad26270885ee03f66c526d286fb33fadb">_sizeX</a>;</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span> </div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno"><a class="line" href="class_game.html#a41ff9f0f665cefb127f427f74fd6276b">   63</a></span>    <span class="keyword">const</span> <span class="keywordtype">int</span> <a class="code hl_variable" href="class_game.html#a41ff9f0f665cefb127f427f74fd6276b">_sizeY</a>;</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span> </div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno"><a class="line" href="class_game.html#aed98bee75b493d39d4215b1a95d5df8a">   68</a></span>    <span class="keywordtype">char</span>** <a class="code hl_variable" href="class_game.html#aed98bee75b493d39d4215b1a95d5df8a">_gameMap</a> = NULL;</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span> </div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno"><a class="line" href="class_game.html#a1f32df09134842bd89dd8fdef685a5a9">   73</a></span>    <span class="keywordtype">bool</span> <a class="code hl_variable" href="class_game.html#a1f32df09134842bd89dd8fdef685a5a9">_gameState</a>;</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span> </div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno"><a class="line" href="class_game.html#aea48f42447cfcf7da342ee817b049ede">   78</a></span>    list&lt;Player*&gt; <a class="code hl_variable" href="class_game.html#aea48f42447cfcf7da342ee817b049ede">_players</a>;</div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span> </div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno"><a class="line" href="class_game.html#ae25e5c4eb0f40ba040ec5ce1c34644dd">   83</a></span>    <span class="keywordtype">unsigned</span> <span class="keywordtype">short</span> <a class="code hl_variable" href="class_game.html#ae25e5c4eb0f40ba040ec5ce1c34644dd">_winScore</a>;</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span> </div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno"><a class="line" href="class_game.html#a5ce257dcde8bacb44d3dd85062c94b00">   88</a></span>    <span class="keywordtype">int</span> <a class="code hl_variable" href="class_game.html#a5ce257dcde8bacb44d3dd85062c94b00">winnerID</a>;</div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span><span class="keyword">protected</span>:</div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>    <span class="keywordtype">char</span>** <a class="code hl_function" href="class_game.html#a7f0459e275c068b3506d92d180d66fd6">createMap</a>(<span class="keywordtype">int</span> Y, <span class="keywordtype">int</span> X);</div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span> </div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="class_game.html#a3951675cb6946605509f22283eb3a4a8">clearMap</a>(<span class="keywordtype">char</span>** map);</div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span> </div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="class_game.html#abe36167c719c3b0416dffbd8b0471bb8">printSnake</a>(<a class="code hl_struct" href="struct_player.html">Player</a>* player);</div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span> </div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>    <span class="keywordtype">char</span> <a class="code hl_function" href="class_game.html#aad5ae3459385741cb9bdd7bde25aec7b">getPlayerASCII</a>(<a class="code hl_struct" href="struct_player.html">Player</a>* player);</div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span> </div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span> </div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>    <a class="code hl_class" href="class_game.html">Game</a>(list&lt;Player*&gt;&amp; players, <a class="code hl_struct" href="struct_server_setup.html">ServerSetup</a>* setup);</div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span> </div>
+<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span>    <span class="keywordtype">bool</span> <a class="code hl_function" href="class_game.html#a20f831cd0ac6a796dd8037c9840722a3">checkGameState</a>();</div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span> </div>
+<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="class_game.html#a3773831912ac0c4f23b84b77c9243f04">placeBonuses</a>(<span class="keywordtype">int</span> num);</div>
+<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span> </div>
+<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="class_game.html#ab98403da69bfb6b372aa917fbae4526c">removeSnake</a>(<a class="code hl_struct" href="struct_player.html">Player</a>* player);</div>
+<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span> </div>
+<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="class_game.html#afb0fc38dcb2e7e76f9fcf4fe7fdebd5e">drawSnakeHead</a>(<a class="code hl_struct" href="struct_player.html">Player</a>* player);</div>
+<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span> </div>
+<div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="class_game.html#a44fbdb787e3efe7506dc13805fc58d49">movePlayer</a>(<a class="code hl_struct" href="struct_player.html">Player</a>* player);</div>
+<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span> </div>
+<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="class_game.html#a2bfe1cf03f2f0545c3d038640338382f">getMap</a>(<span class="keywordtype">char</span>* msg);</div>
+<div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span> </div>
+<div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span>    <span class="keywordtype">int</span> <a class="code hl_function" href="class_game.html#a7499ba00c41608781a2f3f3f835546b7">getWinnerID</a>();</div>
+<div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span> </div>
+<div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span>    <a class="code hl_function" href="class_game.html#ae3d112ca6e0e55150d2fdbc704474530">~Game</a>();</div>
+<div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span>};</div>
+<div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span> </div>
+<div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span> </div>
+<div class="line"><a id="l00176" name="l00176"></a><span class="lineno">  176</span><span class="preprocessor">#endif </span><span class="comment">// !GAME</span></div>
+<div class="ttc" id="aclass_game_html"><div class="ttname"><a href="class_game.html">Game</a></div><div class="ttdoc">Klasa Game zarządza logiką gry.</div><div class="ttdef"><b>Definition</b> Game.h:14</div></div>
+<div class="ttc" id="aclass_game_html_a1acc0a4ded1b54a18bede6716dcda64e"><div class="ttname"><a href="class_game.html#a1acc0a4ded1b54a18bede6716dcda64e">Game::_placingBonusTries</a></div><div class="ttdeci">unsigned int _placingBonusTries</div><div class="ttdoc">Liczba prób podczas losowania bonusów.</div><div class="ttdef"><b>Definition</b> Game.h:40</div></div>
+<div class="ttc" id="aclass_game_html_a1f32df09134842bd89dd8fdef685a5a9"><div class="ttname"><a href="class_game.html#a1f32df09134842bd89dd8fdef685a5a9">Game::_gameState</a></div><div class="ttdeci">bool _gameState</div><div class="ttdoc">Flaga oznaczająca trwanie gry.</div><div class="ttdef"><b>Definition</b> Game.h:73</div></div>
+<div class="ttc" id="aclass_game_html_a20f831cd0ac6a796dd8037c9840722a3"><div class="ttname"><a href="class_game.html#a20f831cd0ac6a796dd8037c9840722a3">Game::checkGameState</a></div><div class="ttdeci">bool checkGameState()</div><div class="ttdoc">Sprawdza stan bieżącej gry.</div><div class="ttdef"><b>Definition</b> Game.cpp:73</div></div>
+<div class="ttc" id="aclass_game_html_a2bfe1cf03f2f0545c3d038640338382f"><div class="ttname"><a href="class_game.html#a2bfe1cf03f2f0545c3d038640338382f">Game::getMap</a></div><div class="ttdeci">void getMap(char *msg)</div><div class="ttdoc">Przekształca mapę do postaci wymaganej przez Server do wysłania.</div><div class="ttdef"><b>Definition</b> Game.cpp:224</div></div>
+<div class="ttc" id="aclass_game_html_a3773831912ac0c4f23b84b77c9243f04"><div class="ttname"><a href="class_game.html#a3773831912ac0c4f23b84b77c9243f04">Game::placeBonuses</a></div><div class="ttdeci">void placeBonuses(int num)</div><div class="ttdoc">Ustawia losowo na mapę bonusy w ilości podanej przez argument.</div><div class="ttdef"><b>Definition</b> Game.cpp:91</div></div>
+<div class="ttc" id="aclass_game_html_a3951675cb6946605509f22283eb3a4a8"><div class="ttname"><a href="class_game.html#a3951675cb6946605509f22283eb3a4a8">Game::clearMap</a></div><div class="ttdeci">void clearMap(char **map)</div><div class="ttdoc">Usuwa z pamięci obszar podany jako parametr.</div><div class="ttdef"><b>Definition</b> Game.cpp:20</div></div>
+<div class="ttc" id="aclass_game_html_a41ff9f0f665cefb127f427f74fd6276b"><div class="ttname"><a href="class_game.html#a41ff9f0f665cefb127f427f74fd6276b">Game::_sizeY</a></div><div class="ttdeci">const int _sizeY</div><div class="ttdoc">Liczba wierszy.</div><div class="ttdef"><b>Definition</b> Game.h:63</div></div>
+<div class="ttc" id="aclass_game_html_a44fbdb787e3efe7506dc13805fc58d49"><div class="ttname"><a href="class_game.html#a44fbdb787e3efe7506dc13805fc58d49">Game::movePlayer</a></div><div class="ttdeci">void movePlayer(Player *player)</div><div class="ttdoc">Przesuwa postać gracza według jego bieżącego kierunku.</div><div class="ttdef"><b>Definition</b> Game.cpp:146</div></div>
+<div class="ttc" id="aclass_game_html_a5ce257dcde8bacb44d3dd85062c94b00"><div class="ttname"><a href="class_game.html#a5ce257dcde8bacb44d3dd85062c94b00">Game::winnerID</a></div><div class="ttdeci">int winnerID</div><div class="ttdoc">ID gracza, który wygrał</div><div class="ttdef"><b>Definition</b> Game.h:88</div></div>
+<div class="ttc" id="aclass_game_html_a69cd7d7ac5aaa4ad4da546d0c69f6859"><div class="ttname"><a href="class_game.html#a69cd7d7ac5aaa4ad4da546d0c69f6859">Game::_playerStep</a></div><div class="ttdeci">int _playerStep</div><div class="ttdoc">Kr.</div><div class="ttdef"><b>Definition</b> Game.h:44</div></div>
+<div class="ttc" id="aclass_game_html_a7499ba00c41608781a2f3f3f835546b7"><div class="ttname"><a href="class_game.html#a7499ba00c41608781a2f3f3f835546b7">Game::getWinnerID</a></div><div class="ttdeci">int getWinnerID()</div><div class="ttdoc">Zwraca identyfikator gracza, który wygrał rozgrywkę</div><div class="ttdef"><b>Definition</b> Game.cpp:234</div></div>
+<div class="ttc" id="aclass_game_html_a7f0459e275c068b3506d92d180d66fd6"><div class="ttname"><a href="class_game.html#a7f0459e275c068b3506d92d180d66fd6">Game::createMap</a></div><div class="ttdeci">char ** createMap(int Y, int X)</div><div class="ttdoc">Tworzy mape ASCII o wymiarach Y na X.</div><div class="ttdef"><b>Definition</b> Game.cpp:7</div></div>
+<div class="ttc" id="aclass_game_html_aad5ae3459385741cb9bdd7bde25aec7b"><div class="ttname"><a href="class_game.html#aad5ae3459385741cb9bdd7bde25aec7b">Game::getPlayerASCII</a></div><div class="ttdeci">char getPlayerASCII(Player *player)</div><div class="ttdoc">Pobiera kod ASCII gracza.</div><div class="ttdef"><b>Definition</b> Game.cpp:39</div></div>
+<div class="ttc" id="aclass_game_html_ab98403da69bfb6b372aa917fbae4526c"><div class="ttname"><a href="class_game.html#ab98403da69bfb6b372aa917fbae4526c">Game::removeSnake</a></div><div class="ttdeci">void removeSnake(Player *player)</div><div class="ttdoc">Usuwa postać nieaktywnego gracza.</div><div class="ttdef"><b>Definition</b> Game.cpp:123</div></div>
+<div class="ttc" id="aclass_game_html_abe36167c719c3b0416dffbd8b0471bb8"><div class="ttname"><a href="class_game.html#abe36167c719c3b0416dffbd8b0471bb8">Game::printSnake</a></div><div class="ttdeci">void printSnake(Player *player)</div><div class="ttdoc">Nanosi na mapę ASCII postać gracza.</div><div class="ttdef"><b>Definition</b> Game.cpp:30</div></div>
+<div class="ttc" id="aclass_game_html_ac55ce0a55fce68d7d88e64df7b774277"><div class="ttname"><a href="class_game.html#ac55ce0a55fce68d7d88e64df7b774277">Game::_sprites</a></div><div class="ttdeci">SpritesRepo _sprites</div><div class="ttdoc">struktura (SpritesRepo) zawierająca symbole wszystkich elementów mapy</div><div class="ttdef"><b>Definition</b> Game.h:53</div></div>
+<div class="ttc" id="aclass_game_html_ad26270885ee03f66c526d286fb33fadb"><div class="ttname"><a href="class_game.html#ad26270885ee03f66c526d286fb33fadb">Game::_sizeX</a></div><div class="ttdeci">const int _sizeX</div><div class="ttdoc">Liczba kolumn.</div><div class="ttdef"><b>Definition</b> Game.h:58</div></div>
+<div class="ttc" id="aclass_game_html_ae25e5c4eb0f40ba040ec5ce1c34644dd"><div class="ttname"><a href="class_game.html#ae25e5c4eb0f40ba040ec5ce1c34644dd">Game::_winScore</a></div><div class="ttdeci">unsigned short _winScore</div><div class="ttdoc">Wynik wymagany do wygrania gry.</div><div class="ttdef"><b>Definition</b> Game.h:83</div></div>
+<div class="ttc" id="aclass_game_html_ae3d112ca6e0e55150d2fdbc704474530"><div class="ttname"><a href="class_game.html#ae3d112ca6e0e55150d2fdbc704474530">Game::~Game</a></div><div class="ttdeci">~Game()</div><div class="ttdoc">Czyści poprawnie klasę Game.</div><div class="ttdef"><b>Definition</b> Game.cpp:239</div></div>
+<div class="ttc" id="aclass_game_html_aea48f42447cfcf7da342ee817b049ede"><div class="ttname"><a href="class_game.html#aea48f42447cfcf7da342ee817b049ede">Game::_players</a></div><div class="ttdeci">list&lt; Player * &gt; _players</div><div class="ttdoc">Lista graczy, ta sama jak w klasie Server.</div><div class="ttdef"><b>Definition</b> Game.h:78</div></div>
+<div class="ttc" id="aclass_game_html_aed98bee75b493d39d4215b1a95d5df8a"><div class="ttname"><a href="class_game.html#aed98bee75b493d39d4215b1a95d5df8a">Game::_gameMap</a></div><div class="ttdeci">char ** _gameMap</div><div class="ttdoc">Wskaźnik na mapę o wymiarach Y na X, do mapy odwołuje się poprzez gameMap[y][x].</div><div class="ttdef"><b>Definition</b> Game.h:68</div></div>
+<div class="ttc" id="aclass_game_html_afb0fc38dcb2e7e76f9fcf4fe7fdebd5e"><div class="ttname"><a href="class_game.html#afb0fc38dcb2e7e76f9fcf4fe7fdebd5e">Game::drawSnakeHead</a></div><div class="ttdeci">void drawSnakeHead(Player *player)</div><div class="ttdoc">Wysuje głowę postaci gracza na mapie.</div><div class="ttdef"><b>Definition</b> Game.cpp:136</div></div>
+<div class="ttc" id="astruct_game_1_1_sprites_repo_html"><div class="ttname"><a href="struct_game_1_1_sprites_repo.html">Game::SpritesRepo</a></div><div class="ttdoc">prywatna struktura przechowująca symbole reprezentujące elementy na mapie</div><div class="ttdef"><b>Definition</b> Game.h:20</div></div>
+<div class="ttc" id="astruct_game_1_1_sprites_repo_html_a58c3dc903bea43f742640e1329559ccd"><div class="ttname"><a href="struct_game_1_1_sprites_repo.html#a58c3dc903bea43f742640e1329559ccd">Game::SpritesRepo::bonus</a></div><div class="ttdeci">char bonus</div><div class="ttdoc">symbol bonusu na mapie</div><div class="ttdef"><b>Definition</b> Game.h:25</div></div>
+<div class="ttc" id="astruct_game_1_1_sprites_repo_html_a80488eff34d9ab839137534cfa0b58a5"><div class="ttname"><a href="struct_game_1_1_sprites_repo.html#a80488eff34d9ab839137534cfa0b58a5">Game::SpritesRepo::empty</a></div><div class="ttdeci">char empty</div><div class="ttdoc">symbol pustego pola na mapie</div><div class="ttdef"><b>Definition</b> Game.h:30</div></div>
+<div class="ttc" id="astruct_game_1_1_sprites_repo_html_ad354d5c19b073fb6832700cc6120346f"><div class="ttname"><a href="struct_game_1_1_sprites_repo.html#ad354d5c19b073fb6832700cc6120346f">Game::SpritesRepo::playerHead</a></div><div class="ttdeci">char playerHead</div><div class="ttdoc">symbol oznaczający głowę postaci gracza</div><div class="ttdef"><b>Definition</b> Game.h:35</div></div>
+<div class="ttc" id="astruct_player_html"><div class="ttname"><a href="struct_player.html">Player</a></div><div class="ttdoc">Zawiera wszystktie informacje o pojedynczym graczu-kliencie.</div><div class="ttdef"><b>Definition</b> Player.h:29</div></div>
+<div class="ttc" id="astruct_server_setup_html"><div class="ttname"><a href="struct_server_setup.html">ServerSetup</a></div><div class="ttdoc">Pozwala ustawić serwer według podanych parametrów.</div><div class="ttdef"><b>Definition</b> Server.h:14</div></div>
+</div><!-- fragment --></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Wygenerowano przez&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.7
+</small></address>
+</body>
+</html>

@@ -1,0 +1,122 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="pl">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.7"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>My Project: README</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">My Project
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Wygenerowano przez Doxygen 1.9.7 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','Szukaj');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Wczytywanie...</div>
+<div class="SRStatus" id="Searching">Szukanie...</div>
+<div class="SRStatus" id="NoMatches">Brak dopasowań</div>
+</div>
+</div>
+</div>
+</div>
+
+</div><!-- top -->
+<div><div class="header">
+  <div class="headertitle"><div class="title">README</div></div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><p><b>Projekt z “Przetwarzania rozproszonego”</b></p>
+<p><b>Sprawozdanie</b></p>
+<p>Mateusz Stencel Tomasz Szcząchor Oskar Ruczyński 188676 188721 188862</p>
+<p><b>Wstęp</b></p>
+<p>Celem projektu jest zaimplementowanie prostej wieloosobowej gry konsolowej typu Slither.io. Do implementacji zostanie użyty język C++. Działanie gry będzie oparte</p>
+<ul>
+<li>architekturę client-server oraz protokół komunikacyjny TCP. Do obsługi połączeń zostaną wykorzystane interfejsy dostępne w bibliotece WinAPIWinsock2.</li>
+</ul>
+<p><b>Rozgrywka</b></p>
+<p>W danej rozgrywce bierze udział 3 graczy. Gracz steruje kierunkiem przemieszczania się węża. Węże poruszają się po wspólnej mapie. Jedno pole na mapie może być zajmowane tylko przez jednego węża. Co pewien ustalony czas na mapie generowane są bonusy. Gdy wąż najdzie na bonus, wydłuża się o jeden człon. W czasie rozgrywki węże mogą się ze sobą zderzyć. Wąż, który uderzy głową w ciało innego węża (nie głowę) przegrywa, bez względu na jego długość. W przypadku gdy wąż wyjdzie poza krawędź mapy, pojawia się po drugiej stronie planszy. Rozgrywka kończy się gdy na planszy pozostanie jeden wąż lub jeden z węży osiągnie określoną długość postaci.</p>
+<p><b>Implementacja</b></p>
+<p>Serwer rozpoczyna rozgrywkę, gdy połączy się 3 graczy. Każdy gracz otrzymuje unikalny identyfikator. Do czasu rozpoczęcia rozgrywki, gracze znajdują się w stanie oczekiwania na grę. Pozycja startowa gracza dla danego identyfikatora jest z góry ustalona. Podczas gry klient przesyła do serwera informacje o kierunku, w którym ma podążać jego wąż. Informacja ta jest przesyłana wtedy, gdy aktualnie wciśnięty klawisz sterujący przypisany jest do innego kierunku niż kierunek poprzednio wysłany. Klient także potwierdza odebranie mapy od serwera. Serwer porusza wężami na podstawie informacji zawartych w buforze kierunków. Bufor kierunków przechowuje kierunki zebrane od każdego gracza. Serwer kilka razy na sekundę generuje nową mapę. Przesuwa wężami w jednym z kierunków: w górę, w dół, w prawo, w lewo. Obsługuje kolizje węży jeśli taka nastąpi. Wydłuża o 1 segment węże, które zdobyły bonus. Raz na kilka rund dodaje bonusy na mapie. Wysyła klientom stan mapy oraz informację o tym czy wciąż biorą udział w rozgrywce. Kolejność poruszania wężami odbywa się zgodnie z rosnącą wartością identyfikatorów nadanych im przez serwer. Klient otrzymaną mapę przetwarza, a następnie wyświetla. Gdy rozgrywka zakończy się, wszyscy gracze zostaną o tym powiadomieni. Serwer sprawdza połączenie z klientem poprzez oczekiwanie na odpowiedź odbioru wysłania mapy.</p>
+<p><b>Przewidywane problemy i propozycje ich rozwiązania</b></p>
+<ol type="1">
+<li>Węże zderzają się głowami - zniszczony zostaje krótszy wąż, w przypadku równej długości losujemy wygranego.</li>
+</ol>
+<ol type="1">
+<li>Zebranie jedzenia w tym samym momencie - najpierw sprawdzane są kolizje węży, więc problem sprowadza się do punktu 1.</li>
+</ol>
+<ol type="1">
+<li>Nieplanowane rozłączenie gracza (odłączenie od internetu, awaria komputera itp.) wykrywane jest przez serwer - wystąpi błąd połączenia lub dany klient 3 razy pod rząd nie odpowie na wysłanie mapy.</li>
+</ol>
+<ol type="1">
+<li>W przypadku rozłączenia gracza, gracz przegrywa, a jego wąż znika z planszy.</li>
+</ol>
+<ol type="1">
+<li>Jeśli klient będzie próbował podłączyć się w trakcie gry, zostanie powiadomiony, że nie może się połączyć.</li>
+</ol>
+<ol type="1">
+<li>Przytrzymanie klawisza sterującego przez użytkownika nie spowoduje redundantnego wysyłania informacji do serwera o kierunku przemieszczania się. Informacja ta jest wysyłana tylko wtedy, gdy kierunek w ostatnio wysłanej wiadomości był różny od kierunku wyznaczonego przez aktualnie wciśnięty klawisz sterujący.</li>
+</ol>
+<p><b>Diagram klas</b></p>
+<p>Poniżej znajduje się diagram klas. Aplikacja kliencka jest reprezentowana przez pojedynczą klasę Klient. Znajdują się w niej wszystkie potrzebne komponenty do łączenia się z serwerem, wysyłania i odbierania danych z serwera. Obiekt klasy Gra zawiera informacje</p>
+<ul>
+<li>aktualnym stanie mapy, jak i metody pozwalające ten stan zmieniać. Serwer może posiadać tylko jeden obiekt klasy Gra w danym momencie. Klasa Gracz reprezentuje podłączonego klienta, i zawiera związane z nim informacje, takie jak aktualnie wybrany przez niego kierunek, długość węża, identyfikator i położenie wszystkich części jego ciała w postaci listy Punktów na mapie.</li>
+</ul>
+<p><img src="Aspose.Words.ef4ff9e4-a2b4-4f96-b6a4-22fedaf3bb80.001.png" alt="" class="inline"/></p>
+<p><b>Diagram sekwencji</b></p>
+<p>Poniżej znajduje się diagram sekwencji. Gracze podłączają się do serwera, który nadaje im unikalny identyfikator i oczekują na rozpoczęcie gry. W momencie gdy do serwera jest podłączonych 3 graczy, serwer przestaje oczekiwać na kolejnych graczy. Wysyła informacje o rozpoczęciu rozgrywki i przechodzi w tryb nasłuchiwania ruchów graczy oraz wysyłania planszy. Podczas gry, gracz wysyła kierunek, w którym ma podążać jego postać. Serwer wysyła klientom stan gry w postaci tablicy znaków ASCII, klient taką tablicę przetwarza i wyświetla jako mapa na konsoli oraz wysyła do serwera informację o odebraniu mapy. Po zakończeniu rozgrywki serwer wysyła informację graczom o końcu gry. Następnie połączenie między serwerem i klientem zostaje zamknięte.</p>
+<p><img src="Aspose.Words.ef4ff9e4-a2b4-4f96-b6a4-22fedaf3bb80.002.jpeg" alt="" class="inline"/> </p>
+</div></div><!-- contents -->
+</div><!-- PageDoc -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Wygenerowano przez&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.7
+</small></address>
+</body>
+</html>
